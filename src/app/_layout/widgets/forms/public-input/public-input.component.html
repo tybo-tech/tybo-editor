@@ -1,0 +1,22 @@
+<div class="input" *ngIf="input">
+  <app-public-html-element
+    *ngIf="input.InputLabel && (input.InputType === 'text' || input.InputType === 'textarea' || input.InputType === 'number' || input.InputType === 'email')"
+    [type]="'p'" [value]="input.InputLabel" [ItemStyle]="input.LabelStyles"></app-public-html-element>
+
+
+  <input [type]="input.InputType" [placeholder]="input.Placeholder"
+    *ngIf="input.InputType === 'text' || input.InputType === 'number' || input.InputType === 'email'"
+    [ngStyle]="input.SelectedStyle" [(ngModel)]="input.Value">
+
+  <textarea *ngIf="input.InputType === 'textarea'" [(ngModel)]="input.Value" [ngStyle]="input.SelectedStyle" ></textarea>
+
+  <app-public-html-element  *ngIf="input.InputLabel  && input.InputType == 'button'" [type]="'button'"
+    [value]="input.InputLabel" [ItemStyle]="input.SelectedStyle"></app-public-html-element>
+</div>
+<!-- 
+<hr>
+<pre>
+  {{ input | json }}
+</pre>
+
+<hr> -->

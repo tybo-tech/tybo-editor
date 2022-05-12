@@ -1,0 +1,34 @@
+<div class="sections" *ngIf="page">
+
+
+  <div class="section" *ngIf="header">
+    <h6 class="d-flex justify-content-between">
+     <span>
+      <i class="fa fa-folder"></i>  {{header.Name}}
+     </span>
+
+     <span (click)="toggleVisble(header)">
+      <i class="fas fa-eye" *ngIf="header.Diplayed"></i>
+      <i class="fas fa-eye-slash" *ngIf="!header.Diplayed"></i>
+     </span>
+    </h6>
+  </div>
+
+
+  <div class="section" *ngFor="let section of page.Sections">
+    <h6 class="d-flex justify-content-between">
+     <span>
+      <i class="fa fa-folder"></i>  {{section.Name}}
+     </span>
+
+     <span  (click)="toggleVisble(section)">
+      <i class="fas fa-eye" *ngIf="section.Diplayed"></i>
+      <i class="fas fa-eye-slash" *ngIf="!section.Diplayed"></i>
+     </span>
+    </h6>
+  </div>
+</div>
+
+
+
+

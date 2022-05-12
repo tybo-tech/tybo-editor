@@ -1,0 +1,18 @@
+<div class="nav-box">
+  <div class="_nav-bar" *ngIf="logo && pages">
+    <div class="d-flex justify-content-between">
+      <div class="logo">
+        <img [src]="logo" alt="">
+      </div>
+
+      <div class="pages d-flex justify-content-end">
+        <div class="page" *ngFor="let page of pages">
+          <a [routerLink] = "page.Url" routerLinkActive="active"   [routerLinkActiveOptions]="{exact: true}" [ngClass]="page.StyleClass">
+            {{page.Name}}
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

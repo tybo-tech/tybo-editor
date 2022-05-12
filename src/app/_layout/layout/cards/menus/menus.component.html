@@ -1,0 +1,45 @@
+<div *ngIf="widget && !isBurgerMenu">
+  <ul class="ul contextmenu_card" [ngStyle]="widget.SelectedStyle">
+
+
+    <li *ngFor="let card of widget.Children">
+      <app-html-element *ngIf="card.ItemContent" [type]="'a'" [parent]="card" [value]="card.ItemContent"
+        (valueChanged)="valueChanged($event,card, 'ItemContent')" [ItemStyle]="card.SelectedStyle"
+        (copyEvent)="OnCopyEvent($event,card, 'ItemContent')"></app-html-element>
+    </li>
+
+    <img class="item-menu contextmenu_section" src="assets/images/menu-icon.svg" (contextmenu)="onRightClick($event)"
+      can_hover_me (onHover)="showStyleMenu($event,column)">
+
+
+    <app-mini-menu [showMiniMenu]="widget.ShowMiniMenu" [miniMenu]="miniMenu" (miniMenuEvent)="miniMenuEvent($event)">
+    </app-mini-menu>
+
+    <app-element-options *ngIf="widget && widget.ShowOptions" [type]="'widget'" [ItemStyle]="widget.SelectedStyle"
+      (onStyleChange)="onStyleChange($event)">
+    </app-element-options>
+  </ul>
+
+
+
+</div>
+
+<div class="relative" *ngIf="isBurgerMenu">
+  <app-html-element *ngIf="isBurgerMenu && widget" [type]="'button'" [parent]="widget" [value]="widget.ItemEventName"
+    (valueChanged)="valueChanged($event, 'ItemEventName')" [ItemStyle]="widget.SelectedStyle"
+    (copyEvent)="OnCopyEvent($event, 'ItemEventName')" (sideMenuEvent)="onMenuEvent($event)"
+    (deleteEvent)="onDeleteMenu($event)"> </app-html-element>
+
+
+  <div *ngIf="showMenu && menuItemWrapper" [ngStyle]="menuItemWrapper.SelectedStyle">
+    <div class="items">
+      <div class="item" *ngFor="let menuItem of menuItems">
+        <app-html-element *ngIf="menuItem.ItemContent" [type]="'a'" [parent]="menuItem" [value]="menuItem.ItemContent"
+          (valueChanged)="valueChanged($event,menuItem, 'ItemContent')" [ItemStyle]="menuItem.SelectedStyle"
+          (copyEvent)="OnCopyEvent($event,menuItem, 'ItemContent')"></app-html-element>
+      </div>
+    </div>
+  </div>
+
+
+</div>

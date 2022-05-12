@@ -1,0 +1,32 @@
+._nav-bar {
+    // position: absolute;
+    width: 80%;
+    padding: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .logo {
+        img {
+            width: 4.5em;
+        }
+    }
+    // background: red;
+}
+.nav-box {
+    position: relative;
+}
+
+.pages {
+    .page {
+        padding: 0 1em;
+        top: 0.22555em;
+        font-size: .8em;
+        a.active {
+            color: #f3cf3d;
+        }
+
+        .btn{
+            top: -.5em;
+        }
+    }
+}

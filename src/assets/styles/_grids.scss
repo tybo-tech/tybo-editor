@@ -1,0 +1,62 @@
+.grid-1,
+.grid-2,
+.grid-side-menu,
+.grid-3,
+.grid-4,
+.grid-5,
+.grid-6,
+.grid-7,
+.grid-8,
+.grid-9,
+.grid-10,
+.grid-11,
+.grid-12
+ {
+    display: grid;
+    margin: 0 auto;
+    gap: 1rem;
+    .card {
+        margin: 0 auto;
+    }
+}
+.grid-1 {
+    grid-template-columns: 100%;
+}
+.grid-2 {
+    grid-template-columns: 50% auto; 
+}
+.grid-3 {
+    grid-template-columns: repeat(3, 33.333%);
+   
+}
+.grid-4 {
+    grid-template-columns: repeat(4, 25%);
+   
+}
+.grid-5 {
+    grid-template-columns: repeat(5, 20%);
+   
+}
+.grid-6 {
+    grid-template-columns: repeat(6, 16.666%);
+   
+}
+.grid-8 {
+    grid-template-columns: repeat(6, 12.5%);
+   
+}
+.grid-10 {
+    grid-template-columns: repeat(6, 10%);
+   
+}
+.grid-side-menu {
+    grid-template-columns: 80% auto;
+   
+}
+
+.grid-col {
+    // border: 2px solid $grey;
+    height: inherit;
+    min-height: inherit;
+    // min-height: 35em ;
+}

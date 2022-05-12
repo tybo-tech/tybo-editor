@@ -1,0 +1,83 @@
+$pl: #f3eed9;
+$prm: #824936;
+$wt: #fff;
+$neut: #222c2a;
+.home{
+    padding-top: 10%;
+}
+.body {
+    height: 100vh;
+    overflow-y: scroll;
+    font-weight: 400;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    background: $wt;
+    color: $neut;
+}
+
+section,
+header {
+    padding: 3rem 0;
+    display: block;
+    .con {
+        margin-inline: auto;
+        width: min(90%, 70.5rem);
+    }
+
+    @media (min-width: 40em) {
+        padding: 7em 0;
+    }
+}
+
+header {
+    h1 {
+        max-width: 34rem;
+        margin-inline: auto;
+        color: $prm;
+    }
+}
+.body,
+h1,
+h2,
+p {
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+h1,
+h2 {
+    font-weight: 900;
+}
+
+.split {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 40em) {
+        flex-direction: row;
+        & > * {
+            flex-basis: 100%;
+        }
+
+        & > * + * {
+            margin-left: 2em;
+        }
+    }
+}
+.center {
+    text-align: center;
+}
+
+.bg-light {
+    background-color: $pl !important;
+}
+
+.bg-primary {
+    background-color: $prm !important;
+    color: $wt !important;
+}
+
+.bg-dark {
+    background-color: $neut !important;
+    color: $wt !important;
+}

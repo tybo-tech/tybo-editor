@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="85" height="85" viewBox="0 0 85 85">
+  <g id="navigations" transform="translate(-369 -443)">
+    <rect id="Rectangle_130" data-name="Rectangle 130" width="85" height="85" transform="translate(369 443)" fill="none"/>
+    <g id="Group_189" data-name="Group 189" transform="translate(6 22)">
+      <rect id="_1card" data-name="1card" width="9" height="7" rx="3" transform="translate(382 460)" fill="#f3cf3d"/>
+      <g id="Group_188" data-name="Group 188">
+        <rect id="_1card-2" data-name="1card" width="6" height="5" rx="2.5" transform="translate(403 461)" fill="#7b8282"/>
+        <rect id="_1card-3" data-name="1card" width="6" height="5" rx="2.5" transform="translate(410 461)" fill="#7b8282"/>
+        <rect id="_1card-4" data-name="1card" width="5" height="5" rx="2.5" transform="translate(417 461)" fill="#7b8282"/>
+        <rect id="_1card-5" data-name="1card" width="6" height="5" rx="2.5" transform="translate(423 461)" fill="#7b8282"/>
+      </g>
+    </g>
+  </g>
+</svg>

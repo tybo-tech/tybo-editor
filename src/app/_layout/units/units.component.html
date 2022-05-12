@@ -1,0 +1,17 @@
+<!-- <div class="d-flex justify-content-start">
+  <span class="badge bg-secondary" *ngFor="let item of items"> {{item}}</span>
+
+</div> -->
+
+<div class="grid-2">
+  <input type="number" class="__target form-control" [(ngModel)]="inputValue" (input)="formatStyles('width',width, inputUnits)">
+  <select class="__target form-select" [(ngModel)]="inputUnits" (change)="formatStyles('font-weight',inputUnits, inputUnits)">
+    <option [value]="item" *ngFor="let item of items">{{item}}
+    </option>
+
+  </select>
+</div>
+
+<!-- <div class="input-group mb-3">
+
+</div> -->

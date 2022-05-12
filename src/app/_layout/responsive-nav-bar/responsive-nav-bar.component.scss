@@ -1,0 +1,173 @@
+@import "../../../assets/styles/colors";
+
+header {
+    background: $bg;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    padding: 1em 0;
+
+    @media screen and (min-width: 800px) {
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    }
+
+    .logo {
+        margin: 0;
+        color: $white;
+        display: flex;
+        justify-content: end;
+
+        img {
+            width: 7rem;
+
+            @media screen and (min-width: 800px) {
+                width: 10rem;
+            }
+        }
+        @media screen and (min-width: 800px) {
+            grid-column: 2 / 3;
+        }
+    }
+
+    .nav-bar {
+        position: absolute;
+        text-align: left;
+        background: $bg;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        // display: none;
+        transform: scale(1, 0);
+        transform-origin: top;
+        transition: transform 400ms ease-in-out;
+
+        @media screen and (min-width: 800px) {
+            all: unset;
+            grid-column: 3 / 4;
+            transform: scale(1, 1);
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            // border: 1px solid green;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            @media screen and (min-width: 800px) {
+                display: flex;
+                // border: 1px solid red;
+            }
+
+            li {
+                margin-bottom: 1em;
+                margin-left: 1em;
+
+                @media screen and (min-width: 800px) {
+                    margin-bottom: 0;
+                    margin-left: 3em;
+                }
+
+                a {
+                    color: $white;
+                    text-decoration: none;
+                    font-size: .8rem;
+                    text-transform: capitalize;
+                    font-weight: 600;
+                    position: relative;
+                    &:hover {
+                        color: $cloud;
+                    }
+
+                    @media screen and (min-width: 800px) {
+                        &::before {
+                            content: "";
+                            display: block;
+                            height: 5px;
+                            background: $white;
+                            position: absolute;
+                            top: -0.75em;
+                            left: 0;
+                            right: 0;
+                            transform: scale(0, 1);
+                            transform-origin: left;
+                            transition: transform ease-in-out 250ms;
+                            border-radius: .5em;
+
+                        }
+                    }
+
+                    @media screen and (min-width: 800px) {
+                        &:hover::before {
+                            transform: scale(1, 1);
+                        }
+                    }
+                }
+
+                a.active{
+                    &::before {
+                        content: "";
+                        display: block;
+                        height: 5px;
+                        background: $primary;
+                        position: absolute;
+                        border-radius: .5em;
+                        top: -0.75em;
+                        left: 0;
+                        right: 0;
+                        transform: scale(1, 1);
+                        transform-origin: left;
+                        transition: transform ease-in-out 250ms;
+                    }
+                }
+            }
+        }
+    }
+}
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    span,
+    span::before,
+    span::after {
+        display: block;
+        background: $white;
+        height: 2.5px;
+        width: 1.5em;
+        border-radius: 2px;
+        position: relative;
+    }
+
+    span::before,
+    span::after {
+        content: "";
+        position: absolute;
+    }
+    span::before {
+        bottom: 7px;
+    }
+    span::after {
+        top: 7px;
+    }
+
+    @media screen and (min-width: 800px) {
+        display: none;
+    }
+}
+
+.nav-toggle:checked ~ .nav-bar {
+    transform: scale(1, 1);
+}

@@ -1,0 +1,14 @@
+.holder{
+    background: rgb(186, 186, 186);
+    padding: 1em;
+    margin: .5em 0;
+    p{
+        background: black;
+        margin: 1em;
+        padding: 2em;
+    }
+}
+.dragging{
+    opacity: .5;
+    background: rgb(110, 132, 240) !important;
+}

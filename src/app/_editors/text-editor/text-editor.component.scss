@@ -1,0 +1,24 @@
+$colorWidth: 1.5em;
+.color-picker{
+    padding: 0;
+    margin: 0;
+    width: $colorWidth;
+    height: $colorWidth;
+    border-radius: 1em;
+    position: relative;
+    top: .45em;
+    left: .45em;
+    
+}
+
+.text{
+    padding:20px;
+    box-shadow:  0 0 5px rgba(0, 0, 0, 0.5);
+    margin: 30px 0;
+    outline: none;
+    min-height: 300px;
+}
+
+.main{
+    max-width: 35em;
+}

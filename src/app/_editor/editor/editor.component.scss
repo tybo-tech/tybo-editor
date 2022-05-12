@@ -1,0 +1,149 @@
+@import "../../../assets/styles/colors";
+.editor-menu {
+    position: fixed;
+    width: 100%;
+    // min-height: 3rem;
+    background: $cloud;
+    background: #1d2e35;
+    z-index: 10000000;
+    top: 0;
+    left: 0;
+    padding: 0em;
+    box-shadow: $box-shadow;
+    border-bottom: 3px solid $border;
+    .input-group {
+        // height: 2.5rem;
+        top: 0.25rem;
+        input,
+        .input-group-text,
+        select {
+            background: #1d2e35;
+            color: $white;
+        }
+    }
+    .item {
+        padding: 0.2rem;
+    }
+
+    select {
+        font-size: 0.8rem;
+    }
+    .btn {
+        // font-weight: 100;
+    }
+}
+.container-fluid {
+    padding: 2em 2em;
+    background: $cloud;
+
+    // padding-top: 3em;
+
+    .editor,
+    .menu {
+        padding: 1em;
+        background: $cloud;
+        min-height: 50vh;
+        color: $bg;
+        padding: 0;
+
+        .body {
+            // padding: 1em;
+            min-height: 50vh;
+            // max-height: 95vh;
+        }
+
+        h6 {
+            padding: 1em;
+            background: $white;
+        }
+    }
+
+    .editor {
+        position: relative;
+        // max-width: 80em;
+        width: 100%;
+        margin: 0 auto;
+        left: 1em;
+        min-height: 100vh;
+
+        // .body {
+        //     // padding-bottom: 30em;
+        //     overflow-x: hidden;
+        // }
+    }
+}
+
+.over {
+    background: #bbbbbb8b;
+}
+
+.preview {
+    position: fixed !important;
+    width: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 100000 !important;
+    height: 100% !important;
+
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.grid-side-menu {
+    // background: red;
+    // grid-template-columns: 15% auto;
+    grid-template-columns: auto 80%;
+    max-width: 100%;
+    margin: 4rem 0;
+}
+
+.styles-menu {
+    position: relative;
+}
+
+.btn-preview {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000000000;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 0.25rem;
+    background: $bg;
+    color: $white;
+}
+
+.create-section {
+    text-align: center;
+    padding: 4rem;
+    margin: 2% auto;
+    max-width: 40rem;
+    border: 2px dashed $grey;
+    margin-top: 7%;
+    cursor: pointer;
+
+    p {
+        text-align: center;
+        font-size: 0.6rem;
+    }
+}
+
+.phone-class {
+    width: 480px;
+    height: 60rem;
+    border: 1.5rem solid rgb(202, 202, 202);
+    border: 1.5rem solid #505050;
+    border-radius: 28px;
+    // overflow: scroll;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    max-height: 95vh;
+}
+
+.body-holder {
+    padding-bottom: 55rem;
+    @media only screen and (max-width: 600px) {
+        max-height: 95vh !important;
+    }
+}
+

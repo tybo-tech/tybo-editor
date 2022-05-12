@@ -1,0 +1,28 @@
+<div class="styles">
+  <div class="style" *ngFor="let style of styles">
+    <h5 (click)="clickSection(style, !style.IsOpen)">
+      <span> {{style.SectionName}}</span>
+      <span *ngIf="!style.IsOpen"><i class="fa fa-chevron-down"></i></span>
+      <span *ngIf="style.IsOpen"><i class="fa fa-chevron-up"></i></span>
+    </h5>
+
+    <div class="fields grid-2" *ngIf="style.IsOpen && style.Type == 'Text'">
+      <div class="field" *ngFor="let input of style.Inputs">
+        <app-options-input [input]="input" (inputEvent)="onInputEvent($event)"></app-options-input>
+      </div>
+    </div>
+
+    <div class="fields grid-10" *ngIf="style.IsOpen && style.Type == 'General'">
+      <div class="field" *ngFor="let input of style.Inputs">
+        <app-general-styles [input]="input" (inputEvent)="onInputEvent($event)"></app-general-styles>
+      </div>
+    </div>
+
+
+    <div class="fields grid-1" *ngIf="style.IsOpen && style.Type == 'Background'">
+      <div class="field" *ngFor="let input of style.Inputs">
+        <app-options-input [input]="input"></app-options-input>
+      </div>
+    </div>
+  </div>
+</div>

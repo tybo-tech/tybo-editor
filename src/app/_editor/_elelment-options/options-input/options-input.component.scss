@@ -1,0 +1,60 @@
+@import "../../../../assets/styles/colors";
+._input {
+    display: grid;
+    grid-template-columns: 33% 40% auto;
+    background: #1f2937;
+    padding: 0.45rem;
+    border-radius: 0.4rem;
+    border: 2px solid $border;
+    select,
+    input {
+        width: 100%;
+        background: #1f2937;
+        color: #fff;
+        border: none;
+        padding: 0 0.25rem;
+        margin: 0;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: "";
+        font-size: 0.7rem;
+        color: #8395a7;
+        cursor: pointer;
+        text-align: right;
+    }
+    ._label {
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        padding: 0.25rem 0;
+        color: #8395a7;
+    }
+}
+
+.grid-2 {
+    grid-template-columns: 40% auto;
+    gap: 0;
+}
+.grid-1 {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+._image {
+    margin: 1rem auto;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: "";
+}
+// ._label, input, select{
+//     font-size: .7rem !important;
+// }

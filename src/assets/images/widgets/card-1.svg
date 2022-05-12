@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3540" height="2789" viewBox="0 0 3540 2789">
+  <g id="card-1" transform="translate(6103 6812)">
+    <rect id="Rectangle_93" data-name="Rectangle 93" width="3540" height="2789" transform="translate(-6103 -6812)" fill="#fff"/>
+    <g id="card-1-2" data-name="card-1" transform="translate(82 121)">
+      <path id="placeholder" d="M0,0H2866V903H0Z" transform="translate(-5848 -6614)" fill="#d6d6d6"/>
+      <path id="Icon_awesome-image" data-name="Icon awesome-image" d="M647.787,540.6H67.012A67.012,67.012,0,0,1,0,473.587V71.512A67.012,67.012,0,0,1,67.012,4.5H647.787A67.012,67.012,0,0,1,714.8,71.512V473.587A67.012,67.012,0,0,1,647.787,540.6ZM156.362,82.681a78.181,78.181,0,1,0,78.181,78.181A78.181,78.181,0,0,0,156.362,82.681ZM89.35,451.25h536.1V294.887L503.271,172.708a16.755,16.755,0,0,0-23.693,0L290.387,361.9l-77.5-77.5a16.755,16.755,0,0,0-23.693,0L89.35,384.237Z" transform="translate(-4772 -6435.5)" fill="#bfbfbf"/>
+      <path id="placeholder-2" data-name="placeholder" d="M0,0H1301.94V294.061H0Z" transform="translate(-5602 -4757.297)" fill="#faf1c8"/>
+      <path id="placeholder-3" data-name="placeholder" d="M0,0H1301.94V78.672H0Z" transform="translate(-5602 -5566)" fill="#d6d6d6"/>
+      <path id="placeholder-4" data-name="placeholder" d="M0,0H2030.206V78.672H0Z" transform="translate(-5602 -5371)" fill="#d6d6d6"/>
+      <path id="placeholder-5" data-name="placeholder" d="M0,0H1873.349V78.672H0Z" transform="translate(-5602 -5177)" fill="#d6d6d6"/>
+      <path id="placeholder-6" data-name="placeholder" d="M0,0H2086.227V78.672H0Z" transform="translate(-5602 -4983)" fill="#d6d6d6"/>
+    </g>
+  </g>
+</svg>

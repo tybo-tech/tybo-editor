@@ -1,0 +1,44 @@
+@import "../../../../assets/styles/colors";
+.styles {
+    padding: 2rem 0.5rem;
+    color: $cloud;
+    padding: 1rem;
+    padding-top: 3.5rem;
+    max-height: 100vh;
+    overflow-y: scroll;
+    padding-bottom: 6rem;
+    scrollbar-color: red !important ;
+
+
+    .style {
+        margin-bottom: 2.5rem;
+    }
+    h5 {
+        border-bottom: 1px solid $cloud;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.35rem 0;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        span {
+            transition: 0.5s ease-in-out;
+        }
+    }
+}
+.fields {
+    -webkit-animation: scale 0.3s ease-out;
+    animation-fill-mode: backwards;
+    position: relative;
+}
+@-webkit-keyframes scale {
+    0% {
+        top: -1rem;
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}

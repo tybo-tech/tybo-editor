@@ -1,0 +1,40 @@
+@import "./assets/styles/colors";
+@import "./assets/styles/keyframes";
+@import "./assets/styles/modals";
+@import "./assets/styles/grids";
+@import "./assets/styles/common";
+@import "./assets/styles/buttons";
+@import "./assets/styles/sidemenu";
+
+*,
+*::after,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    overflow: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f100; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

@@ -1,0 +1,29 @@
+<div *ngIf="row" [ngStyle]="row.SelectedStyle" class="_row" [id]="row.RowId" can_drop_on_me (onDrop)="onDrop($event)">
+
+    <!-- <div class="_column" > -->
+    <app-column *ngFor="let column of row.Columns; let i = index" [column]="column" [section]="section" [row]="row"
+        [website]="website" [page]="page" [colIndex]="i"></app-column>
+    <!-- </div> -->
+
+
+    <img class="item-menu contextmenu_section" src="assets/images/row-icon.svg" (contextmenu)="onRightClick($event)"
+         (click)="toggleOptions()">
+
+         <app-mini-menu [showMiniMenu]="row.ShowMiniMenu" [miniMenu]="miniMenu" (miniMenuEvent)="miniMenuEvent($event)">
+        </app-mini-menu>
+
+        <!-- <img class="item-menu contextmenu_section" src="assets/images/row-icon.svg" (contextmenu)="onRightClick($event)"
+        can_hover_me (onHover)="showStyleMenu($event,row)"> -->
+    <div class="absolute">
+      
+<!-- 
+        <app-element-options *ngIf="row && row.ShowOptions" [type]="'row'" [ItemStyle]="row.SelectedStyle">
+        </app-element-options> -->
+    </div>
+
+</div>
+
+
+<!-- <pre>
+    {{row | json}}
+</pre> -->

@@ -1,0 +1,78 @@
+<div class="_settings" *ngIf="website" >
+
+
+  <div class="card _mini-menu">
+    <h6 class="card-header d-flex justify-content-between">
+      <span>{{options}}</span>
+      <span><i class="fa fa-times pointer" (click)="onClose()"></i></span>
+    </h6>
+    <div class="card-body">
+      <div class="grid-2">
+        <section>
+          <ul class="list-group">
+            <!-- <li class="list-group-item active" aria-current="true">An active item</li> -->
+            <li class="list-group-item" *ngFor="let page of website.Pages" [ngClass]="page.ItemClass">
+              <input type="text" [(ngModel)]="page.Name" class="form-control" (click)="selectPage(page)">
+            </li>
+          </ul>
+
+        </section>
+
+        <section class="p-2" *ngIf="page">
+
+          <h5 class="d-flex justify-content-between">
+            <span> {{page.Name}}</span>
+            <span><i class="fa fa-trash pointer"></i></span>
+          </h5>
+          <hr>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Page tittle</label>
+            <input type="text" [(ngModel)]="page.Title" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Page url</label>
+            <input type="text" [(ngModel)]="page.Url" class="form-control">
+          </div>
+
+          
+    
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [value]="page.ShowInNav"  [(ngModel)]="page.ShowInNav"  id="showInNav">
+            <label class="form-check-label" for="showInNav">
+              Display on menu
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [value]="page.DisplayHeader"  [(ngModel)]="page.DisplayHeader"  id="headerDisplay">
+            <label class="form-check-label" for="headerDisplay">
+              Display Header
+            </label>
+          </div>
+
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [value]="page.DisplayFooter"  [(ngModel)]="page.DisplayFooter"  id="footerDisplay">
+            <label class="form-check-label" for="footerDisplay">
+              Display Footer
+            </label>
+          </div>
+
+          <!-- <pre>
+            {{page| json}}
+          </pre> -->
+        </section>
+      </div>
+
+    </div>
+
+    <div class="card-footer">
+      <div class="add d-flex justify-content-between">
+        <button class="btn btn-light" style="background: #fff; border: 1px solid rgb(67, 67, 67)" (click)="addPage()">Add a page</button>
+        <button class="btn btn-primary" (click)="savePage()" *ngIf="page">Save page</button>
+      </div>
+    </div>
+  </div>
+</div>

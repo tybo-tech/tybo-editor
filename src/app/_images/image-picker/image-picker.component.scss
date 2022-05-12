@@ -1,0 +1,37 @@
+@import "../../../assets/styles/colors";
+$scale: 1.2;
+._picker {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+    width: 80%;
+    max-height: 80vh;
+    overflow-y: scroll;
+    .heading {
+        background: $bg;
+        color: $white;
+    }
+
+    .body {
+        color: $bg;
+
+        .images {
+            display: grid;
+            grid-template-columns: repeat(8, 12%);
+            grid-gap: 5px;
+            .image {
+                cursor: pointer;
+                overflow: hidden;
+                img {
+                    transition: .2s ease-in-out;
+                    &:hover {
+                        transform: scale($scale, $scale);
+                        -ms-transform: scale($scale, $scale);
+                        -webkit-transform: scale($scale, $scale);
+                    }
+                }
+            }
+        }
+    }
+}

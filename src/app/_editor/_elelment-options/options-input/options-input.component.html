@@ -1,0 +1,121 @@
+<div class="_input" *ngIf="input && input.Units && (input.Type == 'number' || input.Type == 'text')">
+  <div class="_label">{{input.Label}}</div>
+  <div class="_value"><input [type]="input.Type" (input)="onInputEvent()" class="no-spin" [(ngModel)]="input.Value"></div>
+  <div class="_units">
+    <select name="" id="" [(ngModel)]="input.Unit" (change)="onInputEvent()">
+      <option [value]="option" *ngFor="let  option of input.Units">
+        {{option}}
+      </option>
+    </select>
+  </div>
+</div>
+
+
+<div class="_input grid-2"
+  *ngIf="input && input.Options && !input.Units && (input.Type == 'number' || input.Type == 'text')">
+  <div class="_label">{{input.Label}}</div>
+  <div class="_units">
+    <select name="" id="" [(ngModel)]="input.Value" (change)="onInputEvent()" style="color: white;">
+      <option [value]="option" *ngFor="let  option of input.Options">
+        {{option}}
+      </option>
+    </select>
+  </div>
+</div>
+
+
+
+<div class="_input grid-2"
+  *ngIf="input && !input.Options && !input.Units && (input.Type == 'number' || input.Type == 'text')">
+  <div class="_label">{{input.Label}}</div>
+  <div class="_units">
+    <input name="" id="" [(ngModel)]="input.Value" [type]="input.Type" (change)="onInputEvent()" style="color: white;" />
+  </div>
+</div>
+
+<div class="_input grid-2" *ngIf="input && input.Options && !input.Units && input.Type == 'select-option'">
+  <div class="_label">{{input.Label}}</div>
+  <div class="_units">
+    <select name="" id="" [(ngModel)]="input.Value" style="color: white;" (change)="onInputEvent()">
+      <option [value]="option" *ngFor="let  option of input.Options">
+        {{option}}
+      </option>
+    </select>
+  </div>
+</div>
+
+
+<div class="_input grid-2" *ngIf="input && input.Type == 'color' && input.Label && input.IsVisible === true">
+  <div class="_label">{{input.Label}}</div>
+  <div class="_units">
+    <input type="color" [(ngModel)]="input.Value" (input)="onInputEvent()"/>
+  </div>
+</div>
+
+
+<div class="_input grid-1" *ngIf="input && input.Type == 'color' && !input.Label && input.IsVisible === true">
+  <div class="_units">
+    <input type="color" [(ngModel)]="input.Value" (input)="onInputEvent()"/>
+  </div>
+</div>
+
+
+<div class="_input grid-2" *ngIf="input && input.Type == 'choice'">
+  <div class="_label">{{input.Label}}</div>
+  <div class="_units">
+    <select name="" id="" [(ngModel)]="input.Option" style="color: white;">
+      <option [value]="option" *ngFor="let  option of input.Options">
+        {{option}}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="input.Option === 'Image'" style="grid-column: span 2">
+    <img [src]="input.Value" alt="">
+    <div></div>
+    <br>
+    <button class="btn btn-dark" (click)="showBG = !showBG">Change image</button>
+  </div>
+
+
+
+  <div *ngIf="input.Option === 'Color'">
+    {{input.Id}}
+    <input type="color" [(ngModel)]="input.Value" (input)="onInputEvent()" />
+  </div>
+
+
+
+</div>
+
+
+
+
+<div *ngIf="input.Option === 'Image'">
+  <div class="field" *ngFor="let childInput of input.Inputs">
+    <div class="_input grid-2">
+      <div class="_label">{{childInput.Label}}</div>
+      <div class="_units" *ngIf="childInput.Type === 'select-option'">
+        <select name="" id="" [(ngModel)]="childInput.Option" style="color: white;">
+          <option [value]="option" *ngFor="let  option of childInput.Options">
+            {{option}}
+          </option>
+        </select>
+      </div>
+
+      <div class="_units" *ngIf="childInput.Type === 'range'">
+        <input type="range" style="max-height: .4rem;" [(ngModel)]="childInput.Value" min="1" max="100" class="slider"
+          id="myRange">
+      </div>
+
+
+      <div class="_units" *ngIf="childInput.Type === 'color'">
+        <input type="color" [(ngModel)]="childInput.Value" min="1" max="100" (input)="onInputEvent()" class="slider" id="myRange">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<app-image-picker *ngIf="showBG" (onClose)="showBG= false" (onImageSelect)="onBgChanged($event)"></app-image-picker>

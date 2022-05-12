@@ -1,0 +1,36 @@
+<div class="all" *ngIf="widget">
+  <div class="widget-item grid-2 draggables" *ngIf="widget.WidgetId === 'card-1'" [id]="widget.WidgetId" draggable="true" candragme>
+    <div class="card" *ngFor="let item of [1]; let i = index" [id]="widget.WidgetId+(i+1)">
+      <img [src]="cardImage" class="card-img-top" alt="...">
+    </div>
+
+  </div>
+
+  <div class="widget-item  grid-2 draggables" *ngIf="widget.WidgetId === 'card-2'" [id]="widget.WidgetId" draggable="true"
+    candragme>
+    <div class="card" *ngFor="let item of [1,2]; let i = index" [id]="widget.WidgetId+(i+1)">
+      <img [src]="cardImage" class="card-img-top" alt="...">
+    </div>
+  </div>
+
+  <div class="widget-item  grid-3 draggables" *ngIf="widget.WidgetId === 'card-3'" [id]="widget.WidgetId" draggable="true"
+    candragme>
+    <div class="card" *ngFor="let item of [1,2,3]; let i = index" [id]="widget.WidgetId+(i+1)">
+      <img [src]="cardImage" class="card-img-top" alt="...">
+    </div>
+  </div>
+
+  <div class="widget-item  grid-4 draggables" *ngIf="widget.WidgetId === 'card-4'" [id]="widget.WidgetId" draggable="true"
+    candragme>
+    <div class="card" *ngFor="let item of [1,2,1,1]; let i = index" [id]="widget.WidgetId+(i+1)">
+      <img [src]="cardImage" class="card-img-top" alt="...">
+    </div>
+  </div>
+
+
+  <div class="widget-item  draggables" *ngIf="widget.WidgetId === 'hero-1'" [id]="widget.WidgetId" draggable="true" candragme>
+    <div class="card" *ngFor="let item of [1]; let i = index" [id]="widget.WidgetId+(i+1)">
+      <img [src]="heroImage" class="card-img-top" alt="...">
+    </div>
+  </div>
+</div>

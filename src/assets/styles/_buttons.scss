@@ -1,0 +1,15 @@
+.btn {
+    // font-weight: 700 !important;
+    font-size: 0.85em !important;
+    cursor: pointer;
+}
+.btn-primary {
+    background: $primary !important;
+    color: $bg !important;
+    border-color: $primary !important;
+}
+
+.nav-btn {
+    margin-right: 1em;
+    max-height: 3em;
+}

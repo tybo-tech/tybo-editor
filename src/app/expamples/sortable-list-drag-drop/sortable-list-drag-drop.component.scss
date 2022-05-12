@@ -1,0 +1,56 @@
+@import "../../../assets/styles/colors";
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    // height: 50vh;
+    margin: 0;
+    .draggable-list {
+        border: 1px solid $cloud;
+        list-style-type: none;
+        padding: 0;
+        li{
+            display: flex;
+            flex: 1;
+        }
+        li:not(:last-of-type) {
+            border-bottom: 1px solid $cloud;
+        }
+
+        .number {
+            background: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            height: 60px;
+            width: 60px;
+            color: $bg;
+        }
+
+        .item-name{
+            margin: 0 20px 0 0 ;
+        }
+
+        .draggable{
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            flex: 1;
+        }
+
+        li.right .item-name{
+            color: #3ae374;
+        }
+        li.over .draggable{
+            // color: #3ae374;
+            background: #be99fa;
+        }
+        li.wrong .item-name{
+            color: rgb(214, 51, 26);
+        }
+    }
+}

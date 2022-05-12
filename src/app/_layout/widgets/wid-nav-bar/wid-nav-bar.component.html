@@ -1,0 +1,13 @@
+<div *ngIf="website" class="_nav-bar  simple-nav">
+  <div class="d-flex justify-content-between">
+    <div class="_logo">
+      <app-html-element [type]="'image'" [value]="website.Logo" (onImageChange)="onImageChange($event)" [ItemStyle]="website.LogoStyles"></app-html-element>
+    </div>
+
+    <div class="__nav">
+      <app-html-element [type]="'nav'" [items]="website.Pages" [ItemStyle]="website.NavItemsStyles"></app-html-element>
+    </div>
+
+  </div>
+
+</div>

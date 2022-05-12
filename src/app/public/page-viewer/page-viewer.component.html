@@ -1,0 +1,31 @@
+<div class="_main"  [ngClass]="mainClass">
+  <div class="item" *ngIf="id == 'editor'">
+    <app-editor></app-editor>
+  </div>
+  <div class="item" *ngIf="id != 'editor' && website">
+        <!-- GLOBAL HEADER -->
+        <div class="nav-holder" *ngIf="website && website.Header">
+          <!-- <app-flex-box [section]="website.Header" [website]="website"></app-flex-box> -->
+          <app-public-section [section]="website.Header" [website]="website" [page]="page"  [sectionIndex]="'0'"></app-public-section>
+        </div>
+  
+        <!-- BODY -->
+        <div class="body-holder" *ngIf="page && page.Sections && page.Sections.length">
+          <div class="section holder" *ngFor="let section of page.Sections; let i = index" [id]="section.SectionId">
+            <!-- <app-flex-box [section]="section" [website]="website" [page]="page" [sectionIndex]="i"></app-flex-box> -->
+            <app-public-section [section]="section" [website]="website" [page]="page"  [sectionIndex]="i"></app-public-section>
+          </div>
+        </div>
+  
+        <!--GLOBAL FOOTER -->
+        <div *ngIf="website && website.Footer">
+          <app-flex-box [section]="website.Footer" [website]="website"></app-flex-box>
+        </div>
+  </div>
+
+
+<!-- 
+  <pre>
+    {{ this.website | json }}
+  </pre> -->
+</div>

@@ -1,0 +1,15 @@
+<div *ngIf="widget" class="widget">
+
+  <app-public-html-element [type]="widget.ElementType" [value]="widget.ItemContent" [parent]="widget"
+      *ngIf="widget.ItemCategory != SectionTypes.CARD && widget.ItemCategory != 'List' && widget.ItemCategory != 'Menu' && widget.ItemCategory !=  SectionTypes.FORM"
+      (clickEvent)="linkClick($event,widget)"
+      [ItemStyle]="widget.SelectedStyle" (copyEvent)="OnCopyEvent($event,widget)"
+      (onStyleChange)="onStyleChange($event)" (deleteEvent)="deleteEvent($event)"></app-public-html-element>
+
+
+  <app-card [card]="widget" [website]="website"   *ngIf="widget.ItemCategory ===  SectionTypes.CARD"></app-card>
+
+  <app-public-menu [widget]="widget"    [website]="website" [column]="column"  *ngIf="widget.ItemCategory ===  SectionTypes.MENU"></app-public-menu>
+
+  <app-public-form [widget]="widget"  [website]="website" [index]="index" [column]="column" *ngIf="widget.ItemCategory ===  SectionTypes.FORM"></app-public-form>
+</div>

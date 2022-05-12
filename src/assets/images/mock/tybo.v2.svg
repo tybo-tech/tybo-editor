@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="612.882" height="80" viewBox="0 0 612.882 80">
+  <g id="tybo.v2" transform="translate(-170 -275)">
+    <g id="Group_172" data-name="Group 172" transform="translate(30 -65)">
+      <g id="Group_170" data-name="Group 170" transform="translate(452 340)">
+        <g id="Component_2_1" data-name="Component 2 – 1" transform="translate(0 0)">
+          <g id="Subtraction_8" data-name="Subtraction 8" transform="translate(0 0)">
+            <path id="Path_169" data-name="Path 169" d="M-8923.354,9799.867H-9024V9756h100.646a20.658,20.658,0,0,1,20.646,20.646l0,2.58A20.662,20.662,0,0,1-8923.354,9799.867Z" transform="translate(9024 -9755.996)" fill="none"/>
+            <path id="Path_170" data-name="Path 170" d="M-8923.354,9789.545a10.319,10.319,0,0,0,10.322-10.322v-2.58a10.319,10.319,0,0,0-10.322-10.322h-90.324v23.225h90.324m0,10.322H-9024V9756h100.646a20.673,20.673,0,0,1,20.645,20.646v2.58A20.672,20.672,0,0,1-8923.354,9799.867Z" transform="translate(9024 -9755.996)" fill="#f3cf3d"/>
+          </g>
+          <g id="Subtraction_9" data-name="Subtraction 9" transform="translate(0 36.129)">
+            <path id="Path_171" data-name="Path 171" d="M-8923.354,9799.867H-9024V9756h100.646a20.658,20.658,0,0,1,20.646,20.646l0,2.58A20.662,20.662,0,0,1-8923.354,9799.867Z" transform="translate(9024 -9755.996)" fill="none"/>
+            <path id="Path_172" data-name="Path 172" d="M-8923.354,9789.545a10.319,10.319,0,0,0,10.322-10.322v-2.58a10.319,10.319,0,0,0-10.322-10.322h-90.324v23.225h90.324m0,10.322H-9024V9756h100.646a20.673,20.673,0,0,1,20.645,20.646v2.58A20.672,20.672,0,0,1-8923.354,9799.867Z" transform="translate(9024 -9755.996)" fill="#f3cf3d"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_171" data-name="Group 171" transform="translate(140 340)">
+        <path id="Path_173" data-name="Path 173" d="M9649.008-9537.417H9715.1v-13.9h-78.971v79.989h12.879Z" transform="translate(-9569.021 9551.325)" fill="#f3cf3d"/>
+        <path id="Path_174" data-name="Path 174" d="M9611.473-9551.324v14.576h53.886v-14.576Z" transform="translate(-9611.473 9551.324)" fill="#f3cf3d"/>
+      </g>
+      <path id="Subtraction_10" data-name="Subtraction 10" d="M-9922.117,9834H-10035a21.862,21.862,0,0,1-15.558-6.442A21.86,21.86,0,0,1-10057,9812v-36a21.86,21.86,0,0,1,6.444-15.557A21.862,21.862,0,0,1-10035,9754h112.882a21.862,21.862,0,0,1,15.557,6.442,21.862,21.862,0,0,1,6.442,15.557v36a21.862,21.862,0,0,1-6.442,15.557A21.862,21.862,0,0,1-9922.117,9834ZM-10030,9766a12.015,12.015,0,0,0-12,12v33a12.015,12.015,0,0,0,12,12h102.882a12.014,12.014,0,0,0,12-12v-33a12.014,12.014,0,0,0-12-12Z" transform="translate(10653 -9414)" fill="#f3cf3d"/>
+      <path id="Path_175" data-name="Path 175" d="M9418.086-9547.838,9468-9514.125v43.309h14.433l1.825-43.309,53.842-36.691h-26.8l-36.426,25.866-32.724-22.888Z" transform="translate(-9109.086 9890.816)" fill="#f3cf3d"/>
+    </g>
+  </g>
+</svg>

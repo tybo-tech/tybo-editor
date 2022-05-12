@@ -1,0 +1,27 @@
+@import "../../../../../assets/styles/colors";
+.item-menu {
+    width: auto;
+    height: 4.5rem;
+    top: -1rem;
+    left: auto;
+    right: -1rem;
+}
+
+.ul {
+    list-style: none;
+    &:hover {
+        border: 1px dotted $info;
+        .item-menu {
+            opacity: 1;
+        }
+    }
+}
+
+.toggle{
+    position: absolute;
+    right: .5rem;
+    top: -38px;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+}

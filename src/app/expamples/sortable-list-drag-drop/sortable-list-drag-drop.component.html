@@ -1,0 +1,23 @@
+<div class="main">
+  <h1>
+    Steps to crate a website
+  </h1>
+
+  <p>
+    Drag items to correct sport
+  </p>
+
+  <ul class="draggable-list" id="draggable-list">
+    <li *ngFor="let item of copyArray; let i = index" [id]="i">
+      <span class="number">{{i +1}}</span>
+      <div class="draggable" draggable="true">
+        <p class="item-name">
+          {{item}}
+        </p>
+        <i class="fas fa-grip-lines"> </i>
+      </div>
+    </li>
+  </ul>
+
+  <button class="btn btn-light" (click)="check()">Check order</button>
+</div>

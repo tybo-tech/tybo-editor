@@ -1,0 +1,8 @@
+<svg id="image" xmlns="http://www.w3.org/2000/svg" width="85" height="85" viewBox="0 0 85 85">
+  <g id="section">
+    <g id="section-2" data-name="section">
+      <rect id="Rectangle_99" data-name="Rectangle 99" width="85" height="85" fill="none"/>
+    </g>
+  </g>
+  <path id="Icon_awesome-image" data-name="Icon awesome-image" d="M58.3,52.749H6.031A6.031,6.031,0,0,1,0,46.718V10.531A6.031,6.031,0,0,1,6.031,4.5H58.3a6.031,6.031,0,0,1,6.031,6.031V46.718A6.031,6.031,0,0,1,58.3,52.749ZM14.073,11.536a7.036,7.036,0,1,0,7.036,7.036A7.036,7.036,0,0,0,14.073,11.536ZM8.042,44.708H56.291V30.635l-11-11a1.508,1.508,0,0,0-2.132,0L26.135,36.666,19.16,29.691a1.508,1.508,0,0,0-2.132,0L8.042,38.677Z" transform="translate(9.972 13.875)" fill="#7b8282"/>
+</svg>

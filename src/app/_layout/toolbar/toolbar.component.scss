@@ -1,0 +1,49 @@
+@import "./../../../assets/styles/colors";
+.tabs {
+    grid-template-columns: repeat(3, 33.33%);
+}
+
+.elements {
+    max-height: 100vh;
+    padding-bottom: 4rem;
+    overflow-y: scroll;
+    padding: 1rem;
+
+    ._widget {
+        text-align: center;
+        border: 2px solid $border;
+        padding: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+            border-color: $bg;
+            box-sizing: $box-shadow;
+            p {
+                color: $white;
+            }
+        }
+        img {
+            width: 2em;
+            margin-inline: auto;
+            border: none;
+        }
+
+        p {
+            display: block;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-weight: 500;
+            font-size: 0.7em;
+            color: $dark-grey;
+            padding-top: 0.5em;
+        }
+    }
+}
+
+.holder {
+    max-height: 100vh;
+    overflow-y: scroll;
+    padding-bottom: 4rem;
+}

@@ -1,0 +1,12 @@
+<div class="controls d-flex justify-content-start" *ngIf="contenteditable">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="__target btn btn-light" (click)="topActionButtons('bold')">B</button>
+    <button type="button" class="__target btn btn-light" (click)="topActionButtons('underline')">U</button>
+    <button type="button" class="__target btn btn-light" (click)="topActionButtons('italic')"><i>I</i></button>
+    <input type="color" (input)="topActionButtons('forecolor')" [(ngModel)]="forecolor"
+    class="__target form-control color-picker">
+  
+  </div>
+</div>
+<div [innerHTML] ="text" contenteditable="true" *ngIf="contenteditable"></div>
+<div [innerHTML] ="text" contenteditable="true" *ngIf="!contenteditable"></div>

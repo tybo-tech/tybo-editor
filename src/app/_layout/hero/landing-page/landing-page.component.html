@@ -1,0 +1,38 @@
+<div class="body">
+  <div class="main-grid">
+    <header>
+      <img src="assets/images/mock/newlogo.svg" class="" alt="">
+      <div class="_nav">
+        <a *ngFor="let page of pages" [routerLink]="page.Url" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}" [ngClass]="page.StyleClass"> {{page.Name}}</a>
+      </div>
+    </header>
+    <main>
+      <h1 class="title">The box</h1>
+      <p class="sub-tittle">Hey there</p>
+  
+      <img src="assets/images/mock/t1.png" alt="">
+  
+      <div class="secondary-images">
+        <img src="assets/images/mock/t1.png" alt="">
+        <img src="assets/images/mock/t2.png" alt="">
+      </div>
+  
+      <p class="description">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi veritatis aut ratione nulla non totam et natus
+        distinctio, magni a. Voluptate et quia harum nesciunt eaque, quasi asperiores. Fugit, assumenda!
+      </p>
+  
+      <button>Book now</button>
+  
+    </main>
+    <footer>
+      <a href="" class="social-links"><img src="assets/images/mock/inta.svg" alt="" aria-label=""
+          class="socila-image"></a>
+      <a href="" class="social-links"><img src="assets/images/mock/face.svg" alt="" aria-label=""
+          class="socila-image"></a>
+      <a href="" class="social-links"><img src="assets/images/mock/youtube.svg" alt="" aria-label=""
+          class="socila-image"></a>
+    </footer>
+  </div>
+</div>

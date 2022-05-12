@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="5796" height="2789" viewBox="0 0 5796 2789">
+  <g id="hero-1" transform="translate(2079 10338)">
+    <rect id="Rectangle_93" data-name="Rectangle 93" width="5796" height="2789" transform="translate(-2079 -10338)" fill="#fff"/>
+    <g id="Group_162" data-name="Group 162" transform="translate(63.858)">
+      <g id="Group_160" data-name="Group 160" transform="translate(36 222)">
+        <path id="placeholder" d="M0,0H1952.634V1706.734H0Z" transform="translate(1177 -10019)" fill="#d6d6d6"/>
+        <path id="Icon_awesome-image" data-name="Icon awesome-image" d="M574.189,479.691H59.4A59.4,59.4,0,0,1,0,420.292V63.9A59.4,59.4,0,0,1,59.4,4.5h514.79a59.4,59.4,0,0,1,59.4,59.4V420.292A59.4,59.4,0,0,1,574.189,479.691ZM138.6,73.8a69.3,69.3,0,1,0,69.3,69.3A69.3,69.3,0,0,0,138.6,73.8ZM79.2,400.492H554.389V261.9l-108.3-108.3a14.851,14.851,0,0,0-21,0l-167.7,167.7-68.7-68.7a14.851,14.851,0,0,0-21,0l-88.5,88.5Z" transform="translate(1836.47 -9407.463)" fill="#bfbfbf"/>
+      </g>
+      <g id="Group_161" data-name="Group 161" transform="translate(0 112.332)">
+        <path id="placeholder-2" data-name="placeholder" d="M0,0H1301.94V294.061H0Z" transform="translate(-1654.858 -8798.629)" fill="#faf1c8"/>
+        <path id="placeholder-3" data-name="placeholder" d="M0,0H1301.94V78.672H0Z" transform="translate(-1654.858 -9607.332)" fill="#d6d6d6"/>
+        <path id="placeholder-4" data-name="placeholder" d="M0,0H2030.206V78.672H0Z" transform="translate(-1654.858 -9412.332)" fill="#d6d6d6"/>
+        <path id="placeholder-5" data-name="placeholder" d="M0,0H1873.349V78.672H0Z" transform="translate(-1654.858 -9218.332)" fill="#d6d6d6"/>
+        <path id="placeholder-6" data-name="placeholder" d="M0,0H2086.227V78.672H0Z" transform="translate(-1654.858 -9024.332)" fill="#d6d6d6"/>
+      </g>
+    </g>
+  </g>
+</svg>

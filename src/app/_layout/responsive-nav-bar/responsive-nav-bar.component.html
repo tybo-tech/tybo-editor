@@ -1,0 +1,23 @@
+<header>
+  <!-- <h1 style="font-family: 'Jokerman';" class="logo">
+    Tybo
+    <i class="fab fa-apple"></i>
+    <i class="fab fa-pied-piper-square"></i>
+  </h1> -->
+  <div class="logo">
+    <img src="assets/images/mock/newlogo.svg" class="" alt="">
+
+  </div>
+  <input type="checkbox" name="" class="nav-toggle" id="nav-toggle-id">
+  <div class="nav-bar">
+    <ul>
+      <li *ngFor="let page of pages">
+        <a [routerLink]="page.Url"  routerLinkActive="active"   [routerLinkActiveOptions]="{exact: true}" [ngClass]="page.StyleClass"> {{page.Name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <label class="nav-toggle-label" for="nav-toggle-id">
+    <span></span>
+  </label>
+</header>

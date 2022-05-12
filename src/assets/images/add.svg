@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1820" height="2979.5" viewBox="0 0 1820 2979.5">
+  <g id="add" transform="translate(15871 7596.5)">
+    <line id="Line_1" data-name="Line 1" y2="1437.5" transform="translate(-14930.75 -7493.5)" fill="none" stroke="#f3cf3d" stroke-linecap="round" stroke-width="206"/>
+    <line id="Line_2" data-name="Line 2" y2="1437.5" transform="translate(-14242 -6774.75) rotate(90)" fill="none" stroke="#f3cf3d" stroke-linecap="round" stroke-width="206"/>
+    <text id="Add-2" data-name="Add" transform="translate(-14961 -4927)" fill="#f3cf3d" font-size="886" font-family="Poppins-Medium, Poppins" font-weight="500"><tspan x="-909.479" y="0">Add</tspan></text>
+  </g>
+</svg>

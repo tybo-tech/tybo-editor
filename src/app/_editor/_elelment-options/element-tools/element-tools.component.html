@@ -1,0 +1,15 @@
+<div class="tools-holder">
+    <div class="content">
+        <div class="tabs" *ngIf="tabs">
+            <div class="tab" *ngFor="let tab of tabs" [ngClass]="tab.Class" (click)="onTab(tab)">
+                <p [innerHTML]="tab.Name">
+
+                </p>
+            </div>
+
+        </div>
+
+        <app-element-style *ngIf="tabId === 'styles' && element" [type]="element.ElementId" [ItemStyle]="element.SelectedStyle"></app-element-style>
+        <app-options *ngIf="tabId === 'options' && element" [type]="element.ElementId" [element]="element"></app-options>
+    </div>
+</div>

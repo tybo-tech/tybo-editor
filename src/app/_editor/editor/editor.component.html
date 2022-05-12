@@ -1,0 +1,113 @@
+<button class="btn-preview" *ngIf="preview"> <i (click)="closePreview()" class="_close fas fa-times"></i>
+</button>
+<div class="editor-menu">
+  <div class="d-flex justify-content-between">
+
+    <div class="d-flex justify-content-start">
+      <div class="item">
+        <app-toolbar *ngIf="showAdd" (menuEvent)="menuEvent($event)"></app-toolbar>
+
+      </div>
+      <div class="item">
+        <a class="_nav-btn" (click)="showAdd = !showAdd"><i class="fas fa-plus"></i> Add</a>
+      </div>
+      <div class="item">
+        <a class="_nav-btn" (click)="preVeiw()"><i class="fas fa-play"></i> Preview</a>
+      </div>
+      <div class="item" style="padding-right: 2rem;">
+        <div class="input-group input-group-sm">
+          <input type="text" class="form-control" *ngIf="website" disabled [(ngModel)]="website.WebsiteId"
+            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+          <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-cog pointer"></i></span>
+        </div>
+      </div>
+
+
+      <div class="item" *ngIf="website && website.Pages">
+
+
+        <div class="input-group input-group-sm">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="pageId" (change)="pageChanged()">
+            <option [value]="pageItem.PageId" *ngFor="let pageItem of website.Pages">
+              Page: {{pageItem.Name}}
+            </option>
+          </select>
+          <span class="input-group-text" (click)="toggleClose()" id="inputGroup-sizing-sm"><i
+              class="fas fa-cog pointer"></i></span>
+        </div>
+        <app-page-settings [website]="website" *ngIf="website.ShowPages" (closeEvent)="toggleClose()">
+        </app-page-settings>
+      </div>
+      <div style="width: 2rem;"></div>
+      <div class="item">
+        <a class="_nav-btn" (click)="phoneVew()"><i class="fas fa-mobile-alt"></i></a>
+      </div>
+
+      <div class="item">
+        <a class="_nav-btn" (click)="pcView()"><i class="fas fa-desktop"></i> </a>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <a class="_nav-btn" (click)="savePage()"><i class="fas fa-save"></i> Save changes</a>
+      <a class="_nav-btn"><i class="fas fa-upload"></i> Publish site</a>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="container-fluid">
+
+  <div class="grid-side-menu">
+
+    <div class="styles-menu">
+      <app-element-tools></app-element-tools>
+    </div>
+
+    <!-- MAIN WEBSITE -->
+    <div class="editor" [ngClass]="mainClass">
+
+      <!-- <app-side-menu></app-side-menu> -->
+
+      <!-- GLOBAL HEADER -->
+      <div class="nav-holder" *ngIf="website && website.Header">
+        <!-- <app-flex-box [section]="website.Header" [website]="website"></app-flex-box> -->
+        <app-section-viewer [section]="website.Header" [website]="website" [page]="page" [sectionIndex]="'0'">
+        </app-section-viewer>
+      </div>
+
+      <!-- BODY -->
+      <div class="body body-holder" *ngIf="page && page.Sections">
+        <div class="section holder" *ngFor="let section of page.Sections; let i = index" [id]="section.SectionId">
+          <!-- <app-flex-box [section]="section" [website]="website" [page]="page" [sectionIndex]="i"></app-flex-box> -->
+          <app-section-viewer [section]="section" [website]="website" [page]="page" [sectionIndex]="i">
+          </app-section-viewer>
+        </div>
+
+        <!--GLOBAL FOOTER -->
+        <div *ngIf="website && website.Footer">
+          <app-flex-box [section]="website.Footer" [website]="website"></app-flex-box>
+        </div>
+
+        <div class="create-section">
+          <h3>
+            Create a section
+          </h3>
+
+          <div class="d-flex justify-content-start">
+            <div class="item" *ngFor="let colItem of COL_IMAGES" (click)="addSection(colItem.Id)">
+              <img [src]="colItem.ImageUrl" alt="">
+              <p>{{colItem.Name}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+  </div>
+</div>

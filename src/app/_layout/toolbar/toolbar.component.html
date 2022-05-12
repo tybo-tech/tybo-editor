@@ -1,0 +1,75 @@
+<div class="tools-holder">
+  <div class="content">
+    <div class="tabs" *ngIf="tabs">
+      <div class="tab" *ngFor="let tab of tabs" [ngClass]="tab.Class" (click)="onTab(tab)">
+        <p [innerHTML]="tab.Name">
+
+        </p>
+      </div>
+
+    </div>
+
+   <div class="holder">
+
+    <div *ngIf="elements && tabId === 'elements'" class="elements grid-2">
+      <div class="widget-item _widget draggables" *ngFor="let widget of elements; let i = index"
+        (click)="clickMenu(widget)" draggable="true" [id]="widget.ItemType" candragme>
+        <img [src]="widget.ImageUrl" alt="">
+        <p>
+          {{widget.Name}}
+        </p>
+      </div>
+    </div>
+
+    <app-layers *ngIf="tabId === 'layers'"></app-layers>
+
+   </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="tool-bars" *ngIf="mainMenu">
+  <div class="tool-bar" *ngFor="let toolbar of mainMenu; let i = index" (mouseover)="expandToolBar(toolbar)">
+
+    <a class="_nav-btn"> <span [innerHTML]="toolbar.Icon"></span>
+      {{toolbar.Name}}</a>
+    <div class="item-dropdown" *ngIf="selectedToolbar" (mouseleave)="closeToolBar(toolbar)">
+      <div class="grid-2">
+        <div class="bg-cloud full-child no-scrol">
+          <div class="" *ngFor="let sub of subMenu; let i = index" [ngClass]="sub.StyleClass"
+            (mouseover)="showWidets(sub)">
+            <p>{{sub.Name}}</p>
+          </div>
+        </div>
+
+        <div class="bg-cloud full-child grid-3" *ngIf="widgets && widgets.length">
+          <div class="widget-item _widget draggables" *ngFor="let widget of widgets; let i = index"
+            (click)="clickMenu(widget)" draggable="true" [id]="widget.ItemType" candragme>
+            <img [src]="widget.ImageUrl" alt="">
+            <p>
+              {{widget.Name}}
+            </p>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div> -->

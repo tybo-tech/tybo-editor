@@ -1,0 +1,30 @@
+<div class="section" class="section contextmenu_section" *ngIf="section && website" [id]="section.SectionId"
+  [ngStyle]="section.SelectedStyle" can_drop_on_me (onDrop)="onDrop($event)" (contextmenu)="preventRightClick($event)">
+  <!-- <pre>
+  {{ section.Rows | json }}
+</pre> -->
+  <div class="" *ngFor="let row of section.Rows; let i = index">
+    <!-- <h1>{{row.OrderNumber}}</h1> -->
+    <app-row [row]="row" [section]="section" [website]="website" [page]="page" [rowIndex]="i"></app-row>
+  </div>
+
+  <img class="item-menu contextmenu_section" src="assets/images/section.svg" (click)="toggleOptions()" (contextmenu)="onRightClickSection($event,section)" />
+  <!-- <img class="item-menu contextmenu_section" src="assets/images/section.svg" can_hover_me
+    (onHover)="showSectionStyleMenu($event,section)" alt="" (contextmenu)="onRightClickSection($event,section)" /> -->
+
+  <div class="absolute _absolute">
+
+  </div>
+
+  <app-mini-menu [showMiniMenu]="section.ShowMiniMenu" [miniMenu]="miniMenu"
+  (miniMenuEvent)="selectSectionMenu($event, section)">
+</app-mini-menu>
+  <div class="absolute">
+
+
+
+    <!-- <app-element-options *ngIf="section && section.ShowOptions" [name]="section.Name" [type]="'section'"
+      [ItemStyle]="section.SelectedStyle" (onStyleChange)="onStyleChange($event)">
+    </app-element-options> -->
+  </div>
+</div>

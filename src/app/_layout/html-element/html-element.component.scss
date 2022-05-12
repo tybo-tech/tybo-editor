@@ -1,0 +1,59 @@
+@import "../../../assets/styles/colors";
+.__nav {
+    a {
+        color: inherit !important;
+    }
+}
+
+p {
+    margin: 0;
+}
+.typo {
+    // opacity: 0;
+    background: $white;
+    position: absolute;
+    min-width: 10rem;
+    top: -4rem;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    box-shadow: $box-shadow;
+    left: 0;
+    z-index: 100000;
+    transition: 2s ease-in-out;
+    .bold {
+        font-weight: 900 !important;
+        font-size: 1.8rem;
+    }
+    .bold2 {
+        font-weight: 800 !important;
+        font-size: 1.6rem;
+    }
+    .bold3 {
+        font-weight: 700 !important;
+        font-size: 1.4rem;
+    }
+    .bold4 {
+        font-weight: 600 !important;
+        font-size: 1.2rem;
+    }
+    .bold5 {
+        font-weight: 600 !important;
+        font-size: 1.1rem;
+    }
+    .bold6 {
+        font-weight: 500 !important;
+        font-size: 1rem;
+    }
+
+    .color-picker {
+        height: 1.5rem !important;
+        border-radius: 1.5rem !important;
+        width: 1.5rem !important;
+        border: 2px solid $bg !important;
+        top: .3rem;
+    }
+}
+
+.html-element {
+    position: relative;
+}

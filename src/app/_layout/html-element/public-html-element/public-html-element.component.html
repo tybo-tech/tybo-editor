@@ -1,0 +1,94 @@
+<!-- <div class="___item"> -->
+
+
+
+<!-- IMAGE SECTION -->
+<div *ngIf="type === 'image'" class="html-element">
+  <img [src]="value" alt="" [ngStyle]="ItemStyle">
+</div>
+
+
+
+<!-- NAV BAR SECTION -->
+<div *ngIf="type === 'nav'" class="html-element" [ngStyle]="ItemStyle">
+  <div class="__nav">
+    <ul class="nav justify-content-end">
+      <li class="nav-item" *ngFor="let page of items">
+        <a class="nav-link" [routerLink]="page.Url" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          [ngClass]="page.StyleClass" [ngStyle]="page.SelectedStyle">{{page.Name}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- TEXT -->
+
+<div *ngIf="type === 'h1'" class="html-element">
+  <h1 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
+  </h1>
+
+</div>
+
+<div *ngIf="type === 'h2'" class="html-element">
+  <h2 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
+  </h2>
+</div>
+
+<div *ngIf="type === 'h3'" class="html-element">
+  <h3 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
+  </h3>
+</div>
+
+
+<div *ngIf="type === 'h4'" class="html-element">
+  <h4 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
+  </h4>
+</div>
+
+
+<div *ngIf="type === 'h5'" class="html-element">
+  <h5 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
+  </h5>
+</div>
+
+
+<div *ngIf="type === 'h6'" class="html-element">
+  <h6 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
+  </h6>
+</div>
+
+<div *ngIf="type === 'p'" class="html-element">
+  <p [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
+  </p>
+</div>
+
+<div *ngIf="type === 'a'" class="html-element">
+  <a [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" (click)="linkClick($event)"
+    class="____text-editor">
+  </a>
+</div>
+
+<div *ngIf="type === 'div'" class="html-element">
+  <div [innerHTML]="value" [ngStyle]="ItemStyle">
+  </div>
+</div>
+
+
+<!-- BUTTONS -->
+<button *ngIf="type === 'button'" [ngStyle]="ItemStyle" (click)="linkClick($event)">
+  <p style="padding: 0; margin: 0;" [innerHTML]="value" editor_item contenteditable="false"></p>
+</button>
+
+
+<!-- LIST -->
+<div *ngIf="type === 'list'" class="html-element">
+  <ul>
+    <li *ngFor="let listItem of listItems" contenteditable="false" [ngStyle]="ItemStyle">
+      <!-- {{listItem}} -->
+      <p [innerHTML]="listItem" editor_item contenteditable="false" class="____text-editor">
+
+      </p>
+    </li>
+  </ul>
+</div>
+<!-- </div> -->

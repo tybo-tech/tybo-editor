@@ -1,0 +1,20 @@
+<div class="overlay"></div>
+<div class="_picker options-modal">
+
+    <div class="heading d-flex justify-content-between">
+        <h5>
+            Choose image
+        </h5>
+
+        <i (click)="close()" class="_close fas fa-times"></i>
+    </div>
+
+    <div class="body" *ngIf="images">
+        <div class="images">
+            <div class="image"  *ngFor="let image  of images">
+                <img [src]="image.Url" alt="" (click)="selectImage(image)">
+            </div>
+        </div>
+
+    </div>
+</div>

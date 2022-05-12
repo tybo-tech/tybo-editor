@@ -1,0 +1,55 @@
+// component css goes here
+@import '../../../../assets/styles/colors';
+.card{
+    &:hover {
+        border: 1px dotted $info;
+        .item-menu {
+            opacity: 1;
+        }
+    }
+
+    .item-menu {
+        position: absolute;
+        width: .855rem;
+        top: 33%;
+        left: 99%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        cursor: pointer;
+        opacity: 0.03;
+    }
+}
+
+
+._mini-menu {
+    position: absolute;
+    left: 2rem;
+    top: 1rem;
+    border-radius: 0.25rem;
+    min-width: 17rem;
+    width: fit-content;
+    min-height: 4em;
+    background: $white;
+    box-shadow: $box-shadow;
+    z-index: 100001;
+    padding-right: 2em;
+
+    .card{
+        width: 100%;
+    }
+
+    a{
+        cursor: pointer;
+        font-size: .85rem;
+    }
+
+    .fas {
+        margin-right: 0.5rem;
+    }
+}
+
+.card-header{
+    color: $bg;
+    text-transform: uppercase !important;
+    font-size: .75rem;
+}

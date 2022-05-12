@@ -1,0 +1,22 @@
+@import "../../../../assets/styles/colors";
+.item-menu {
+    width: 3rem;
+    top:0;
+    left: auto;
+    right: -1.4rem;
+    margin: 0;
+}
+
+.forms{
+    &:hover {
+        border: 1px dotted $info;
+        .item-menu {
+            opacity: 1;
+        }
+    }
+}
+
+.absolute{
+    top: 2%;
+    left: 90%;
+}

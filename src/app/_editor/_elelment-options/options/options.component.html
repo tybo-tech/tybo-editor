@@ -1,0 +1,43 @@
+<div class="styles">
+  <div class="style" *ngFor="let style of styles">
+    <h5 (click)="clickSection(style, !style.IsOpen)">
+      <span> {{style.SectionName}}</span>
+      <span *ngIf="!style.IsOpen"><i class="fa fa-chevron-down"></i></span>
+      <span *ngIf="style.IsOpen"><i class="fa fa-chevron-up"></i></span>
+    </h5>
+
+    <div class="fields" *ngIf="style.IsOpen">
+      <div class="_input grid-2">
+        <div class="_label">Action</div>
+        <div class="_units">
+          <select name="" id="" [(ngModel)]="style.Type" (change)="onInputEvent(style)" style="color: white;">
+            <option [value]="option.Action" *ngFor="let  option of style.EventOptions">
+              {{option.Action}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="_input grid-2" *ngIf="style.Type === 'Go to page'">
+        <div class="_label">Page</div>
+        <div class="_units">
+          <select name="" id="" [(ngModel)]="style.Url" (change)="onInputEvent(style)" style="color: white;">
+          <option [value]="option.Url" *ngFor="let  option of pages">
+            {{option.Name}}
+          </option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="_input grid-2"  *ngIf="style.Type === 'Go to link'">
+        <div class="_label">Url</div>
+        <div class="_units">
+          <input [(ngModel)]="style.Url" (input)="onInputEvent(style)"
+            style="text-transform: lowercase; color: white; text-align: right; font-size: .75rem;" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

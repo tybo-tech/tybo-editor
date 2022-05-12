@@ -1,0 +1,118 @@
+<!-- CONTAINER -->
+
+<section class="section contextmenu_section" *ngIf="section && website" [id]="section.SectionId"
+  [ngStyle]="sectionStyles" can_drop_on_me
+  (onDrop)="onDrop($event)" (contextmenu)="onRightClickSection($event,section)">
+<!-- 
+  <pre style="color: aliceblue;">
+    {{ section | json }}
+  </pre> -->
+
+  <img class="item-menu contextmenu_section" src="assets/images/mock/section.svg" can_hover_me
+    (onHover)="showSectionStyleMenu($event,section)" alt="">
+
+  <!-- <h1>
+  {{website.ViewDevice}}
+</h1> -->
+  <!--Section Mini-Menu -->
+
+  <div *ngIf="section.ShowMiniMenu" (click)="section.ShowMiniMenu = false" class="overlay _mini-overlay"></div>
+  <div *ngIf="section.ShowMiniMenu" class="_mini-menu">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active __target" (click)="selectSectionMenu('copy-section-styles',section)"><i
+            class="fas fa-copy"></i>
+          Copy section styles</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active __target" (click)="selectSectionMenu('copy-section-content',section)"><i
+            class="fas fa-copy"></i>
+          Copy section content</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active __target" (click)="selectSectionMenu('duplicate-section',section)"><i
+            class="fas fa-copy"></i>
+          Duplicate section</a>
+      </li>
+      <li class="nav-item" *ngIf="columnToPaste">
+        <a class="nav-link active __target" (click)="selectSectionMenu('paste-column',section)"><i
+            class="fas fa-clipboard"></i>Paste column</a>
+      </li>
+      <li class="nav-item" *ngIf="stylesToPaste">
+        <a class="nav-link active __target" (click)="selectSectionMenu('paste-section-styles',section)"><i
+            class="fas fa-clipboard"></i>Paste section styles</a>
+      </li>
+      <li class="nav-item" *ngIf="sectionContentToPaste">
+        <a class="nav-link active __target" (click)="selectSectionMenu('paste-section-content',section)"><i
+            class="fas fa-clipboard"></i>Paste section content</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active __target" (click)="selectSectionMenu('delete-section',section)"><i
+            class="fas fa-trash"></i>Delete section</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <app-element-options *ngIf="section && section.ShowOptions" [name]="section.Name" [type]="'section'"
+    [ItemStyle]="sectionStyles" (onStyleChange)="onStyleChange($event)">
+  </app-element-options>
+
+
+  <!-- <app-element-options *ngIf="section && section.ShowOptions" [name]="section.Name" [type]="'section'"
+  [ItemStyle]="sectionStyles" [ChildStyle]="section.GridStyle" [ItemMobileStyle]="section.ItemMobileStyle">
+</app-element-options> -->
+
+
+  <div class="contextmenu_section section-grid" [ngClass]="section.ItemClass" [ngStyle]="gridStyle">
+
+    <img class="item-menu grid-menu contextmenu_section" src="assets/images/grid-icon.svg" can_hover_me
+    (onHover)="showGridMenu($event,section)" alt="">
+
+
+
+    <span style="position: fixed;">
+      <app-element-options *ngIf="section && section.ShowGridOptions" [type]="'grid'" [ItemStyle]="gridStyle"  (onStyleChange)="onGridStyleChange($event)">
+      </app-element-options>
+  
+    </span>
+
+
+
+    <div *ngFor="let column of section.Columns; let i = index" [ngStyle]="column.SelectedStyle" class="column"
+      [id]="column.ColumnId" can_drop_on_me (onDrop)="onDrop($event)">
+
+
+
+
+
+
+      <!-- WIDGETS  -->
+      <div *ngFor="let widget of column.Widgets" class="widget">
+
+        <app-html-element [type]="widget.ElementType" [value]="widget.ItemContent" [parent]="widget"
+          *ngIf="widget.ItemCategory != 'Card' && widget.ItemCategory != 'List' && widget.ItemCategory != 'Menu'"
+          (onImageChange)="onImageChange($event, widget)" (valueChanged)="valueChanged($event,widget)"
+          [ItemStyle]="widget.SelectedStyle" [itemCol]="widget.ColNumber" (colEvent)="onColEvent($event, widget)"
+          (fillBGEvent)="onFillBG($event, widget)" (copyEvent)="OnCopyEvent($event,widget)"></app-html-element>
+
+
+        <app-cards [widget]="widget" *ngIf="widget.ItemCategory === 'Card'"></app-cards>
+        <app-list [widget]="widget" *ngIf="widget.ItemCategory === 'List' || widget.ItemCategory === 'Menu'"
+          [website]="website"></app-list>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="veiw-json" *ngIf="showJson" (contextmenu)="showJson = !showJson">
+
+  <pre>
+  {{section | json}}
+</pre>
+</div>

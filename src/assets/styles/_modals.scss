@@ -1,0 +1,85 @@
+._modal {
+    background: red;
+    position: absolute;
+    padding: 1em;
+    max-width: 40em;
+    z-index: 2;
+}
+.item-dropdown {
+    background: $cloud;
+    position: fixed;
+    // max-width: 40em;
+    z-index: 2;
+    top: 4em;
+    left: 0;
+    min-height: 15em;
+    box-shadow: $box-shadow;
+    color: $bg;
+    border-top: 5px solid $primary;
+    height: 100vh;
+    width: 40%;
+
+    .full-child {
+        padding: 1em;
+        height: 100vh;
+        overflow-y: scroll;
+        padding-bottom: 6em;
+    }
+}
+
+.no-scrol {
+    overflow: hidden !important;
+}
+
+.options-modal {
+    position: fixed;
+    left: 0;
+    top: 4rem;
+    background: $cloud;
+    box-shadow: $box-shadow;
+    border-top: 6px solid $primary;
+    // border-left: 2px solid $cloud;
+    padding: 0;
+    width: 17%;
+    z-index: 1000000;
+    max-height: 100vh;
+    height: 100%;
+    overflow-y: scroll;
+    font-size: 0.8em !important;
+    .heading,
+    .body {
+        padding: 0.5em;
+    }
+
+    .heading {
+        // background: $grey;
+        h5 {
+            font-size: 1.1rem;
+            text-transform: lowercase;
+            top: 0.4em;
+            font-weight: 700;
+            padding: 0.25em;
+        }
+
+        ._close {
+            cursor: pointer;
+            padding: 0.2rem;
+            font-size: 1.4rem;
+        }
+    }
+
+    .body {
+        font-size: 0.8em;
+        padding: 1em;
+    }
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 100000;
+}

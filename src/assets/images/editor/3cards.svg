@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="85" height="85" viewBox="0 0 85 85">
+  <g id="_3cards" data-name="3cards" transform="translate(0.14)">
+    <g id="Group_163" data-name="Group 163" transform="translate(18 35)">
+      <rect id="Rectangle_100" data-name="Rectangle 100" width="15" height="15" rx="3" transform="translate(-0.14)" fill="#7b8282"/>
+      <rect id="Rectangle_100-2" data-name="Rectangle 100" width="15" height="15" rx="3" transform="translate(16.86)" fill="#7b8282"/>
+      <rect id="Rectangle_100-3" data-name="Rectangle 100" width="15" height="15" rx="3" transform="translate(33.86)" fill="#7b8282"/>
+    </g>
+    <g id="section">
+      <rect id="Rectangle_99" data-name="Rectangle 99" width="85" height="85" transform="translate(-0.14)" fill="none"/>
+    </g>
+  </g>
+</svg>
