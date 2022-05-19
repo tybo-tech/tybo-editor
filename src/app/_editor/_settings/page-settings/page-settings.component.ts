@@ -10,7 +10,7 @@ import { WebsiteService } from 'src/app/_services/website.service';
   styleUrls: ['./page-settings.component.scss']
 })
 export class PageSettingsComponent implements OnInit {
-  options = 'Pages menu'
+  options = 'Pages settings'
   @Input() website: WebsiteModel;
   @Output() closeEvent: EventEmitter<any> = new EventEmitter();
   page: PageModel;

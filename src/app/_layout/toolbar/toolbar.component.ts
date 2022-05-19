@@ -17,7 +17,7 @@ export class ToolbarComponent implements OnInit {
   @Output() menuEvent: EventEmitter<any> = new EventEmitter();
   // menuSections: ToolbarModel[];
   widgets: WidgetModel[];
-  selectedToolbar: ToolbarModel;
+  selectedToolbar: ToolbarModel | undefined;
 
 
   tabs = [
@@ -50,7 +50,7 @@ export class ToolbarComponent implements OnInit {
   closeToolBar(toolbar: ToolbarModel) {
     // return
     if (toolbar)
-      this.selectedToolbar = null;
+      this.selectedToolbar = undefined;
 
   }
 
@@ -63,7 +63,7 @@ export class ToolbarComponent implements OnInit {
 
   }
 
-  onTab(tab) {
+  onTab(tab: any) {
     this.tabs.map(t => t.Class = [])
     tab.Class = ['active'];
     this.tabId = tab.Id;

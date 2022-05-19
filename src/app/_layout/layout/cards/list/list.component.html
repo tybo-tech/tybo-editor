@@ -4,8 +4,6 @@
   (onHover)="showULStyleMenu($event,widget)" alt="">
 
 
-  <app-element-options *ngIf="widget && widget.ShowOptions" [type]="'widget'" [ItemStyle]="widget.SelectedStyle">
-  </app-element-options>
 
   <li *ngFor="let card of widget.Children" >
     <app-html-element *ngIf="card.ItemContent" [type]="'a'" [value]="card.ItemContent"

@@ -3,7 +3,7 @@ export interface IOptions {
   Id?: string;
   SectionName: string;
   IsOpen: boolean,
-  Inputs: IInput[],
+  Inputs: IInput[] | undefined,
   Type: string;
   SelectedOption?: string
   EventOptions?: any[];
@@ -16,10 +16,10 @@ export interface IInput {
   IsVisible: boolean;
   Type: string;
   Value: any;
-  Label: string;
+  Label: string | undefined;
   Unit?: string;
   Units?: string[];
-  Options?: string[] | number[];
+  Options: any[];
   Option?: string;
   Inputs?: IInput[],
   Classes?: string[],
@@ -38,23 +38,46 @@ export const STYLE_ITEMS: IOptions[] =
           Type: 'image-check',
           Value: '0',
           Label: 'assets/images/widgets/align-left.svg', Unit: '',
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'margin-center',
           Type: 'image-check',
           Value: '0',
           Label: 'assets/images/widgets/align-center.svg', Unit: '',
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'margin-left',
           Type: 'image-check',
           Value: '0',
           Label: 'assets/images/widgets/align-right.svg', Unit: '',
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
 
+
+        {
+          Id: 'align-items',
+          Type: 'image-check',
+          Value: '0',
+          Label: 'assets/images/widgets/align-left.svg', Unit: '',
+          IsVisible: true,
+          Options: [],
+          Option: 'center'
+        },
+
+        {
+          Id: 'justify-content',
+          Type: 'image-check',
+          Value: '0',
+          Label: 'assets/images/widgets/align-left.svg', Unit: '',
+          IsVisible: true,
+          Options: [],
+          Option: 'center'
+        }
       ],
 
     },
@@ -65,51 +88,57 @@ export const STYLE_ITEMS: IOptions[] =
       Inputs: [
         {
           Id: 'width',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Wid', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'height',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Height', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'min-width',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Min.WID', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'min-height ',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Min.Hei', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'max-width',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Max.WID', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'max-height ',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Max.Hei', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         }
       ],
 
@@ -121,35 +150,39 @@ export const STYLE_ITEMS: IOptions[] =
       Inputs: [
         {
           Id: 'padding-left',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Left', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'padding-top',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Top', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'padding-right',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Right', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'padding-bottom',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Bottom', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         }
       ],
     },
@@ -160,35 +193,39 @@ export const STYLE_ITEMS: IOptions[] =
       Inputs: [
         {
           Id: 'margin-left',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Left', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'margin-top',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Top', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'margin-right',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Right', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'margin-bottom',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Bottom', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         }
       ],
     },
@@ -199,15 +236,16 @@ export const STYLE_ITEMS: IOptions[] =
       Inputs: [
         {
           Id: 'font-size',
-          Type: 'number',
+          Type: 'text',
           Value: '12',
           Label: 'Size', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'font-weight',
-          Type: 'number',
+          Type: 'text',
           Value: '500',
           Label: 'Weight',
           Options: [100, 200, 300, 400, 500, 600, 700, 800, 900],
@@ -215,7 +253,7 @@ export const STYLE_ITEMS: IOptions[] =
         },
         {
           Id: 'text-decoration',
-          Type: 'number',
+          Type: 'text',
           Value: 'none',
           Label: 'Line',
           Options: ['none', 'overline', 'line-through', 'underline', 'underline overline'],
@@ -223,7 +261,7 @@ export const STYLE_ITEMS: IOptions[] =
         },
         {
           Id: 'font-style',
-          Type: 'number',
+          Type: 'text',
           Value: 'normal',
           Label: 'Style',
           Options: ['normal', 'italic'],
@@ -231,7 +269,7 @@ export const STYLE_ITEMS: IOptions[] =
         },
         {
           Id: 'text-align',
-          Type: 'number',
+          Type: 'text',
           Value: 'left',
           Label: 'align',
           Options: ['left', 'center', 'right'],
@@ -242,7 +280,8 @@ export const STYLE_ITEMS: IOptions[] =
           Type: 'color',
           Value: '#ffffff',
           Label: 'color',
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         }
       ]
     }
@@ -268,7 +307,8 @@ export const STYLE_ITEMS: IOptions[] =
           Type: 'color',
           Value: '#ffffff',
           Label: undefined,
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         }
       ],
     },
@@ -279,35 +319,39 @@ export const STYLE_ITEMS: IOptions[] =
       Inputs: [
         {
           Id: 'left',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Left', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'top',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Top', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'right',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Right', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'bottom',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Bottom', Unit: 'px',
           Units: ['px', 'rem', 'em', '%', 'fr'],
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         },
         {
           Id: 'position',
@@ -320,10 +364,11 @@ export const STYLE_ITEMS: IOptions[] =
         },
         {
           Id: 'z-index',
-          Type: 'number',
+          Type: 'text',
           Value: '0',
           Label: 'Z Index',
-          IsVisible: true
+          IsVisible: true,
+          Options: []
         }
       ],
     },
@@ -352,7 +397,7 @@ export const CONFIG_ITEMS: IOptions[] =
       SectionName: 'Click',
       IsOpen: true,
       Type: 'Go to link',
-      Inputs: null,
+      Inputs: undefined,
       Url: '',
       EventOptions: [{ Action: 'None' }, { Action: 'Go to page' }, { Action: 'Go to link' }]
     }

@@ -23,7 +23,7 @@
 
 
   <!-- NAV BAR SECTION -->
-  <div *ngIf="type === 'nav'" class="html-element" [ngStyle]="ItemStyle" can_hover_me (onHover)="onHover($event)">
+  <div *ngIf="type === 'nav'" class="html-element" [ngStyle]="ItemStyle" can_hover_me (click)="toggleOptions()">
     <div class="__nav">
       <ul class="nav justify-content-end">
         <li class="nav-item" *ngFor="let page of items">
@@ -82,48 +82,48 @@
 
   <div *ngIf="type === 'p'" class="html-element" (click)="showTextOption = true" (mouseleave)="showTextOption = false">
  
-    <p can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
+    <p can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
       contenteditable="true" (OnInputEvent)="onChange($event)" class="____text-editor">
     </p>
   </div>
 
   
   <div *ngIf="type === 'h1'" class="html-element">
-    <h1 can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
+    <h1 can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
       contenteditable="true" (OnInputEvent)="onChange($event)" class="____text-editor">
     </h1>
 
   </div>
 
   <div *ngIf="type === 'h2'" class="html-element">
-    <h2 can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
+    <h2 can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
       contenteditable="true" (OnInputEvent)="onChange($event)" class="____text-editor">
     </h2>
   </div>
 
   <div *ngIf="type === 'h3'" class="html-element">
-    <h3 can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
+    <h3 can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
       contenteditable="true" (OnInputEvent)="onChange($event)" class="____text-editor">
     </h3>
   </div>
 
 
   <div *ngIf="type === 'h4'" class="html-element">
-    <h4 can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
+    <h4 can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
       contenteditable="true" (OnInputEvent)="onChange($event)" class="____text-editor">
     </h4>
   </div>
 
 
   <div *ngIf="type === 'h5'" class="html-element">
-    <h5 can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
+    <h5 can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
       contenteditable="true" (OnInputEvent)="onChange($event)" class="____text-editor">
     </h5>
   </div>
 
 
   <div *ngIf="type === 'h6'" class="html-element">
-    <h6 can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
+    <h6 can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle" [innerHTML]="value" editor_item
       contenteditable="true" (OnInputEvent)="onChange($event)" class="____text-editor">
     </h6>
   </div>
@@ -140,7 +140,7 @@
   </div>
 
   <div *ngIf="type === 'div'" class="html-element">
-    <div [innerHTML]="value" can_hover_me (onHover)="onHover($event)" [ngStyle]="ItemStyle">
+    <div [innerHTML]="value" can_hover_me (click)="toggleOptions()" [ngStyle]="ItemStyle">
     </div>
   </div>
 
@@ -159,7 +159,7 @@
     <ul>
       <li *ngFor="let listItem of listItems" contenteditable="true" [ngStyle]="ItemStyle">
         <!-- {{listItem}} -->
-        <p can_hover_me (onHover)="onHover($event)" [innerHTML]="listItem" editor_item contenteditable="true"
+        <p can_hover_me (click)="toggleOptions()" [innerHTML]="listItem" editor_item contenteditable="true"
           (OnInputEvent)="onChange($event)" class="____text-editor">
 
         </p>
@@ -168,11 +168,8 @@
   </div>
 
 
-  <app-element-options *ngIf="show" (onChange)="onChange($event)" [type]="type" [value]="value" [ItemStyle]="ItemStyle">
-  </app-element-options>
-
 </div>
 
 <app-image-picker *ngIf="showImage" (onClose)="showImage= false" (onImageSelect)="onImageSelect($event)"
-  (onStyleChange)="onStyleChange($event)">
+  (onStyleChange)="styleChange($event)">
 </app-image-picker>

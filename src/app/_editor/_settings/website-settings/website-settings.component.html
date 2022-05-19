@@ -1,0 +1,40 @@
+<div class="_settings" *ngIf="website" >
+
+
+    <div class="card _mini-menu">
+      <h6 class="card-header d-flex justify-content-between">
+        <span>{{options}}</span>
+        <span><i class="fa fa-times pointer" (click)="onClose()"></i></span>
+      </h6>
+      <div class="card-body">
+        <div class="grid-2">
+          <section>
+        <div class="inputs">
+          <label for="">website name</label> <br>
+          <input type="text" [(ngModel)]="website.Name" class="form-control" >
+        </div>
+
+        <div class="inputs">
+          <label for="">Url</label> <br>
+          <input type="text" [(ngModel)]="website.WebsiteId" class="form-control" >
+        </div>
+  
+
+        <div class="inputs">
+          <label for="">Title</label> <br>
+          <textarea [(ngModel)]="website.Title" class="form-control" ></textarea>
+        </div>
+  
+          </section>
+  
+        </div>
+  
+      </div>
+  
+      <div class="card-footer">
+        <div class="add d-flex justify-content-between">
+          <button class="btn btn-primary" (click)="saveWebsite()" *ngIf="website && website.WebsiteId">Save website</button>
+        </div>
+      </div>
+    </div>
+  </div>

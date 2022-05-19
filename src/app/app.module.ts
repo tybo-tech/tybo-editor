@@ -30,7 +30,6 @@ import { ImagePickerComponent } from './_images/image-picker/image-picker.compon
 import { HerosComponent } from './_layout/layout/heros/heros.component';
 import { TextWidgetComponent } from './_editors/text-widget/text-widget.component';
 import { EditorDirective } from './_directives/editor.directive';
-import { FlexBoxComponent } from './_layout/widgets/flex-box/flex-box.component';
 import { ResponsiMadeEasyComponent } from './expamples/responsi-made-easy/responsi-made-easy.component';
 import { ResponsiveNavBarComponent } from './_layout/responsive-nav-bar/responsive-nav-bar.component';
 import { LandingPageComponent } from './_layout/hero/landing-page/landing-page.component';
@@ -51,7 +50,6 @@ import { PageSettingsComponent } from './_editor/_settings/page-settings/page-se
 import { PublicHtmlElementComponent } from './_layout/html-element/public-html-element/public-html-element.component';
 import { PublicMenuComponent } from './_layout/layout/cards/menus/public-menu/public-menu.component';
 import { ElementToolsComponent } from './_editor/_elelment-options/element-tools/element-tools.component';
-import { ElementOptionsComponent } from './_editor/_elelment-options/element-options/element-options.component';
 import { OptionsComponent } from './_editor/_elelment-options/options/options.component';
 import { LayersComponent } from './_editor/_elelment-options/layers/layers.component';
 import { OptionsInputComponent } from './_editor/_elelment-options/options-input/options-input.component';
@@ -59,6 +57,16 @@ import { PublicFormComponent } from './_layout/widgets/forms/public-form/public-
 import { PublicInputComponent } from './_layout/widgets/forms/public-input/public-input.component';
 import { SideMenuComponent } from './_layout/layout/cards/menus/side-menu/side-menu.component';
 import { GeneralStylesComponent } from './_editor/_elelment-options/general-styles/general-styles.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { WebsiteSettingsComponent } from './_editor/_settings/website-settings/website-settings.component';
+import { ContainerComponent } from './_layout/widgets/container/container.component';
+import { DragDropCdkComponent } from './_layout/widgets/container/drag-drop-cdk/drag-drop-cdk.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ContainersComponent } from './_layout/widgets/container/containers/containers.component';
+import { ContainerChildComponent } from './_layout/widgets/container/container-child/container-child.component';
+import { PageWidgetsComponent } from './_layout/widgets/page-widgets/page-widgets.component';
+import { PageWidgetComponent } from './_layout/widgets/page-widget/page-widget.component';
+import { PageWidgetTreeComponent } from './_layout/widgets/page-widget-tree/page-widget-tree.component';
 
 @NgModule({
   declarations: [
@@ -83,12 +91,10 @@ import { GeneralStylesComponent } from './_editor/_elelment-options/general-styl
     WidNavBarComponent,
     HtmlElementComponent,
     HoveMeDirective,
-    ElementOptionsComponent,
     ImagePickerComponent,
     HerosComponent,
     TextWidgetComponent,
     EditorDirective,
-    FlexBoxComponent,
     ResponsiMadeEasyComponent,
     ResponsiveNavBarComponent,
     LandingPageComponent,
@@ -115,7 +121,15 @@ import { GeneralStylesComponent } from './_editor/_elelment-options/general-styl
     PublicFormComponent,
     PublicInputComponent,
     SideMenuComponent,
-    GeneralStylesComponent
+    GeneralStylesComponent,
+    WebsiteSettingsComponent,
+    ContainerComponent,
+    DragDropCdkComponent,
+    ContainersComponent,
+    ContainerChildComponent,
+    PageWidgetsComponent,
+    PageWidgetComponent,
+    PageWidgetTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +137,9 @@ import { GeneralStylesComponent } from './_editor/_elelment-options/general-styl
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    LayoutModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,7 +11,7 @@ import { WebsiteService } from 'src/app/_services/website.service';
 export class OptionsComponent implements OnInit {
   styles: IOptions[] = CONFIG_ITEMS;
   @Input() element: WidgetModel;
-  @Input() type;
+  @Input() type:any;
   pages: any[];
   constructor(private www: WebsiteService) {
     www.websiteObservable.subscribe(data=>{

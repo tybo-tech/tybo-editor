@@ -50,7 +50,7 @@ export class PublicColumnWidgetComponent implements OnInit {
         });
     }
 
-    OnCopyEvent(event) {
+    OnCopyEvent(event:any) {
         if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
             this.widget.ItemMobileStyle = this.stylesToPaste;
         }
@@ -62,7 +62,7 @@ export class PublicColumnWidgetComponent implements OnInit {
         this.widget.SelectedStyle = this.stylesToPaste;
     }
 
-    onStyleChange(event) {
+    onStyleChange(event:any) {
         if (!event)
             return
         if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
@@ -79,7 +79,7 @@ export class PublicColumnWidgetComponent implements OnInit {
         widget.ItemContent = event;
     }
 
-    deleteEvent(e) {
+    deleteEvent(e:any) {
         if (e) {
             this.column.DeleteWidget(this.index);
             this.websiteService.delete(`widgets/${this.widget._id}`).subscribe(data => {
@@ -89,7 +89,7 @@ export class PublicColumnWidgetComponent implements OnInit {
         }
     }
 
-    linkClick(e, navItem: WidgetModel) {
+    linkClick(e: any, navItem: WidgetModel) {
         if (e) {
             // debugger
             this.router.navigate([navItem.ItemEvent]);

@@ -15,7 +15,7 @@ export class WidNavBarComponent implements OnInit {
     if (this.website)
       this.website.Pages.forEach(page => { page.ItemStyle = { 'color': 'white', 'font-size': '12px' } })
   }
-  onImageChange(e) {
+  onImageChange(e:any) {
     this.website.Logo = e;
     // alert(e)
   }

@@ -27,7 +27,7 @@ export class PublicMenuComponent implements OnInit {
   showToggle: boolean;
   miniMenu = MENU_MINI_MENU;
   isBurgerMenu: boolean;
-  menuItemWrapper: WidgetModel;
+  menuItemWrapper: WidgetModel | undefined;
   menuItems: WidgetModel[];
 
   constructor(
@@ -51,7 +51,7 @@ export class PublicMenuComponent implements OnInit {
         c.SelectedStyle = {};
     })
   }
-  linkClick(e, navItem: WidgetModel) {
+  linkClick(e:any, navItem: WidgetModel) {
     if (e) {
       // debugger
       if (this.isBurgerMenu) {

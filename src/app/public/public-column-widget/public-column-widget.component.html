@@ -3,7 +3,7 @@
   <app-public-html-element [type]="widget.ElementType" [value]="widget.ItemContent" [parent]="widget"
       *ngIf="widget.ItemCategory != SectionTypes.CARD && widget.ItemCategory != 'List' && widget.ItemCategory != 'Menu' && widget.ItemCategory !=  SectionTypes.FORM"
       (clickEvent)="linkClick($event,widget)"
-      [ItemStyle]="widget.SelectedStyle" (copyEvent)="OnCopyEvent($event,widget)"
+      [ItemStyle]="widget.SelectedStyle" (copyEvent)="OnCopyEvent($event)"
       (onStyleChange)="onStyleChange($event)" (deleteEvent)="deleteEvent($event)"></app-public-html-element>
 
 

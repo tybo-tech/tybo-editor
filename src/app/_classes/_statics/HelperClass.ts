@@ -6,7 +6,7 @@ export class HelperClass {
     };
 
     
-    public static  getGridClassFromNumberOfColumns(id) {
+    public static  getGridClassFromNumberOfColumns(id:any) {
     id = Number(id);
     let col = '';
     let num = 100 / id;

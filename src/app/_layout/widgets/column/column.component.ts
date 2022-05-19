@@ -26,7 +26,7 @@ export class ColumnComponent {
     @Input() colIndex: number;
     miniMenu = COl_MINI_MENU;
 
-    constructor( private eventService: EventService){}
+    constructor(private eventService: EventService) { }
     closeMenu() {
         this.row.Columns.map(c => c.ShowMiniMenu = false);
     }
@@ -35,14 +35,14 @@ export class ColumnComponent {
         column.ShowOptions = e;
     }
 
-    onRightClick(pointerEvent: PointerEvent) {
+    onRightClick(pointerEvent: MouseEvent) {
         pointerEvent.preventDefault()
         this.row.Columns.map(c => c.ShowMiniMenu = false);
         this.column.ShowMiniMenu = true;
         return false;
     }
 
-    miniMenuEvent(event) {
+    miniMenuEvent(event: any) {
         if (event === "close") {
             this.closeMenu();
             return;
@@ -89,13 +89,7 @@ export class ColumnComponent {
 
             // Image
             if (sectionType === SectionTypes.IMAGE && this.column) {
-                const image: WidgetModel = new WidgetModel(HelperClass.getId('image'), this.column.ColumnId, this.page.PageId, 'Text', SectionTypes.CARD1, ``);
-                image.ElementType = "image";
-                image.ItemContent = 'assets/images/mock/27.png';
-                if (this.section.SectionType === SectionTypes.HEADER) {
-                    image.PageId = 'master';
-                }
-                this.column.AddWidget(image);
+                this.column.AddImage(this.page.PageId);
             }
 
 
@@ -157,6 +151,7 @@ export class ColumnComponent {
 
             }
 
+            // Bugger
             if (sectionType === SectionTypes.BURGER_MENU) {
                 const menuWidget: WidgetModel = new WidgetModel(
                     HelperClass.getId('card-master'), this.column.ColumnId, 'master', 'Card-Master-1', SectionTypes.BURGER_MENU, ``);

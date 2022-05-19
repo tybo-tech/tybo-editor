@@ -1,6 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { ColumnModel } from 'src/app/_classes/ColumnModel';
+import { ContainerModel } from 'src/app/_classes/ContainerModel';
 import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
 import { WidgetModel } from 'src/app/_classes/WidgetModel';
 import { DeviceTypes } from 'src/app/_classes/_statics/DeviceTypes';
@@ -18,7 +19,7 @@ export class ColumnWidgetComponent implements OnInit {
 
     @Input() widget: WidgetModel;
     @Input() index: number;
-    @Input() column: ColumnModel;
+    @Input() container: ContainerModel;
     @Input() website: WebsiteModel;
     stylesToPaste: any;
     valueChanged(event: string, widget: WidgetModel) {
@@ -49,7 +50,7 @@ export class ColumnWidgetComponent implements OnInit {
         });
     }
 
-    OnCopyEvent(event) {
+    OnCopyEvent(event:any) {
         if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
             this.widget.ItemMobileStyle = this.stylesToPaste;
         }
@@ -61,7 +62,7 @@ export class ColumnWidgetComponent implements OnInit {
         this.widget.SelectedStyle = this.stylesToPaste;
     }
 
-    onStyleChange(event) {
+    onStyleChange(event:any) {
         debugger
         if (!event)
             return
@@ -79,9 +80,9 @@ export class ColumnWidgetComponent implements OnInit {
         widget.ItemContent = event;
     }
 
-    deleteEvent(e) {
+    deleteEvent(e:any) {
         if (e) {
-            this.column.DeleteWidget(this.index);
+            this.container.DeleteWidget(this.index);
             if (this.widget._id)
                 this.websiteService.delete(`widgets/${this.widget._id}`).subscribe(data => {
                     console.log(data);

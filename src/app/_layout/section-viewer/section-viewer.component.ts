@@ -26,9 +26,9 @@ export class SectionViewerComponent implements OnInit {
   showElementOptions: boolean;
   miniMenu = SECTION_MINI_MENU;
   stylesToPaste: any;
-  columnToPaste: ColumnModel;
-  widgetToPaste: WidgetModel;
-  sectionContentToPaste: SectionModel;
+  columnToPaste: ColumnModel | undefined;
+  widgetToPaste: WidgetModel | undefined;
+  sectionContentToPaste: SectionModel | undefined;
   childStylesToPaste: any;
 
   constructor(private viewModeService: ViewModeService, private copyService: CopyService, private eventService: EventService) { }
@@ -66,7 +66,7 @@ export class SectionViewerComponent implements OnInit {
   showSectionStyleMenu(e: boolean, section: SectionModel) {
     section.ShowOptions = e;
   }
-  onStyleChange(event) {
+  onStyleChange(event: any) {
     if (!event)
       return
 
@@ -81,7 +81,7 @@ export class SectionViewerComponent implements OnInit {
   }
 
 
-  onRightClickSection(pointerEvent: PointerEvent, section: SectionModel) {
+  onRightClickSection(pointerEvent: MouseEvent, section: SectionModel) {
     pointerEvent.preventDefault();
     const __target = <HTMLDivElement>pointerEvent.target;
     const classes = Array.from(__target.classList).find(x => x === 'contextmenu_section');
@@ -97,7 +97,7 @@ export class SectionViewerComponent implements OnInit {
   }
   selectSectionMenu(action: string, section: SectionModel) {
     section.ShowMiniMenu = false;
-    if (action == 'paste-column') {
+    if (action == 'paste-column' && this.columnToPaste) {
       section.AddColumn(this.columnToPaste);
     }
     if (action == 'duplicate-section') {
@@ -129,11 +129,11 @@ export class SectionViewerComponent implements OnInit {
     }
     if (action == 'delete-section') {
       if (section.SectionType === SectionTypes.HEADER) {
-        this.website.Header = null;
+        this.website.Header = undefined;
         return;
       }
       if (section.SectionType === SectionTypes.FOOTER) {
-        this.website.Footer = null;
+        this.website.Footer = undefined;
         return;
       }
       this.page.Sections.splice(this.sectionIndex, 1);
@@ -141,7 +141,7 @@ export class SectionViewerComponent implements OnInit {
     if (action == 'copy-section-content') {
       this.copyService.copy(section);
     }
-    if (action == 'paste-section-content') {
+    if (action == 'paste-section-content' && this.sectionContentToPaste) {
       section.ItemStyle = this.sectionContentToPaste.ItemStyle;
       section.Columns = this.sectionContentToPaste.Columns;
       section.ItemClass = this.sectionContentToPaste.ItemClass;
@@ -159,7 +159,7 @@ export class SectionViewerComponent implements OnInit {
     }
   }
 
-  preventRightClick(e) {
+  preventRightClick(e: any) {
     e.preventDefault();
   }
 

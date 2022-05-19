@@ -36,9 +36,9 @@ export class CopyService {
     this.copiedChildItemBehaviorSubject.next(itemInMoemory);
   }
 
-  getColumnToPaste(column: ColumnModel): ColumnModel {
+  getColumnToPaste(column: ColumnModel): ColumnModel | undefined {
     if (!column.ColumnId || !column.ColumnType)
-      return null;
+      return ;
 
     const col = new ColumnModel(HelperClass.getId('col'), column.RowId, 'Col-1', '', [], 'Grid-col');
     col.Widgets = column.Widgets;
@@ -46,14 +46,14 @@ export class CopyService {
     return col;
   }
 
-  getWidgetToPaste(widget: WidgetModel): WidgetModel {
+  getWidgetToPaste(widget: WidgetModel): WidgetModel | undefined{
     if (!widget.WidgetId && !widget.ItemContent && !widget.ItemHeading && !widget.ImageUrl && !widget.ItemEventName)
-      return null;
+      return undefined;
     return widget;
   }
-  geSectionContentToPaste(section: SectionModel): SectionModel {
+  geSectionContentToPaste(section: SectionModel): SectionModel |undefined{
     if (!section.SectionId && !section.Columns)
-      return null;
+      return undefined;
     return section;
   }
 

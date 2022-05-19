@@ -27,28 +27,28 @@ export class DragDropComponent implements OnInit {
     })
 
 
-    Array.from(this.containers).forEach(container => {
-      container.addEventListener('dragover', (e: MouseEvent) => {
-        e.preventDefault();
-        const afterElemennt = this.getDragAfterElement(container, e.clientY);
-        const draggable = document.querySelector('.dragging');
-        if (afterElemennt == null) {
-          container.appendChild(draggable);
-        } else {
-          container.insertBefore(draggable, afterElemennt);
-        }
+    // Array.from(this.containers).forEach(container => {
+    //   container.addEventListener('dragover', (e: MouseEvent, v:any) => {
+    //     e.preventDefault();
+    //     const afterElemennt = this.getDragAfterElement(container, e.clientY);
+    //     const draggable = document.querySelector('.dragging');
+    //     if (afterElemennt == null) {
+    //       container.appendChild(draggable);
+    //     } else {
+    //       container.insertBefore(draggable, afterElemennt);
+    //     }
 
 
-      });
+    //   });
 
 
-    })
+    // })
 
 
   }
-  getDragAfterElement(container: Element, y) {
+  getDragAfterElement(container: Element, y:any) {
     const draggbles = Array.from(container.querySelectorAll('.draggable:not(.dragging)'));
-    return draggbles.reduce((closest, child) => {
+    return draggbles.reduce((closest:any, child:any) => {
       const box = child.getBoundingClientRect();
       const offset = y - box.top - box.height / 2;
       if (offset < 0 && offset > closest.offset) {
@@ -59,6 +59,6 @@ export class DragDropComponent implements OnInit {
 
 
 
-    }, { offset: Number.NEGATIVE_INFINITY, element: null }).element;
+    }, { offset: Number.NEGATIVE_INFINITY, element: null })?.element;
   }
 }

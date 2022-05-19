@@ -8,6 +8,7 @@ $scale: 1.2;
     width: 80%;
     max-height: 80vh;
     overflow-y: scroll;
+    z-index: 10000;
     .heading {
         background: $bg;
         color: $white;
@@ -18,13 +19,14 @@ $scale: 1.2;
 
         .images {
             display: grid;
-            grid-template-columns: repeat(8, 12%);
+            grid-template-columns: repeat(10, 10%);
             grid-gap: 5px;
             .image {
                 cursor: pointer;
                 overflow: hidden;
                 img {
                     transition: .2s ease-in-out;
+                    width: 100%;
                     &:hover {
                         transform: scale($scale, $scale);
                         -ms-transform: scale($scale, $scale);

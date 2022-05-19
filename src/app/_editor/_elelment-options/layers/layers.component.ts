@@ -10,7 +10,7 @@ import { WebsiteService } from 'src/app/_services/website.service';
 })
 export class LayersComponent implements OnInit {
   page: PageModel;
-  header: SectionModel;
+  header: SectionModel | undefined;
   constructor(private w: WebsiteService) { }
 
   ngOnInit() {

@@ -29,11 +29,9 @@ export const subMenu: ToolbarModel[] = [
 
 export const COL_IMAGES = [
 
-    { Id: 1, Name: SectionTypes.COL1, ImageUrl: `assets/images/editor/grid-1.svg` },
-    { Id: 2, Name: SectionTypes.COL2, ImageUrl: `assets/images/editor/grid-2.svg` },
-    { Id: 3, Name: SectionTypes.COL3, ImageUrl: `assets/images/editor/grid-3.svg` },
-    { Id: 4, Name: SectionTypes.COL4, ImageUrl: `assets/images/editor/grid-4.svg` },
-    { Id: 5, Name: SectionTypes.COL5, ImageUrl: `assets/images/editor/grid-4.svg` },
-    { Id: 6, Name: SectionTypes.COL6, ImageUrl: `assets/images/editor/grid-4.svg` }
+    { Id: 1, Name: SectionTypes.COL1, ImageUrl: `assets/images/editor/g-1.svg` },
+    { Id: 2, Name: SectionTypes.COL2, ImageUrl: `assets/images/editor/g-2.svg` },
+    { Id: 3, Name: SectionTypes.COL3, ImageUrl: `assets/images/editor/g-3.svg` },
+    { Id: 4, Name: SectionTypes.COL4, ImageUrl: `assets/images/editor/g-4.svg` }
 ]
 

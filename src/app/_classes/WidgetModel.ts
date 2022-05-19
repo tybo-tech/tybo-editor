@@ -1,5 +1,6 @@
 import { FormModel } from "./FormModel";
 import { MainClass } from "./MainClass";
+import { HelperClass } from "./_statics/HelperClass";
 import { SectionTypes } from "./_statics/SectionTypes";
 
 export class WidgetModel extends MainClass {
@@ -14,7 +15,6 @@ export class WidgetModel extends MainClass {
     ItemHeading: string;
     ItemEventName: string;
     ItemEvent: string;
-    ParentId: string;
     Children: WidgetModel[];
     ImageUrl: string;
     ImageStyles: any;
@@ -24,7 +24,7 @@ export class WidgetModel extends MainClass {
     ElementType: string;
     RowNumber: number;
     ColNumber: number;
-    Form: FormModel;
+    Form: FormModel | undefined;
 
     constructor(
         WidgetId: string,
@@ -46,7 +46,7 @@ export class WidgetModel extends MainClass {
         ElementType = "div",
         RowNumber = 1,
         ColNumber = 1,
-        Form = null
+        Form = undefined
 
     ) {
         super();
@@ -76,6 +76,16 @@ export class WidgetModel extends MainClass {
         if (widget) {
             this.Children.push(widget);
         }
+    }
+
+    AddImage(pageId = 'master', image = 'assets/images/widgets/brand.png', isMobileMode = false, width = '100%') {
+        const element: WidgetModel = new WidgetModel(HelperClass.getId('image'), this.ColumnId, pageId, 'Image', SectionTypes.IMAGE, ``);
+        element.ElementType = "image";
+        element.ItemContent = image;
+        element.ItemStyle = { 'width': width, 'margin-left': '2rem', 'margin-top': '.5rem' };
+        element.ItemMobileStyle = { 'width': '5rem', 'margin-left': '2rem', 'margin-top': '.5rem', position: 'relative', top: '7px' };
+        element.SelectedStyle = isMobileMode ? element.ItemMobileStyle : element.ItemStyle;
+        this.AddChild(element);
     }
 
     AddStyles() {

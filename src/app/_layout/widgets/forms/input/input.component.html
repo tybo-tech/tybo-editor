@@ -19,7 +19,3 @@
 
 <app-mini-menu [showMiniMenu]="input.ShowMiniMenu" [miniMenu]="miniMenu" (miniMenuEvent)="miniMenuEvent($event)">
 </app-mini-menu>
-
-<app-element-options *ngIf="input && input.ShowOptions" (onStyleChange)="onStyleChange($event)" [name]="input.Name"
-  [type]="'input'" [ItemStyle]="input.SelectedStyle">
-</app-element-options>

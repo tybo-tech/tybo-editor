@@ -18,6 +18,7 @@
         &:hover {
             border-color: $bg;
             box-sizing: $box-shadow;
+            cursor: move;
             p {
                 color: $white;
             }

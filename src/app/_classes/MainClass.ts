@@ -1,6 +1,6 @@
 
 export class MainClass {
-    _id: string;
+    _id?: string;
     ParentId: string;
     CreateUserId: string;
     ModifyUserId: string;
@@ -19,6 +19,7 @@ export class MainClass {
     OrderNumber: number;
     IsSelected: boolean;
     ElementId: string;
+    Settings: any
     constructor(
         Id: string = '',
         ParentId: string = '',

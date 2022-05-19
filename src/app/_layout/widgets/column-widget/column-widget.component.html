@@ -3,18 +3,18 @@
     <app-html-element [type]="widget.ElementType" [value]="widget.ItemContent" [parent]="widget"
         *ngIf="widget.ItemCategory != SectionTypes.CARD && widget.ItemCategory != 'List' && widget.ItemCategory != 'Menu' && widget.ItemCategory !=  SectionTypes.FORM"
         (onImageChange)="onImageChange($event, widget)" (valueChanged)="valueChanged($event,widget)"
-        [ItemStyle]="widget.SelectedStyle" (copyEvent)="OnCopyEvent($event,widget)"
+        [ItemStyle]="widget.SelectedStyle" (copyEvent)="OnCopyEvent($event)"
         (onStyleChange)="onStyleChange($event)" (deleteEvent)="deleteEvent($event)"></app-html-element>
 
 
     <app-card [card]="widget" [website]="website" (deleteEvent)="deleteEvent($event)"
         *ngIf="widget.ItemCategory ===  SectionTypes.CARD"></app-card>
-
+<!-- 
     <app-menus [widget]="widget" (deleteEvent)="deleteEvent($event)" [website]="website" [column]="column"
         *ngIf="widget.ItemCategory ===  SectionTypes.MENU"></app-menus>
 
     <app-forms [widget]="widget" (deleteEvent)="deleteEvent($event)" [website]="website" [index]="index"
-        [column]="column" *ngIf="widget.ItemCategory ===  SectionTypes.FORM"></app-forms>
+        [column]="column" *ngIf="widget.ItemCategory ===  SectionTypes.FORM"></app-forms> -->
 </div>
 <!-- 
 <pre *ngIf="widget.ItemCategory ===  SectionTypes.MENU">

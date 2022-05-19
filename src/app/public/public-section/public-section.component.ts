@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ColumnModel } from 'src/app/_classes/ColumnModel';
 import { PageModel } from 'src/app/_classes/PageModel';
 import { SectionModel } from 'src/app/_classes/SectionModel';
 import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
+import { WidgetModel } from 'src/app/_classes/WidgetModel';
 import { DeviceTypes } from 'src/app/_classes/_statics/DeviceTypes';
 import { CopyService } from 'src/app/_services/copy.service';
 import { ViewModeService } from 'src/app/_services/view-mode.service';
@@ -17,9 +19,9 @@ export class PublicSectionComponent  implements OnInit{
     @Input() page: PageModel;
     @Input() sectionIndex: number;
     stylesToPaste: any;
-    columnToPaste: import("c:/ndu/apps/tybo-website-editor/src/app/_classes/ColumnModel").ColumnModel;
-    widgetToPaste: import("c:/ndu/apps/tybo-website-editor/src/app/_classes/WidgetModel").WidgetModel;
-    sectionContentToPaste: SectionModel;
+    columnToPaste?: ColumnModel;
+    widgetToPaste?: WidgetModel;
+    sectionContentToPaste?: SectionModel;
 
     constructor(private viewModeService: ViewModeService, private copyService: CopyService) { }
 
@@ -43,7 +45,7 @@ export class PublicSectionComponent  implements OnInit{
         if (data) {
           // debugger
           this.stylesToPaste = this.copyService.getStylesToPaste(data);
-          this.columnToPaste = this.copyService.getColumnToPaste(data);
+          this.columnToPaste = this.copyService.getColumnToPaste(data) || undefined;
           this.widgetToPaste = this.copyService.getWidgetToPaste(data);
           this.sectionContentToPaste = this.copyService.geSectionContentToPaste(data);
         }

@@ -1,3 +1,4 @@
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageModel } from 'src/app/_classes/PageModel';
@@ -15,50 +16,75 @@ import { NO_SQL_DB } from 'src/environments/environment';
 })
 export class PageViewerComponent implements OnInit {
   id: any = '/';
-  website: WebsiteModel;
+  website?: WebsiteModel;
   pages: any[];
-  page: PageModel;
+  page: PageModel | undefined;
   pageId: any;
   mainClass: string;
+  isMobileMode = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private websiteService: WebsiteService, private viewModeService: ViewModeService
+  constructor(public breakpointObserver: BreakpointObserver, private activatedRoute: ActivatedRoute, private websiteService: WebsiteService, private viewModeService: ViewModeService
   ) {
 
     this.activatedRoute.params.subscribe(r => {
-      this.id = r.id || '/';
-      this.websiteService.getSite('tybo.co.za', `/${this.id}`)
+      this.id = r['id'] || '/';
+      // this.websiteService.getSite('tybo.co.za', `/${this.id}`)
+      this.websiteService.getSite('easyfunding.co.za', `/${this.id}`)
 
     });
   }
 
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.screenSizeChanged(event.target.innerWidth);
-  }
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event:any) {
+  //   this.screenSizeChanged(event.target.innerWidth);
+  // }
 
   ngOnInit() {
+    if (window.matchMedia('(max-width: 500px)').matches) {
+      this.isMobileMode = true;
+    }
     this.websiteService.websiteObservable.subscribe(data => {
       if (data) {
-        this.website = data;
-        console.log(' this.website: ', this.website);
-
+        this.website = this.websiteService.selectWebsiteStyles(this.isMobileMode, data);
       }
     });
     this.websiteService.pageObservable.subscribe(data => {
       if (data) {
+        
         this.page = data;
-        console.log(' this.website: ', this.website);
 
+        this.page = this.websiteService.selectTyles(this.isMobileMode, this.page);
       }
     })
+
+
+
+    this.breakpointObserver
+      .observe(['(min-width: 500px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.isMobileMode = false;
+          if (this.page)
+            this.page = this.websiteService.selectTyles(this.isMobileMode, this.page);
+          if (this.website)
+            this.website = this.websiteService.selectWebsiteStyles(this.isMobileMode, this.website);
+        } else {
+          this.isMobileMode = true;
+          if (this.page)
+          this.page = this.websiteService.selectTyles(this.isMobileMode, this.page);
+        if (this.website)
+          this.website = this.websiteService.selectWebsiteStyles(this.isMobileMode, this.website);
+        }
+      });
   }
+
 
   screenSizeChanged(size: number) {
     localStorage.setItem("screen_size", size + '');
   }
   addWebsite() {
-    this.website = this.websiteService.loadSites();
+    // this.website = this.websiteService.loadSites();
 
     this.websiteService.create('websites', this.website).subscribe(patched => {
       // debugger
@@ -81,7 +107,7 @@ export class PageViewerComponent implements OnInit {
 
   phoneVew() {
     const editor = <HTMLDivElement>document.querySelector(".editor");
-    if (!editor)
+    if (!editor || !this.website)
       return;
     this.website.ViewDevice = DeviceTypes.PHONE;
     this.website.ViewWidth = DeviceTypes.PHONE_WIDTH;
@@ -92,7 +118,7 @@ export class PageViewerComponent implements OnInit {
   }
   pcView() {
     const editor = <HTMLDivElement>document.querySelector(".editor");
-    if (!editor)
+    if (!editor || !this.website)
       return;
     this.website.ViewDevice = DeviceTypes.PC;
     this.website.ViewWidth = DeviceTypes.PC_WIDTH;

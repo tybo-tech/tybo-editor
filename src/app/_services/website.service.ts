@@ -2,10 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { HostListener, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { NO_SQL_DB } from "src/environments/environment";
+import { ContainerModel } from "../_classes/ContainerModel";
 import { PageModel } from "../_classes/PageModel";
 import { WebsiteModel } from "../_classes/WebsiteModel";
+import { WidgetModel } from "../_classes/WidgetModel";
 import { JsonParserHelper } from "../_classes/_statics/JsonParserHelper";
-import { newWebsite } from "../_mocks/website";
+import { blackWebsite, newWebsite } from "../_mocks/website";
 
 
 @Injectable({
@@ -14,109 +16,158 @@ import { newWebsite } from "../_mocks/website";
 export class WebsiteService {
 
 
-  private websiteBehaviorSubject: BehaviorSubject<WebsiteModel>;
-  public websiteObservable: Observable<WebsiteModel>;
+  private websiteBehaviorSubject: BehaviorSubject<WebsiteModel | undefined>;
+  public websiteObservable: Observable<WebsiteModel | undefined>;
 
-  private pageBehaviorSubject: BehaviorSubject<PageModel>;
-  public pageObservable: Observable<PageModel>;
+  private pageBehaviorSubject: BehaviorSubject<PageModel | undefined>;
+  public pageObservable: Observable<PageModel | undefined>;
   url: string;
 
 
   constructor(private http: HttpClient
   ) {
-    const website = localStorage.getItem("_website");
-    let web = null;
-    // if (website) {
-    //   web = JsonParserHelper.parseWeb(JSON.parse(website));
-    // }
-    this.websiteBehaviorSubject = new BehaviorSubject<WebsiteModel>(web);
+    this.websiteBehaviorSubject = new BehaviorSubject<WebsiteModel | undefined>(undefined);
     this.websiteObservable = this.websiteBehaviorSubject.asObservable();
 
-    this.pageBehaviorSubject = new BehaviorSubject<PageModel>(null);
+    this.pageBehaviorSubject = new BehaviorSubject<PageModel | undefined>(undefined);
     this.pageObservable = this.pageBehaviorSubject.asObservable();
 
     this.url = NO_SQL_DB;
 
   }
 
-  getSite(_id, pageid) {
+  getSite(_id: string, pageid: string) {
     this.http.get<WebsiteModel>(`${this.url}/websites/${_id}`)
       .subscribe(data => {
         if (data && data._id) {
           let parsedWebsite = JsonParserHelper.parseWeb(data);
-          // debugger
           if (parsedWebsite && parsedWebsite.Pages && parsedWebsite.Pages.length) {
-            let page: PageModel;
-            // debugger
-            if (parsedWebsite.Header) {
-              this.selectTyles(parsedWebsite.Header);
-              parsedWebsite.Header.Rows.forEach(r => {
-                this.selectTyles(r)
-                r.Columns.forEach(c => {
-                  this.selectTyles(c);
-                })
-              })
-            }
-
-            if (parsedWebsite.Footer) {
-              this.selectTyles(parsedWebsite.Footer);
-              parsedWebsite.Footer.Rows.forEach(r => {
-                this.selectTyles(r)
-                r.Columns.forEach(c => {
-                  this.selectTyles(c);
-                })
-              })
-            }
+            let page: PageModel | undefined = undefined;
             if (pageid)
-              page = parsedWebsite.Pages.find(x => x.Url === pageid);
-
-            if (!page)
-              page = parsedWebsite.Pages.find(x => x.IsSelected) || parsedWebsite.Pages[0];
-            if (page) {
-              // alert(page.Name)
-              this.selectTyles(page);
-              page.Sections.forEach(s => {
-                this.selectTyles(s);
-                s.Rows.forEach(r => {
-                  this.selectTyles(r)
-                  r.Columns.forEach(c => {
-                    this.selectTyles(c);
-                  })
-                })
-              })
-              this.geWdigets(page, parsedWebsite);
-            }
+              page = parsedWebsite.Pages.find(x => x.Url === pageid) || parsedWebsite.Pages.find(x => x.IsSelected) || parsedWebsite.Pages[0];
+            this.updateWebsieState(parsedWebsite);
+            this.pageBehaviorSubject.next(page);
           }
         }
-
+        else {
+          this.updateWebsieState(blackWebsite);
+        }
       })
   }
 
-  selectTyles(item) {
-    // let query = window.matchMedia("(max-width: 700px)");
-    // if (query.matches) {
-    //   alert("PC")    // If page is larger than 700px
+  selectWebsiteStyles(isMobileMode: boolean, website: WebsiteModel): WebsiteModel | undefined {
+    if (website) {
+      website.SelectedStyle = isMobileMode ? website.ItemMobileStyle : website.ItemStyle;
+      // website.IsMobileView = isMobileMode;
+      if (website.Header) {
+        website.Header.SelectedStyle = isMobileMode ? website.Header.ItemMobileStyle : website.Header.ItemStyle;
+        if (website.Header.Rows) {
+          website.Header.Rows.map(row => {
+            row.SelectedStyle = isMobileMode ? row.ItemMobileStyle : row.ItemStyle;
+            if (row.Columns) {
+              row.Columns.map(c => {
+                c.SelectedStyle = isMobileMode ? c.ItemMobileStyle : c.ItemStyle;
+                if (c.Widgets) {
+                  c.Widgets.map(w => {
+                    w.SelectedStyle = isMobileMode ? w.ItemMobileStyle : w.ItemStyle;
+                    if (w.Children) {
+                      w.Children.map(ch => {
+                        ch.SelectedStyle = isMobileMode ? ch.ItemMobileStyle : ch.ItemStyle;
+                        return ch
+                      })
+                    }
 
-    // } else {
-    //   // Mobile phones
-    //   alert("Phone")
-    // }
-
-    if (item && item.ColumnId === 'col-412159861-1651910434276' && item.CreateDate === 'Mon May 09 2022 23:38:53 GMT+0200 (South Africa Standard Time)') {
-      let b = 333;
-      debugger
+                    if (w.Form) {
+                      w.Form.SelectedStyle = isMobileMode ? w.Form.ItemMobileStyle : w.Form.ItemStyle;
+                      if (w.Form.Inputs) {
+                        w.Form.Inputs.map(input => {
+                          input.SelectedStyle = isMobileMode ? input.ItemMobileStyle : input.ItemStyle;
+                          return input
+                        })
+                      }
+                    }
+                    return w;
+                  })
+                }
+                return c;
+              })
+            }
+            return row
+          })
+        }
+      }
+      return website;
     }
+    return undefined;
+  }
+  selectContainerStyles(container: ContainerModel, isMobileMode = false): ContainerModel {
+    if (container) {
+      if (!container.ItemStyle)
+        container.ItemStyle = container.SelectedStyle || {}
 
-    let size: any = localStorage.getItem("screen_size");
-    if (size) {
-      size = parseInt(size);
-      if (size < 700) {
-        item.SelectedStyle = item.ItemMobileStyle;
-      } else {
-        item.SelectedStyle = item.ItemStyle;
+      if (!container.ItemMobileStyle)
+        container.ItemMobileStyle = container.SelectedStyle || {}
+      container.SelectedStyle = isMobileMode ? container.ItemMobileStyle : container.ItemStyle;
+      if (container.Widgets) {
+        container.Widgets.forEach(c => {
+          this.selectWidgetStyles(c, isMobileMode);
+        })
+      }
 
+      if (container.Containers) {
+        container.Containers.forEach(c => {
+          this.selectContainerStyles(c, isMobileMode);
+        })
       }
     }
+    return container;
+  }
+
+  selectWidgetStyles(widget: WidgetModel, isMobileMode = false): WidgetModel {
+    if (widget) {
+      // debugger
+      if (!widget.ItemStyle)
+        widget.ItemStyle = {}
+
+      if (!widget.ItemMobileStyle)
+        widget.ItemMobileStyle = {}
+      widget.SelectedStyle = isMobileMode ? widget.ItemMobileStyle : widget.ItemStyle;
+      if (widget.Children) {
+        widget.Children.forEach(c => {
+          this.selectWidgetStyles(c, isMobileMode);
+        })
+      }
+    }
+    return widget;
+  }
+  selectTyles(isMobileMode: boolean, page: PageModel): PageModel | undefined {
+    if (page) {
+      page.SelectedStyle = page.ItemStyle;
+      if (page.Containers)
+        page.Containers.forEach(c => {
+          this.selectContainerStyles(c, isMobileMode);
+        });
+
+
+      if (page.Widgets)
+        page.Widgets.forEach(c => {
+          this.selectWidgetStyles(c, isMobileMode);
+        });
+
+      return page;
+    }
+    return;
+
+    // let size: any = localStorage.getItem("screen_size");
+    // if (size) {
+    //   size = parseInt(size);
+    //   if (size < 700) {
+    //     item.SelectedStyle = item.ItemMobileStyle;
+    //   } else {
+    //     item.SelectedStyle = item.ItemStyle;
+
+    //   }
+    // }
   }
 
   geWdigets(page: PageModel, website: WebsiteModel): any {
@@ -124,28 +175,26 @@ export class WebsiteService {
       if (data && data.length) {
         const parsedWidgets = JsonParserHelper.parseWidgets(data);
         parsedWidgets.map(x => {
-          this.selectTyles(x);
+          // this.selectTyles(x);
           if (x.Form) {
-            this.selectTyles(x.Form)
+            // this.selectTyles(x.Form)
             if (x.Form.Inputs) {
               x.Form.Inputs.map(i => {
-                this.selectTyles(i);
+                // this.selectTyles(i);
                 return i;
               })
             }
           }
 
           x.Children.map(c => {
-            // debugger
-            this.selectTyles(c);
             return c
           })
           return x;
         })
         page.Sections.forEach(section => {
-          this.selectTyles(section)
+          // this.selectTyles(section)
           section.Rows.forEach(row => {
-            this.selectTyles(row)
+            // this.selectTyles(row)
             row.Columns.forEach(column => {
               column.Widgets = parsedWidgets.filter(x => x.ColumnId === column.ColumnId);
             })
@@ -153,9 +202,9 @@ export class WebsiteService {
         });
 
         if (website.Header) {
-          this.selectTyles(website.Header)
+          // this.selectTyles(website.Header)
           website.Header.Rows.forEach(row => {
-            this.selectTyles(row)
+            // this.selectTyles(row)
             row.Columns.forEach(column => {
               column.Widgets = parsedWidgets.filter(x => x.ColumnId === column.ColumnId);
             })
@@ -164,7 +213,7 @@ export class WebsiteService {
 
         if (website.Footer) {
           website.Footer.Rows.forEach(row => {
-            this.selectTyles(row)
+            // this.selectTyles(row)
             row.Columns.forEach(column => {
               column.Widgets = parsedWidgets.filter(x => x.ColumnId === column.ColumnId);
             })
@@ -172,6 +221,9 @@ export class WebsiteService {
         }
         this.updateWebsieState(website);
         this.pageBehaviorSubject.next(page);
+      }
+      else {
+        this.updateWebsieState(website);
       }
 
     });
@@ -246,7 +298,7 @@ export class WebsiteService {
   delete(endpoint: string) {
     return this.http.delete<any>(`${this.url}/${endpoint}`);
   }
-  post(url, item) {
+  post(url: string, item: any) {
     return this.http.post(url, item);
   }
   updateWebsieState(site: WebsiteModel) {

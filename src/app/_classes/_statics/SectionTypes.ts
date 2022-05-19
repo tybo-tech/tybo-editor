@@ -5,6 +5,7 @@ export class SectionTypes {
     public static FOOTER = 'Footer';
     public static EMPTY = 'Empty';
     public static ROW = 'Row';
+    public static CONTAINER = 'Container';
     public static SEC = 'Section';
     public static LIST = 'List';
     public static MENU = 'Menu';
@@ -35,7 +36,7 @@ export class SectionTypes {
     public static IMAGE = 'Image';
 
 
-    public static HEADER_MIN_HEIGHT = '8vh';
+    public static HEADER_MIN_HEIGHT = '3.5rem';
     public static BODY_MIN_HEIGHT = '22vh';
     public static FOOTER_HEIGHT = '15vh';
 }

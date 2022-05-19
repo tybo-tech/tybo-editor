@@ -6,7 +6,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
   styleUrls: ['./sortable-list-drag-drop.component.scss']
 })
 export class SortableListDragDropComponent implements OnInit, AfterViewInit {
-  dragableList: HTMLElement;
+  dragableList?: any;
   makeCoffeSteps = [
     'Pick a cup',
     'Add some suger',
@@ -19,8 +19,8 @@ export class SortableListDragDropComponent implements OnInit, AfterViewInit {
   ];
 
   listItems = [];
-  drageStartIndex;
-  endStartIndex;
+  drageStartIndex: any;
+  endStartIndex: any;
   copyArray: string[];
   dragables: NodeListOf<Element>;
   dragListItems: NodeListOf<Element>;
@@ -41,11 +41,13 @@ export class SortableListDragDropComponent implements OnInit, AfterViewInit {
 
   check() {
     // alert(2)
-    this.copyArray.forEach( (item, index) => {
+    this.copyArray.forEach((item, index) => {
       const element = document.getElementById(`${index}`);
+      if (!element)
+        return
       element.classList.remove('right');
       element.classList.remove('wrong')
-      
+
       if (item === this.makeCoffeSteps[index]) {
         element.classList.add('right')
 
@@ -96,11 +98,11 @@ export class SortableListDragDropComponent implements OnInit, AfterViewInit {
     });
 
   }
-  dragEnter(dragListItem: Element): EventListenerOrEventListenerObject {
+  dragEnter(dragListItem: Element) {
     dragListItem.classList.add('over');
     return
   }
-  dragLeave(dragListItem: Element): EventListenerOrEventListenerObject {
+  dragLeave(dragListItem: Element) {
     dragListItem.classList.remove('over');
     return;
   }
@@ -113,16 +115,18 @@ export class SortableListDragDropComponent implements OnInit, AfterViewInit {
 
     return;
   }
-  dragOver(e: Event): EventListenerOrEventListenerObject {
+  dragOver(e: Event) {
     e.preventDefault();
     return;
   }
-  dragStart(element: Element): EventListenerOrEventListenerObject {
-    this.drageStartIndex = Number(element.closest("li").getAttribute('id'));
+  dragStart(element: Element) {
+    if (!element)
+      return;
+    this.drageStartIndex = Number(element.closest("li")?.getAttribute('id'));
     return;
   }
 
-  swapItes(from, to) {
+  swapItes(from: any, to: any) {
     const temp = this.copyArray[from];
     this.copyArray[from] = this.copyArray[to];
     this.copyArray[to] = temp;

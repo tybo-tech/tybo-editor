@@ -9,12 +9,12 @@ import { CopyService } from 'src/app/_services/copy.service';
   styleUrls: ['./public-html-element.component.scss']
 })
 export class PublicHtmlElementComponent implements OnInit {
-  @Input() type;
-  @Input() ItemStyle;
+  @Input() type:any;
+  @Input() ItemStyle:any;
   @Input() value: any;
   @Input() parent: any;
-  @Input() items;
-  @Input() itemCol;
+  @Input() items:any;
+  @Input() itemCol:any;
   @Output() clickEvent: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

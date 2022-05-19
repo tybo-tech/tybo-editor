@@ -22,7 +22,7 @@ export class GeneralStylesComponent implements OnInit {
   }
 
   onInputEvent() {
-    this.input.Value = "auto"
+    this.input.Value = this.input.Option || "auto"
     this.inputEvent.emit(this.input);
   }
 

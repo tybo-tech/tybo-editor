@@ -1,0 +1,43 @@
+<div class="_container _parent" *ngIf="container" [id]="container.ContainerId" [ngStyle]="container.SelectedStyle">
+    <div class="seletor" (click)="toggleOptions(container)">{{container.Name}}</div>
+
+
+    <div class="_container _child" *ngFor="let childContainer of container.Containers; let i = index"
+        [ngStyle]="childContainer.SelectedStyle" [id]="childContainer.ContainerId">
+        <div class="seletor" (click)="toggleOptions(childContainer)">{{childContainer.Name}}</div>
+
+
+        <div class="_container _grand" *ngFor="let grandContainer of childContainer.Containers; let i = index"
+            [ngStyle]="grandContainer.SelectedStyle" [id]="grandContainer.ContainerId" can_drop_on_me
+            (onDrop)="onDrop($event,grandContainer)">
+            <div class="seletor" (click)="toggleOptions(grandContainer)">{{grandContainer.Name}}</div>
+
+
+            <div *ngFor="let widget of grandContainer.Widgets; let i = index" class="widget">
+                <app-column-widget [widget]="widget" [website]="website" [index]="i" [container]="grandContainer">
+                </app-column-widget>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!-- 
+ <div>  
+    <ng-container  
+    *ngTemplateOutlet="recursiveListTmpl; context:{ list: container.Containers}"  
+    ></ng-container>  
+ </div>  
+   
+ <ng-template #recursiveListTmpl let-list="list">  
+    <div *ngFor="let item of list">  
+       {{item.ContainerType}} {{ item.Name }}  
+       <div *ngIf="item.Containers.length > 0">  
+          <ng-container  
+             *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.Containers }"  
+          ></ng-container>  
+       </div>  
+    </div>  
+ </ng-template>    -->

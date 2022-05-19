@@ -22,7 +22,7 @@ export class ElementToolsComponent implements OnInit {
       // console.log(data);
     })
   }
-  onTab(tab) {
+  onTab(tab:any) {
     this.tabs.map(t => t.Class = [])
     tab.Class = ['active'];
     this.tabId = tab.Id;

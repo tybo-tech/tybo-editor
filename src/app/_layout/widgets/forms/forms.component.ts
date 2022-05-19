@@ -53,7 +53,7 @@ export class FormsComponent implements OnInit {
         this.stylesToPaste = data;
     });
   }
-  onRightClick(pointerEvent: PointerEvent) {
+  onRightClick(pointerEvent: MouseEvent) {
     pointerEvent.preventDefault();
     const __target = <HTMLDivElement>pointerEvent.target;
     const classes = Array.from(__target.classList).find(x => x === 'contextmenu_from');
@@ -70,7 +70,7 @@ export class FormsComponent implements OnInit {
   }
 
 
-  onStyleChange(event) {
+  onStyleChange(event:any) {
     if (!event)
       return
 
@@ -85,7 +85,7 @@ export class FormsComponent implements OnInit {
 
   }
 
-  miniMenuEvent(event) {
+  miniMenuEvent(event:any) {
     if (event === "close") {
       this.closeMenu();
       return;

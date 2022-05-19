@@ -7,15 +7,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class UnitsComponent implements OnInit {
   @Output() valueEvent: EventEmitter<any> = new EventEmitter();
-  @Input() inputUnits;
-  @Input() inputValue;
-  width
+  @Input() inputUnits:any;
+  @Input() inputValue:any;
+  width:any;
   items = ['%', 'px', 'vh', 'vw', 'em', 'rem', 'fr']
   constructor() { }
 
   ngOnInit() {
   }
-  formatStyles(a,b,c){
+  formatStyles(a:any,b:any,c:any){
     this.valueEvent.emit(`${this.inputValue}${this.inputUnits}`)
   }
 }

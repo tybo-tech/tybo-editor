@@ -12,12 +12,12 @@ import { EventService } from 'src/app/_services/event.service';
   styleUrls: ['./html-element.component.scss']
 })
 export class HtmlElementComponent implements OnInit {
-  @Input() type;
-  @Input() ItemStyle;
+  @Input() type: any;
+  @Input() ItemStyle: any;
   @Input() value: any;
   @Input() parent: WidgetModel;
-  @Input() items;
-  @Input() itemCol;
+  @Input() items: any;
+  @Input() itemCol: any;
   @Output() valueChanged: EventEmitter<any> = new EventEmitter();
   @Output() colEvent: EventEmitter<any> = new EventEmitter();
   @Output() fillBGEvent: EventEmitter<any> = new EventEmitter();
@@ -66,7 +66,7 @@ export class HtmlElementComponent implements OnInit {
       this.miniMenu.push({ Name: `<i class="fas fa-bars"></i> Open menu`, Action: 'open-menu' })
     }
   }
-  onHover(e) {
+  onHover(e: any) {
     this.show = e;
     // if (e)
     //   this.eventService.updateOptionsState(this.parent)
@@ -76,26 +76,29 @@ export class HtmlElementComponent implements OnInit {
 
   toggleOptions() {
     // debugger
-    this.showOptions = !this.showOptions;
-    if (this.showOptions) {
-      if (!this.parent.ItemStyle)
-        this.parent.ItemStyle = {};
+    this.eventService.updateOptionsState(null);
+    setTimeout(() => {
+      this.showOptions = true;
+      if (this.showOptions) {
+        if (!this.parent.ItemStyle)
+          this.parent.ItemStyle = {};
 
-      if (!this.parent.ItemMobileStyle)
-        this.parent.ItemMobileStyle = {};
+        if (!this.parent.ItemMobileStyle)
+          this.parent.ItemMobileStyle = {};
 
-      if (!this.parent.SelectedStyle)
-        this.parent.SelectedStyle = {};
+        if (!this.parent.SelectedStyle)
+          this.parent.SelectedStyle = {};
 
-      if (!this.parent.EventStyles)
-        this.parent.EventStyles = {};
+        if (!this.parent.EventStyles)
+          this.parent.EventStyles = {};
 
-      this.eventService.updateOptionsState(this.parent)
-    }
-    else
-      this.eventService.updateOptionsState(null);
+        this.eventService.updateOptionsState(this.parent)
+      }
+      else
+        this.eventService.updateOptionsState(null);
+    }, 100)
   }
-  onChange(e) {
+  onChange(e: any) {
     this.value = e.Url || e;
     this.valueChanged.emit(this.value)
   }
@@ -111,7 +114,7 @@ export class HtmlElementComponent implements OnInit {
     this.onImageChange.emit(image.Url);
   }
 
-  selectMenu(action) {
+  selectMenu(action: any) {
     if (action === 'copy-styles') {
       this.copyService.copy(this.ItemStyle);
     }
@@ -139,13 +142,13 @@ export class HtmlElementComponent implements OnInit {
     this.showMiniMenu = false;
   }
 
-  toogleMiniMenu(pointerEvent: PointerEvent) {
+  toogleMiniMenu(pointerEvent: MouseEvent) {
     pointerEvent.preventDefault();
     this.showMiniMenu = true;
     return false;
   }
 
-  styleChange(e) {
+  styleChange(e: any) {
     this.onStyleChange.emit(e)
   }
 
@@ -165,7 +168,7 @@ export class HtmlElementComponent implements OnInit {
     }
   }
 
-  textStyleChange(e) {
+  textStyleChange(e: any) {
     if (e === 'align-center') {
       if (!this.parent.SelectedStyle)
         this.parent.SelectedStyle = {};

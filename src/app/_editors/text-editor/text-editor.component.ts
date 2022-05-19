@@ -9,15 +9,17 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./text-editor.component.scss']
 })
 export class TextEditorComponent implements OnInit, AfterViewInit {
-  @Input() text;
+  @Input() text: any;
   @Output() onValue: EventEmitter<any> = new EventEmitter();
   forecolor: string
   loading: boolean;
   maxSize = 1500;
   constructor(private uploadService: UploadService) { }
   ngAfterViewInit(): void {
-    document.getElementById("content").addEventListener("input", function(e) {
-  }, false);
+    let content = document.getElementById("content");
+    if (content)
+      content.addEventListener("input", function (e) {
+      }, false);
   }
 
   ngOnInit() {
@@ -44,7 +46,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
   }
 
 
-  uploadOriginal(file) {
+  uploadOriginal(file: any) {
     const formData = new FormData();
     formData.append('file', file);
     this.loading = true;
@@ -61,7 +63,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
   }
 
 
-  resizeImage(file) {
+  resizeImage(file: any) {
     if (file.type.match(/image.*/) && file.type !== 'image/gif') {
 
       const reader = new FileReader();
@@ -87,7 +89,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
           }
           canvas.width = width;
           canvas.height = height;
-          canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+          canvas.getContext('2d')?.drawImage(image, 0, 0, width, height);
           const dataUrl = canvas.toDataURL('image/jpeg');
           const resizedImage = this.dataURLToBlob(dataUrl);
 
@@ -118,7 +120,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
 
   }
 
-  dataURLToBlob(dataURL) {
+  dataURLToBlob(dataURL: any) {
     const BASE64_MARKER = ';base64,';
     if (dataURL.indexOf(BASE64_MARKER) === -1) {
       // tslint:disable-next-line: no-shadowed-variable
@@ -144,7 +146,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
 
     return new Blob([uInt8Array], { type: contentType });
   }
-  onInput(e){
+  onInput(e: any) {
     this.onValue.emit(e)
   }
 }

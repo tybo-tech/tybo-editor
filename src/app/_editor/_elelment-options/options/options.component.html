@@ -1,6 +1,6 @@
 <div class="styles">
   <div class="style" *ngFor="let style of styles">
-    <h5 (click)="clickSection(style, !style.IsOpen)">
+    <h5>
       <span> {{style.SectionName}}</span>
       <span *ngIf="!style.IsOpen"><i class="fa fa-chevron-down"></i></span>
       <span *ngIf="style.IsOpen"><i class="fa fa-chevron-up"></i></span>

@@ -1,8 +1,10 @@
 import { hero_col_1, hero_col_2, wid_cards } from "../_mocks/widgets";
 import { ColumnModel } from "./ColumnModel";
+import { ContainerModel } from "./ContainerModel";
 import { MainClass } from "./MainClass";
 import { RowModel } from "./RowModel";
 import { SectionModel } from "./SectionModel";
+import { WidgetModel } from "./WidgetModel";
 import { HelperClass } from "./_statics/HelperClass";
 import { SectionTypes } from "./_statics/SectionTypes";
 
@@ -18,6 +20,8 @@ export class PageModel extends MainClass {
     Url: string;
     Styles: any;
     Sections: SectionModel[];
+    Containers: ContainerModel[];
+    Widgets: WidgetModel[];
     PageStatus: string;
     StyleClass: string;
     DisplayHeader: boolean;
@@ -49,6 +53,28 @@ export class PageModel extends MainClass {
         this.StyleClass = styleClass;
         this.DisplayHeader = DisplayHeader;
         this.DisplayFooter = DisplayFooter;
+        this.Containers = [];
+        this.Widgets = [];
+    }
+
+    AddContainerWidget(container: WidgetModel) {
+        this.Widgets.push(container);
+    }
+    AddContainer(container: ContainerModel) {
+        if (!container)
+            return;
+
+        if (container.ContainerType === SectionTypes.HEADER) {
+            container.ItemStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT };
+            container.ItemStyle = { 'background-color': '#000000', 'padding': '20px' }
+        }
+
+
+
+        if (container.ContainerType === SectionTypes.FOOTER) {
+            container.ItemStyle = { 'min-height': SectionTypes.FOOTER_HEIGHT, 'background-color': '#000000' }
+        }
+        this.Containers.push(container);
     }
     AddSection(section: SectionModel) {
         if (!section)

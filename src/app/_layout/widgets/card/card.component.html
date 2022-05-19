@@ -30,10 +30,6 @@
 
 
 
-    <app-element-options *ngIf="card && card.ShowOptions" [name]="card.Name" [type]="'section'"
-        [ItemStyle]="card.SelectedStyle">
-    </app-element-options>
-
 
     <app-html-element *ngIf="card.ImageUrl" [type]="'image'" [value]="card.ImageUrl"
         (valueChanged)="valueChanged($event,card, 'ImageUrl')" [ItemStyle]="card.ImageStyles"

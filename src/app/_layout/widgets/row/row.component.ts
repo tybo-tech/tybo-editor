@@ -61,7 +61,7 @@ export class RowComponent {
         //         this.row.SelectedStyle = data.SelectedStyle;
         //         console.log(this.row);
         //         // alert(3)
-                
+
         //     }
         // })
     }
@@ -90,7 +90,7 @@ export class RowComponent {
         }
     }
 
-    onRightClick(pointerEvent: PointerEvent) {
+    onRightClick(pointerEvent: MouseEvent) {
         pointerEvent.preventDefault()
         this.section.Rows.map(c => c.ShowMiniMenu = false);
         this.row.ShowMiniMenu = true;
@@ -104,7 +104,7 @@ export class RowComponent {
     closeMenu() {
         this.section.Rows.map(c => c.ShowMiniMenu = false);
     }
-    miniMenuEvent(e) {
+    miniMenuEvent(e:any) {
         this.section.Rows.map(c => c.ShowMiniMenu = false);
         if (e === "close") {
             this.closeMenu();
@@ -151,7 +151,19 @@ export class RowComponent {
 
     toggleOptions() {
         // this.row.ElementId = this.row.RowId;
-        this.row.ElementId = HelperClass.getId("element-id");
-        this.eventService.updateOptionsState(this.row)
+
+
+
+
+        this.eventService.updateOptionsState(null);
+        setTimeout(() => {
+            this.row.ShowOptions = !this.row.ShowOptions;
+            if (this.row.ShowOptions) {
+                this.row.ElementId = HelperClass.getId("element-id");
+                this.eventService.updateOptionsState(this.row)
+            }
+            else
+                this.eventService.updateOptionsState(null);
+        }, 100)
     }
 }

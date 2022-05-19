@@ -1,0 +1,60 @@
+<ng-template #nodeTemplateRef let-node>
+
+    <!-- <div class="node" [class.node--selected]="( node === selectedTreeNode )"> -->
+
+
+    <div *ngIf="node.Children.length  && node.ItemType === SectionTypes.CONTAINER" class="_container" can_drop_on_me
+        (onDrop)="onDrop($event,node)" [ngStyle]="node.SelectedStyle">
+        <div class="seletor parent-seletor" (click)="toggleOptions(node)">{{node.Name}}</div>
+
+        <!-- Invoke the recursive template. -->
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+            <!--
+					NOTE: The "$implicit" property of the ngFor context is what will
+					be made available to the template ref's implicit let-node binding.
+				-->
+        </ng-template>
+
+    </div>
+
+
+
+    <div *ngIf="!node.Children.length && node.ItemType === SectionTypes.CONTAINER" class="_container" can_drop_on_me
+        (onDrop)="onDrop($event,node)" [ngStyle]="node.SelectedStyle">
+        <div class="seletor parent-seletor" (click)="toggleOptions(node)">{{node.Name}}</div>
+
+        <!-- <app-page-widget [widget]="node" [page]="page"></app-page-widget> -->
+        <p style="display: block;  width: fit-content; margin:auto; top: 40%; position: relative; color: darkgray;">
+            Empty conatiner
+        </p>
+
+    </div>
+
+    <div *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER" class="_widget"
+        [ngStyle]="node.SelectedStyle">
+        <app-page-widget [widget]="node" [page]="page"></app-page-widget>
+
+    </div>
+
+    <div *ngIf="node.Children.length && node.ItemType !== SectionTypes.CONTAINER" class="_widget"
+        [ngStyle]="node.SelectedStyle">
+        <h1> You cant hit me yet, untill you have nasted widgets, which are not containers!</h1>
+        <app-page-widget [widget]="node" [page]="page"></app-page-widget>
+
+    </div>
+
+    <!-- </div> -->
+
+</ng-template>
+
+<!--
+	Initiate the recursive template rendering. Because our recursive template is going to
+	be using the ngFor directive to render recursively, the "context" in the recursive
+	instances is going to be the ngForContext. As such, we have to "mock" the initial
+	context to look like the context that the ngFor directive will expose internally.
+ 
+	NOTE: If we used ngContainer or ngTemplate to invoke the recursion internally, we'd
+	have more control over which values were made available at each level.
+-->
+<ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ $implicit: widget }">
+</ng-template>

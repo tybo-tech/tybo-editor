@@ -26,7 +26,7 @@ export class MenusComponent implements OnInit {
   showToggle: boolean;
   miniMenu = MENU_MINI_MENU;
   isBurgerMenu: boolean;
-  menuItemWrapper: WidgetModel;
+  menuItemWrapper?: WidgetModel;
   menuItems: WidgetModel[];
   constructor(
     private copyService: CopyService,
@@ -58,7 +58,7 @@ export class MenusComponent implements OnInit {
         this.stylesToPaste = data;
     });
   }
-  onRightClick(pointerEvent: PointerEvent) {
+  onRightClick(pointerEvent: MouseEvent) {
     pointerEvent.preventDefault()
     this.column.Widgets.map(c => c.ShowMiniMenu = false);
     this.widget.ShowMiniMenu = true;
@@ -76,7 +76,7 @@ export class MenusComponent implements OnInit {
       widget.ImageStyles = event;
   }
 
-  // onRightClick(pointerEvent: PointerEvent, widget: WidgetModel, index: number) {
+  // onRightClick(pointerEvent: MouseEvent, widget: WidgetModel, index: number) {
   //   pointerEvent.preventDefault();
   //   const __target = <HTMLDivElement>pointerEvent.target;
   //   const classes = Array.from(__target.classList).find(x => x === 'contextmenu_card');
@@ -122,7 +122,7 @@ export class MenusComponent implements OnInit {
     this.widget.ShowOptions = e;
   }
 
-  onStyleChange(event) {
+  onStyleChange(event: any) {
     if (!event)
       return
 
@@ -139,8 +139,8 @@ export class MenusComponent implements OnInit {
 
 
 
-  miniMenuEvent(event) {
-    // alert(event)
+  miniMenuEvent(event: any) {
+    // alert(event:any)
     if (event === "close") {
       this.closeMenu();
       return;
@@ -156,7 +156,7 @@ export class MenusComponent implements OnInit {
     // }
 
   }
-  onMenuEvent(e) {
+  onMenuEvent(e: any) {
     if (e) {
       if (!this.menuItemWrapper || !this.menuItems || !this.menuItems.length)
         return
@@ -172,7 +172,7 @@ export class MenusComponent implements OnInit {
     }
   }
 
-  onDeleteMenu(e) {
+  onDeleteMenu(e: any) {
     if (e) {
       this.deleteEvent.emit(this.widget)
     }

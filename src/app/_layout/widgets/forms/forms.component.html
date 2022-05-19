@@ -11,9 +11,6 @@
 
   <div class="absolute">
 
-    <app-element-options *ngIf="widget && widget.ShowOptions" [type]="'widget'" [ItemStyle]="widget.SelectedStyle"
-      (onStyleChange)="onStyleChange($event)">
-    </app-element-options>
 
 
     <app-mini-menu [showMiniMenu]="widget.ShowMiniMenu" [miniMenu]="miniMenu" [options]="'Form'"

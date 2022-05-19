@@ -79,7 +79,7 @@ export class CardComponent {
         this.card.ShowOptions = e;
     }
 
-    onRightClick(pointerEvent: PointerEvent) {
+    onRightClick(pointerEvent: MouseEvent) {
         pointerEvent.preventDefault();
 
 
@@ -149,7 +149,7 @@ export class CardComponent {
     onImageChange(event: string, card: WidgetModel) {
         card.ImageUrl = event;
     }
-    onDelete(e, eventName) {
+    onDelete(e:any, eventName:any) {
         if (e && eventName === 'ImageUrl')
             this.card.ImageUrl = e;
         return;

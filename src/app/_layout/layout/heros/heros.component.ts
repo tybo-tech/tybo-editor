@@ -52,7 +52,7 @@ export class HerosComponent implements OnInit {
   }
 
 
-  getRelativeClientRect(el) {
+  getRelativeClientRect(el:any) {
     var rect = el.getBoundingClientRect(),
       parentRect = el.offsetParent.getBoundingClientRect();
     return {

@@ -9,15 +9,12 @@
     </li>
 
     <img class="item-menu contextmenu_section" src="assets/images/menu-icon.svg" (contextmenu)="onRightClick($event)"
-      can_hover_me (onHover)="showStyleMenu($event,column)">
+      can_hover_me (onHover)="showStyleMenu($event)">
 
 
     <app-mini-menu [showMiniMenu]="widget.ShowMiniMenu" [miniMenu]="miniMenu" (miniMenuEvent)="miniMenuEvent($event)">
     </app-mini-menu>
 
-    <app-element-options *ngIf="widget && widget.ShowOptions" [type]="'widget'" [ItemStyle]="widget.SelectedStyle"
-      (onStyleChange)="onStyleChange($event)">
-    </app-element-options>
   </ul>
 
 
@@ -26,8 +23,8 @@
 
 <div class="relative" *ngIf="isBurgerMenu">
   <app-html-element *ngIf="isBurgerMenu && widget" [type]="'button'" [parent]="widget" [value]="widget.ItemEventName"
-    (valueChanged)="valueChanged($event, 'ItemEventName')" [ItemStyle]="widget.SelectedStyle"
-    (copyEvent)="OnCopyEvent($event, 'ItemEventName')" (sideMenuEvent)="onMenuEvent($event)"
+    (valueChanged)="valueChanged($event, widget,'ItemEventName')" [ItemStyle]="widget.SelectedStyle"
+    (copyEvent)="OnCopyEvent($event,widget, 'ItemEventName')" (sideMenuEvent)="onMenuEvent($event)"
     (deleteEvent)="onDeleteMenu($event)"> </app-html-element>
 
 

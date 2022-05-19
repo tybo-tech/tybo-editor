@@ -1,12 +1,12 @@
 <!-- <div> -->
-  <ul *ngIf="widget && !isBurgerMenu" class="ul contextmenu_card" [ngStyle]="widget.SelectedStyle">
+<ul *ngIf="widget && !isBurgerMenu" class="ul contextmenu_card" [ngStyle]="widget.SelectedStyle">
 
 
-    <li *ngFor="let navItem of widget.Children">
-      <app-public-html-element *ngIf="navItem.ItemContent" [type]="'a'" [value]="navItem.ItemContent"
-        [ItemStyle]="navItem.ContentStyles" (clickEvent)="linkClick($event,navItem)"></app-public-html-element>
-    </li>
-  </ul>
+  <li *ngFor="let navItem of widget.Children">
+    <app-public-html-element *ngIf="navItem.ItemContent" [type]="'a'" [value]="navItem.ItemContent"
+      [ItemStyle]="navItem.ContentStyles" (clickEvent)="linkClick($event,navItem)"></app-public-html-element>
+  </li>
+</ul>
 
 <!-- </div> -->
 
@@ -17,15 +17,14 @@
 <div class="relative" *ngIf="isBurgerMenu">
 
   <app-public-html-element *ngIf="isBurgerMenu && widget" [type]="'button'" (clickEvent)="linkClick($event,widget)"
-  [parent]="widget" [value]="widget.ItemEventName" [ItemStyle]="widget.SelectedStyle"></app-public-html-element>
+    [parent]="widget" [value]="widget.ItemEventName" [ItemStyle]="widget.SelectedStyle"></app-public-html-element>
 
-  
+
   <div *ngIf="showMenu && menuItemWrapper" [ngStyle]="menuItemWrapper.SelectedStyle">
     <div class="items">
       <div class="item" *ngFor="let menuItem of menuItems">
-        <app-html-element *ngIf="menuItem.ItemContent" [type]="'a'" [parent]="menuItem" [value]="menuItem.ItemContent"
-          (valueChanged)="valueChanged($event,menuItem, 'ItemContent')" [ItemStyle]="menuItem.SelectedStyle"
-          (copyEvent)="OnCopyEvent($event,menuItem, 'ItemContent')"></app-html-element>
+        <app-public-html-element *ngIf="menuItem.ItemContent" [type]="'a'" [parent]="menuItem"
+          [value]="menuItem.ItemContent" [ItemStyle]="menuItem.SelectedStyle"></app-public-html-element>
       </div>
     </div>
   </div>

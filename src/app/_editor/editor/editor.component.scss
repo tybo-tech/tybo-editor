@@ -64,7 +64,7 @@
         width: 100%;
         margin: 0 auto;
         left: 1em;
-        min-height: 100vh;
+        min-height: 86vh;
 
         // .body {
         //     // padding-bottom: 30em;
@@ -127,6 +127,14 @@
         text-align: center;
         font-size: 0.6rem;
     }
+    h3{
+        margin-bottom: 3rem;
+    }
+
+    img{
+        width: 5rem;
+        margin: 0 .5rem;
+    }
 }
 
 .phone-class {
@@ -143,7 +151,12 @@
 .body-holder {
     padding-bottom: 55rem;
     @media only screen and (max-width: 600px) {
-        max-height: 95vh !important;
+        max-height: 15vh !important;
     }
 }
 
+
+
+.ffff{
+  
+}

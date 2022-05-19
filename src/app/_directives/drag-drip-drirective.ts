@@ -10,7 +10,7 @@ export class DrageDropDirective {
     prevY: number;
     newX: number;
     newY: number;
-    className: string;
+    className: string | undefined;
     resizing: boolean;
     constructor(private element: ElementRef) {
     }

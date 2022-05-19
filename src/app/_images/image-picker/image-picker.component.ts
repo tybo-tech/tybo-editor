@@ -28,11 +28,12 @@ export class ImagePickerComponent implements OnInit {
     this.images.push(new ImageModel(`assets/images/mock/wid3.png`))
     this.images.push(new ImageModel(`assets/images/mock/newlogo.svg`))
     this.images.push(new ImageModel(`assets/images/mock/phone-me.png`))
+    this.images.push(new ImageModel(`assets/images/widgets/brand.png`))
   }
   close() {
     this.onClose.emit(false)
   }
-  selectImage(image) {
+  selectImage(image:any) {
     this.onImageSelect.emit(image);
   }
 }

@@ -63,7 +63,7 @@ export class InputComponent implements OnInit {
     });
   }
 
-  onRightClick(pointerEvent: PointerEvent) {
+  onRightClick(pointerEvent: MouseEvent) {
     pointerEvent.preventDefault()
     this.form.Inputs.map(c => c.ShowMiniMenu = false);
     this.input.ShowMiniMenu = true;
@@ -73,7 +73,7 @@ export class InputComponent implements OnInit {
     this.input.ShowOptions = e;
   }
 
-  onStyleChange(event) {
+  onStyleChange(event: any) {
     if (!event)
       return
 
@@ -88,7 +88,7 @@ export class InputComponent implements OnInit {
 
   }
 
-  miniMenuEvent(event) {
+  miniMenuEvent(event: any) {
     if (event === "close") {
       this.closeMenu();
       return;

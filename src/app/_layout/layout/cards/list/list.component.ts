@@ -63,7 +63,7 @@ export class ListComponent implements OnInit {
       widget.ImageStyles = event;
   }
 
-  onRightClick(pointerEvent: PointerEvent, widget: WidgetModel, index: number) {
+  onRightClick(pointerEvent: MouseEvent, widget: WidgetModel, index: number) {
     pointerEvent.preventDefault();
     const __target = <HTMLDivElement>pointerEvent.target;
     const classes = Array.from(__target.classList).find(x => x === 'contextmenu_card');

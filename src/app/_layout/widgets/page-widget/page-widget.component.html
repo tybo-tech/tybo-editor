@@ -1,0 +1,7 @@
+<div *ngIf="widget">
+    <app-html-element [type]="widget.ElementType" [value]="widget.ItemContent" [parent]="widget"
+    *ngIf="widget.ItemCategory != SectionTypes.CARD && widget.ItemCategory != 'List' && widget.ItemCategory != 'Menu' && widget.ItemCategory !=  SectionTypes.FORM"
+    (onImageChange)="onImageChange($event, widget)" (valueChanged)="valueChanged($event,widget)"
+    [ItemStyle]="widget.SelectedStyle" (copyEvent)="onCopyEvent($event)"
+    (onStyleChange)="onStyleChange($event)" (deleteEvent)="deleteEvent($event)"></app-html-element>
+</div>

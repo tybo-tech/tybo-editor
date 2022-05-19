@@ -1,6 +1,7 @@
 <div class="_input" *ngIf="input && input.Units && (input.Type == 'number' || input.Type == 'text')">
   <div class="_label">{{input.Label}}</div>
-  <div class="_value"><input [type]="input.Type" (input)="onInputEvent()" class="no-spin" [(ngModel)]="input.Value"></div>
+  <div class="_value"><input [type]="input.Type" (input)="onInputEvent()" class="no-spin" [(ngModel)]="input.Value">
+  </div>
   <div class="_units">
     <select name="" id="" [(ngModel)]="input.Unit" (change)="onInputEvent()">
       <option [value]="option" *ngFor="let  option of input.Units">
@@ -29,7 +30,8 @@
   *ngIf="input && !input.Options && !input.Units && (input.Type == 'number' || input.Type == 'text')">
   <div class="_label">{{input.Label}}</div>
   <div class="_units">
-    <input name="" id="" [(ngModel)]="input.Value" [type]="input.Type" (change)="onInputEvent()" style="color: white;" />
+    <input name="" id="" [(ngModel)]="input.Value" [type]="input.Type" (change)="onInputEvent()"
+      style="color: white;" />
   </div>
 </div>
 
@@ -48,21 +50,21 @@
 <div class="_input grid-2" *ngIf="input && input.Type == 'color' && input.Label && input.IsVisible === true">
   <div class="_label">{{input.Label}}</div>
   <div class="_units">
-    <input type="color" [(ngModel)]="input.Value" (input)="onInputEvent()"/>
+    <input type="color" [(ngModel)]="input.Value" (input)="onInputEvent()" />
   </div>
 </div>
 
 
 <div class="_input grid-1" *ngIf="input && input.Type == 'color' && !input.Label && input.IsVisible === true">
   <div class="_units">
-    <input type="color" [(ngModel)]="input.Value" (input)="onInputEvent()"/>
+    <input type="color" [(ngModel)]="input.Value" (input)="onInputEvent()" />
   </div>
 </div>
 
 
 <div class="_input grid-2" *ngIf="input && input.Type == 'choice'">
   <div class="_label">{{input.Label}}</div>
-  <div class="_units">
+  <div class="_units" *ngIf="input.Options && input.Options.length">
     <select name="" id="" [(ngModel)]="input.Option" style="color: white;">
       <option [value]="option" *ngFor="let  option of input.Options">
         {{option}}
@@ -110,7 +112,8 @@
 
 
       <div class="_units" *ngIf="childInput.Type === 'color'">
-        <input type="color" [(ngModel)]="childInput.Value" min="1" max="100" (input)="onInputEvent()" class="slider" id="myRange">
+        <input type="color" [(ngModel)]="childInput.Value" min="1" max="100" (input)="onInputEvent()" class="slider"
+          id="myRange">
       </div>
     </div>
   </div>

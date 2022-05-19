@@ -63,7 +63,7 @@
 </div>
 
 <div *ngIf="type === 'a'" class="html-element">
-  <a [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" (click)="linkClick($event)"
+  <a [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" (click)="linkClick()"
     class="____text-editor">
   </a>
 </div>
@@ -75,20 +75,10 @@
 
 
 <!-- BUTTONS -->
-<button *ngIf="type === 'button'" [ngStyle]="ItemStyle" (click)="linkClick($event)">
+<button *ngIf="type === 'button'" [ngStyle]="ItemStyle" (click)="linkClick()">
   <p style="padding: 0; margin: 0;" [innerHTML]="value" editor_item contenteditable="false"></p>
 </button>
 
 
-<!-- LIST -->
-<div *ngIf="type === 'list'" class="html-element">
-  <ul>
-    <li *ngFor="let listItem of listItems" contenteditable="false" [ngStyle]="ItemStyle">
-      <!-- {{listItem}} -->
-      <p [innerHTML]="listItem" editor_item contenteditable="false" class="____text-editor">
 
-      </p>
-    </li>
-  </ul>
-</div>
 <!-- </div> -->

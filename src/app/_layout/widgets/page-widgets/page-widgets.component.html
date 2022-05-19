@@ -1,0 +1,46 @@
+<div *ngIf="page" [ngStyle]="page.SelectedStyle" [id]="page.PageId" can_drop_on_me (onDrop)="onPageDrop($event)">
+    <!-- <pre>
+        {{ page.Widgets | json }}
+    </pre> -->
+
+    <!-- {{page._id}} -->
+
+    <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: page.Widgets}"></ng-container>
+
+    <ng-template #recursiveListTmpl let-list="list">
+
+        <div *ngFor="let item of list" class="________list__class">
+            <app-page-widget [widget]="item" [page]="page"></app-page-widget>
+
+            <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.Children }"></ng-container>
+            <!-- <div *ngIf="item.ItemType === SectionTypes.CONTAINER && item.Children.length > 0" class="_container _parent"
+                can_drop_on_me (onDrop)="onDrop($event,item)" [ngStyle]="item.SelectedStyle" [id]="item.WidgetId">
+
+                <div class="seletor parent-seletor" (click)="toggleOptions(item)">{{item.Name}}</div>
+                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.Children }"></ng-container>
+            </div>
+
+            <div *ngIf="item.ItemType === SectionTypes.CONTAINER && !item.Children.length" class="_container _parent"
+                can_drop_on_me (onDrop)="onDrop($event,item)" [ngStyle]="item.SelectedStyle" [id]="item.WidgetId">
+
+                <div class="seletor parent-seletor" (click)="toggleOptions(item)">{{item.Name}}</div>
+            </div> -->
+            <!-- 
+            <div *ngIf="item.ItemType !== SectionTypes.CONTAINER" class="_container _parent"
+                [ngStyle]="item.SelectedStyle" [id]="item.WidgetId">
+
+
+
+                <app-html-element [type]="item.ElementType" [value]="item.ItemContent" [parent]="item"
+                    *ngIf="item.ItemCategory != SectionTypes.CARD && item.ItemCategory != 'List' && item.ItemCategory != 'Menu' && item.ItemCategory !=  SectionTypes.FORM"
+                    [ItemStyle]="item.SelectedStyle"></app-html-element>
+
+                <div *ngIf="item.Children.length > 0" class="">
+                    <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.Children }"></ng-container>
+                </div>
+
+            </div> -->
+
+        </div>
+    </ng-template>
+</div>

@@ -9,8 +9,8 @@ import { EventService } from 'src/app/_services/event.service';
 })
 export class ElementStyleComponent implements OnInit, OnChanges {
   styles: IOptions[];
-  @Input() ItemStyle;
-  @Input() type;
+  @Input() ItemStyle: any;
+  @Input() type: any;
   constructor(private eventService: EventService) { }
 
 
@@ -24,7 +24,7 @@ export class ElementStyleComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const itemStyles = <any>changes.ItemStyle.currentValue;
+    const itemStyles = <any>changes['ItemStyle'].currentValue;
     this.mapStyles(itemStyles);
     console.log('changes: ', changes);
 
@@ -34,12 +34,13 @@ export class ElementStyleComponent implements OnInit, OnChanges {
     optionSection.IsOpen = isOpen;
   }
 
-  loopObject(anyObject) {
+  loopObject(anyObject: any) {
     const allStyles = []
     this.styles.forEach(s => {
-      s.Inputs.forEach(i => {
-        allStyles.push(i);
-      })
+      if (s.Inputs)
+        s.Inputs.forEach(i => {
+          allStyles.push(i);
+        })
     })
 
     for (const [key, value] of Object.entries(anyObject)) {
@@ -47,31 +48,35 @@ export class ElementStyleComponent implements OnInit, OnChanges {
 
     }
   }
-  mapStyles(itemStyles) {
+  mapStyles(itemStyles: any) {
     if (!itemStyles)
       return;
 
     this.styles = STYLE_ITEMS;
     this.styles.forEach(style => {
-      style.Inputs.forEach(input => {
-        let styleValue = itemStyles[input.Id];
+      if (style.Inputs)
+        style.Inputs.forEach(input => {
+          let styleValue = itemStyles[input.Id];
 
-        if (styleValue) {
-          input.Value = styleValue;
-          input.Unit = this.getUnit(styleValue);
-          if (input.Id === 'margin-center') {
-            input.Classes = ['active'];
+          if (styleValue) {
+            // debugger
+            // console.log(this.styles);
+
+            input.Value = styleValue;
+            input.Unit = this.getUnit(styleValue);
+            if (input.Id === 'margin-center') {
+              input.Classes = ['active'];
+            }
+            if (input.Id === 'margin-left') {
+              input.Classes = ['active'];
+            }
+            if (input.Id === 'margin-right') {
+              input.Classes = ['active'];
+            }
+            if (input.Unit)
+              input.Value = parseFloat(styleValue);
           }
-          if (input.Id === 'margin-left') {
-            input.Classes = ['active'];
-          }
-          if (input.Id === 'margin-right') {
-            input.Classes = ['active'];
-          }
-          if (input.Unit)
-            input.Value = parseFloat(styleValue);
-        }
-      })
+        })
 
     })
     console.log(this.ItemStyle);
@@ -96,16 +101,18 @@ export class ElementStyleComponent implements OnInit, OnChanges {
       const parent = this.styles.find(x => x.Id === e.ParentId);
       if (!parent)
         return;
-
-      parent.Inputs.map(i => i.IsVisible = false);
+      if (parent.Inputs)
+        parent.Inputs.map(i => i.IsVisible = false);
       if (e.Value === 'None') {
         delete this.ItemStyle["background-color"];
         delete this.ItemStyle["background-image"];
         delete this.ItemStyle["background"];
       }
-      let selectedItem = parent.Inputs.find(x => x.Id === `background-${e.Value.toLocaleLowerCase()}`);
-      if (selectedItem)
-        selectedItem.IsVisible = true;
+      if (parent.Inputs) {
+        let selectedItem = parent.Inputs.find(x => x.Id === `background-${e.Value.toLocaleLowerCase()}`);
+        if (selectedItem)
+          selectedItem.IsVisible = true;
+      }
 
       return;
     }
@@ -139,6 +146,11 @@ export class ElementStyleComponent implements OnInit, OnChanges {
     if (e.Id === 'background-image') {
       delete this.ItemStyle["background"];
       delete this.ItemStyle["background-color"];
+    }
+
+    if (e.Id === 'align-items' && this.ItemStyle["display"] != 'flex') {
+      this.ItemStyle["display"] = 'flex';
+      this.ItemStyle["flex-direction"] = 'column';
     }
 
     if (e.Id === 'margin-left')

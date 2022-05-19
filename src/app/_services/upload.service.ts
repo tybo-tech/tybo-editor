@@ -19,7 +19,7 @@ export class UploadService {
     }
 
 
-    uploadFile(formData): Observable<any> {
+    uploadFile(formData: any): Observable<any> {
         return this.http.post<any>(`${this.url}/api/upload/upload.php`,
             formData
         );

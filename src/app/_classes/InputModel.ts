@@ -14,6 +14,7 @@ export class InputModel extends MainClass {
     InputIcon: string;
     Placeholder: string;
     MobileLabelStyles: any;
+    Value: string;
 
     constructor(
         Id: string,

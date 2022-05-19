@@ -1,4 +1,5 @@
 import { ColumnModel } from "../ColumnModel";
+import { ContainerModel } from "../ContainerModel";
 import { FormModel } from "../FormModel";
 import { InputModel } from "../InputModel";
 import { PageModel } from "../PageModel";
@@ -28,11 +29,11 @@ export class JsonParserHelper {
             site.SubCategory,
             site.Icon,
             this.parsePages(site.Pages),
-            site.Header ? this.parseSections([site.Header])[0] : null,
+            site.Header ? this.parseSections([site.Header])[0] : undefined,
             site.HeaderDisplay,
             site.HeaderType,
             site.HeaderVisibility,
-            site.Footer ? this.parseSections([site.Footer])[0] : null,
+            site.Footer ? this.parseSections([site.Footer])[0] : undefined,
             site.WebsiteMode,
             site.ViewDevice,
             site.ViewWidth ,
@@ -65,7 +66,7 @@ export class JsonParserHelper {
 
 
     private static parsePages(Pages: PageModel[]): PageModel[] {
-        const pages = [];
+        const pages: any = [];
         Pages.forEach(page => {
             const p = new PageModel(
                 page.PageId,
@@ -83,14 +84,17 @@ export class JsonParserHelper {
             p.IsSelected = page.IsSelected + '' == "true";
             p.ItemStyle = page.ItemStyle;
             p.ItemMobileStyle = page.ItemMobileStyle;
+            p.Containers = this.parseContainers(page.Containers);
+            p.Widgets = this.parseWidgets(page.Widgets);
             pages.push(p)
         })
         return pages;
     }
 
     private static parseSections(secs: SectionModel[]): SectionModel[] {
-        const sections = [];
-
+        const sections: any = [];
+        if (!secs)
+            return [];
         secs.forEach(sec => {
             let s = new SectionModel(
                 sec.SectionId,
@@ -126,7 +130,7 @@ export class JsonParserHelper {
 
 
     public static parseWidgets(Widgets: WidgetModel[]): WidgetModel[] {
-        const widgets = [];
+        const widgets: any = [];
         if (!Widgets)
             return [];
         Widgets.forEach(wid => {
@@ -137,7 +141,7 @@ export class JsonParserHelper {
                 wid.Name,
                 wid.ItemType,
                 wid.ImageUrl,
-                this.parseWidgetsChildren(wid.Children),
+                [],
                 wid.ParentId,
                 wid.ItemContent,
                 wid.ItemHeading,
@@ -160,16 +164,19 @@ export class JsonParserHelper {
             w.ImageStyles = wid.ImageStyles;
             w.ItemCategory = wid.ItemCategory;
             w.ItemClass = wid.ItemClass;
-            w.Form = this.parseForm(wid.Form);
+            if (wid.Children && wid.Children.length)
+                w.Children = this.parseWidgets(wid.Children);
+            if (wid.Form)
+                w.Form = this.parseForm(wid.Form);
             widgets.push(w)
         })
         return widgets;
     }
 
 
-    private static parseForm(form: FormModel): FormModel {
+    private static parseForm(form: FormModel): FormModel | undefined {
         if (!form)
-            return null;
+            return undefined;
 
         // debugger
         return new FormModel(form.FormId, form.Name, this.parseInputs(form.Inputs), this.parseInputs(form.Buttons))
@@ -178,7 +185,7 @@ export class JsonParserHelper {
     private static parseInputs(Inputs: InputModel[]): InputModel[] {
         if (!Inputs || !Inputs.length)
             return [];
-        const inputs = [];
+        const inputs: any = [];
 
         Inputs.forEach(input => {
             let w = new InputModel(
@@ -204,7 +211,7 @@ export class JsonParserHelper {
         if (!Rows || !Rows.length)
             return [];
 
-        const rows = [];
+        const rows: any = [];
 
         Rows.forEach(row => {
             let w = new RowModel(
@@ -225,7 +232,7 @@ export class JsonParserHelper {
         if (!Columns)
             return [];
 
-        const columns = [];
+        const columns: any = [];
 
         Columns.forEach(wid => {
             let w = new ColumnModel(
@@ -246,7 +253,7 @@ export class JsonParserHelper {
     private static parseWidgetsChildren(Widgets: WidgetModel[]): WidgetModel[] {
         if (!Widgets || !Widgets.length)
             return [];
-        const widgets = [];
+        const widgets: any = [];
         Widgets.forEach(wid => {
             const w = new WidgetModel(
                 wid.WidgetId,
@@ -282,6 +289,32 @@ export class JsonParserHelper {
             widgets.push(w)
         })
         return widgets;
+    }
+
+
+    private static parseContainers(Containers: ContainerModel[]): ContainerModel[] {
+        if (!Containers)
+            return [];
+
+        const columns: any = [];
+
+        Containers.forEach(wid => {
+            let w = new ContainerModel(
+                wid.ContainerId,
+                wid.PageId,
+                wid.Name,
+                wid.Styles,
+                this.parseWidgets(wid.Widgets),
+                wid.ContainerType,
+            );
+            w.ItemStyle = wid.ItemStyle
+            w.ItemMobileStyle = wid.ItemMobileStyle;
+            w.SelectedStyle = wid.SelectedStyle;
+            if (wid.Containers && wid.Containers.length)
+                w.Containers = this.parseContainers(wid.Containers);
+            columns.push(w)
+        })
+        return columns;
     }
 
 }

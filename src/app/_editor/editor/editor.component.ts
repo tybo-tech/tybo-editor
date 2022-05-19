@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnModel } from 'src/app/_classes/ColumnModel';
+import { ContainerModel } from 'src/app/_classes/ContainerModel';
 import { PageModel } from 'src/app/_classes/PageModel';
 import { RowModel } from 'src/app/_classes/RowModel';
 import { SectionModel } from 'src/app/_classes/SectionModel';
@@ -9,8 +10,11 @@ import { DeviceTypes } from 'src/app/_classes/_statics/DeviceTypes';
 import { HelperClass } from 'src/app/_classes/_statics/HelperClass';
 import { JsonParserHelper } from 'src/app/_classes/_statics/JsonParserHelper';
 import { SectionTypes } from 'src/app/_classes/_statics/SectionTypes';
+import { StyleHelper } from 'src/app/_classes/_statics/StyleHelper';
 import { COL_IMAGES } from 'src/app/_mocks/menus';
+import { blackWebsite } from 'src/app/_mocks/website';
 import { wid_cards } from 'src/app/_mocks/widgets';
+import { EventService } from 'src/app/_services/event.service';
 import { ViewModeService } from 'src/app/_services/view-mode.service';
 import { WebsiteService } from 'src/app/_services/website.service';
 
@@ -31,11 +35,16 @@ export class EditorComponent implements OnInit {
   pageId: string;
   COL_IMAGES = COL_IMAGES;
   showAdd: boolean = false;
-  constructor(private viewModeService: ViewModeService, private websiteService: WebsiteService) { }
+  constructor(private viewModeService: ViewModeService, private websiteService: WebsiteService, private eventService: EventService) { }
 
   ngOnInit() {
     this.websiteService.websiteObservable.subscribe(data => {
-      this.website = data;
+      if (data) {
+        this.website = data;
+        if (!this.website.WebsiteId)
+          this.website.ShowOptions = true;
+      }
+
 
       if (this.website && this.website.Pages && this.website.Pages.length) {
         const page = this.website.Pages.find(x => x.IsSelected);
@@ -56,6 +65,11 @@ export class EditorComponent implements OnInit {
         }
 
 
+      } else {
+        let pages = blackWebsite.Pages;
+        // this.websiteService.create(`pages/${this.page._id}`,pages).subscribe(data => {
+        //   console.log(data);
+        // })
       }
     })
     // this.website = this.websiteService.loadSites();
@@ -63,7 +77,10 @@ export class EditorComponent implements OnInit {
 
     this.widgets = wid_cards;
   }
-
+  addElement() {
+    this.eventService.updateOptionsState(undefined);
+    this.showAdd = !this.showAdd
+  }
   preVeiw() {
     this.mainClass = ['preview'];
     this.preview = true;
@@ -77,7 +94,8 @@ export class EditorComponent implements OnInit {
     this.website.ViewWidth = DeviceTypes.PHONE_WIDTH;
     editor.style.width = DeviceTypes.PHONE_WIDTH;
     this.viewModeService.changeMode(this.website);
-    this.mainClass = "phone-class"
+    // this.mainClass = "phone-class"
+    this.mainClass = "smartphone"
 
   }
   pcView() {
@@ -93,9 +111,9 @@ export class EditorComponent implements OnInit {
 
 
 
-  getTemplateWidget(widgetId: string): WidgetModel {
-    return this.widgets.find(x => x.WidgetId === widgetId);
-  }
+  // getTemplateWidget(widgetId: string): WidgetModel {
+  //   return this.widgets.find(x => x.WidgetId === widgetId);
+  // }
 
 
   pageChanged() {
@@ -115,17 +133,29 @@ export class EditorComponent implements OnInit {
     this.pageId = page.PageId;
   }
   toggleClose() {
-    this.website.ShowPages = !this.website.ShowPages
+    this.website.ShowPages = !this.website.ShowPages;
+    if (this.website.ShowPages)
+      this.website.ShowOptions = false;
+  }
+  toggleWebClose() {
+    this.website.ShowOptions = !this.website.ShowOptions;
+    if (this.website.ShowOptions)
+      this.website.ShowPages = false;
   }
   savePage() {
     this.saveWebsiteHeaderAndFooter();
-    this.saveWidgetsForThisPage();
-    // return;
+
     this.websiteService.create(`pages/replace/${this.page._id}`, this.page).subscribe(data => {
       console.log(data);
+      // this.website.Pages = tempPages;
     })
-  }
 
+    // this.saveWidgetsForThisPage();
+    // return;
+    // this.websiteService.create(`pages/replace/${this.page._id}`, this.page).subscribe(data => {
+    //   console.log(data);
+    // })
+  }
 
   saveWebsiteHeaderAndFooter() {
     let tempPages = this.website.Pages;
@@ -200,7 +230,7 @@ export class EditorComponent implements OnInit {
     let rows: RowModel[] = [];
     let columns: ColumnModel[] = [];
     this.website.Pages.forEach(page => {
-      page.Sections.forEach(section => {
+      page.Sections.forEach((section: SectionModel) => {
         sections.push(section)
         section.Rows.forEach(row => {
           rows.push(row)
@@ -243,13 +273,13 @@ export class EditorComponent implements OnInit {
   onClose(e: boolean, section: SectionModel) {
     section.ShowOptions = false;
     section.ShowMiniMenu = false
-    this.selectedSection = null;
+    // this.selectedSection = null;
     section.ItemStyle['border'] = this.tempBorder;
   }
 
   viewOptions(section: SectionModel) {
     section.ShowMiniMenu = true
-    this.selectedSection = null;
+    // this.selectedSection = null;
     section.ShowOptions = true;
     this.tempBorder = section.ItemStyle['border'];
     section.ItemStyle['border'] = '1px solid #3498db';
@@ -261,19 +291,45 @@ export class EditorComponent implements OnInit {
     this.mainClass = [];
 
   }
-  addSection(numberOfColumns: number) {
+  addContainer(numberOfColumns: number) {
+    const container = new ContainerModel(HelperClass.getId('container'), this.page.PageId, 'Parent', '', [], SectionTypes.CONTAINER);
+    // container.ItemStyle = StyleHelper.getFlexRow();
+    // container.ItemMobileStyle = StyleHelper.getFlexRow();
+    // container.SelectedStyle = StyleHelper.getFlexRow();
 
-    const section = new SectionModel(HelperClass.getId('section'), this.page.PageId, 'Body Section', '', [], [], SectionTypes.EMPTY, 'max-width', '80rem');
-    const row = new RowModel(HelperClass.getId('row'), section.SectionId, 'Section Row', [], 'Row');
+    const subContainer = new ContainerModel(HelperClass.getId('container'), this.page.PageId, 'Sub', '', [], SectionTypes.CONTAINER);
+    subContainer.ItemStyle = StyleHelper.getFlexRow();
+    subContainer.ItemMobileStyle = StyleHelper.getFlexRow();
+    subContainer.SelectedStyle = StyleHelper.getFlexRow();
 
-    let col = HelperClass.getGridClassFromNumberOfColumns(numberOfColumns)
-    row.ItemStyle = { 'grid-template-columns': col, 'display': 'grid', 'min-height': SectionTypes.BODY_MIN_HEIGHT, }
 
     for (let i = 0; i < numberOfColumns; i++) {
-      row.AddColumn(new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-1', '', [], 'Grid-col'));
+      const childContainer = new ContainerModel(HelperClass.getId('container'), this.page.PageId, 'Col', '', [], SectionTypes.CONTAINER);
+      childContainer.ParentId = container.ContainerId;
+      childContainer.ItemStyle = StyleHelper.getFlexChild();
+      childContainer.ItemMobileStyle = StyleHelper.getFlexChild();
+      childContainer.SelectedStyle = StyleHelper.getFlexChild();
+      subContainer.AddContainer(childContainer);
+
     }
-    section.AddRow(row);
-    this.page.AddSection(section);
+    container.AddContainer(subContainer);
+    this.page.AddContainer(container);
+
+
+
+
+
+    // const section = new SectionModel(HelperClass.getId('section'), this.page.PageId, 'Body Section', '', [], [], SectionTypes.EMPTY, 'max-width', '80rem');
+    // const row = new RowModel(HelperClass.getId('row'), section.SectionId, 'Section Row', [], 'Row');
+
+    // let col = HelperClass.getGridClassFromNumberOfColumns(numberOfColumns)
+    // row.ItemStyle = { 'grid-template-columns': col, 'display': 'grid', 'min-height': SectionTypes.BODY_MIN_HEIGHT, }
+
+    // for (let i = 0; i < numberOfColumns; i++) {
+    //   row.AddColumn(new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-1', '', [], 'Grid-col'));
+    // }
+    // section.AddRow(row);
+    // this.page.AddSection(section);
   }
 
   menuEvent(menu: WidgetModel) {
@@ -282,29 +338,11 @@ export class EditorComponent implements OnInit {
       return
     }
     if (menu.ItemType === SectionTypes.HEADER && !this.website.Header) {
-
-      this.website.Header = new SectionModel(HelperClass.getId('section'), this.page.PageId, 'Header Section', '', [], [], SectionTypes.HEADER, 'max-width', '100%');
-      this.website.Header.ItemStyle = { 'min-height': '5rem', 'background': '#565678' };
-
-      const row = new RowModel(HelperClass.getId('row'), this.website.Header.SectionId, 'Section Row', [], 'Row');
-      row.ItemStyle = { 'grid-template-columns': '10% auto', 'display': 'grid', 'min-height': SectionTypes.HEADER_MIN_HEIGHT, }
-      for (let i = 0; i < 2; i++) {
-        row.AddColumn(new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-1', '', [], 'Grid-col'));
-      }
-      this.website.Header.AddRow(row);
+      this.website.AddHeader();
     }
 
 
-    if (menu.ItemType === SectionTypes.FOOTER) {
-      this.website.Footer = new SectionModel(HelperClass.getId('section'), this.page.PageId, 'Header Section', '', [], [], SectionTypes.FOOTER_HEIGHT, 'max-width', '100%');
-      this.website.Footer.ItemStyle = { 'min-height': '5rem', 'background': '#565854' };
-
-      const row = new RowModel(HelperClass.getId('row'), this.website.Footer.SectionId, 'Section Row', [], 'Row');
-      row.ItemStyle = { 'grid-template-columns': '10% auto', 'display': 'grid', 'min-height': SectionTypes.HEADER_MIN_HEIGHT, }
-      for (let i = 0; i < 2; i++) {
-        row.AddColumn(new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-1', '', [], 'Grid-col'));
-      }
-      this.website.Footer.AddRow(row);
-    }
+    if (menu.ItemType === SectionTypes.FOOTER && !this.website.Footer)
+      this.website.AddFooter();
   }
 }
