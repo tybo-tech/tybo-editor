@@ -1,0 +1,37 @@
+.corner-image {
+    width: 2rem;
+    height: 1.8rem;
+    position: relative;
+    // top: 2rem;
+    background: #212529;
+    padding: 0.5rem;
+    border-right: 1px solid rgb(65, 65, 65);
+    img {
+        width: 100%;
+        cursor: pointer;
+    }
+    .corner-options {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 1px;
+        .item {
+            padding: 0.5rem;
+            background: #212529;
+            width: 2rem;
+            height: 1.8rem;
+            cursor: pointer;
+            &:hover {
+                background: #020202;
+            }
+        }
+    }
+}
+._menuu {
+    background: #212529;
+    padding: 0.25rem;
+}
+.form-control{
+    top: 3px;
+    position: relative;
+}

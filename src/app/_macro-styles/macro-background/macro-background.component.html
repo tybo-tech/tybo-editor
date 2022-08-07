@@ -1,0 +1,23 @@
+<div class="macro-style-container" *ngIf="widget">
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Background type</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="typeChanged()" [(ngModel)]="type">
+            <option value="none">None</option>
+            <option value="color">Color</option>
+            <option value="gradient">Gradient</option>
+            <option value="image">Image</option>
+        </select>
+    </div>
+
+    <div class="mb-3" *ngIf="type === 'color'">
+
+        <input class="form-select form-select-sm" aria-label=".form-select-sm example" type="color" (input)="typeChanged()"
+            [(ngModel)]="color" />
+    </div>
+
+    <app-background-color (imageChanged)="selectOption($event)" *ngIf="type == 'image' && widget" [element]="widget">
+    </app-background-color>
+
+    <app-gradient-picker (imageChanged)="selectOption($event)" *ngIf="type == 'gradient'" [element]="widget">
+    </app-gradient-picker>
+</div>

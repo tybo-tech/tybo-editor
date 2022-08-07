@@ -1,0 +1,52 @@
+$size: 4rem;
+.corner-image {
+    width: $size;
+    height: $size;
+    position: relative;
+    // top: 2rem;
+    background: #212529;
+    padding: 0.5rem;
+    padding-right: 1rem;
+    border-right: 1px solid rgb(65, 65, 65);
+    // flex-direction: ;
+    &:last-child {
+        border: none;
+    }
+    img {
+        width: 100%;
+        cursor: pointer;
+    }
+    .corner-options {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 1px;
+        z-index: 1000;
+        .item {
+            padding: 0.5rem;
+            background: #212529;
+            width: $size;
+            height: $size;
+            cursor: pointer;
+            &:hover {
+                background: #020202;
+            }
+        }
+    }
+}
+._menuu {
+    background: #212529;
+    padding: 0.25rem;
+    z-index: 10000;
+    padding-bottom: 1rem;
+}
+
+.form-control {
+    top: 3px;
+    position: relative;
+}
+
+label {
+    text-align: left;
+    display: block;
+}

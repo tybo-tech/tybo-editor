@@ -1,0 +1,22 @@
+<div class="hr"></div>
+
+<div class="macro-style-container" *ngIf="widget">
+    <label class="form-label">Outer Spacing (Margin)</label>
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: 1rem;" (mouseleave)="showOptions = false">
+        <div class="corner-image">
+            <img [src]="corner.Image" alt="" (click)="showOptions = true">
+            <div class="corner-options" *ngIf="showOptions">
+                <div class="item" *ngFor="let item of items" (click)="selectCorner(item)">
+                    <img [src]="item.Image" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div style="width:100%">
+                <input class="form-control form-control-sm" style="width:100%" type="range" min="0" step="1"
+                    max="100" (input)="typeChanged()" [(ngModel)]="border" />
+            </div>
+        </div>
+
+    </div>

@@ -1,0 +1,56 @@
+<div class="macro-style-container" *ngIf="widget">
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Font</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="typeChanged()"
+            [(ngModel)]="type">
+            <option value="none">None</option>
+            <option value="color">Color</option>
+            <option value="gradient">Gradient</option>
+            <option value="image">Image</option>
+        </select>
+    </div>
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: 1rem;">
+        <div>
+            <label class="form-label">Color</label>
+            <input class="form-select form-select-sm" aria-label=".form-select-sm example" type="color"
+                (input)="typeChanged()" [(ngModel)]="color" />
+        </div>
+
+        <div>
+            <label class="form-label">Background</label>
+            <span class="mb-3 _menuu  d-flex justify-content-start" style="gap: 1rem;">
+                <input class="form-select form-select-sm" aria-label=".form-select-sm example" type="color"
+                    (input)="typeChanged()" [(ngModel)]="background" /> <span class="remove-color"
+                    *ngIf="background && background != 'none'" (click)="background = 'none';typeChanged();"><i
+                        class="fa fa-times"></i></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: .5rem;">
+        <div style="width:100%">
+            <label class="form-label">Size</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+                type="number" (input)="typeChanged()" [(ngModel)]="size" />
+
+
+        </div>
+
+        <div style="width:100%">
+            <label class="form-label">Thickness</label>
+            <input class="form-control form-control-sm" style="width:100%" type="range" min="100" step="100" max="900" (input)="typeChanged()"
+                [(ngModel)]="weight"/>
+        </div>
+
+
+    </div>
+
+    <div class="mb-3 _menuu" style="gap: .5rem;">
+        <label class="form-label">Align text</label>
+        <div class="d-flex justify-content-start">
+            <button *ngFor="let item of alagnActions" [ngClass]="item.Classes"
+                (click)="alignText = item.Action;typeChanged();togleClass()">
+                <i [ngClass]="item.Name"></i>
+            </button>
+        </div>
+    </div>
