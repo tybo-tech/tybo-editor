@@ -1,0 +1,13 @@
+<div class="macro-style-container" *ngIf="widget">
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Display</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="typeChanged()" [(ngModel)]="display">
+            <option value="none">None</option>
+            <option value=" block">Block</option>
+            <option value=" inline-block"> Inline block</option>
+            <option value="flex">Flex</option>
+            <option value="grid">Grid</option>
+        </select>
+    </div>
+
+</div>

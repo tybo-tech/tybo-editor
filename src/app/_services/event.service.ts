@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { WebsiteModel } from '../_classes/WebsiteModel';
+import { WidgetModel } from '../_classes/WidgetModel';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class EventService {
     this.updatedObservable = this.updatedBehaviorSubject.asObservable();
   }
 
-  updateOptionsState(site: any) {
+  updateOptionsState(site: WidgetModel | undefined | WebsiteModel) {
     this.optionsBehaviorSubject.next(site);
   }
 }

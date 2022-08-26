@@ -1,0 +1,36 @@
+<div class="_banner">
+    <p>
+        <a routerLink="/account/create-a-new-website">Back</a>
+    </p>
+    <h1>
+        Website basic details
+    </h1>
+    <p></p>
+</div>
+
+<div class="container" *ngIf="website">
+    <div class="card" style="width: 40rem;">
+
+        <div class="card-body">
+            <div>
+
+                <div class="mb-3">
+                    <label for="webName" class="form-label">Website Name</label>
+                    <input type="text" [(ngModel)]="website.Name" class="form-control" id="webName" >
+                </div>
+                <div class="mb-3">
+                    <label for="Title" class="form-label">Website Title</label>
+                    <input type="text" [(ngModel)]="website.Title" class="form-control" id="Title" >
+                </div>
+
+                <div class="mb-3">
+                    <label for="Url" class="form-label">Website Url</label>
+                    <input type="text" [(ngModel)]="website.Url" class="form-control" id="Url" >
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" (click)="saveWebsite()">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

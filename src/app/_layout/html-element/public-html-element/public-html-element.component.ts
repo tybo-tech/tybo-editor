@@ -25,7 +25,8 @@ export class PublicHtmlElementComponent implements OnInit {
 
   }
 
-  linkClick() {
+
+  onClick(){
     this.clickEvent.emit(this.value);
   }
 }

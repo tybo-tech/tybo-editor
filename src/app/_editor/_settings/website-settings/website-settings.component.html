@@ -16,7 +16,7 @@
 
         <div class="inputs">
           <label for="">Url</label> <br>
-          <input type="text" [(ngModel)]="website.WebsiteId" class="form-control" >
+          <input type="text" [(ngModel)]="website.Url" class="form-control" >
         </div>
   
 
@@ -33,7 +33,7 @@
   
       <div class="card-footer">
         <div class="add d-flex justify-content-between">
-          <button class="btn btn-primary" (click)="saveWebsite()" *ngIf="website && website.WebsiteId">Save website</button>
+          <button class="btn btn-primary" (click)="saveWebsite()" *ngIf="website && website.WebsiteId">Save settings</button>
         </div>
       </div>
     </div>

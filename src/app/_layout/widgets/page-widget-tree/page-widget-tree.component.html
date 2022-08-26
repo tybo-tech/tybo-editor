@@ -1,49 +1,101 @@
 <ng-template #nodeTemplateRef let-node>
 
-    <!-- <div class="node" [class.node--selected]="( node === selectedTreeNode )"> -->
+    <div *ngIf="node.Children.length  && node.ItemType === SectionTypes.CONTAINER  && !node.IsTemplate"
+        [id]="node.WidgetId" class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
+        (mousedown)="moveDown($event)" (mouseup)="moveUp()" (contextmenu)="toogleMiniMenu($event)"
+        (click)="toggleOptions($event)">
+        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
+            {{node.Name}}</div> -->
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
+                [widget]="selecedWidget" (menuEvent)="menuEvent($event)"> </app-container-menu>
+        </span>
 
-
-    <div *ngIf="node.Children.length  && node.ItemType === SectionTypes.CONTAINER" class="_container" can_drop_on_me
-        (onDrop)="onDrop($event,node)" [ngStyle]="node.SelectedStyle">
-        <div class="seletor parent-seletor" (click)="toggleOptions(node)">{{node.Name}}</div>
-
-        <!-- Invoke the recursive template. -->
         <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
-            <!--
-					NOTE: The "$implicit" property of the ngFor context is what will
-					be made available to the template ref's implicit let-node binding.
-				-->
+
         </ng-template>
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
 
     </div>
 
 
+    <ul *ngIf="node.Children.length  && node.ItemType === SectionTypes.UL  && !node.IsTemplate" [id]="node.WidgetId"
+        class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
+        (mousedown)="moveDown($event)" (mouseup)="moveUp()" (contextmenu)="toogleMiniMenu($event)"
+        (click)="toggleOptions($event)">
+        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
+        {{node.Name}}</div> -->
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
+                [widget]="selecedWidget"> </app-container-menu>
+        </span>
 
-    <div *ngIf="!node.Children.length && node.ItemType === SectionTypes.CONTAINER" class="_container" can_drop_on_me
-        (onDrop)="onDrop($event,node)" [ngStyle]="node.SelectedStyle">
-        <div class="seletor parent-seletor" (click)="toggleOptions(node)">{{node.Name}}</div>
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
 
-        <!-- <app-page-widget [widget]="node" [page]="page"></app-page-widget> -->
-        <p style="display: block;  width: fit-content; margin:auto; top: 40%; position: relative; color: darkgray;">
-            Empty conatiner
-        </p>
+        </ng-template>
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
+
+    </ul>
+
+
+
+
+    <li *ngIf="node.Children.length  && node.ItemType === SectionTypes.LI  && !node.IsTemplate" [id]="node.WidgetId"
+        class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
+        (mousedown)="moveDown($event)" (mouseup)="moveUp()" (contextmenu)="toogleMiniMenu($event)"
+        (click)="toggleOptions($event)">
+        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
+        {{node.Name}}</div> -->
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
+                [widget]="selecedWidget"> </app-container-menu>
+        </span>
+
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+
+        </ng-template>
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
+
+    </li>
+
+
+
+    <div *ngIf="!node.Children.length && node.ItemType === SectionTypes.CONTAINER && !node.IsTemplate"
+        [id]="node.WidgetId" class="_container" can_drop_on_me [id]="node.WidgetId"
+        (contextmenu)="toogleMiniMenu($event)" (click)="toggleOptions($event)" (onDrop)="onDrop($event,node)"
+        (mousedown)="moveDown($event)" (mouseup)="moveUp()" [ngClass]="node.ItemClass">
+        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
+            {{node.Name}}</div> -->
+
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
+                [widget]="selecedWidget"> </app-container-menu>
+        </span>
+
+
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
 
     </div>
 
-    <div *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER" class="_widget"
-        [ngStyle]="node.SelectedStyle">
-        <app-page-widget [widget]="node" [page]="page"></app-page-widget>
-
+    <div *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER  && !node.IsTemplate"
+        [id]="node.WidgetId" class="_widget">
+        <app-page-widget [widget]="node" [isPublic]="isPublic" [page]="page"></app-page-widget>
+        <!-- <div style="background: red;">
+        <h1>lol</h1>
+      </div> -->
     </div>
-
-    <div *ngIf="node.Children.length && node.ItemType !== SectionTypes.CONTAINER" class="_widget"
-        [ngStyle]="node.SelectedStyle">
-        <h1> You cant hit me yet, untill you have nasted widgets, which are not containers!</h1>
-        <app-page-widget [widget]="node" [page]="page"></app-page-widget>
-
-    </div>
-
-    <!-- </div> -->
 
 </ng-template>
 
@@ -58,3 +110,8 @@
 -->
 <ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ $implicit: widget }">
 </ng-template>
+
+
+<app-mini-menu [showMiniMenu]="showMiniMenu" [miniMenu]="miniMenu" [options]="type"
+    (miniMenuEvent)="selectMenu($event)">
+</app-mini-menu>

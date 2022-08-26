@@ -1,0 +1,22 @@
+._form {
+    padding: 1rem;
+    background: #fff;
+    margin: 1rem 0;
+    .mb-3 {
+        display: flex;
+        justify-content: flex-start;
+        label {
+            flex-basis: 30%;
+            padding: 0.5rem;
+            font-size: 0.7rem;
+        }
+    }
+}
+
+._action {
+    display: flex;
+    justify-content: flex-end;
+    button {
+        font-weight: 700;
+    }
+}

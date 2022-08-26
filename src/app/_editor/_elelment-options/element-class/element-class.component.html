@@ -1,0 +1,291 @@
+<div class="main-accordion-container" *ngIf="website && element && SectionTypes">
+
+    <div class="_accordion-container" *ngIf="typography">
+        <button class="_accordion" (click)="clickSection(typography, !typography.IsOpen)">
+            <i *ngIf="!typography.IsOpen" class="bi bi-chevron-down"></i>
+            <i *ngIf="typography.IsOpen" class="bi bi-chevron-up"></i>
+            {{typography.SectionName}}
+        </button>
+        <div class="_panel" *ngIf="typography.IsOpen">
+            <div *ngFor="let input of typography.Inputs">
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                    *ngIf="input.Type == 'group-buttons'">
+                    <button *ngFor="let option of input.Options" type="button"
+                        (click)="selectOption(input, option.Value)" class="btn btn-dark" [innerHTML]="option.Name">
+                    </button>
+                </div>
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                    *ngIf="input.Type == 'dropdown' && fonts">
+                    <select class="form-select form-select-sm" #mySelect aria-label=".form-select-sm example"
+                        [(ngModel)]="input.Value" (change)="selectOption(input, mySelect.value)">
+                        <option [value]="option.Value" *ngFor="let option of input.Options">{{option.Name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                    *ngIf="input.Type == 'number' && fonts">
+                    <input class="form-control" [(ngModel)]="input.Value" type="number"
+                        (input)="selectOption(input,input.Value)" />
+
+                </div>
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                    *ngIf="input.Type == 'color' && fonts">
+                    <input class="form-control" [(ngModel)]="input.Value" type="color"
+                        (input)="selectOption(input,input.Value)" />
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="_accordion-container" *ngIf="spacing">
+        <button class="_accordion" (click)="clickSection(spacing, !spacing.IsOpen)">
+            <i *ngIf="!spacing.IsOpen" class="bi bi-chevron-down"></i>
+            <i *ngIf="spacing.IsOpen" class="bi bi-chevron-up"></i>
+            {{spacing.SectionName}}
+        </button>
+        <div class="_panel" *ngIf="spacing.IsOpen">
+
+            <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example">
+                <button *ngFor="let input of spacing.Inputs" type="button" (click)="switchTabs(input)"
+                    [ngClass]="input.Classes || []" [innerHTML]="input.Label">
+                </button>
+            </div>
+
+            <div class="circle-group" *ngIf="selectedInput">
+
+                <div *ngFor="let option of selectedInput.Options" [ngClass]="option.Classes"
+                    (click)="selectInputOption(option)"></div>
+
+            </div>
+
+            <br>
+            <div class="input-group mb-3" *ngIf="selectedInputOption">
+                <input type="range" [(ngModel)]="selectedInputOption.Value" (input)="quadraChanged()"
+                    class="form-control w-50 text-center" aria-label="Amount (to the nearest dollar)">
+                <input type="text" [(ngModel)]="selectedInputOption.Value" (input)="quadraChanged()"
+                    class="form-control w-25 text-center" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text w-25">{{selectedInputOption.Unit}}</span>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="_accordion-container" *ngIf="background">
+        <button class="_accordion" (click)="clickSection(background, !background.IsOpen)">
+            <i *ngIf="!background.IsOpen" class="bi bi-chevron-down"></i>
+            <i *ngIf="background.IsOpen" class="bi bi-chevron-up"></i>
+            {{background.SectionName}}
+        </button>
+        <div class="_panel" *ngIf="background.IsOpen && background.Inputs && background.Inputs.length >= 2">
+            <div class="" *ngFor="let input of background.Inputs">
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                    *ngIf="input.Type == 'color' && fonts && !showImage && !showGradient">
+                    <input class="form-control" [(ngModel)]="input.Value" type="color"
+                        (input)="selectOption(input,input.Value)" />
+                </div>
+
+                <app-background-color (imageChanged)="selectOption(input,$event)"
+                    *ngIf="input.Type == 'image' && showImage && element" [element]="element">
+                </app-background-color>
+
+                <app-gradient-picker (imageChanged)="selectOption(input,$event)"
+                    *ngIf="input.Type == 'image' && showGradient && element" [element]="element">
+                </app-gradient-picker>
+
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                    *ngIf="input.Type == 'group-buttons'">
+                    <button type="button" class="btn btn-dark active">
+                        Type:
+                    </button>
+
+                    <select class="form-select form-select-sm" #mySelect aria-label=".form-select-sm example"
+                        [(ngModel)]="input.Value" (change)="selectOption(input, mySelect.value)">
+                        <option [value]="option.Value" *ngFor="let option of input.Options">{{option.Name}}
+                        </option>
+                    </select>
+         
+                </div>
+
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example" *ngIf="input.Type == 'range'">
+
+
+                    <button type="button" class="btn btn-dark w-100"
+                        [innerHTML]="input.Label + ' ' + input.Value + (input.Unit || '') ">
+                    </button>
+                    <input type="range" [(ngModel)]="input.Value" (input)="selectOption(input,input.Value)"
+                        class="form-control">
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="_accordion-container" *ngIf="sizing">
+        <button class="_accordion" (click)="clickSection(sizing, !sizing.IsOpen)">
+            <i *ngIf="!sizing.IsOpen" class="bi bi-chevron-down"></i>
+            <i *ngIf="sizing.IsOpen" class="bi bi-chevron-up"></i>
+            {{sizing.SectionName}}
+        </button>
+        <div class="_panel" *ngIf="sizing.IsOpen">
+            <div class="grid-2">
+                <div class="" *ngFor="let input of sizing.Inputs">
+
+                    <div class="btn-group w-100 mb-3 " role="group" aria-label="Basic example"
+                        *ngIf="input.Type == 'number' && fonts">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:40%"
+                                id="basic-addon3"><small>{{input.Label}}</small></span>
+                            <input type="text" [(ngModel)]="input.Value" type="number"
+                                (input)="selectOption(input,input.Value)" class="form-control" id="basic-url"
+                                aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="_accordion-container" *ngIf="borderRadius">
+        <button class="_accordion" (click)="clickSection(borderRadius, !borderRadius.IsOpen)">
+            <i *ngIf="!borderRadius.IsOpen" class="bi bi-chevron-down"></i>
+            <i *ngIf="borderRadius.IsOpen" class="bi bi-chevron-up"></i>
+            {{borderRadius.SectionName}}
+        </button>
+        <div class="_panel" *ngIf="borderRadius.IsOpen">
+            <div class="" *ngFor="let input of borderRadius.Inputs">
+
+                <app-edgets (imageChanged)="selectOption(input,$event)" *ngIf="input.Type == 'button-shape' && element"
+                    [element]="element">
+                </app-edgets>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="_accordion-container" *ngIf="border">
+        <button class="_accordion" (click)="clickSection(border, !border.IsOpen)">
+            <i *ngIf="!border.IsOpen" class="bi bi-chevron-down"></i>
+            <i *ngIf="border.IsOpen" class="bi bi-chevron-up"></i>
+            {{border.SectionName}}
+        </button>
+        <div class="_panel" *ngIf="border.IsOpen">
+            <div class="" *ngFor="let input of border.Inputs">
+
+                <app-border (imageChanged)="selectOption(input,$event)" *ngIf="input.Type == 'button-shape' && element"
+                    [element]="element">
+                </app-border>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="" *ngIf="styles && styles.length">
+
+        <div class="_accordion-container" *ngFor="let style of styles">
+            <button class="_accordion" (click)="clickSection(style, !style.IsOpen)">
+                <i *ngIf="!style.IsOpen" class="bi bi-chevron-down"></i>
+                <i *ngIf="style.IsOpen" class="bi bi-chevron-up"></i>
+                {{style.SectionName}}
+            </button>
+            <div class="_panel" *ngIf="style.IsOpen">
+                <div *ngFor="let input of style.Inputs">
+                    <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                        *ngIf="input.Type == 'group-buttons'">
+                        <button *ngFor="let option of input.Options" type="button"
+                            (click)="selectOption(input, option.Value)" class="btn btn-dark" [innerHTML]="option.Name">
+                        </button>
+                    </div>
+
+                    <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                        *ngIf="input.Type == 'range'">
+
+
+                        <button type="button" class="btn btn-dark w-100"
+                            [innerHTML]="input.Label + ' ' + input.Value + (input.Unit || '') ">
+                        </button>
+                        <input type="range" [(ngModel)]="input.Value" (input)="selectOption(input,input.Value)"
+                            class="form-control">
+                    </div>
+
+                    <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                        *ngIf="input.Type == 'dropdown' && fonts">
+                        <select class="form-select form-select-sm" #mySelect aria-label=".form-select-sm example"
+                            [(ngModel)]="input.Value" (change)="selectOption(input, mySelect.value)">
+                            <option [value]="option.Value" *ngFor="let option of input.Options">{{option.Name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                        *ngIf="input.Type == 'number' && fonts">
+                        <input class="form-control" [(ngModel)]="input.Value" type="number"
+                            (input)="selectOption(input,input.Value)" />
+
+                    </div>
+                    <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                        *ngIf="input.Type == 'color' && fonts">
+                        <input class="form-control" [(ngModel)]="input.Value" type="color"
+                            (input)="selectOption(input,input.Value)" />
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="_accordion-container" *ngIf="position">
+        <button class="_accordion" (click)="clickSection(position, !position.IsOpen)">
+            <i *ngIf="!position.IsOpen" class="bi bi-chevron-down"></i>
+            <i *ngIf="position.IsOpen" class="bi bi-chevron-up"></i>
+            {{position.SectionName}}
+        </button>
+        <div class="_panel" *ngIf="position.IsOpen && position.Inputs && position.Inputs.length >= 2">
+            <div class="grid-1">
+                <div class="circle-group">
+
+                    <div *ngFor="let option of  position.Inputs[0].Options" [ngClass]="option.Classes"
+                        (pointerdown)="moveItem(option, position.Inputs[0])" (pointerup)="pointerupEvent()">
+                    </div>
+
+                </div>
+                <div class="btn-group w-100 mb-3" role="group" aria-label="Basic example"
+                    *ngIf=" position.Inputs[1].Type == 'group-buttons'">
+                    <button *ngFor="let option of  position.Inputs[1].Options" type="button"
+                        (click)="selectOption( position.Inputs[1], option.Value)" class="btn btn-dark"
+                        [innerHTML]="option.Name">
+                    </button>
+                </div>
+
+                <label>{{position.Inputs[2].Label}} ({{position.Inputs[2].Value}}px)</label>
+                <input type="range" [(ngModel)]="position.Inputs[2].Value" min="-10000" max="10000"
+                    (input)="selectOption(position.Inputs[2],position.Inputs[2].Value)" class="form-control">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-styles-editor [styles]="cssString" *ngIf="viewCss" (doneProccessing)="doneProccessing($event)"></app-styles-editor>

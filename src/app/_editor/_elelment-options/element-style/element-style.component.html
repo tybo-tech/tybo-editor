@@ -6,7 +6,7 @@
       <span *ngIf="style.IsOpen"><i class="fa fa-chevron-up"></i></span>
     </h5>
 
-    <div class="fields grid-2" *ngIf="style.IsOpen && style.Type == 'Text'">
+    <div class="fields grid-1" *ngIf="style.IsOpen && style.Type == 'Text'">
       <div class="field" *ngFor="let input of style.Inputs">
         <app-options-input [input]="input" (inputEvent)="onInputEvent($event)"></app-options-input>
       </div>

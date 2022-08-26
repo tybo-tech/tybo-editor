@@ -1,0 +1,14 @@
+.macro-style-container {
+  background: #1d2e35;
+  padding: .2rem 1rem;
+  label {
+    color: #fff;
+    font-size: 0.6rem;
+  }
+  .form-select-sm,
+  .form-control-sm {
+    font-size: 0.6rem;
+    background: #1d2e35;
+    color: #fff;
+  }
+}

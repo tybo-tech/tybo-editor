@@ -1,11 +1,14 @@
-import { ColumnModel } from "./ColumnModel";
+import { DbTableModel } from "./DbTableModel";
+import { FileModel } from "./FileModel";
+import { ImportsModel } from "./ImportsModel";
 import { MainClass } from "./MainClass";
 import { PageModel } from "./PageModel";
-import { RowModel } from "./RowModel";
-import { SectionModel } from "./SectionModel";
+import { WebstyleModel } from "./WebstyleModel";
+import { WidgetModel } from "./WidgetModel";
 import { DeviceTypes } from "./_statics/DeviceTypes";
 import { HelperClass } from "./_statics/HelperClass";
 import { SectionTypes } from "./_statics/SectionTypes";
+import { StyleHelper } from "./_statics/StyleHelper";
 
 export class WebsiteModel extends MainClass {
     WebsiteId: string;
@@ -20,17 +23,26 @@ export class WebsiteModel extends MainClass {
     Icon: string;
     Pages: any[];
     // Pages:  PageModel[];
-    Header: SectionModel | undefined;
+    Header: WidgetModel | undefined;
     HeaderDisplay: string; // fixed, block
     HeaderType: string; // left logo right nav  <--> , both center, nav logo nav, logo space nav social,...
     HeaderVisibility: string // all pages, specific pages
-    Footer: SectionModel | undefined;
+    Footer: WidgetModel | undefined;
     WebsiteMode: string; // edit, preview, live
     ViewDevice: string;  // phone , pc
     ViewWidth: string;  // phone , pc
     ShowPages: boolean
     MaxWidth: string;
-
+    WebsiteStyles: WebstyleModel[];
+    SelectedClass: WebstyleModel | undefined;
+    Imports: ImportsModel[];
+    Files: FileModel[];
+    DbTables: DbTableModel[];
+    Widgets: WidgetModel[];
+    WidgetsToDelete: WidgetModel[];
+    Collections: any
+    TableIdListString: string[];
+    ItemType: string;
     constructor(
         WebsiteId: string,
         Name: string,
@@ -43,14 +55,15 @@ export class WebsiteModel extends MainClass {
         SubCategory: string,
         Icon: string,
         Pages: PageModel[],
-        Header: SectionModel | undefined,
+        Header: WidgetModel | undefined,
         HeaderDisplay: string,
         HeaderType: string,
         HeaderVisibility: string,
-        Footer: SectionModel | undefined,
+        Footer: WidgetModel | undefined,
         WebsiteMode: string,
         ViewDevice: string,
         ViewWidth: string,
+        WebsiteStyles = []
     ) {
         super();
         this.WebsiteId = WebsiteId;
@@ -72,6 +85,14 @@ export class WebsiteModel extends MainClass {
         this.WebsiteMode = WebsiteMode;
         this.ViewDevice = ViewDevice;
         this.ViewWidth = ViewWidth;
+        this.WebsiteStyles = WebsiteStyles;
+        this.Files = [];
+        this.Files = [];
+        this.DbTables = [];
+        this.WidgetsToDelete = [];
+        this.Collections = [];
+        this.TableIdListString = [];
+
     }
 
     AddPage(page: PageModel) {
@@ -83,38 +104,77 @@ export class WebsiteModel extends MainClass {
     IsMobileMode() {
         return this.ViewDevice === DeviceTypes.PHONE;
     }
+    HasStyles() {
+        return this.WebsiteStyles && this.WebsiteStyles.length;
+    }
+    GetStyles(selectorName: string) {
+        if (!this.WebsiteStyles || !this.WebsiteStyles.length)
+            return;
+        return this.WebsiteStyles.find(x => x.SelectorName === selectorName);
+    }
+    GetClassForWidget(widget: WidgetModel) {
+        if (!this.HasStyles() || !widget.HasClass())
+            return;
 
-    AddHeader(pageId = 'master') {
-        this.Header = new SectionModel(HelperClass.getId('section'), pageId, 'Header Section', '', [], [], SectionTypes.HEADER, 'max-width', '100%');
-        this.Header.ItemStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'background': '#000000' };
-        this.Header.SelectedStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'background': '#000000' };
-        this.Header.ItemMobileStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'background': '#000000' };
-
-
-        const row = new RowModel(HelperClass.getId('row'), this.Header.SectionId, 'Section Row', [], 'Row');
-        row.ItemStyle = {
-            'grid-template-columns': '20% auto', 'display': 'grid', 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'max-width': '80%', 'margin-left': 'auto',
-            'margin-right': 'auto'
+        return this.WebsiteStyles.find(x => x.SelectorName === widget.ItemClass[0])
+    }
+    AddHeader(pageId = 'master', columnId = '') {
+        // Main header contaner
+        if (!this.WebsiteStyles || !this.WebsiteStyles.length) {
+            this.WebsiteStyles = [];
         }
-        row.ItemMobileStyle = { 'grid-template-columns': '40% auto', 'display': 'grid', 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'max-width': '100%' }
-        row.SelectedStyle = this.IsMobileMode() ? row.ItemMobileStyle : row.ItemStyle;
+        this.Header = new WidgetModel(HelperClass.getId('header'), columnId, pageId, 'Main Header', SectionTypes.CONTAINER, ``);
+        this.Header.ItemCategory = SectionTypes.HEADER;
+        this.Header.ParentId = this.WebsiteId;
+        let checkIfClassExist = this.WebsiteStyles.find(x => x.SelectorName === "nav--bar");
+        this.Header.GetClass(this, 'nav--bar', StyleHelper.getFlexNavBar());
 
-        for (let i = 0; i < 2; i++) {
-            let col = new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-1', '', [], 'Grid-col');
-            col.ItemStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'background': '#000000' };
-            col.SelectedStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'background': '#000000' };
-            col.ItemMobileStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT, 'background': '#000000' };
-            if (i == 0) {
-                col.AddImage(undefined, undefined, this.IsMobileMode(), '9rem');
-            }
-            if (i == 1) {
-                col.AddMenu('master', this.Pages, this.IsMobileMode());
-                col.AddBurger('master', this.Pages);
-            }
 
-            row.AddColumn(col);
-        }
-        this.Header.AddRow(row);
+        const boxContainer: WidgetModel = new WidgetModel(HelperClass.getId('container'), 'col', pageId, 'Box', SectionTypes.CONTAINER, ``);
+        boxContainer.ParentId = this.Header.WidgetId;
+        boxContainer.GetClass(this, 'nav-box-container',
+            StyleHelper.getFlexNavBar([{ Key: 'justify-content', Value: 'space-between' }, { Key: 'background', Value: 'none' }, { Key: 'max-width', Value: '1280px' }]));
+
+        // Logo container
+
+        const logoContainer = new WidgetModel(HelperClass.getId('header'), columnId, pageId, 'Logo Container', SectionTypes.CONTAINER, ``);
+        logoContainer.ParentId = boxContainer.WidgetId;
+        logoContainer.GetClass(this, 'logo-container',
+            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '13%' }]),
+            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '30%' }]),
+            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '50%' }])
+        );
+
+        // logoContainer.AddImage(undefined, `assets/images/widgets/sample-logo-white.png`);
+        const logo: WidgetModel = new WidgetModel(HelperClass.getId('image'), '', 'master', 'Logo', SectionTypes.IMAGE, ``);
+        logo.ElementType = "image";
+        logo.ItemContent = 'assets/images/widgets/sample-logo-white.png';
+        logo.ParentId = logoContainer.WidgetId;
+        logo.GetClass(this, 'logo-image', { 'width': '100%', position: 'relative' })
+        logoContainer.AddChild(logo);
+
+
+        // menu caontainer
+
+
+        const menuContainer = new WidgetModel(HelperClass.getId('header'), columnId, pageId, 'Menu Container', SectionTypes.CONTAINER, ``);
+        menuContainer.ParentId = boxContainer.WidgetId;
+        menuContainer.GetClass(this, 'nav-items-container',
+            StyleHelper.getFlex([{ Key: 'justify-content', Value: 'flex-end' }, { Key: 'align-items', Value: 'center' }])
+        );
+
+        // Mobile menu icon
+        const menuIcon: WidgetModel = new WidgetModel(HelperClass.getId('image'), '', 'master', 'Menu Icon', SectionTypes.BUTTON, ``);
+        menuIcon.ElementType = "image";
+        menuIcon.ItemContent = '<i class="fas fa-bars"></i>';
+        menuIcon.ParentId = menuContainer.WidgetId;
+        menuIcon.GetClass(this, 'menu-button', { 'display': 'none' }, StyleHelper.getMobileMenuStyles(), StyleHelper.getMobileMenuStyles())
+        menuContainer.AddChild(menuIcon);
+        // debugger
+        menuContainer.AddMenu(this, 'master', this.Pages);
+        boxContainer.AddChild(logoContainer);
+        boxContainer.AddChild(menuContainer);
+        this.Header.AddChild(boxContainer);
     }
 
     AddFooter() { }

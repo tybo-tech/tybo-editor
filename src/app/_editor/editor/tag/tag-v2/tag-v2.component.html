@@ -1,0 +1,71 @@
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXT" (click)="toggleOptions()">
+    <p [ngClass]="widget.ItemClass">
+        <font *ngIf="widget.ItemFormat !== 'Currency'" [innerHTML]="widget.ItemContent"></font>
+        <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
+    </p>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <span class="_container-menu">
+        <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
+            *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+</span>
+
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.A" (click)="toggleOptions()">
+    <a [ngClass]="widget.ItemClass">
+        <font *ngIf="widget.ItemFormat !== 'Currency'" [innerHTML]="widget.ItemContent"></font>
+        <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
+    </a>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <span class="_container-menu">
+        <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
+            *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+</span>
+
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.BUTTON" (click)="toggleOptions()">
+    <button [ngClass]="widget.ItemClass">
+        <font *ngIf="widget.ItemFormat !== 'Currency'" [innerHTML]="widget.ItemContent"></font>
+        <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
+    </button>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu (setEditText)="setEditText()" (deleteEvent)="delete()" (cloneEvent)="clone()"
+    (clickEvent)="onClickEvent()"  (copyStyleEvent)="copyStyles()"   (pasteStyleEvent)="pasteStyles()"   *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+    [website]="website" [widget]="widget">
+</app-tag-menu>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXTBOX" (click)="toggleOptions()">
+    <input [(ngModel)]="widget.ItemContent" [ngClass]="widget.ItemClass" />
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXTAREA" (click)="toggleOptions()">
+    <textarea [(ngModel)]="widget.ItemContent" [ngClass]="widget.ItemClass"></textarea>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.IMAGE && backgroundImg"
+    (click)="toggleOptions()">
+    <!-- <div [ngClass]="widget.ItemClass"
+    [style.background-image]="backgroundImg"></div> -->
+    <img [src]="widget.ItemContent" [ngClass]="widget.ItemClass" alt="">
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <span class="_container-menu">
+        <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
+            *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+</span>
+
+
+<app-image-picker *ngIf="showImage" (onClose)="showImage= false" (onImageSelect)="onImageSelect($event)">
+</app-image-picker>
+
+<app-widget-events [widget]="widget" *ngIf="widget && showEvents && page && website && user" [user]="user"
+    [website]="website" [page]="page" (onClose)="showEvents= false"></app-widget-events>

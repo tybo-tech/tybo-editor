@@ -108,20 +108,21 @@ header {
                 }
 
                 a.active{
-                    &::before {
-                        content: "";
-                        display: block;
-                        height: 5px;
-                        background: $primary;
-                        position: absolute;
-                        border-radius: .5em;
-                        top: -0.75em;
-                        left: 0;
-                        right: 0;
-                        transform: scale(1, 1);
-                        transform-origin: left;
-                        transition: transform ease-in-out 250ms;
-                    }
+                    color: $primary;
+                    // &::before {
+                    //     content: "";
+                    //     display: block;
+                    //     height: 5px;
+                    //     background: $primary;
+                    //     position: absolute;
+                    //     border-radius: .5em;
+                    //     top: -0.75em;
+                    //     left: 0;
+                    //     right: 0;
+                    //     transform: scale(1, 1);
+                    //     transform-origin: left;
+                    //     transition: transform ease-in-out 250ms;
+                    // }
                 }
             }
         }

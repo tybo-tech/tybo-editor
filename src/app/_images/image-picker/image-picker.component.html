@@ -1,20 +1,24 @@
-<div class="overlay"></div>
+<div class="overlay" (click)="close()" ></div>
 <div class="_picker options-modal">
-
+    <input type="file" multiple #filesInput style="display: none;" (change)="uploadFile(filesInput.files)">
     <div class="heading d-flex justify-content-between">
         <h5>
-            Choose image
+            Assets
+            <span style="margin-left: 3rem;">
+                <i *ngIf="!files || !files.length" class="bi bi-cloud-plus _close pointer" (click)="filesInput.click()"></i>
+                <!-- <i *ngIf="files && files.length" class="bi bi-cloud-arrow-up-fill _close pointer" (click)="submitFiles()"></i> -->
+            </span>
         </h5>
 
         <i (click)="close()" class="_close fas fa-times"></i>
     </div>
 
-    <div class="body" *ngIf="images">
+    <div class="__body" *ngIf="website && website.Files">
         <div class="images">
-            <div class="image"  *ngFor="let image  of images">
-                <img [src]="image.Url" alt="" (click)="selectImage(image)">
+            <div class="_image" *ngFor="let image  of website.Files">
+               <!-- {{image.Id}}  -->
+               <img [src]="image.Url" alt="" (click)="selectImage(image)">
             </div>
         </div>
-z
     </div>
 </div>

@@ -1,0 +1,59 @@
+<div class="macro-style-container" *ngIf="widget">
+
+    <br>
+
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: .5rem;">
+        <div style="width:100%">
+            <label class="form-label">Width</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="width" />
+
+
+        </div>
+
+        <div style="width:100%">
+            <label class="form-label">Height</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="height" />
+        </div>
+
+
+    </div>
+
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: .5rem;">
+        <div style="width:100%">
+            <label class="form-label">Min Width</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="minWidth" />
+
+
+        </div>
+
+        <div style="width:100%">
+            <label class="form-label">Min Height</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"   (input)="typeChanged()" [(ngModel)]="minHeight" />
+        </div>
+
+
+    </div>
+
+
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: .5rem;">
+        <div style="width:100%">
+            <label class="form-label">Max Width</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="maxWidth" />
+
+
+        </div>
+
+        <div style="width:100%">
+            <label class="form-label">Max Height</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="maxHeight" />
+        </div>
+
+
+    </div>
+    <div class="hr"></div>

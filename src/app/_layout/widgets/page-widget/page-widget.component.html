@@ -1,7 +1,18 @@
-<div *ngIf="widget">
-    <app-html-element [type]="widget.ElementType" [value]="widget.ItemContent" [parent]="widget"
+<!-- <div *ngIf="widget">
+    <app-html-element [type]="widget.ElementType" [value]="widget.ItemContent" [parent]="widget" [page]="page"
     *ngIf="widget.ItemCategory != SectionTypes.CARD && widget.ItemCategory != 'List' && widget.ItemCategory != 'Menu' && widget.ItemCategory !=  SectionTypes.FORM"
     (onImageChange)="onImageChange($event, widget)" (valueChanged)="valueChanged($event,widget)"
     [ItemStyle]="widget.SelectedStyle" (copyEvent)="onCopyEvent($event)"
     (onStyleChange)="onStyleChange($event)" (deleteEvent)="deleteEvent($event)"></app-html-element>
-</div>
+</div> -->
+
+<tag-v2 [widget]="widget" [website]="website" [page]="page" *ngIf="!isPublic  && widget && website && page"
+    (deleteEvent)="deleteEvent($event)"></tag-v2>
+
+    
+<!-- <tag [widget]="widget" [website]="website" [page]="page" *ngIf="!isPublic  && widget && website && page"
+    (deleteEvent)="deleteEvent($event)"></tag> -->
+
+
+<app-public-tag [widget]="widget" [website]="website" [page]="page" [dataId]="dataId" *ngIf="isPublic && widget && website && page"
+    (deleteEvent)="deleteEvent($event)"></app-public-tag>

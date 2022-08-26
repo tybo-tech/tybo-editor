@@ -1,0 +1,146 @@
+<div class="overlay" (click)="close()"></div>
+<div class="_picker options-modal">
+    <div class="heading d-flex justify-content-between">
+        <h5>
+            Database
+        </h5>
+
+        <i (click)="close()" class="_close fas fa-times"></i>
+    </div>
+
+    <div class="__body" *ngIf="website && website.DbTables && website.DbTables.length">
+        <div class="grid-2">
+            <section>
+
+
+                <ul class="list-group">
+                    <!-- <h5>
+                        Tables
+                    </h5>
+                    <br> -->
+                    <li class="list-group-item" *ngFor="let table of website.DbTables">
+                        <input type="text" [(ngModel)]="table.Name" [readonly]="table.Id" class="form-control"
+                            (change)="tableNameChanged(table)" placeholder="Enter Table Name" [ngClass]="table.Classes"
+                            (click)="selectTable(table)">
+                    </li>
+                    <br>
+                    <a class="link link-success pointer" style="margin-left:.25rem;" (click)="createTable()">Create
+                        table</a>
+                </ul>
+            </section>
+            <section>
+                <div class="_tabs">
+                    <div class="_tab" *ngFor="let item of tabs" [ngClass]="item.Classes" (click)="selectTab(item)">
+                        {{item.Name}}</div>
+                </div>
+
+                <section *ngIf="selectedTable && selectedTab && selectedTab.Id === 'structure'">
+
+
+                    <ul class="list-group">
+
+
+                        <!-- <span class="d-flex justify-content-between mb-3">
+                            <h5>
+                                {{selectedTable.Name}} fields
+                            </h5>
+
+                            <a class="btn btn-outline-primary" (click)="showData()">Data <i
+                                    class="bi bi-arrow-right"></i></a>
+                        </span> -->
+                        <!-- <li class="list-group-item grid-4" *ngFor="let field of selectedTable.Columns">
+                    <span> <input type="text" [(ngModel)]="field.Name" class="form-control"
+                            placeholder="Enter Table Name"></span>
+                </li> -->
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Requried</th>
+                                    <th scope="col">Min Length</th>
+                                    <th scope="col">Max Length</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let field of selectedTable.Columns">
+                                    <td>
+                                        <input type="text" [(ngModel)]="field.Name" class="form-control"
+                                            placeholder="Enter field name" (change)="columnNameChanged(field)">
+                                    </td>
+                                    <td>
+                                        <select name="" id="" [(ngModel)]="field.DataType" class="form-control"
+                                            (change)="columnNameChanged(field)">
+                                            <option [value]="option"
+                                                *ngFor="let  option of ['Auto generate','Number','Text','Textarea', 'Image', 'Multiple Images', 'Date','Time','Email','Tel', 'Password','Dropdown', 'Color']">
+                                                {{option}}
+                                            </option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <select name="" id="" [(ngModel)]="field.IsRequired" class="form-control"
+                                            (change)="columnNameChanged(field)">
+                                            <option [value]="option.Id"
+                                                *ngFor="let  option of [{Id:'true',Name: 'Yes'},{Id:'false',Name: 'No'}]">
+                                                {{option.Name}}
+                                            </option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <input type="number" [(ngModel)]="field.MinLen" class="form-control"
+                                            placeholder="E.g. 1" (change)="columnNameChanged(field)">
+                                    </td>
+
+                                    <td>
+                                        <input type="number" [(ngModel)]="field.MaxLen" class="form-control"
+                                            (change)="columnNameChanged(field)" placeholder="E.g. 100">
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <br>
+                        <a class="link link-success pointer" style="margin-left:.25rem;" (click)="addField()">Add
+                            field</a>
+                    </ul>
+
+                </section>
+
+                <section *ngIf="!design && selectedTable && selectedTab && selectedTab.Id === 'data'">
+                    <!-- <span class="d-flex justify-content-between mb-3">
+                        <h5>
+                            {{selectedTable.Name}} data
+                        </h5>
+
+                        <a class="btn btn-outline-primary" (click)="showData()"> <i class="bi bi-arrow-left"></i>
+                            Fields</a>
+                    </span> -->
+                    <app-collections *ngIf="website && collections && user && selectedTable" [keys]="keys"
+                        [website]="website" [selectedTable]="selectedTable" [user]="user" [collections]="collections">
+                    </app-collections>
+                </section>
+
+
+                <app-form-column [table]="selectedTable" [website]="website" [user]="user"
+                    *ngIf="website && user && selectedTable && selectedTab && selectedTab.Id === 'insert'"
+                    (done)="formSubmited($event)">
+                </app-form-column>
+            </section>
+
+
+
+
+        </div>
+    </div>
+
+    <div class="__body" *ngIf="website && !website.DbTables ||  !website.DbTables.length">
+        <p class="no-data">
+            You dont have any database tables at the moment.
+            <br><br>
+            <a class="btn btn-primary" (click)="createTable()">Create table</a>
+        </p>
+    </div>
+</div>

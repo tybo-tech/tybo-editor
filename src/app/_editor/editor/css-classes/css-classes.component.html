@@ -1,0 +1,64 @@
+<div class="overlay" (click)="close()"></div>
+<div class="_picker options-modal">
+    <div class="heading d-flex justify-content-between">
+        <h5>
+            Classes {{selected}}
+        </h5>
+
+        <i (click)="close()" class="_close fas fa-times"></i>
+    </div>
+
+    <div class="__body" *ngIf="website && website.WebsiteStyles && website.WebsiteStyles.length">
+        <div class="grid-2" style="grid-template-columns: 40% auto;">
+            <section>
+                <ul class="list-group">
+                    <!-- <h5>
+                        Tables
+                    </h5> -->
+                    <li class="list-group-item d-flex justify-content-start" style="background:none; border:none">
+                        <input id="all" type="checkbox" [checked]="all" [(ngModel)]="all" (change)="selectAll()"
+                            style="margin-right: .5rem;"> <label for="all" class="all-label">Select All</label>
+                        <i *ngIf="all || selected>0" (click)="deleteSelected()"
+                            class="bi bi-archive pointer ml-2  color-danger"></i>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-start" style="background:none; border:none"
+                        *ngFor="let table of website.WebsiteStyles; let i = index">
+                        <input type="checkbox" name="" id="" [(ngModel)]="table.IsSelected" [checked]="table.IsSelected"
+                            (change)="selectOne(table)" style="background:none">
+                        <input type="text" [(ngModel)]="table.SelectorName" class="form-control" readonly
+                            placeholder="Enter Table Name" (click)="selectStyle(table, i)">
+                    </li>
+                    <br>
+                    <!-- <a class="link link-success pointer" style="margin-left:.25rem;" (click)="createTable()">Create
+                        table</a> -->
+                </ul>
+            </section>
+
+            <section *ngIf="selectedStyle">
+                <h5 class="d-flex justify-content-between mb-3">
+                    <span>
+                        {{selectedStyle.SelectorName}}
+                    </span>
+
+                    <i (click)="deleteClass()" class="bi bi-archive pointer"></i>
+                </h5>
+                <label for="">Pc Styles</label>
+                <textarea class="form-control _txt-area" name="" [(ngModel)]="cssString_pc" id="" cols="30"
+                    rows="10"></textarea>
+                <br>
+
+                <label for="">Tab Styles</label>
+                <textarea class="form-control _txt-area" name="" [(ngModel)]="cssString_tab" id="" cols="30"
+                    rows="10"></textarea>
+
+                <br>
+
+                <label for="">Phone Styles</label>
+                <textarea class="form-control _txt-area" name="" [(ngModel)]="cssString_phone" id="" cols="30"
+                    rows="10"></textarea>
+            </section>
+
+        </div>
+    </div>
+
+</div>

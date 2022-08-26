@@ -1,14 +1,18 @@
-<div class="_input" *ngIf="input && input.Units && (input.Type == 'number' || input.Type == 'text')">
-  <div class="_label">{{input.Label}}</div>
-  <div class="_value"><input [type]="input.Type" (input)="onInputEvent()" class="no-spin" [(ngModel)]="input.Value">
+<div class="_input-holder" *ngIf="input && input.Units && (input.Type == 'number' || input.Type == 'text')">
+  <div class="_input" style="border: none;">
+    <div class="_label">{{input.Label}}</div>
+    <div class="_value"><input [type]="input.Type" (input)="onInputEvent()" class="no-spin" [(ngModel)]="input.Value">
+    </div>
+    <div class="_units">
+      <select name="" id="" [(ngModel)]="input.Unit" (change)="onInputEvent()">
+        <option [value]="option" *ngFor="let  option of input.Units">
+          {{option}}
+        </option>
+      </select>
+    </div>
   </div>
-  <div class="_units">
-    <select name="" id="" [(ngModel)]="input.Unit" (change)="onInputEvent()">
-      <option [value]="option" *ngFor="let  option of input.Units">
-        {{option}}
-      </option>
-    </select>
-  </div>
+  <input type="range" style="max-width: 94%; margin-left: 2%;" class="form-range" [(ngModel)]="input.Value" min="0" (input)="onInputEvent()" max="100" step="0.5"
+    id="customRange3">
 </div>
 
 
@@ -43,6 +47,14 @@
         {{option}}
       </option>
     </select>
+  </div>
+</div>
+
+<div class="_input grid-2" *ngIf="input && input.Type == 'range'">
+  <div class="_label">{{input.Label}} {{input.Value}}</div>
+  <div class="_units">
+    <input type="range" class="form-range" [(ngModel)]="input.Value" min="0" (input)="onInputEvent()" max="100"
+      step="0.5" id="customRange3">
   </div>
 </div>
 

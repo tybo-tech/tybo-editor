@@ -54,7 +54,7 @@ export class FormsComponent implements OnInit {
     });
   }
   onRightClick(pointerEvent: MouseEvent) {
-    pointerEvent.preventDefault();
+    // pointerEvent.preventDefault();
     const __target = <HTMLDivElement>pointerEvent.target;
     const classes = Array.from(__target.classList).find(x => x === 'contextmenu_from');
     if (!classes)

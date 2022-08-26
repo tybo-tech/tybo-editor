@@ -1,0 +1,27 @@
+@import "../../../assets/styles/colors";
+._banner {
+    height: 20vh;
+    background: #1d2e35;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4rem;
+}
+
+.container {
+    padding-top: 3rem;
+    .card {
+        border: 1px solid $cloud;
+        box-shadow: $box-shadow;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+}
+
+.btn {
+    padding: .7rem 2rem;
+    font-weight: 600;
+    color: $bg;
+}

@@ -10,8 +10,8 @@
  
     }
     img {
-        width:1.1rem;
-        height:1.1rem;
+        width:.8rem;
+        height:.8rem;
         margin: auto;
     }
 }
@@ -19,3 +19,7 @@
 .active{
     background: #161c24; 
 }
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+  }

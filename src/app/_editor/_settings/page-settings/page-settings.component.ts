@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DbTableModel } from 'src/app/_classes/DbTableModel';
 import { PageModel } from 'src/app/_classes/PageModel';
 import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
 import { HelperClass } from 'src/app/_classes/_statics/HelperClass';
+import { WidgetHelper } from 'src/app/_classes/_statics/WidgetHelper';
 import { WebsiteService } from 'src/app/_services/website.service';
 
 @Component({
@@ -14,8 +16,15 @@ export class PageSettingsComponent implements OnInit {
   @Input() website: WebsiteModel;
   @Output() closeEvent: EventEmitter<any> = new EventEmitter();
   page: PageModel;
+  tables: DbTableModel[];
+  selectedTable?: DbTableModel;
 
-  constructor(private websiteService: WebsiteService) { }
+  constructor(private websiteService: WebsiteService) {
+    websiteService.websiteObservable.subscribe(data => {
+      if (data)
+        this.tables = data.DbTables;
+    })
+  }
 
   ngOnInit() {
   }
@@ -32,24 +41,25 @@ export class PageSettingsComponent implements OnInit {
 
   selectPage(page: PageModel) {
     this.page = page;
+    if (page.TableName)
+      this.selectTable();
   }
   savePage() {
+    // debugger
     if (!this.page)
-      return;
-    if (this.page._id) {
-      this.websiteService.patch(`pages/${this.page._id}`, this.page).subscribe(data => {
-        if (data && data.modifiedCount) {
-
-        }
-      });
+    return;
+    if (this.page.Id) {
+      this.page.Widgets = WidgetHelper.removeDynamicWidgets(this.page.Widgets)
+      this.page.WebsiteId = this.website.WebsiteId
+      this.websiteService.savePageChanges(this.page);
     }
 
 
-    if (!this.page._id) {
-      delete this.page._id
-      this.websiteService.create(`pages`, this.page).subscribe(data => {
-        if (data && data.modifiedCount) {
-
+    if (!this.page.Id) {
+      delete this.page.Id
+      this.websiteService.create(`pages/create-page.php`, this.page).subscribe(data => {
+        if (data && data.WebsiteId) {
+          this.websiteService.updateWebsieState(this.website);
         }
       });
     }
@@ -57,5 +67,11 @@ export class PageSettingsComponent implements OnInit {
 
   onClose() {
     this.closeEvent.emit(true);
+  }
+
+  selectTable() {
+    if (this.page && this.page.TableName) {
+      this.selectedTable = this.tables.find(x => x.Name === this.page.TableName);
+    }
   }
 }

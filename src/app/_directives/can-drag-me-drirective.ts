@@ -13,6 +13,8 @@ export class CanDragMeDropDirective {
     onMousedown(event: MouseEvent) {
         const prevX = event.clientX;
         const prevY = event.clientY;
+        console.log('Start: ',prevX, prevY);
+
 
         if (this.element.nativeElement.classList[0] === 'widget-item') {
             this.element.nativeElement.classList.add('dragging');
@@ -21,6 +23,10 @@ export class CanDragMeDropDirective {
         if (this.element.nativeElement.classList[0] === 'movable') {
             this.element.nativeElement.classList.add('moving');
             this.onPoints.emit({ x: prevX, y: prevY, element: this.element.nativeElement });
+        }
+        if (this.element.nativeElement.classList[0] === 'draggables') {
+            this.element.nativeElement.classList.add('dragging');
+            this.onPoints.emit({ x: prevX, y: prevY, element: null });
         }
     }
 

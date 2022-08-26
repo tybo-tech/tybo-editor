@@ -1,0 +1,24 @@
+p,td{
+    padding: 0;
+    margin: 0;
+}
+thead{
+    margin-bottom:4rem 
+}
+.list-group{
+    max-width: 100vw;
+    overflow-x: scroll;
+}
+
+.table {
+    overflow-x: scroll;
+    td {
+        padding: 0;
+        background: #fff;
+        input,
+        select {
+            font-size: 0.65rem;
+            border-radius: 0;
+        }
+    }
+}

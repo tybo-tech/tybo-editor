@@ -1,0 +1,43 @@
+<section *ngIf="collections">
+
+
+    <ul class="list-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" *ngFor="let column of selectedTable.Columns">{{column.Name}}</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let collectionItem of collections">
+                    <td *ngFor="let column of selectedTable.Columns" style="padding-bottom:0 ;">
+                        <!-- <p style="padding: 0; margin: 0;">
+                            {{collectionItem[key]}}
+                        </p> -->
+                        <input
+                            *ngIf="['Text', 'Number','Date','Number','Time','Email','Password','Tel','Textarea'].indexOf(column.DataType) > -1"
+                            type="text" class="form-control" [(ngModel)]="collectionItem[column.Name]"
+                            (change)="colChanged(collectionItem, collectionItem['DataId'], column.Name)" />
+                        <app-images *ngIf="'Image' === column.DataType" [image]="collectionItem[column.Name]" (onImageSelect)="onImageSelect($event,collectionItem, collectionItem['DataId'], column.Name)"></app-images>
+                    </td>
+                    <td>
+                        <!-- <a (click)="dataItemClicked(collectionItem, 'view')" class="btn btn-outline-info mr-2"><i class="fas fa-eye"></i></a> -->
+                        <!-- <a (click)="dataItemClicked(collectionItem, 'edit')" class="btn mr-2"><i
+                                class="fas fa-pen"></i></a> -->
+                        <a (click)="dataItemClicked(collectionItem,'delete')" class="btn form-control"><i
+                                class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <!-- <br>
+        <a class="link link-success pointer" style="margin-left:.25rem;" (click)="addCollectionItem()">Add
+            item</a> -->
+
+        <!-- <app-form-column [table]="selectedTable" [collection]="collection" *ngIf="selectedTable && showForm" (done)="formSubmited($event)">
+        </app-form-column> -->
+    </ul>
+
+</section>

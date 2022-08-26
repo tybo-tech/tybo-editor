@@ -1,25 +1,28 @@
-<div class="_main"  [ngClass]="mainClass">
-  <div class="item" *ngIf="id == 'editor'">
-    <app-editor></app-editor>
-  </div>
-  <div class="item" *ngIf="id != 'editor' && website">
-        <!-- GLOBAL HEADER -->
-        <div class="nav-holder" *ngIf="website && website.Header">
-          <app-public-section *ngIf="page" [section]="website.Header" [website]="website" [page]="page"  [sectionIndex]="0"></app-public-section>
-        </div>
-  
-        <!-- BODY -->
-        <div class="body-holder" *ngIf="page && page.Sections && page.Sections.length">
-          <div class="section holder" *ngFor="let section of page.Sections; let i = index" [id]="section.SectionId">
-            <app-public-section [section]="section" [website]="website" [page]="page"  [sectionIndex]="i"></app-public-section>
-          </div>
-        </div>
-  
-  </div>
-
-
-<!-- 
-  <pre>
-    {{ this.website | json }}
+<div [ngClass]="mainClass">
+  <app-editor *ngIf="id == 'editor'" [id]="id" [id2]="id2" ></app-editor>
+  <app-templates *ngIf="id == 'templates'"></app-templates>
+  <!-- <pre>
+    {{ website | json }}
   </pre> -->
+  <div *ngIf="id != 'editor' && id != 'templates' && website" [ngClass]="website.ItemClass">
+    <div class="sections" *ngIf="page && website">
+
+      <div class="section holder" *ngIf="website.Header">
+        <app-page-public-tree [page]="page" [widget]="website.Header" [website]="website">
+        </app-page-public-tree>
+      </div>
+<!-- 
+      <pre>
+        {{website | json}}
+      </pre> -->
+      <div class="body-holder">
+        <app-page-public-tree  *ngFor="let widget of page.Widgets; let i = index" [dataId]="id2" [id]="widget.WidgetId" [page]="page" [dataId]="id2"
+          [widget]="widget" [website]="website">
+        </app-page-public-tree>
+      </div>
+
+    </div>
+
+  </div>
 </div>
+

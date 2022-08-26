@@ -1,0 +1,7 @@
+<div *ngIf="widget" [ngClass]="widget.ItemClass">
+    <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,widget)"
+    (click)="toggleOptions(widget)">
+    {{widget.Name}}</div>
+    <app-nasted-widget *ngFor="let child of widget.Children" [widget]="child"></app-nasted-widget>
+
+</div>

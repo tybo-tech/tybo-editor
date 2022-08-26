@@ -1,6 +1,6 @@
 
 export class MainClass {
-    _id?: string;
+    Id?: string;
     ParentId: string;
     CreateUserId: string;
     ModifyUserId: string;
@@ -12,13 +12,14 @@ export class MainClass {
     ItemStyle: any;
     ItemMobileStyle: any;
     SelectedStyle: any;
-    ItemClass: string[];
+    ItemClass: any;
     ItemCategory: string;
     ShowOptions: boolean;
     ShowMiniMenu: boolean;
     OrderNumber: number;
     IsSelected: boolean;
     ElementId: string;
+    RelatedId: string;
     Settings: any
     constructor(
         Id: string = '',
@@ -38,10 +39,11 @@ export class MainClass {
         ShowOptions: boolean = false,
         ShowMiniMenu: boolean = false,
         OrderNumber = 1,
-        IsSelected = false
+        IsSelected = false, 
+        Settings = {}
 
     ) {
-        this._id = Id;
+        this.Id = Id;
         this.ParentId = ParentId;
         this.CreateUserId = CreateUserId;
         this.ModifyUserId = ModifyUserId;
@@ -59,6 +61,7 @@ export class MainClass {
         this.ShowMiniMenu = ShowMiniMenu;
         this.OrderNumber = OrderNumber;
         this.IsSelected = IsSelected;
+        this.Settings = Settings;
     }
 
 }

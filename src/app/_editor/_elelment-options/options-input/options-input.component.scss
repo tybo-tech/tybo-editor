@@ -1,4 +1,9 @@
 @import "../../../../assets/styles/colors";
+._input-holder{
+    background: #1f2937;
+    border: 2px solid $border;
+
+}
 ._input {
     display: grid;
     grid-template-columns: 33% 40% auto;

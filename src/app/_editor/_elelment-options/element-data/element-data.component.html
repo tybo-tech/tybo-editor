@@ -1,0 +1,78 @@
+<div class="styles">
+  <div class="style" *ngFor="let style of settings">
+    <h5>
+      <span> {{style.SectionName}}</span>
+      <span *ngIf="!style.IsOpen"><i class="fa fa-chevron-down"></i></span>
+      <span *ngIf="style.IsOpen"><i class="fa fa-chevron-up"></i></span>
+    </h5>
+
+    <div class="fields" *ngIf="style.IsOpen">
+      <div class="_input grid-2">
+        <div class="_label">Set as</div>
+        <div class="_units">
+          <select name="" id="" [(ngModel)]="style.Type" (change)="onInputEvent(style)" style="color: white;">
+            <option [value]="option.Action" *ngFor="let  option of style.EventOptions">
+              {{option.Action}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="_input grid-2" *ngIf="style.Type === 'Data List' && tables">
+        <div class="_label">Table</div>
+        <div class="_units">
+          <select name="" id="" [(ngModel)]="widget.DbTable"  style="color: white;" (change)="dbTableChnaged()">
+            <option [value]="option.Name" *ngFor="let  option of tables">
+              {{option.Name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="_input grid-2" *ngIf="style.Type === 'Data single item' && tables">
+        <div class="_label">Table</div>
+        <div class="_units">
+          <select name="" id=""[(ngModel)]="widget.DbTable"  style="color: white;" (change)="dbTableChnaged()">
+            <option [value]="option.Name" *ngFor="let  option of tables">
+              {{option.Name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="_input grid-2" *ngIf="style.Type === 'Data single item' && columns">
+        <div class="_label">Field</div>
+        <div class="_units">
+          <select name="" id="" [(ngModel)]="widget.FeildName"  style="color: white;" (change)="dataTypeChnaged()" >
+            <option value="Static">Static</option>
+            <option [value]="option.Name" *ngFor="let  option of columns">
+              {{option.Name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <span *ngIf="widget.ItemType === SectionTypes.CONTAINER && widget.Children && columns">
+        <br>
+        <h5>
+          Content settings
+        </h5>
+
+        <div class="_input grid-2" *ngFor="let child of widget.Children">
+          <div class="_label">{{child.Name}}</div>
+          <div class="_units">
+            <select name="" id="" [(ngModel)]="child.FeildName" (change)="itemContentSource(child)" style="color: white;">
+              <option value="Static">Static</option>
+              <option [value]="option.Name" *ngFor="let  option of columns">
+                {{option.Name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </span>
+
+    </div>
+
+  </div>
+</div>

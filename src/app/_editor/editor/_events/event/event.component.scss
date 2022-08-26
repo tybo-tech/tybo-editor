@@ -1,0 +1,25 @@
+@import "../../../../../assets/styles/colors";
+._event {
+    position: relative;
+    .group-options {
+        position: absolute;
+        left: 11rem;
+        z-index: 100;
+        top: 1rem;
+        width: 30rem;
+    }
+
+    ._add {
+        background: $bg;
+        color: #fff;
+    }
+}
+
+p {
+    margin: 0;
+}
+
+.list-group-item {
+    position: relative;
+    padding: 0.2rem;
+}

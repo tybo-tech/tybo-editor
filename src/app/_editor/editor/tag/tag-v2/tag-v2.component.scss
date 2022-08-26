@@ -1,0 +1,43 @@
+@import "../../../../../assets/styles/colors";
+.image-holder {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 10rem;
+}
+
+.tybo-tag {
+    position: relative;
+    display: block;
+    // border: 2px solid $info;
+    // .resizer {
+    //     width: 10px;
+    //     height: 10px;
+    //     position: absolute;
+    //     bottom: 0;
+    //     right: 0;
+    //     background: $info;
+    //     cursor: nw-resize;
+    //     z-index: 10000;
+    // }
+}
+
+.active-node {
+    border: 2px solid $info;
+    z-index: 1000;
+    cursor: move !important;
+
+    .resize-action {
+        transform: translate3d(-50%, -50%, 0) rotateZ(45deg);
+        border-style: solid;
+        border-width: 8px;
+        border-color: transparent transparent transparent $info;
+    }
+}
+
+
+._container-menu {
+    left: 0;
+    bottom: 0rem;
+    z-index: 100;
+}

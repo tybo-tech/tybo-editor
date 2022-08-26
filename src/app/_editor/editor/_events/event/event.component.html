@@ -1,0 +1,15 @@
+<div class="_event" *ngIf="event && page && website">
+    <div class="d-flex justify-content-between align-items-center">
+        <p>{{event.Name}}</p>
+        <p><i class="fa fa-angle-right"></i></p>
+    </div>
+    <ul class="list-group list-group-wider group-options" *ngIf="event.Inputs.length && event.ShowInputs">
+        <li class="list-group-item _add">{{event.Name}}</li>
+        <li class="list-group-item pointer" *ngFor="let input of event.Inputs">
+            <app-event-inputs  [page]="page" [website]="website" [event]="event" [input]="input" (hideInputs)="hideInputs()" (saveInputs)="saveInputs()"></app-event-inputs>
+        </li>
+        <li class="list-group-item d-flex justify-content-end">
+            <button class="btn btn-primary" (click)="saveEvent()">Save event</button>
+        </li>
+    </ul>
+</div>

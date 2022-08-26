@@ -26,19 +26,46 @@
           </h5>
           <hr>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Page tittle</label>
+            <label for="exampleInputPassword1" class="form-label">Page tittle*</label>
             <input type="text" [(ngModel)]="page.Title" class="form-control">
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Page url</label>
+            <label for="exampleInputPassword1" class="form-label">Page url*</label>
             <input type="text" [(ngModel)]="page.Url" class="form-control">
           </div>
 
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Database table(Optional)</label>
+            <select name="" id="" [(ngModel)]="page.TableName" (change)="selectTable()" class="form-control">
+              <option [value]="option.Name" *ngFor="let  option of tables">
+                {{option.Name}}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3" *ngIf="selectedTable && page.TableName">
+            <label for="exampleInputPassword1" class="form-label">Main display column</label>
+            <select name="" id="" [(ngModel)]="page.TableDisplayColName" class="form-control">
+              <option [value]="option.Name" *ngFor="let  option of selectedTable.Columns">
+                {{option.Name}}
+              </option>
+            </select>
+          </div>
+
+
+   
           
     
 
           <div class="form-check">
+            <input class="form-check-input" type="checkbox" [value]="page.UrlId"  [(ngModel)]="page.UrlId"  id="UrlId">
+            <label class="form-check-label" for="UrlId">
+              Requre url id?
+            </label>
+          </div>
+
+          <!-- <div class="form-check">
             <input class="form-check-input" type="checkbox" [value]="page.ShowInNav"  [(ngModel)]="page.ShowInNav"  id="showInNav">
             <label class="form-check-label" for="showInNav">
               Display on menu
@@ -58,7 +85,7 @@
             <label class="form-check-label" for="footerDisplay">
               Display Footer
             </label>
-          </div>
+          </div> -->
 
           <!-- <pre>
             {{page| json}}

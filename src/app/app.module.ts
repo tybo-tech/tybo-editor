@@ -17,7 +17,6 @@ import { DragDropComponent } from './expamples/drag-drop/drag-drop.component';
 import { SortableListDragDropComponent } from './expamples/sortable-list-drag-drop/sortable-list-drag-drop.component';
 import { ToolbarComponent } from './_layout/toolbar/toolbar.component';
 import { WidgetsComponent } from './_layout/widgets/widgets.component';
-import { SectionViewerComponent } from './_layout/section-viewer/section-viewer.component';
 import { CardsComponent } from './_layout/layout/cards/cards.component';
 import { ElementStyleComponent } from './_editor/_elelment-options/element-style/element-style.component';
 import { FlexElementComponent } from './expamples/flex-element/flex-element.component';
@@ -36,14 +35,11 @@ import { LandingPageComponent } from './_layout/hero/landing-page/landing-page.c
 import { UnitsComponent } from './_layout/units/units.component';
 import { ListComponent } from './_layout/layout/cards/list/list.component';
 import { MenusComponent } from './_layout/layout/cards/menus/menus.component';
-import { RowComponent } from './_layout/widgets/row/row.component';
 import { MiniMenuComponent } from './_layout/widgets/mini-menu/mini-menu.component';
-import { ColumnComponent } from './_layout/widgets/column/column.component';
 import { ColumnWidgetComponent } from './_layout/widgets/column-widget/column-widget.component';
 import { CardComponent } from './_layout/widgets/card/card.component';
 import { FormsComponent } from './_layout/widgets/forms/forms.component';
 import { InputComponent } from './_layout/widgets/forms/input/input.component';
-import { PublicSectionComponent } from './public/public-section/public-section.component';
 import { PublicColumnComponent } from './public/public-column/public-column.component';
 import { PublicColumnWidgetComponent } from './public/public-column-widget/public-column-widget.component';
 import { PageSettingsComponent } from './_editor/_settings/page-settings/page-settings.component';
@@ -67,6 +63,50 @@ import { ContainerChildComponent } from './_layout/widgets/container/container-c
 import { PageWidgetsComponent } from './_layout/widgets/page-widgets/page-widgets.component';
 import { PageWidgetComponent } from './_layout/widgets/page-widget/page-widget.component';
 import { PageWidgetTreeComponent } from './_layout/widgets/page-widget-tree/page-widget-tree.component';
+import { PageWidgtesNavigationTreeComponent } from './_layout/widgets/page-widgtes-navigation-tree/page-widgtes-navigation-tree.component';
+import { PagePublicTreeComponent } from './_layout/widgets/page-public-tree/page-public-tree.component';
+import { ElementClassComponent } from './_editor/_elelment-options/element-class/element-class.component';
+import { StylesEditorComponent } from './_editor/styles-editor/styles-editor.component';
+import { LoginComponent } from './account/login/login.component';
+import { RegisterComponent } from './account/register/register.component';
+import { WorkspaceComponent } from './account/workspace/workspace.component';
+import { HomeComponent } from './account/home/home.component';
+import { CreateANewWebsiteComponent } from './account/create-a-new-website/create-a-new-website.component';
+import { WebsiteBasicDetailsComponent } from './account/website-basic-details/website-basic-details.component';
+import { DatabaseComponent } from './_editor/editor/_database/database/database.component';
+import { CssClassesComponent } from './_editor/editor/css-classes/css-classes.component';
+import { CollectionsComponent } from './_editor/editor/_database/collections/collections.component';
+import { FormColumnComponent } from './_editor/editor/_database/form-column/form-column.component';
+import { ListIconsComponent } from './_editor/list-icons/list-icons.component';
+import { StringfilterPipe } from './_editor/stringfilter.pipe';
+import { ElementDataComponent } from './_editor/_elelment-options/element-data/element-data.component';
+import { NastedWidgetComponent } from './_recursive/nasted-widget/nasted-widget.component';
+import { LoaderComponent } from './_editors/loader/loader.component';
+import { BackgroundColorComponent } from './_editor/_elelment-options/element-class/background-color/background-color.component';
+import { GradientPickerComponent } from './_editor/_elelment-options/element-class/gradient-picker/gradient-picker.component';
+import { EdgetsComponent } from './_editor/_elelment-options/element-class/edgets/edgets.component';
+import { BorderComponent } from './_editor/_elelment-options/element-class/border/border.component';
+import { TagComponent } from './_editor/editor/tag/tag.component';
+import { ContenteditableValueAccessorModule } from '@tinkoff/angular-contenteditable-accessor';
+import { ElementClassBettaComponent } from './_editor/_elelment-options/element-class/element-class-betta/element-class-betta.component';
+import { MacroBackgroundComponent } from './_macro-styles/macro-background/macro-background.component';
+import { MacroTipographyComponent } from './_macro-styles/macro-tipography/macro-tipography.component';
+import { MicroCornersComponent } from './_macro-styles/micro-corners/micro-corners.component';
+import { MicroBorderComponent } from './_macro-styles/micro-border/micro-border.component';
+import { MicroLayoutComponent } from './_macro-styles/micro-layout/micro-layout.component';
+import { MicroPaddingComponent } from './_macro-styles/micro-padding/micro-padding.component';
+import { ImagesComponent } from './_editor/_settings/images/images.component';
+import { PublicTagComponent } from './_editor/editor/tag/public-tag/public-tag.component';
+import { ContainerMenuComponent } from './_layout/widgets/page-widget-tree/container-menu/container-menu.component';
+import { MacroMarginComponent } from './_macro-styles/macro-margin/macro-margin.component';
+import { TagMenuComponent } from './_editor/editor/tag/tag-menu/tag-menu.component';
+import { TemplatesComponent } from './_editor/templates/templates.component';
+import { WidgetEventsComponent } from './_editor/editor/_events/widget-events/widget-events.component';
+import { TagV2Component } from './_editor/editor/tag/tag-v2/tag-v2.component';
+import { MicroSizeComponent } from './_macro-styles/micro-size/micro-size.component';
+import { EventComponent } from './_editor/editor/_events/event/event.component';
+import { MicroDisplayComponent } from './_macro-styles/micro-display/micro-display.component';
+import { EventInputsComponent } from './_editor/editor/_events/event-inputs/event-inputs.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +122,6 @@ import { PageWidgetTreeComponent } from './_layout/widgets/page-widget-tree/page
     SortableListDragDropComponent,
     ToolbarComponent,
     WidgetsComponent,
-    SectionViewerComponent,
     CardsComponent,
     ElementStyleComponent,
     FlexElementComponent,
@@ -100,15 +139,12 @@ import { PageWidgetTreeComponent } from './_layout/widgets/page-widget-tree/page
     LandingPageComponent,
     UnitsComponent,
     ListComponent,
-    RowComponent,
     MiniMenuComponent,
-    ColumnComponent,
     ColumnWidgetComponent,
     CardComponent,
     MenusComponent,
     FormsComponent,
     InputComponent,
-    PublicSectionComponent,
     PublicColumnComponent,
     PublicColumnWidgetComponent,
     PageSettingsComponent,
@@ -129,7 +165,50 @@ import { PageWidgetTreeComponent } from './_layout/widgets/page-widget-tree/page
     ContainerChildComponent,
     PageWidgetsComponent,
     PageWidgetComponent,
-    PageWidgetTreeComponent
+    PageWidgetTreeComponent,
+    PageWidgtesNavigationTreeComponent,
+    PagePublicTreeComponent,
+    ElementClassComponent,
+    StylesEditorComponent,
+    LoginComponent,
+    RegisterComponent,
+    WorkspaceComponent,
+    HomeComponent,
+    CreateANewWebsiteComponent,
+    WebsiteBasicDetailsComponent,
+    DatabaseComponent,
+    CssClassesComponent,
+    CollectionsComponent,
+    FormColumnComponent,
+    ListIconsComponent,
+    StringfilterPipe,
+    ElementDataComponent,
+    NastedWidgetComponent,
+    LoaderComponent,
+    BackgroundColorComponent,
+    GradientPickerComponent,
+    EdgetsComponent,
+    BorderComponent,
+    TagComponent,
+    ElementClassBettaComponent,
+    MacroBackgroundComponent,
+    MacroTipographyComponent,
+    MicroCornersComponent,
+    MicroBorderComponent,
+    MicroLayoutComponent,
+    MicroPaddingComponent,
+    ImagesComponent,
+    PublicTagComponent,
+    ContainerMenuComponent,
+    MacroMarginComponent,
+    TagMenuComponent,
+    TemplatesComponent,
+    WidgetEventsComponent,
+    TagV2Component,
+    MicroSizeComponent,
+    EventComponent,
+    MicroDisplayComponent,
+    EventInputsComponent
   ],
   imports: [
     BrowserModule,
@@ -139,7 +218,8 @@ import { PageWidgetTreeComponent } from './_layout/widgets/page-widget-tree/page
     ReactiveFormsModule,
     HttpClientModule,
     LayoutModule,
-    DragDropModule
+    DragDropModule,
+    ContenteditableValueAccessorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

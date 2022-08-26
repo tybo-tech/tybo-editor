@@ -1,0 +1,68 @@
+@import "../../../../../assets/styles/colors";
+._picker {
+    width: 65%;
+}
+
+.events {
+    padding: 1rem;
+    height: 100vh;
+    .event {
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        margin: 1rem 0;
+        width: 10rem;
+        position: relative;
+        .list-group {
+            position: absolute;
+            width: 14rem;
+            left: 8rem;
+            // bottom: -7rem;
+            top: 1rem;
+            z-index: 100;
+            box-shadow: $box-shadow;
+            .list-group-item {
+                position: relative;
+                padding: 0.2rem;
+                p {
+                    margin: 0;
+                    padding: 0.1rem;
+                }
+                label {
+                    display: block;
+                    margin-bottom: 0.4rem;
+                    // margin-top: 1rem;
+                    font-size: 0.7rem;
+                }
+                select,
+                input {
+                    z-index: 100000;
+                    font-size: 0.7rem;
+                }
+            }
+        }
+
+        .list-group-wider {
+            width: 20rem;
+        }
+    }
+    ._add {
+        background: $bg;
+        color: #fff;
+    }
+}
+
+.grid-2 {
+    margin: 0;
+    gap: 0;
+    grid-gap: 0;
+    label {
+        margin: 0 !important;
+    }
+}
+
+p {
+    margin: 0;
+}

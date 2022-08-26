@@ -1,0 +1,92 @@
+<div class="overlay" (click)="close()"></div>
+<div class="_picker options-modal" *ngIf="page && website">
+    <div class="heading d-flex justify-content-between">
+        <h5>
+            {{widget.Name}} Events
+        </h5>
+
+        <i (click)="close()" class="_close fas fa-times"></i>
+    </div>
+
+    <div class="__body">
+        <div class="events">
+            <ng-container *ngIf="widget && widget.Events && widget.Events.length">
+                <div class="event" *ngFor="let event of widget.Events">
+                    <span class="pointer" (click)="toggeEventOptions(event)">
+                        {{event.Name}}
+                    </span>
+
+                    <ul class="list-group list-group-wider" *ngIf="event && event.ShowOEvents">
+                        <li class="list-group-item _add">
+
+                            <div class="d-flex justify-content-between">
+                                <p>
+                                    {{event.Name}}
+                                </p>
+                                <i (click)="event.ShowOEvents = false" style="position: relative; top: .4rem"
+                                    class="_close fas fa-times pointer"></i>
+                            </div>
+                        </li>
+                        <li class="list-group-item pointer  grid-2" *ngFor="let input of event.Inputs">
+                            <label>{{input.Name}}</label>
+                            <div>
+                                <input type="text" readonly class="form-control pointer" placeholder="Select source..."
+                                    [(ngModel)]="input.Source" (click)="toggleViewOptions(input)">
+                                <ul class="list-group list-group-wider" style="left: 15rem;" *ngIf="input.ViewOptions">
+                                    <li class="list-group-item _add">Get {{input.Name}} from...</li>
+                                    <li class="list-group-item">
+                                        <div (click)="input.SourceId = 'set'; input.Source = 'mrnnmthembu@gmail.com'">
+                                            Set value as...
+                                        </div>
+
+                                        <div *ngIf="input.SourceId === 'set'">
+                                            <textarea class="form-control" [(ngModel)]="input.Source"> </textarea>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngFor="let _input of inputWidgets"
+                                        (click)="input.Source = _input.Name; input.SourceId = _input.WidgetId; input.ViewOptions= false">
+                                        {{_input.Name}}</li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="list-group-item _add">
+                            <button class="btn btn-dark mr-2" (click)="saveEvent(event)"><i
+                                    class="fa fa-save"></i></button>
+                            <!-- <button class="btn btn-danger" (click)="saveEvent()"><i class="fa fa-trash"></i></button> -->
+                        </li>
+                    </ul>
+
+                </div>
+            </ng-container>
+
+
+            <div class="event">
+                <span class="pointer" (click)="addEvent = !addEvent">
+                    Add event
+                </span>
+
+                <ul class="list-group" *ngIf="addEvent">
+                    <li class="list-group-item _add d-flex justify-content-between align-items-center">
+                            <p>Choose event</p>
+                            <p (click)="addEvent = !addEvent"><i class="fa fa-times pointer"></i></p>
+                    </li>
+                    <li class="list-group-item pointer" *ngFor="let event of events" (click)="selectItem(event)">
+                        <app-event [event]="event" [page]="page" [widget]="widget" [website]="website" ></app-event>
+                        <ul class="list-group list-group-wider" *ngIf="event.Events && event.ShowOEvents">
+                            <li class="list-group-item _add">{{event.Name}}</li>
+                            <li class="list-group-item pointer" *ngFor="let eventChild of event.Events"
+                                (click)="selectChildEvent(eventChild,event.Events)">
+                                <app-event [event]="eventChild"   [widget]="widget" [user]="user" [page]="page" [website]="website" ></app-event>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>

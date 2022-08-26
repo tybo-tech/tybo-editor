@@ -1,13 +1,11 @@
-import { ColumnModel } from "../ColumnModel";
-import { ContainerModel } from "../ContainerModel";
+
 import { FormModel } from "../FormModel";
 import { InputModel } from "../InputModel";
 import { PageModel } from "../PageModel";
-import { RowModel } from "../RowModel";
-import { SectionModel } from "../SectionModel";
 import { WebsiteModel } from "../WebsiteModel";
 import { WidgetModel } from "../WidgetModel";
 import { DeviceTypes } from "./DeviceTypes";
+import { WidgetHelper } from "./WidgetHelper";
 
 export class JsonParserHelper {
 
@@ -28,22 +26,19 @@ export class JsonParserHelper {
             site.Category,
             site.SubCategory,
             site.Icon,
-            this.parsePages(site.Pages),
-            site.Header ? this.parseSections([site.Header])[0] : undefined,
+            [],
+            undefined,
             site.HeaderDisplay,
             site.HeaderType,
             site.HeaderVisibility,
-            site.Footer ? this.parseSections([site.Footer])[0] : undefined,
+            site.Footer ? this.parseWidgets([site.Footer])[0] : undefined,
             site.WebsiteMode,
             site.ViewDevice,
-            site.ViewWidth ,
+            site.ViewWidth,
         );
 
-        if (site.Header)
-            web.Header = this.parseSections([site.Header])[0];
-        if (site.Footer)
-            web.Footer = this.parseSections([site.Footer])[0];
-        web._id = site._id;
+        site.Widgets.map(x => x.ItemClass = JSON.parse(x.ItemClass));
+        web.Id = site.Id;
 
         if (web && web.Footer && web.ViewDevice === DeviceTypes.PHONE) {
             web.Footer.SelectedStyle = web.Footer.ItemMobileStyle;
@@ -61,11 +56,46 @@ export class JsonParserHelper {
         if (web && web.Header && web.ViewDevice === DeviceTypes.PC) {
             web.Header.SelectedStyle = web.Header.ItemStyle;
         }
+
+
+
+        web.ItemStyle = site.ItemStyle;
+        web.ItemMobileStyle = site.ItemMobileStyle;
+        web.Imports = site.Imports || [];
+        web.Collections = site.Collections || [];
+        web.TableIdListString = site.TableIdListString || [];
+        web.Files = site.Files || [];
+        web.ItemType = 'Page';
+        if (site.WebsiteStyles && site.WebsiteStyles) {
+            site.WebsiteStyles.forEach(style => {
+                style.PcStyles = JSON.parse(style.PcStyles);
+                style.PhoneStyles = JSON.parse(style.PhoneStyles);
+                style.TabStyles = JSON.parse(style.TabStyles);
+            })
+        }
+        if (site.Widgets) {
+            // debugger
+            const masters = site.Widgets.filter(x => x.PageId === "master");
+            const pageWids = WidgetHelper.fixWidgetTree(masters, site.WebsiteId);
+            if (pageWids && pageWids.length)
+                web.Header = this.parseWidgets(pageWids)[0];
+            // p.Widgets = this.parseWidgets(pageWids);
+        }
+
+
+        web.WebsiteStyles = site.WebsiteStyles || [];
+        web.ItemClass = site.ItemClass || [];
+        web.DbTables = site.DbTables || [];
+        // web.Widgets = site.Widgets || [];
+        if (!site.Widgets)
+            site.Widgets = [];
+
+        web.Pages = this.parsePages(site.Pages, site.Widgets);
         return web;
     }
 
 
-    private static parsePages(Pages: PageModel[]): PageModel[] {
+    private static parsePages(Pages: PageModel[], widgets: WidgetModel[] = []): PageModel[] {
         const pages: any = [];
         Pages.forEach(page => {
             const p = new PageModel(
@@ -77,55 +107,25 @@ export class JsonParserHelper {
                 page.Url,
                 page.PageStatus,
                 page.Styles,
-                this.parseSections(page.Sections),
+                [],
                 page.StyleClass
             );
-            p._id = page._id;
+            p.Id = page.Id;
+            p.WebsiteId = page.WebsiteId;
             p.IsSelected = page.IsSelected + '' == "true";
             p.ItemStyle = page.ItemStyle;
+            p.UrlId = page.UrlId;
+            // p.PageData = page.PageData;
+            p.Tables = page.Tables;
+            p.TableName = page.TableName;
+
+            p.TableDisplayColName = page.TableDisplayColName;
             p.ItemMobileStyle = page.ItemMobileStyle;
-            p.Containers = this.parseContainers(page.Containers);
-            p.Widgets = this.parseWidgets(page.Widgets);
+            const pageWids = WidgetHelper.fixWidgetTree(widgets.filter(x => x.PageId === page.PageId), page.PageId);
+            p.Widgets = this.parseWidgets(pageWids);
             pages.push(p)
         })
         return pages;
-    }
-
-    private static parseSections(secs: SectionModel[]): SectionModel[] {
-        const sections: any = [];
-        if (!secs)
-            return [];
-        secs.forEach(sec => {
-            let s = new SectionModel(
-                sec.SectionId,
-                sec.PageId,
-                sec.Name,
-                sec.Styles,
-                this.parseRows(sec.Rows),
-                this.parseColumns(sec.Columns),
-                sec.SectionType,
-                sec.ContentWidthMode,
-                sec.ContentWidth
-            );
-            s.ItemStyle = sec.ItemStyle;
-            s.ItemClass = sec.ItemClass;
-            s.GridStyle = sec.GridStyle;
-            s.ItemMobileStyle = sec.ItemMobileStyle;
-            s.MobileGridStyle = sec.MobileGridStyle;
-            sections.push(s)
-        });
-
-
-        //fix data
-        // sections.forEach(section => {
-        //     if (section.Columns) {
-        //         const row = new RowModel(HelperClass.getId('row'), 'Row', section.Columns, 'Section-Raw');
-        //         section.AddRow(row)
-        //     }
-
-        //     section.Columns = [];
-        // })
-        return sections;
     }
 
 
@@ -155,7 +155,7 @@ export class JsonParserHelper {
                 wid.RowNumber,
                 wid.ColNumber
             );
-            w._id = wid._id;
+            w.Id = wid.Id;
             w.ItemStyle = wid.ItemStyle;
             w.ItemMobileStyle = wid.ItemMobileStyle;
             w.EventStyles = wid.EventStyles;
@@ -164,6 +164,20 @@ export class JsonParserHelper {
             w.ImageStyles = wid.ImageStyles;
             w.ItemCategory = wid.ItemCategory;
             w.ItemClass = wid.ItemClass;
+            w.FeildName = wid.FeildName;
+            w.ItemFormat = wid.ItemFormat;
+            w.DbTable = wid.DbTable;
+            w.UrlId = wid.UrlId;
+            w.Events = wid.Events || [];
+            w.BackgroundType = wid.BackgroundType || '';
+            w.Settings = {};
+            if (wid.Settings) {
+                w.Settings = JSON.parse(wid.Settings);
+                w.Settings = this.loadSettings(w);
+            }
+            w.OrderNumber = wid.OrderNumber || 1;
+            w.Sort();
+
             if (wid.Children && wid.Children.length)
                 w.Children = this.parseWidgets(wid.Children);
             if (wid.Form)
@@ -173,6 +187,75 @@ export class JsonParserHelper {
         return widgets;
     }
 
+    public static loadSettings(widget: WidgetModel, w = 200, h = 200): any {
+        if (!widget.Settings)
+            widget.Settings = {};
+
+        // Pc
+
+        if (!widget.Settings["PcX"])
+            widget.Settings["PcX"] = 0;
+
+        if (!widget.Settings["PcY"])
+            widget.Settings["PcY"] = 0;
+
+
+        if (!widget.Settings["PcW"])
+            widget.Settings["PcW"] = w;
+
+
+        if (!widget.Settings["PcH"])
+            widget.Settings["PcH"] = h;
+
+        // Tab
+
+        if (!widget.Settings)
+            widget.Settings = {};
+
+        if (!widget.Settings["TabX"])
+            widget.Settings["TabX"] = 0;
+
+        if (!widget.Settings["TabY"])
+            widget.Settings["TabY"] = 0;
+
+
+        if (!widget.Settings["TabW"])
+            widget.Settings["TabW"] = w;
+
+
+        if (!widget.Settings["TabH"])
+            widget.Settings["TabH"] = h;
+
+        // phone 
+        if (!widget.Settings)
+            widget.Settings = {};
+
+        if (!widget.Settings["PhoneX"])
+            widget.Settings["PhoneX"] = 0;
+
+        if (!widget.Settings["PhoneY"])
+            widget.Settings["PhoneY"] = 0;
+
+
+        if (!widget.Settings["PhoneW"])
+            widget.Settings["PhoneW"] = w;
+
+
+        if (!widget.Settings["PhoneH"])
+            widget.Settings["PhoneH"] = h;
+
+        // Background
+        if (!widget.Settings["PcBgType"])
+            widget.Settings["PcBgType"] = 'none';
+
+        if (!widget.Settings["TabBgType"])
+            widget.Settings["TabBgType"] = 'none';
+
+        if (!widget.Settings["PhoneBgType"])
+            widget.Settings["PhoneBgType"] = 'none';
+
+        return widget.Settings;
+    }
 
     private static parseForm(form: FormModel): FormModel | undefined {
         if (!form)
@@ -205,116 +288,6 @@ export class JsonParserHelper {
             inputs.push(w)
         })
         return inputs;
-    }
-
-    private static parseRows(Rows: RowModel[]): RowModel[] {
-        if (!Rows || !Rows.length)
-            return [];
-
-        const rows: any = [];
-
-        Rows.forEach(row => {
-            let w = new RowModel(
-                row.RowId,
-                row.SectionId,
-                row.Name,
-                this.parseColumns(row.Columns),
-                row.RowType,
-            );
-            w.ItemStyle = row.ItemStyle
-            w.ItemMobileStyle = row.ItemMobileStyle;
-            w.OrderNumber = row.OrderNumber;
-            rows.push(w)
-        })
-        return rows;
-    }
-    private static parseColumns(Columns: ColumnModel[]): ColumnModel[] {
-        if (!Columns)
-            return [];
-
-        const columns: any = [];
-
-        Columns.forEach(wid => {
-            let w = new ColumnModel(
-                wid.ColumnId,
-                wid.RowId,
-                wid.Name,
-                wid.Styles,
-                this.parseWidgets(wid.Widgets),
-                wid.ColumnType,
-            );
-            w.ItemStyle = wid.ItemStyle
-            w.ItemMobileStyle = wid.ItemMobileStyle
-            columns.push(w)
-        })
-        return columns;
-    }
-
-    private static parseWidgetsChildren(Widgets: WidgetModel[]): WidgetModel[] {
-        if (!Widgets || !Widgets.length)
-            return [];
-        const widgets: any = [];
-        Widgets.forEach(wid => {
-            const w = new WidgetModel(
-                wid.WidgetId,
-                wid.ColumnId,
-                wid.PageId,
-                wid.Name,
-                wid.ItemType,
-                wid.ImageUrl,
-                [],
-                wid.ParentId,
-                wid.ItemContent,
-                wid.ItemHeading,
-                wid.ItemEvent,
-                wid.ItemEventName,
-                wid.ImageStyles,
-                wid.HeadingStyles,
-                wid.ContentStyles,
-                wid.EventStyles,
-                wid.ElementType,
-                wid.RowNumber,
-                wid.ColNumber
-            )
-
-            w._id = wid._id;
-            w.ItemStyle = wid.ItemStyle;
-            w.ItemMobileStyle = wid.ItemMobileStyle;
-            w.EventStyles = wid.EventStyles;
-            w.HeadingStyles = wid.HeadingStyles;
-            w.ContentStyles = wid.ContentStyles;
-            w.ImageStyles = wid.ImageStyles;
-            w.ItemCategory = wid.ItemCategory;
-            w.ItemClass = wid.ItemClass;
-            widgets.push(w)
-        })
-        return widgets;
-    }
-
-
-    private static parseContainers(Containers: ContainerModel[]): ContainerModel[] {
-        if (!Containers)
-            return [];
-
-        const columns: any = [];
-
-        Containers.forEach(wid => {
-            let w = new ContainerModel(
-                wid.ContainerId,
-                wid.PageId,
-                wid.Name,
-                wid.Styles,
-                this.parseWidgets(wid.Widgets),
-                wid.ContainerType,
-            );
-            w.ItemStyle = wid.ItemStyle
-            w.ItemMobileStyle = wid.ItemMobileStyle;
-            w.SelectedStyle = wid.SelectedStyle;
-            if (wid.Containers && wid.Containers.length)
-                w.Containers = this.parseContainers(wid.Containers);
-            columns.push(w)
-        })
-        return columns;
     }
 
 }

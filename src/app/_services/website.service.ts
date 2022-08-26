@@ -1,13 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { HostListener, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { NO_SQL_DB } from "src/environments/environment";
+import { API_BASE, NO_SQL_DB } from "src/environments/environment";
 import { ContainerModel } from "../_classes/ContainerModel";
+import { DbCollectionModel } from "../_classes/DbCollectionModel";
+import { FontModel } from "../_classes/FontModel";
 import { PageModel } from "../_classes/PageModel";
+import { UserModel } from "../_classes/UserModel";
 import { WebsiteModel } from "../_classes/WebsiteModel";
+import { WebstyleModel } from "../_classes/WebstyleModel";
 import { WidgetModel } from "../_classes/WidgetModel";
+import { Constants } from "../_classes/_statics/Constants";
 import { JsonParserHelper } from "../_classes/_statics/JsonParserHelper";
+import { WidgetHelper } from "../_classes/_statics/WidgetHelper";
 import { blackWebsite, newWebsite } from "../_mocks/website";
+import { IUpdateWidget } from "./sync.service";
 
 
 @Injectable({
@@ -21,6 +28,17 @@ export class WebsiteService {
 
   private pageBehaviorSubject: BehaviorSubject<PageModel | undefined>;
   public pageObservable: Observable<PageModel | undefined>;
+
+  private fontsBehaviorSubject: BehaviorSubject<FontModel | undefined>;
+  public fontsObservable: Observable<FontModel | undefined>;
+
+  private userBehaviorSubject: BehaviorSubject<UserModel | undefined>;
+  public userObservable: Observable<UserModel | undefined>;
+
+
+  private collectionsBehaviorSubject: BehaviorSubject<DbCollectionModel[] | undefined>;
+  public collectionsObservable: Observable<DbCollectionModel[] | undefined>;
+
   url: string;
 
 
@@ -32,70 +50,79 @@ export class WebsiteService {
     this.pageBehaviorSubject = new BehaviorSubject<PageModel | undefined>(undefined);
     this.pageObservable = this.pageBehaviorSubject.asObservable();
 
-    this.url = NO_SQL_DB;
+    this.fontsBehaviorSubject = new BehaviorSubject<FontModel | undefined>(undefined);
+    this.fontsObservable = this.fontsBehaviorSubject.asObservable();
+
+    this.fontsBehaviorSubject = new BehaviorSubject<FontModel | undefined>(undefined);
+    this.fontsObservable = this.fontsBehaviorSubject.asObservable();
+
+    let _user = localStorage.getItem("_user");
+    let user = undefined;
+    if (_user && _user !== "undefined") {
+      user = JSON.parse(_user);
+    }
+    this.userBehaviorSubject = new BehaviorSubject<UserModel | undefined>(user);
+    this.userObservable = this.userBehaviorSubject.asObservable();
+
+    this.collectionsBehaviorSubject = new BehaviorSubject<DbCollectionModel[] | undefined>(undefined);
+    this.collectionsObservable = this.collectionsBehaviorSubject.asObservable();
+
+    // this.url = NO_SQL_DB;
+    this.url = API_BASE;
 
   }
-
-  getSite(_id: string, pageid: string) {
-    this.http.get<WebsiteModel>(`${this.url}/websites/${_id}`)
+  public get GetWebsite() {
+    return this.websiteBehaviorSubject.value;
+  }
+  getSite(_id: string, pageid: string, pageId2 = '', pageId3 = '') {
+    this.http.get<WebsiteModel>(`${this.url}/websites/get-website.php?WebsiteId=${_id}`)
       .subscribe(data => {
-        if (data && data._id) {
-          let parsedWebsite = JsonParserHelper.parseWeb(data);
-          if (parsedWebsite && parsedWebsite.Pages && parsedWebsite.Pages.length) {
-            let page: PageModel | undefined = undefined;
-            if (pageid)
-              page = parsedWebsite.Pages.find(x => x.Url === pageid) || parsedWebsite.Pages.find(x => x.IsSelected) || parsedWebsite.Pages[0];
-            this.updateWebsieState(parsedWebsite);
-            this.pageBehaviorSubject.next(page);
-          }
+        if (data && data.Id) {
+          this.parseWebsite(data, pageid, pageId3)
         }
         else {
           this.updateWebsieState(blackWebsite);
         }
       })
   }
+  parseWebsite(data: WebsiteModel, pageid: string, pageId3: string) {
+    // alert(pageId3)
+    let parsedWebsite = JsonParserHelper.parseWeb(data);
+    if (parsedWebsite && parsedWebsite.Pages && parsedWebsite.Pages.length) {
+      // debugger
+      let page: PageModel | undefined = undefined;
+      if (pageid)
+        page = parsedWebsite.Pages.find(x => x.Url === `/pages/${pageId3}`)
+          || parsedWebsite.Pages.find(x => x.Url === `/pages${pageid}`)
+          || parsedWebsite.Pages.find(x => x.Url === `${pageid}`)
+          || parsedWebsite.Pages.find(x => x.IsSelected)
+          || parsedWebsite.Pages[0];
 
+      this.updateWebsieState(parsedWebsite);
+      this.pageBehaviorSubject.next(page);
+    } else {
+      delete blackWebsite.Pages[0]._id;
+      blackWebsite.Pages[0].WebsiteId = parsedWebsite.WebsiteId;
+      this.create(`pages/create-page.php`, blackWebsite.Pages[0]).subscribe(pageCreated => {
+        if (pageCreated) {
+          parsedWebsite.Pages.push(pageCreated)
+          this.updateWebsieState(parsedWebsite);
+          this.pageBehaviorSubject.next(parsedWebsite.Pages[0]);
+        }
+      });
+    }
+  }
   selectWebsiteStyles(isMobileMode: boolean, website: WebsiteModel): WebsiteModel | undefined {
     if (website) {
       website.SelectedStyle = isMobileMode ? website.ItemMobileStyle : website.ItemStyle;
       // website.IsMobileView = isMobileMode;
-      if (website.Header) {
-        website.Header.SelectedStyle = isMobileMode ? website.Header.ItemMobileStyle : website.Header.ItemStyle;
-        if (website.Header.Rows) {
-          website.Header.Rows.map(row => {
-            row.SelectedStyle = isMobileMode ? row.ItemMobileStyle : row.ItemStyle;
-            if (row.Columns) {
-              row.Columns.map(c => {
-                c.SelectedStyle = isMobileMode ? c.ItemMobileStyle : c.ItemStyle;
-                if (c.Widgets) {
-                  c.Widgets.map(w => {
-                    w.SelectedStyle = isMobileMode ? w.ItemMobileStyle : w.ItemStyle;
-                    if (w.Children) {
-                      w.Children.map(ch => {
-                        ch.SelectedStyle = isMobileMode ? ch.ItemMobileStyle : ch.ItemStyle;
-                        return ch
-                      })
-                    }
+      if (website.Footer)
+        this.selectWidgetStyles(website.Footer, isMobileMode)
 
-                    if (w.Form) {
-                      w.Form.SelectedStyle = isMobileMode ? w.Form.ItemMobileStyle : w.Form.ItemStyle;
-                      if (w.Form.Inputs) {
-                        w.Form.Inputs.map(input => {
-                          input.SelectedStyle = isMobileMode ? input.ItemMobileStyle : input.ItemStyle;
-                          return input
-                        })
-                      }
-                    }
-                    return w;
-                  })
-                }
-                return c;
-              })
-            }
-            return row
-          })
-        }
-      }
+      if (website.Header)
+        this.selectWidgetStyles(website.Header, isMobileMode)
+
+
       return website;
     }
     return undefined;
@@ -157,117 +184,10 @@ export class WebsiteService {
       return page;
     }
     return;
-
-    // let size: any = localStorage.getItem("screen_size");
-    // if (size) {
-    //   size = parseInt(size);
-    //   if (size < 700) {
-    //     item.SelectedStyle = item.ItemMobileStyle;
-    //   } else {
-    //     item.SelectedStyle = item.ItemStyle;
-
-    //   }
-    // }
   }
 
-  geWdigets(page: PageModel, website: WebsiteModel): any {
-    this.get(`widgets/page/${page.PageId}`).subscribe(data => {
-      if (data && data.length) {
-        const parsedWidgets = JsonParserHelper.parseWidgets(data);
-        parsedWidgets.map(x => {
-          // this.selectTyles(x);
-          if (x.Form) {
-            // this.selectTyles(x.Form)
-            if (x.Form.Inputs) {
-              x.Form.Inputs.map(i => {
-                // this.selectTyles(i);
-                return i;
-              })
-            }
-          }
 
-          x.Children.map(c => {
-            return c
-          })
-          return x;
-        })
-        page.Sections.forEach(section => {
-          // this.selectTyles(section)
-          section.Rows.forEach(row => {
-            // this.selectTyles(row)
-            row.Columns.forEach(column => {
-              column.Widgets = parsedWidgets.filter(x => x.ColumnId === column.ColumnId);
-            })
-          })
-        });
 
-        if (website.Header) {
-          // this.selectTyles(website.Header)
-          website.Header.Rows.forEach(row => {
-            // this.selectTyles(row)
-            row.Columns.forEach(column => {
-              column.Widgets = parsedWidgets.filter(x => x.ColumnId === column.ColumnId);
-            })
-          })
-        }
-
-        if (website.Footer) {
-          website.Footer.Rows.forEach(row => {
-            // this.selectTyles(row)
-            row.Columns.forEach(column => {
-              column.Widgets = parsedWidgets.filter(x => x.ColumnId === column.ColumnId);
-            })
-          })
-        }
-        this.updateWebsieState(website);
-        this.pageBehaviorSubject.next(page);
-      }
-      else {
-        this.updateWebsieState(website);
-      }
-
-    });
-
-    // this.websiteService.updateWebsieState(this.website);
-    // return { page: page, website: website };
-  }
-  getDisplaySize(page: PageModel, website: WebsiteModel) {
-    // page.Sections.forEach(section => {
-
-    //   if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
-    //     section.SelectedStyle = section.ItemMobileStyle;
-    //   }
-
-    //   if (this.website && this.website.ViewDevice === DeviceTypes.PC) {
-    //     section.SelectedStyle = section.ItemStyle;
-    //   }
-    //   section.Rows.forEach(row => {
-
-    //     if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
-    //       row.SelectedStyle = row.ItemMobileStyle;
-    //     }
-
-    //     if (this.website && this.website.ViewDevice === DeviceTypes.PC) {
-    //       row.SelectedStyle = row.ItemStyle;
-    //     }
-    //     row.Columns.forEach(col => {
-    //       console.log();
-    //       if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
-    //         col.SelectedStyle = col.ItemMobileStyle;
-    //       }
-
-    //       if (this.website && this.website.ViewDevice === DeviceTypes.PC) {
-    //         col.SelectedStyle = col.ItemStyle;
-    //       }
-    //       col.Widgets = widgets.filter(x => x.ColumnId === col.ColumnId);
-    //       if (col.Widgets.length)
-    //         console.log('col', col);
-
-    //     })
-    //   });
-
-    // });
-  }
   loadSites() {
     let website = null;
     const sites = localStorage.getItem("_sites");
@@ -292,18 +212,142 @@ export class WebsiteService {
   create(endpoint: string, item: any) {
     return this.http.post<any>(`${this.url}/${endpoint}`, item);
   }
+  login(endpoint: string, item: any) {
+    return this.http.post<any>(`${this.url}/${endpoint}`, item);
+  }
   get(endpoint: string) {
     return this.http.get<any>(`${this.url}/${endpoint}`);
+  }
+  getCollections() {
+    const id = localStorage.getItem("_website");
+    if (!id) {
+      this.updateCollectionState([]);
+      return;
+    }
+    this.get(`collections/${id}`).subscribe(data => {
+      if (data && data.length) {
+        this.updateCollectionState(data);
+      }
+    })
+
+  }
+  getuser(endpoint: string) {
+    return this.http.get<any>(`${this.url}/${endpoint}`, { withCredentials: true });
   }
   delete(endpoint: string) {
     return this.http.delete<any>(`${this.url}/${endpoint}`);
   }
-  post(url: string, item: any) {
-    return this.http.post(url, item);
+  // post(url: string, item: any) {
+  //   return this.http.post(url, item);
+  // }
+
+  getAllFonts(endpoint: string = Constants.GOOGLE_FONTS_URL) {
+    return this.http.get<FontModel>(`${endpoint}`);
   }
   updateWebsieState(site: WebsiteModel) {
     this.websiteBehaviorSubject.next(site);
     // localStorage.setItem("_website", JSON.stringify(site));
   }
+  updatePageState(page: PageModel) {
+    this.pageBehaviorSubject.next(page);
+  }
+  updateUserState(user: UserModel) {
+    this.userBehaviorSubject.next(user);
+    if (user)
+      localStorage.setItem("_user", JSON.stringify(user));
+    else
+      localStorage.removeItem("_user");
+  }
+  updateFontsState(font: FontModel) {
+    this.fontsBehaviorSubject.next(font);
+  }
+  updateCollectionState(collections: DbCollectionModel[]) {
+    this.collectionsBehaviorSubject.next(collections);
+  }
+  syncWidgteNow(widget: WidgetModel, userId: string) {
+    const iwid: IUpdateWidget = {
+      ParentId: widget.ParentId,
+      Name: widget.Name,
+      OrderNumber: widget.OrderNumber,
+      Settings: widget.Settings,
+      BackgroundType: widget.BackgroundType,
+      FeildName: widget.FeildName || '',
+      DbTable: widget.DbTable,
+      ItemEventName: widget.ItemEventName || '',
+      ItemFormat: widget.ItemFormat || '',
+      ItemEvent: widget.ItemEvent,
+      UrlId: widget.UrlId,
+      ItemContent: widget.ItemContent,
+      ItemClass: widget.ItemClass.filter((x: string) => x !== "active-node"),
+      ItemCategory: widget.ItemCategory,
+      ModifyUserId: userId,
+      StatusId: widget.StatusId,
+      Id: widget.Id
+    }
+    this.create(`widgets/update-widget.php`, iwid).subscribe(data => {
+    });
+  }
 
+  saveWidget(widgets: WidgetModel[], website: WebsiteModel, page: PageModel) {
+    WidgetHelper.removeClass(widgets, 'active-node')
+    const fresh_widgets = WidgetHelper.IsolateWidget([], page.Widgets);
+    fresh_widgets.map(x => x.WebsiteId = website.WebsiteId)
+    const classess: WebstyleModel[] = [];
+    fresh_widgets.forEach(w => {
+      const c = website.GetStyles(w.ItemClass[0]);
+      if (c)
+        classess.push(c)
+    })
+
+    this.create(`widgets/add-widgets-range.php`, fresh_widgets).subscribe(data => { });
+    if (classess.length) {
+      this.create(`webstyles/save-webstyles.php`, classess).subscribe(data => { });
+    }
+
+  }
+
+
+  saveWidgetsRange(widgets: WidgetModel[], website: WebsiteModel) {
+    WidgetHelper.removeClass(widgets, 'active-node')
+    const fresh_widgets = WidgetHelper.IsolateWidget([], widgets);
+    fresh_widgets.map(x => x.WebsiteId = website.WebsiteId)
+    fresh_widgets.map(x => x.OrderNumber = 1)
+    const classess: WebstyleModel[] = [];
+    fresh_widgets.forEach(w => {
+      const c = website.GetStyles(w.ItemClass[0]);
+      if (c)
+        classess.push(c)
+    })
+
+    this.create(`widgets/add-widgets-range.php`, fresh_widgets).subscribe(data => { });
+    if (classess.length) {
+      this.create(`webstyles/save-webstyles.php`, classess).subscribe(data => { });
+    }
+
+  }
+
+  savePageChanges(page: PageModel) {
+    this.create(`pages/update-page.php`, page).subscribe(data => {
+    });
+  }
+
+  saveWebsiteChanges(website: any) {
+    this.create(`websites/update-webisite-only.php`, website).subscribe(data => {
+    });
+  }
+  saveWidgetChanges(widget: IUpdateWidget) {
+    this.create(`widgets/update-widget.php`, widget).subscribe(data => {
+    });
+  }
+
+  saveAddedWidget(widget: WidgetModel, website: WebsiteModel) {
+    widget.WebsiteId = website.WebsiteId
+    this.create(`widgets/add-widgets-range.php`, [widget]).subscribe(data => { });
+    if (website.WebsiteStyles.length && widget.ItemClass.length) {
+      const selectedClass = website.WebsiteStyles.find(x => x.SelectorName === widget.ItemClass[0])
+      if (selectedClass)
+        this.create(`webstyles/save-webstyles.php`, [selectedClass]).subscribe(data => { });
+    }
+    // debugger
+  }
 }

@@ -1,0 +1,32 @@
+@import "../../../../../assets/styles/colors";
+.grid-2 {
+    margin: 0;
+}
+._input {
+    position: relative;
+}
+.group-options {
+    position: absolute;
+    left: 22rem;
+    z-index: 100;
+    top: 1rem;
+    width: 30rem;
+}
+._add {
+    background: $bg;
+    color: #fff;
+}
+
+p {
+    margin: 0;
+}
+.form-control{
+    padding: .1rem;
+    margin: 0;
+    font-size: .75rem;
+}
+
+.list-group-item {
+    position: relative;
+    padding: 0.2rem;
+}

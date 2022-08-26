@@ -1,4 +1,5 @@
 // @import "../../../../assets/styles/colors";
 .tabs {
-    grid-template-columns: repeat(2, 50%);
+    // grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(3, 33.3%);
 }

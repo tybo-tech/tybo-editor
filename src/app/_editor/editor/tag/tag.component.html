@@ -1,0 +1,194 @@
+<div #box alt="" *ngIf="widget && widget.ItemType === SectionTypes.IMAGE && backgroundImg" [ngClass]="widget.ItemClass"
+    (click)="toggleOptions()" class="resizable-draggable image-holder" [class.active]="status === 1 || status === 2"
+    (mousedown)="setStatus($event, 2)" [style.background-image]="backgroundImg" (window:mouseup)="setStatus($event, 0)">
+    <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+    <!-- <div class="_menuu  d-flex justify-content-start" *ngIf="widget.ShowOptions">
+        <div class="_item" (click)="showImage = true">
+            Change Image
+        </div>
+        <div class="_item" (click)="showImage = true">
+            Dynamic
+           <i class="fas fa-database"></i>
+        </div>
+        <div class="_item" (click)="copyElement()">
+            <i class="bi bi-files"></i>Copy
+        </div>
+        <div class="_item" (click)="delete()">
+            <i class="bi bi-trash"> </i>Delete
+        </div>
+    </div> -->
+    <span class="_container-menu">
+        <app-tag-menu (dbEvent)="dbEvent()" *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+            [website]="website" [widget]="widget"> </app-tag-menu>
+    </span>
+</div>
+
+
+<h6 #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXT" class="resizable-draggable"
+    (dblclick)="setEditText()" [ngClass]="widget.ItemClass" [class.active]="status === 1 || status === 2"
+    (mousedown)="setStatus($event, 2)" (window:mouseup)="setStatus($event, 0)" (click)="toggleOptions()">
+    <font *ngIf="widget.ItemFormat !== 'Currency'" [innerHTML]="widget.ItemContent"></font>
+    <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
+    <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+    <span class="_container-menu">
+        <app-tag-menu (setEditText)="setEditText()" (deleteEvent)="delete()" (cloneEvent)="clone()"
+            (clickEvent)="onClickEvent()"  (copyStyleEvent)="copyStyles()"   (pasteStyleEvent)="pasteStyles()"   *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+            [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+</h6>
+
+
+
+<h1 #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.HEADING" class="resizable-draggable"
+    (dblclick)="setEditText()" [ngClass]="widget.ItemClass" [class.active]="status === 1 || status === 2"
+    (mousedown)="setStatus($event, 2)" (window:mouseup)="setStatus($event, 0)" (click)="toggleOptions()">
+    <font [innerHTML]="widget.ItemContent"></font>
+    <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+    <span class="_container-menu">
+        <app-tag-menu (setEditText)="setEditText()" (deleteEvent)="delete()" (cloneEvent)="clone()"
+            (clickEvent)="onClickEvent()"  (copyStyleEvent)="copyStyles()"   (pasteStyleEvent)="pasteStyles()"   *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+            [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+    <!-- <div class="_menuu d-flex justify-content-start" *ngIf="widget.ShowOptions">
+        <div class="_item" (click)="setEditText()">
+            <i class="bi bi-pencil"></i> Text
+        </div>
+
+        <div class="_item" (click)="showImage = true">
+            <i class="fas fa-database"></i>
+            Dynamic
+        </div>
+        <div class="_item" (click)="copyElement()">
+            <i class="bi bi-files"></i>Copy
+        </div>
+
+        <div class="_item" (click)="copyStyles()">
+            <i class="bi bi-brush"> </i>Copy
+        </div>
+        <div class="_item" *ngIf="showPasteStyles" (click)="pasteStyles()">
+            <i class="bi bi-brush"> </i>Paste
+        </div>
+        <div class="_item" (click)="delete()">
+            <i class="bi bi-trash"> </i>Delete
+        </div>
+    </div> -->
+</h1>
+
+
+
+<h2 #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.SUB_HEADING" class="resizable-draggable"
+    (dblclick)="setEditText()" [ngClass]="widget.ItemClass" [class.active]="status === 1 || status === 2"
+    (mousedown)="setStatus($event, 2)" (window:mouseup)="setStatus($event, 0)" (click)="toggleOptions()">
+    <font *ngIf="widget.ItemFormat !== 'Currency'" [innerHTML]="widget.ItemContent"></font>
+    <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
+    <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+    <span class="_container-menu">
+        <app-tag-menu (setEditText)="setEditText()" (deleteEvent)="delete()" (cloneEvent)="clone()"
+            (clickEvent)="onClickEvent()"  (copyStyleEvent)="copyStyles()"   (pasteStyleEvent)="pasteStyles()"   *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+            [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+    <!-- <div class="_menuu d-flex justify-content-start" *ngIf="widget.ShowOptions">
+        <div class="_item" (click)="setEditText()">
+            <i class="bi bi-pencil"></i> Text
+        </div>
+
+        <div class="_item" (click)="showImage = true">
+            <i class="fas fa-database"></i>
+            Dynamic
+        </div>
+        <div class="_item" (click)="copyElement()">
+            <i class="bi bi-files"></i>Copy
+        </div>
+
+        <div class="_item" (click)="copyStyles()">
+            <i class="bi bi-brush"> </i>Copy
+        </div>
+        <div class="_item" *ngIf="showPasteStyles" (click)="pasteStyles()">
+            <i class="bi bi-brush"> </i>Paste
+        </div>
+        <div class="_item" (click)="delete()">
+            <i class="bi bi-trash"> </i>Delete
+        </div>
+    </div> -->
+</h2>
+
+
+<!-- menu -->
+<div *ngIf="editText && widget" class="menu-menu" [style.width.px]="width" [ngClass]="widget.ItemClass"
+    [style.height.px]="height" [style.transform]="'translate3d('+ left + 'px,' + top + 'px,' + '0px)'"
+    [class.active]="status === 1 || status === 2">
+    <div class="_menuu d-flex justify-content-start" *ngIf="widget.ShowOptions">
+        <div class="_item" (click)="finish()">
+            <i class="bi bi-check"></i> Apply changes
+        </div>
+    </div>
+</div>
+
+
+
+
+<h6 #box *ngIf="editText && widget && widget.ItemType === SectionTypes.TEXT" (click)="toggleOptions()"
+    class="resizable-draggable editing" [(ngModel)]="widget.ItemContent" contenteditable [ngClass]="widget.ItemClass"
+    [class.active]="status === 1 || status === 2">
+    {{widget.ItemContent}}
+    <div class="resize-action"></div>
+</h6>
+
+<h1 #box *ngIf="editText && widget && widget.ItemType === SectionTypes.HEADING" (click)="toggleOptions()"
+    class="resizable-draggable editing" [(ngModel)]="widget.ItemContent" contenteditable [ngClass]="widget.ItemClass"
+    [class.active]="status === 1 || status === 2">
+    {{widget.ItemContent}}
+    <div class="resize-action"></div>
+</h1>
+
+
+
+
+
+
+
+<button #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.BUTTON" (click)="toggleOptions()"
+    class="resizable-draggable" [ngClass]="widget.ItemClass" [class.active]="status === 1 || status === 2"
+    (mousedown)="setStatus($event, 2)" (window:mouseup)="setStatus($event, 0)">
+    <font [innerHTML]="widget.ItemContent"></font>
+    <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+    <span class="_container-menu">
+        <app-tag-menu (setEditText)="setEditText()" (deleteEvent)="delete()" (cloneEvent)="clone()"
+            (clickEvent)="onClickEvent()"  (copyStyleEvent)="copyStyles()"   (pasteStyleEvent)="pasteStyles()"   *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+            [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+</button>
+
+
+
+
+<div *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXTBOX"
+    class="resizable-draggable input-holder-box" #box (click)="toggleOptions()" [ngClass]="widget.ItemClass"
+    [class.active]="status === 1 || status === 2" (mousedown)="setStatus($event, 2)"
+    (window:mouseup)="setStatus($event, 0)">
+
+    <input [(ngModel)]="widget.ItemContent" />
+    <div class="resize-action" *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXTBOX"
+        (mousedown)="setStatus($event, 1)"></div>
+    <span class="_container-menu" *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXTBOX">
+        <app-tag-menu (setEditText)="setEditText()" (deleteEvent)="delete()" (cloneEvent)="clone()"
+            (clickEvent)="onClickEvent()"  (copyStyleEvent)="copyStyles()"   (pasteStyleEvent)="pasteStyles()"   *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+            [website]="website" [widget]="widget">
+        </app-tag-menu>
+    </span>
+</div>
+
+
+
+<div #box *ngIf="editText && widget && widget.ItemType === SectionTypes.BUTTON" [(ngModel)]="widget.ItemContent"
+    style="display:flex; align-items: center; justify-content: center;" contenteditable [ngClass]="widget.ItemClass"
+    (change)="textChanged()" [class.active]="status === 1 || status === 2" type="text"></div>
+
+<app-image-picker *ngIf="showImage" (onClose)="showImage= false" (onImageSelect)="onImageSelect($event)">
+</app-image-picker>
+
+<app-widget-events [widget]="widget" *ngIf="widget && showEvents && page && website && user" [user]="user" [website]="website" [page]="page" (onClose)="showEvents= false"></app-widget-events>

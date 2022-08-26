@@ -1,0 +1,51 @@
+@import "../../../../../assets/styles/colors";
+.container-menu {
+    position: fixed;
+    background: $white;
+    // bottom: -2rem;
+    z-index: 1000;
+    box-shadow: $box-shadow;
+    padding: 0;
+
+    @media only screen and (max-width: 600px) {
+        position: fixed;
+        bottom: unset;
+    }
+    ._items {
+        display: flex;
+        justify-content: flex-start;
+        padding: 0;
+        ._item {
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            border: 1px solid $grey;
+            margin: 0;
+            color: $bg;
+            text-align: left;
+            cursor: pointer;
+            select {
+                border: none;
+                font-size: 0.7rem;
+                display: block;
+                z-index: 1000;
+                cursor: pointer;
+                option {
+                    z-index: 55555555;
+                }
+            }
+        }
+    }
+}
+._select {
+    position: absolute;
+    top: 1.5rem;
+    left: 0;
+    background: $white;
+    box-shadow: $box-shadow;
+    border: 1px solid $grey;
+    width: 100%;
+    padding: 0.5rem;
+    animation: identifier 0.2s ease-in-out;
+    animation-fill-mode: backwards;
+    overflow: hidden;
+}

@@ -11,4 +11,6 @@
 .dragging{
     opacity: .5;
     background: rgb(110, 132, 240) !important;
+    transition: transform 250ms cubic-bezier(0,0,0.2,1);
+    animation: 2s ease-in-out;
 }

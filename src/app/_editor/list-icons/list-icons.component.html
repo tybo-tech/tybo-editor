@@ -1,0 +1,19 @@
+<div class="overlay" (click)="close()"></div>
+<div class="_picker options-modal">
+    <div class="heading d-flex justify-content-between">
+        <h5>
+            Font awesome icons
+        </h5>
+
+        <i (click)="close()" class="_close fas fa-times"></i>
+    </div>
+
+
+    <div class="__body" *ngIf="icons">
+        <input [(ngModel)]="searchString" type="search" placeholder="Search for icons" class="form-control">
+        <br>
+        <div class="p-3">
+            <i *ngFor="let item of icons | stringfilter: searchString" class="pointer" [ngClass]="item" style="margin-right: .4rem;"  (click)="select(item)"></i>
+        </div>
+    </div>
+</div>

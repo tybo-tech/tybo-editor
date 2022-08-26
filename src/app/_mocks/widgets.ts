@@ -86,16 +86,33 @@ export const menus: WidgetModel[] = [
 
 export const quickAdd: WidgetModel[] = [
     new WidgetModel('Container', 'master-column', 'master-page', 'Container', SectionTypes.CONTAINER,`assets/images/editor/container.svg`),
-    // new WidgetModel('section-empty', 'master-column', 'master-page', 'Empty Section', SectionTypes.EMPTY),
-    new WidgetModel('text', 'master-column', 'master-page', 'Text', SectionTypes.TEXT, `assets/images/editor/text.svg`),
+    new WidgetModel('text', 'master-column', 'master-page', 'Heading', SectionTypes.HEADING, `assets/images/editor/heading.svg`),
+    // new WidgetModel('text', 'master-column', 'master-page', 'Sub Heading', SectionTypes.SUB_HEADING, `assets/images/editor/sub-heading.svg`),
+    new WidgetModel('text', 'master-column', 'master-page', 'Paragraph', SectionTypes.TEXT, `assets/images/editor/text.svg`),
+    new WidgetModel('text', 'master-column', 'master-page', 'Link', SectionTypes.LINK, `assets/images/editor/text.svg`),
     new WidgetModel('image', 'master-column', 'master-page', 'Image', SectionTypes.IMAGE, `assets/images/editor/image.svg`),
-    new WidgetModel('card-1', 'master-column', 'master-page', 'Card', SectionTypes.CARD1, `assets/images/editor/1card.svg`),
     button,
-    wid_cards[2], wid_cards[3],
     new WidgetModel('card-1', 'master-column', 'master-page', 'Header', SectionTypes.HEADER, `assets/images/editor/1card.svg`),
-    new WidgetModel('form-1', 'master-column', 'master-page', 'Forms', SectionTypes.FORM, `assets/images/editor/1card.svg`),
+    new WidgetModel('form-1', 'master-column', 'master-page', 'Form', SectionTypes.FORM, `assets/images/widgets/froms-widget.svg`),
+    new WidgetModel('textbox', 'master-column', 'master-page', 'Textbox', SectionTypes.TEXTBOX, `assets/images/widgets/froms-widget.svg`),
+    new WidgetModel('text-area', 'master-column', 'master-page', 'Textarea', SectionTypes.TEXTAREA, `assets/images/widgets/froms-widget.svg`),
+    new WidgetModel('check-box', 'master-column', 'master-page', 'Checkbox', SectionTypes.CHECKBOX, `assets/images/widgets/froms-widget.svg`),
+    new WidgetModel('dropdown', 'master-column', 'master-page', 'Dropdown', SectionTypes.DROPDOWN, `assets/images/widgets/froms-widget.svg`),
+    // new WidgetModel('radio', 'master-column', 'master-page', 'Radio button', SectionTypes.RADIO, `assets/images/widgets/froms-widget.svg`),
     menu,
     mobilemenu
+    // new WidgetModel('section-empty', 'master-column', 'master-page', 'Empty Section', SectionTypes.EMPTY),
+    // new WidgetModel('card-1', 'master-column', 'master-page', 'Card', SectionTypes.CARD1, `assets/images/editor/1card.svg`),
+    // wid_cards[2], wid_cards[3],
 ];
+
+export const databsesElements: WidgetModel[] = [
+    new WidgetModel('data-list', 'master-column', 'master-page', 'Item List', SectionTypes.DB_LIST, `assets/images/editor/db-list.svg`),
+    new WidgetModel('data-details', 'master-column', 'master-page', 'Item Details', SectionTypes.DB_DETAILS, `assets/images/editor/db-list.svg`),
+    new WidgetModel('data-add', 'master-column', 'master-page', 'Create Item', SectionTypes.DB_ADD, `assets/images/editor/db-list.svg`),
+    new WidgetModel('data-update', 'master-column', 'master-page', 'Update Item', SectionTypes.DB_UPDATE, `assets/images/editor/db-list.svg`),
+    new WidgetModel('data-delete', 'master-column', 'master-page', 'Delete Item', SectionTypes.DB_DELETE, `assets/images/editor/db-list.svg`),
+];
+
 
 // export const wid_simple_header: WidgetModel = new WidgetModel('simple-nav', 'Simple Navigation bar', "Nav-1", SectionTypes.NAV, []);

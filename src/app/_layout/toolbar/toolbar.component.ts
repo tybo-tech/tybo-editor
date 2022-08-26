@@ -3,7 +3,7 @@ import { ToolbarModel } from 'src/app/_classes/ToolbarModel';
 import { WidgetModel } from 'src/app/_classes/WidgetModel';
 import { SectionTypes } from 'src/app/_classes/_statics/SectionTypes';
 import { subMenu } from 'src/app/_mocks/menus';
-import { quickAdd } from 'src/app/_mocks/widgets';
+import { databsesElements, quickAdd } from 'src/app/_mocks/widgets';
 import { EventService } from 'src/app/_services/event.service';
 
 @Component({
@@ -27,6 +27,7 @@ export class ToolbarComponent implements OnInit {
   ]
   tabId: string = this.tabs[0].Id;
   elements: WidgetModel[];
+  databsesElements: WidgetModel[];
 
   constructor(private eventService: EventService) { }
 
@@ -35,6 +36,7 @@ export class ToolbarComponent implements OnInit {
     // this.subMenu = subMenu;
     // this.menuSections = subMenu[0].Nodes;
     this.elements = quickAdd;
+    this.databsesElements = databsesElements;
 
     this.eventService.optionsObservable.subscribe(data => {
       if (data)

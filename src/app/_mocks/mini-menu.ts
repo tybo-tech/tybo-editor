@@ -20,9 +20,9 @@ export const COl_MINI_MENU: MiniMenu[] = [
 export const ELEMENT_MINI_MENU: MiniMenu[] = [
     { Name: `<i class="fas fa-copy"></i> Copy styles`, Action: 'copy-styles' },
     { Name: `<i class="fas fa-copy"></i> Copy element`, Action: 'copy-element' },
-    { Name: `<i class="fas fa-copy"></i> Change image`, Action: 'select-image' },
+    // { Name: `<i class="fas fa-copy"></i> Change image`, Action: 'select-image' },
     { Name: `<i class="fas fa-trash"></i> Delete`, Action: 'delete' },
-    { Name: `<i class="fas fa-clipboard"></i> Paste styles`, Action: 'paste-styles' }
+    // { Name: `<i class="fas fa-clipboard"></i> Paste styles`, Action: 'paste-styles' }
     // { Name: ``, Action: 'xxxxxx' },
 ]
 

@@ -1,0 +1,22 @@
+<div *ngIf="input && page && website && event" class="_input grid-2">
+    <label>{{input.Name}}</label>
+    <div>
+        <input type="text" readonly class="form-control pointer" placeholder="Select source..."
+            [(ngModel)]="input.Source" (click)="toggleViewOptions(input)">
+        <ul class="list-group list-group-wider group-options" style="left: 15rem;" *ngIf="input.ViewOptions">
+            <li class="list-group-item _add">Get {{event.Name}} from...</li>
+            <li class="list-group-item">
+                <div (click)="input.SourceId = 'set'; input.Source = 'mrnnmthembu@gmail.com'">
+                    Set value as...
+                </div>
+
+                <div *ngIf="input.SourceId === 'set'">
+                    <textarea class="form-control" [(ngModel)]="input.Source"> </textarea>
+                </div>
+            </li>
+            <li class="list-group-item" *ngFor="let _input of inputWidgets"
+                (click)="input.Source = _input.Name; input.SourceId = _input.WidgetId; input.ViewOptions= false; saveInputsEvent()">
+                {{_input.Name}}</li>
+        </ul>
+    </div>
+</div>

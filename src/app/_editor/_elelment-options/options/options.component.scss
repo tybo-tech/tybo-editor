@@ -49,6 +49,7 @@
         font-size: 0.85rem;
         text-transform: uppercase;
         text-align: center;
+        font-size: .75rem;
     }
     select {
         -webkit-appearance: none;
@@ -69,6 +70,6 @@
 }
 
 .grid-2 {
-    grid-template-columns: 20% auto;
+    grid-template-columns: 25% auto;
     gap: 0;
 }

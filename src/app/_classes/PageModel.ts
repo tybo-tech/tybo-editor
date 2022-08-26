@@ -1,9 +1,11 @@
 import { hero_col_1, hero_col_2, wid_cards } from "../_mocks/widgets";
 import { ColumnModel } from "./ColumnModel";
 import { ContainerModel } from "./ContainerModel";
+import { DbTableModel } from "./DbTableModel";
 import { MainClass } from "./MainClass";
 import { RowModel } from "./RowModel";
 import { SectionModel } from "./SectionModel";
+import { WebsiteModel } from "./WebsiteModel";
 import { WidgetModel } from "./WidgetModel";
 import { HelperClass } from "./_statics/HelperClass";
 import { SectionTypes } from "./_statics/SectionTypes";
@@ -18,14 +20,23 @@ export class PageModel extends MainClass {
     Title: string;
     Name: string;
     Url: string;
+    TableName: string;
+    TableDisplayColName: string;
+    UrlId: any;
     Styles: any;
     Sections: SectionModel[];
     Containers: ContainerModel[];
     Widgets: WidgetModel[];
     PageStatus: string;
     StyleClass: string;
+    DataTittle: string;
     DisplayHeader: boolean;
     DisplayFooter: boolean;
+    Tables: any[];
+    PageData: any;
+    SelectedTable: DbTableModel;
+    // TableIdListString: string[];
+    // PageData: any;
     constructor(
         PageId: string,
         showInNav: boolean,
@@ -38,7 +49,8 @@ export class PageModel extends MainClass {
         sections: SectionModel[],
         styleClass = 'link',
         DisplayHeader = true,
-        DisplayFooter = true
+        DisplayFooter = true,
+        UrlId = false
     ) {
         super();
         this.PageId = PageId;
@@ -53,6 +65,7 @@ export class PageModel extends MainClass {
         this.StyleClass = styleClass;
         this.DisplayHeader = DisplayHeader;
         this.DisplayFooter = DisplayFooter;
+        this.UrlId = UrlId;
         this.Containers = [];
         this.Widgets = [];
     }
@@ -166,5 +179,15 @@ export class PageModel extends MainClass {
         });
     }
 
+
+    RecursiveWidget(arr: WidgetModel[], id: string) {
+        return arr
+            .filter((el) => el.WidgetId !== id)
+            .map((el) => {
+                if (!el.Children || !Array.isArray(el.Children)) return el;
+                el.Children = this.RecursiveWidget(el.Children, id);
+                return el;
+            });
+    }
 
 }

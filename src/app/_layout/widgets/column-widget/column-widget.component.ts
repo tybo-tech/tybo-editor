@@ -83,8 +83,8 @@ export class ColumnWidgetComponent implements OnInit {
     deleteEvent(e:any) {
         if (e) {
             this.container.DeleteWidget(this.index);
-            if (this.widget._id)
-                this.websiteService.delete(`widgets/${this.widget._id}`).subscribe(data => {
+            if (this.widget.Id)
+                this.websiteService.delete(`widgets/${this.widget.Id}`).subscribe(data => {
                     console.log(data);
                 })
         }

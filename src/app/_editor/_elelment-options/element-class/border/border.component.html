@@ -1,0 +1,63 @@
+<div class="_bg-container">
+
+
+
+    <div class="direction">
+
+        <div class="__items grid-1">
+            <button class="btn btn-light" (click)="typeChanged('top')">
+                Top
+            </button>
+        </div>
+
+        <div class="__items grid-3">
+            <button class="btn btn-light" (click)="typeChanged('left')">
+                left
+            </button>
+
+            <button style="padding:.22rem" class="btn btn-light" (click)="typeChanged('all')">
+                <img src="assets/images/border-radius-all.svg" style="width:.85rem; margin: .1rem auto;" class="pointer"
+                    alt="">
+            </button>
+
+            <button class="btn btn-light" (click)="typeChanged('right')">
+                right
+            </button>
+        </div>
+
+        <div class="__items grid-1">
+            <button class="btn btn-light" (click)="typeChanged('bottom')">
+                bottom
+            </button>
+        </div>
+
+
+        <div class="__items grid-1">
+            <br>
+            <label>
+                All Corners:
+            </label>
+            <input class="form-control w-100" [(ngModel)]="border" type="range" step="1" max="100" min="0"
+                (input)="omit()" />
+
+            <div class="d-flex justify-content-between" style="color: rgb(165, 165, 165); font-size: .7rem;">
+                <span>
+                    Sharper
+                </span>
+
+                <span>
+                    Softer
+                </span>
+            </div>
+
+            <br>
+            <label>
+                Color:
+            </label>
+            <input class="form-control w-100" [(ngModel)]="borderColor" type="color" (input)="omit()" />
+
+        </div>
+
+        <br>
+    </div>
+</div>

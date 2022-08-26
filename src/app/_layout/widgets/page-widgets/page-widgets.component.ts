@@ -115,14 +115,14 @@ export class PageWidgetsComponent implements OnInit {
 
 
 
-    this.eventService.updateOptionsState(null);
+    this.eventService.updateOptionsState(undefined);
     setTimeout(() => {
       inputContainer.ShowOptions = !inputContainer.ShowOptions;
       if (inputContainer.ShowOptions) {
         this.eventService.updateOptionsState(inputContainer)
       }
       else
-        this.eventService.updateOptionsState(null);
+        this.eventService.updateOptionsState(undefined);
     }, 100)
   }
 }

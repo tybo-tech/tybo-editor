@@ -5,18 +5,26 @@
 
     <div class="d-flex justify-content-start">
       <div class="item">
-        <app-toolbar *ngIf="showAdd" (menuEvent)="menuEvent($event)"></app-toolbar>
-
+        <a class="_nav-btn" routerLink="/account/workspace"> <i class="fas fa-home"></i> </a>
       </div>
       <div class="item">
-        <a class="_nav-btn" (click)="addElement()"><i class="fas fa-plus"></i> Add</a>
+        <a class="_nav-btn" (click)="showImage = true"> <i class="fas fa-images"></i> </a>
+      </div>
+      <!-- <div class="item">
+        <a class="_nav-btn" (click)="addElement()"> <i class="fas fa-layer-group"></i> </a>
+      </div> -->
+      <div class="item">
+        <a class="_nav-btn" (click)="showDatabase = true"><i class="fas fa-database"></i> </a>
       </div>
       <div class="item">
-        <a class="_nav-btn" (click)="preVeiw()"><i class="fas fa-play"></i> Preview</a>
+        <a class="_nav-btn" (click)="showCss = true">CSS</a>
+      </div>
+      <div class="item">
+        <a class="_nav-btn" href="/pages" target="_blank"><i class="fas fa-play"></i> </a>
       </div>
       <div class="item" style="padding-right: 2rem;">
         <div class="input-group input-group-sm">
-          <input type="text" class="form-control" *ngIf="website" disabled [(ngModel)]="website.WebsiteId"
+          <input type="text" class="form-control" *ngIf="website" disabled [(ngModel)]="website.Url"
             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
           <span class="input-group-text" id="inputGroup-sizing-sm" (click)="toggleWebClose()"><i
               class="fas fa-cog pointer"></i></span>
@@ -39,89 +47,116 @@
           <span class="input-group-text" (click)="toggleClose()" id="inputGroup-sizing-sm"><i
               class="fas fa-cog pointer"></i></span>
         </div>
-        <app-page-settings [website]="website" *ngIf="website.ShowPages" (closeEvent)="toggleClose()">
+        <app-page-settings [website]="website" *ngIf="website && website.ShowPages" (closeEvent)="toggleClose()">
         </app-page-settings>
 
       </div>
+
+      <div class="item" *ngIf="pageDbItems && pageDbItems.length && page && page.TableName && page.PageData">
+
+
+        <div class="input-group input-group-sm">
+          <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-database"></i></span>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="page.PageData['DataId']"
+            (change)="dataChanged()">
+            <option [value]="pageItem['DataId']" *ngFor="let pageItem of pageDbItems">
+              {{page.TableName}}: {{pageItem[page.TableDisplayColName || "Name"]}}
+            </option>
+          </select>
+        </div>
+
+
+      </div>
       <div style="width: 2rem;"></div>
-      <div class="item">
-        <a class="_nav-btn" (click)="phoneVew()"><i class="fas fa-mobile-alt"></i></a>
+
+      <div class="item d-flex ">
+        <a class="_nav-btn _nav-btn-sm-padding" (click)="pcView()"><i class="fas fa-desktop"></i> </a>
+        <a class="_nav-btn _nav-btn-sm-padding" (click)="phoneVew()"><i class="fas fa-mobile-alt"></i></a>
       </div>
 
-      <div class="item">
-        <a class="_nav-btn" (click)="pcView()"><i class="fas fa-desktop"></i> </a>
-      </div>
+
     </div>
-    <div class="d-flex justify-content-end">
-      <a class="_nav-btn" (click)="savePage()"><i class="fas fa-save"></i> Save changes</a>
-      <a class="_nav-btn"><i class="fas fa-upload"></i> Publish site</a>
-    </div>
+    <!-- <div class="d-flex justify-content-end"> -->
+    <a class="_nav-btn" (click)="savePage()"><i class="fas fa-save"></i> Save changes</a>
+
+    <!-- </div> -->
 
   </div>
 
 </div>
+
+
 
 <div class="container-fluid">
 
   <div class="grid-side-menu">
 
     <div class="styles-menu">
-      <app-element-tools></app-element-tools>
+      <app-toolbar *ngIf="!selectWidget" (menuEvent)="menuEvent($event)"></app-toolbar>
+      <app-element-tools *ngIf="selectWidget && website && page" [website]="website" [page]="page"></app-element-tools>
+      <!-- <div class="btn-group menu-actions" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-dark" (click)="pcView()"><i class="fas fa-desktop"></i></button>
+        <button type="button" class="btn btn-dark" (click)="phoneVew()"><i class="fas fa-mobile-alt"></i></button>
+        <button type="button" (click)="savePage()" class="btn btn-success"><i class="fas fa-save"></i></button>
+      </div> -->
     </div>
 
     <!-- MAIN WEBSITE -->
     <div class="editor" [ngClass]="mainClass">
       <div class="__content">
 
-        <!-- <app-side-menu></app-side-menu> -->
+        <div *ngIf="website" [ngClass]="website.ItemClass" class="website-body _container">
+          <div class="seletor parent-seletor" (click)="toggleBodyOptions(website)">Body</div>
 
-        <!-- GLOBAL HEADER -->
-        <div class="nav-holder" *ngIf="website && website.Header">
-          <app-section-viewer [section]="website.Header" [website]="website" [page]="page" [sectionIndex]="0">
-          </app-section-viewer>
-        </div>
-
-        <!-- BODY -->
-        <div class="body body-holder" *ngIf="page && page.Sections">
-          <!-- <div class="section holder" *ngFor="let section of page.Sections; let i = index" [id]="section.SectionId">
-            <app-section-viewer [section]="section" [website]="website" [page]="page" [sectionIndex]="i">
-            </app-section-viewer>
-          </div> -->
-          <!-- <pre>
-  {{ page.Containers | json }}
-</pre> -->
-          <!-- <div class="section holder" *ngFor="let container of page.Containers; let i = index" [id]="container.ContainerId">
-            <app-container [container]="container" [page]="page"  [website]="website">
-            </app-container>
-          </div> -->
-
-          <!-- <app-page-widgets [page]="page" [website]="website"></app-page-widgets> -->
-          
-          <div class="section holder" *ngFor="let widget of page.Widgets; let i = index" [id]="widget.WidgetId">
-            <app-page-widget-tree [page]="page" [widget]="widget" [website]="website"></app-page-widget-tree>
+          <div class="nav-holder" *ngIf="website && website.Header">
+            <app-page-widget-tree [page]="page" [widget]="website.Header" [website]="website"></app-page-widget-tree>
           </div>
 
 
-          <div class="create-section">
-            <h3>
-              Create a container
-            </h3>
+          <div class="__body body-holder" *ngIf="page && page.Sections">
 
-            <div class="d-flex justify-content-center">
-              <div class="item" *ngFor="let colItem of COL_IMAGES" (click)="addContainer(colItem.Id)">
-                <img [src]="colItem.ImageUrl" alt="">
-                <!-- <p>{{colItem.Name}}</p> -->
+
+            <div class="section holder" *ngFor="let widget of page.Widgets; let i = index" [id]="widget.WidgetId">
+              <app-page-widget-tree [page]="page" [widget]="widget" [website]="website"></app-page-widget-tree>
+            </div>
+
+
+            <div class="create-section">
+              <h3>
+                Create a section
+              </h3>
+
+              <div class="d-flex justify-content-center">
+                <div class="item" *ngFor="let colItem of COL_IMAGES" (click)="addContainerWidget(colItem.Id)">
+                  <img [src]="colItem.ImageUrl" alt="">
+                  <!-- <p>{{colItem.Name}}</p> -->
+                </div>
               </div>
             </div>
           </div>
+
+
         </div>
 
       </div>
 
     </div>
 
-
+    <!-- 
+    <div class="styles-menu">
+      <app-element-tools></app-element-tools>
+    </div> -->
 
 
   </div>
 </div>
+
+<app-image-picker *ngIf="showImage" (onClose)="showImage= false">
+</app-image-picker>
+
+<app-database *ngIf="showDatabase" (onClose)="showDatabase= false">
+</app-database>
+
+<app-css-classes *ngIf="showCss" (onClose)="showCss= false">
+</app-css-classes>
+<app-loader *ngIf="loading"></app-loader>

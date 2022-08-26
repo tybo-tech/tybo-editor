@@ -1,0 +1,36 @@
+<div class="_banner">
+    <p>
+        <a routerLink="/">Back</a>
+    </p>
+    <h1>
+        My Workspace
+    </h1>
+    <p>
+        <a routerLink="/account/create-a-new-website" class="btn btn-primary">Create new website</a>
+    </p>
+</div>
+<div class="all">
+ 
+    
+    <div class="container" *ngIf="user && user.Websites">
+        <h3>
+            My projects
+        </h3>
+        <div class="row">
+            <div class="p-2 col-md-4" *ngFor="let item of user.Websites">
+    
+           <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{item.Name}}</h3>
+                <p>
+                    {{item.Url}}
+                </p>
+                <button (click)="edit(item)" class="btn btn-primary">Edit</button>
+                <button (click)="preview(item)"  class="btn btn-dark" style="margin-left: 1rem;">Preview</button>
+            </div>
+           </div>
+            </div>
+        </div>
+    
+    </div>
+</div>

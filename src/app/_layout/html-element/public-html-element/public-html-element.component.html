@@ -1,84 +1,17 @@
-<!-- <div class="___item"> -->
-
-
-
-<!-- IMAGE SECTION -->
-<div *ngIf="type === 'image'" class="html-element">
-  <img [src]="value" alt="" [ngStyle]="ItemStyle">
-</div>
-
-
-
-<!-- NAV BAR SECTION -->
-<div *ngIf="type === 'nav'" class="html-element" [ngStyle]="ItemStyle">
-  <div class="__nav">
-    <ul class="nav justify-content-end">
-      <li class="nav-item" *ngFor="let page of items">
-        <a class="nav-link" [routerLink]="page.Url" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          [ngClass]="page.StyleClass" [ngStyle]="page.SelectedStyle">{{page.Name}}</a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<!-- TEXT -->
-
-<div *ngIf="type === 'h1'" class="html-element">
-  <h1 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
-  </h1>
-
-</div>
-
-<div *ngIf="type === 'h2'" class="html-element">
-  <h2 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
-  </h2>
-</div>
-
-<div *ngIf="type === 'h3'" class="html-element">
-  <h3 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
-  </h3>
-</div>
-
-
-<div *ngIf="type === 'h4'" class="html-element">
-  <h4 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
-  </h4>
-</div>
-
-
-<div *ngIf="type === 'h5'" class="html-element">
-  <h5 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
-  </h5>
-</div>
-
-
-<div *ngIf="type === 'h6'" class="html-element">
-  <h6 [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
-  </h6>
-</div>
-
-<div *ngIf="type === 'p'" class="html-element">
-  <p [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" class="____text-editor">
-  </p>
-</div>
-
-<div *ngIf="type === 'a'" class="html-element">
-  <a [ngStyle]="ItemStyle" [innerHTML]="value" editor_item contenteditable="false" (click)="linkClick()"
-    class="____text-editor">
-  </a>
-</div>
-
-<div *ngIf="type === 'div'" class="html-element">
-  <div [innerHTML]="value" [ngStyle]="ItemStyle">
-  </div>
-</div>
-
-
-<!-- BUTTONS -->
-<button *ngIf="type === 'button'" [ngStyle]="ItemStyle" (click)="linkClick()">
-  <p style="padding: 0; margin: 0;" [innerHTML]="value" editor_item contenteditable="false"></p>
+<p *ngIf="parent && type === 'p'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value">
+</p>
+<h1 *ngIf="parent && type === 'h1'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></h1>
+<h2 *ngIf="parent && type === 'h2'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></h2>
+<h3 *ngIf="parent && type === 'h3'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></h3>
+<h4 *ngIf="parent && type === 'h4'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></h4>
+<h5 *ngIf="parent && type === 'h5'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></h5>
+<h6 *ngIf="parent && type === 'h6'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></h6>
+<img *ngIf="parent && type === 'image'" [ngClass]="'_round_image'" [src]="value" alt="" (click)="onClick()"   [ngClass]="parent.ItemClass">
+<a *ngIf="parent && type === 'a'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></a>
+<div *ngIf="parent && type === 'div'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value"></div>
+<button *ngIf="parent && type === 'button'" (click)="onClick()"   [ngClass]="parent.ItemClass" [innerHTML]="value">
 </button>
-
-
-
-<!-- </div> -->
+<input *ngIf="parent && type === 'Textbox'"   [ngClass]="parent.ItemClass" />
+<input *ngIf="parent && type === 'Checkbox'" type="checkbox"   [ngClass]="parent.ItemClass" />
+<textarea *ngIf="parent && type === 'Textarea'"   [ngClass]="parent.ItemClass"></textarea>
+<select *ngIf="parent && type === 'Dropdown'"   [ngClass]="parent.ItemClass"></select>

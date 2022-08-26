@@ -20,6 +20,10 @@ export class CopyService {
   private copiedChildItemBehaviorSubject: BehaviorSubject<any>;
   public copiedChildItemObservable: Observable<any>;
 
+  
+  private vwBehaviorSubject: BehaviorSubject<number>;
+  public vwObservable: Observable<number>;
+
 
   constructor() {
     this.copiedItemBehaviorSubject = new BehaviorSubject<any>(null);
@@ -27,6 +31,10 @@ export class CopyService {
 
     this.copiedChildItemBehaviorSubject = new BehaviorSubject<any>(null);
     this.copiedChildItemObservable = this.copiedChildItemBehaviorSubject.asObservable();
+
+    
+    this.vwBehaviorSubject = new BehaviorSubject<number>(0);
+    this.vwObservable = this.vwBehaviorSubject.asObservable();
   }
 
   copy(itemInMoemory: any) {
@@ -34,6 +42,9 @@ export class CopyService {
   }
   copyChildItem(itemInMoemory: any) {
     this.copiedChildItemBehaviorSubject.next(itemInMoemory);
+  }
+  updateVW(vw: number) {
+    this.vwBehaviorSubject.next(vw);
   }
 
   getColumnToPaste(column: ColumnModel): ColumnModel | undefined {

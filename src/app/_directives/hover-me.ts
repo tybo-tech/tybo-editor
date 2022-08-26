@@ -44,7 +44,7 @@ export class HoveMeDirective {
 
     @HostListener('mouseleave', ['$event'])
     onMouseLeave(event: MouseEvent) {
-        event.preventDefault();
+        // event.preventDefault();
         this.mouseLeft = true;
         if (!this.clicked)
             this.element.nativeElement.classList.remove('mouse-over');

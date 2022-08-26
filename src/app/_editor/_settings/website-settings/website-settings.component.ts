@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ContainerModel } from 'src/app/_classes/ContainerModel';
 import { PageModel } from 'src/app/_classes/PageModel';
+import { UserModel } from 'src/app/_classes/UserModel';
 import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
 import { HelperClass } from 'src/app/_classes/_statics/HelperClass';
 import { WebsiteService } from 'src/app/_services/website.service';
@@ -15,10 +16,14 @@ export class WebsiteSettingsComponent implements OnInit {
   options = 'Website settings menu'
   @Input() website: WebsiteModel;
   @Output() closeEvent: EventEmitter<any> = new EventEmitter();
-
+  user: UserModel;
   constructor(private websiteService: WebsiteService) { }
 
   ngOnInit() {
+    this.websiteService.userObservable.subscribe(data => {
+      if (data)
+        this.user = data;
+    });
   }
   addPage() {
     const page = new PageModel(HelperClass.getId(`page`), true, false, 'New Page', 'New Page', '/', "Active", { color: 'red' }, []);
@@ -37,45 +42,44 @@ export class WebsiteSettingsComponent implements OnInit {
       return;
 
 
-    if (this.website._id) {
-      // this.websiteService.patch(`websites/${this.website._id}`, this.website).subscribe(data => {
-      //   if (data && data.modifiedCount) {
+    if (this.website.Id) {
+      this.websiteService.patch(`websites/update-website.php`, {
+        Name: this.website.Name,
+        Title: this.website.Title,
+        Url: this.website.Url,
+        Logo: this.website.Logo,
+        Category: this.website.Category,
+        SubCategory: this.website.SubCategory,
+        Icon: this.website.Icon,
+        StatusId: this.website.StatusId,
+        ItemClass: this.website.ItemClass,
+        WebsiteId: this.website.WebsiteId,
+        ModifyUserId: this.user.UserId || this.website.ModifyUserId || '',
+        Id: this.website.Id
+      }).subscribe(data => {
 
-      //   }
-      // });
+      });
     }
 
 
-    if (!this.website._id) {
-      delete this.website._id
+    if (!this.website.Id) {
+      delete this.website.Id
       this.website.Pages.forEach(p => {
         delete p._id;
         if (p.Containers)
           p.Containers.forEach((c: ContainerModel) => {
-            delete c._id;
+            delete c.Id;
           })
       })
 
+      this.websiteService.create(`websites/update-website.php`, this.website).subscribe(data => {
+        this.website.WebsiteStyles.forEach(style => {
+          style.PcStyles = JSON.parse(style.PcStyles);
+          style.PhoneStyles = JSON.parse(style.PhoneStyles);
+          style.TabStyles = JSON.parse(style.TabStyles);
+        });
 
-      this.websiteService.create(`pages`, this.website.Pages).subscribe(data => {
-        if (data && data.length) {
-          const pagesId = data.map((x: PageModel) => x._id);
-          console.log(pagesId);
-          this.website.Pages = pagesId;
-          this.websiteService.create(`websites`, this.website).subscribe(data => {
-            if (data && data.modifiedCount) {
-              this.websiteService.getSite(this.website.Url, '/');
-            }
-          });
-        }
-      });
-
-
-      // this.websiteService.create(`websites`, this.website).subscribe(data => {
-      //   if (data && data.modifiedCount) {
-      //     this.websiteService.getSite(this.website.Url, '/');
-      //   }
-      // });
+      })
     }
   }
 

@@ -1,0 +1,86 @@
+<div class="container-menu" *ngIf="widget && website && page">
+    <div class="_items">
+        <div class="_item">
+            <b>{{widget.Name}} </b>
+        </div>
+        <div class="_item"
+            *ngIf="website.DbTables && page.TableName && page.UrlId && page.PageData && page.SelectedTable"
+            (click)="showChooseTable = !showChooseTable">
+            <span> <i class="fas fa-database"></i> {{widget.FeildName || 'Get data from...'}}</span>
+            <div *ngIf="showChooseTable" class="_select" (click)="menuClicked('db')">
+                <div (click)="userTable()">
+                    None
+                </div>
+                <div *ngFor="let  option of page.SelectedTable.Columns" (click)="userTable(option)">
+                    {{option.Name}}
+                </div>
+            </div>
+        </div>
+        <div class="_item" *ngIf="widget.ItemType === SectionTypes.TEXTBOX" (click)="showChooseInputType = true">
+            <span> <i class="fas fa-cogs"></i></span>
+            <div *ngIf="showChooseInputType" class="_select">
+                <!-- <div *ngFor="let  option of ['Text','Email', 'Password']" (click)="userTable(option)">
+                    {{option}}
+                </div> -->
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="_item">
+            <span (click)="showFormat = true"> {{ widget.ItemFormat || 'Format'}}</span>
+            <div *ngIf="showFormat" class="_select" (click)="menuClicked('db')">
+                <div (click)="selectFormat('none')">
+                    None
+                </div>
+                <div *ngFor="let  option of ['Text','Currency']" (click)="selectFormat(option)">
+                    {{option}}
+                </div>
+            </div>
+        </div>
+        <div class="_item" (click)="menuClicked('edit')">
+            <i class="fas fa-edit"></i>
+        </div>
+        <div class="_item" *ngIf="widget.ItemType === SectionTypes.IMAGE" (click)="menuClicked('change-image')">
+            <i class="fas fa-image"></i>
+        </div>
+        <div class="_item" (click)="menuClicked('click')">
+            <i class="fas fa-bolt"></i> On click
+        </div>
+        <div class="_item" (click)="menuClicked('clone')">
+            <i class="fas fa-clone"></i>
+        </div>
+        <div class="_item" (click)="menuClicked('copy-style')">
+            <i class="fas fa-clone"></i> Style
+        </div>
+        <div class="_item" (click)="menuClicked('paste-style')">
+            <i class="fas fa-clone"></i> Paste
+        </div>
+        <div class="_item" (click)="menuClicked('delete')">
+            <i class="fas fa-trash"></i>
+        </div>
+    </div>
+</div>

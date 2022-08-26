@@ -1,0 +1,29 @@
+<div class="_form" *ngIf="table && table.Columns && table.Columns.length">
+  <div class="" *ngFor="let column of table.Columns">
+
+    <div class="mb-3" *ngIf="['Text', 'Number','Date','Number','Time','Email','Password','Tel'].indexOf(column.DataType) > -1">
+      <label for="exampleInputPassword1" class="form-label">{{column.Name}}</label>
+      <input [type]="column.DataType" class="form-control" [(ngModel)]="column.Value">
+    </div>
+
+    <div class="mb-3" *ngIf="column.DataType == 'Image'">
+      <label for="exampleInputPassword1" class="form-label">{{column.Name}}</label>
+      <!-- <input type="file" class="form-control" multiple #filesInput (change)="selectImages($event,column)"> -->
+      <!-- <br> -->
+      <!-- <img [src]="column.Value" style="max-width: 3rem;" *ngIf="column.Value" alt=""> -->
+      <app-images *ngIf="'Image' === column.DataType" [image]="column.Value" (onImageSelect)="onImageSelect($event,column)"></app-images>
+
+    </div>
+
+    
+    <div class="mb-3" *ngIf="column.DataType == 'Textarea'">
+      <label for="exampleInputPassword1" class="form-label">{{column.Name}}</label>
+      <!-- <textarea  class="form-control" [(ngModel)]="column.Value" id="exampleInputPassword1"></textarea> -->
+      <div class="form-control" style="min-height: 5rem;"  [id]="column.ColumnId" [innerHTML] = "column.Value"  contenteditable="true" (mouseleave)="saveText(column, column.Value)"></div>
+    </div>
+
+  </div>
+  <div class="_action">
+    <button class="btn btn-primary" (click)="save()">Save item</button>
+  </div>
+</div>

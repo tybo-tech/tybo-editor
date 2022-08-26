@@ -1,0 +1,57 @@
+<div class="_bg-container">
+
+
+
+    <div class="direction">
+        <p>
+            Each corner:
+        </p>
+
+        <div class="__items">
+            <button class="btn btn-light" (click)="typeChanged('tl')">
+                <img src="assets/images/border-radiaus-top-left.svg" class="image-icon" alt="">
+            </button>
+            <span></span>
+            <button class="btn btn-light" (click)="typeChanged('tr')">
+                <img src="assets/images/border-top-right-radius.svg" class="image-icon" alt="">
+            </button>
+            <span></span>
+            <button style="padding:.22rem" class="btn btn-light" (click)="typeChanged('all')">
+                <img src="assets/images/border-radius-all.svg" style="width:.55rem; margin: .1rem auto;" class="pointer"
+                    alt="">
+            </button>
+            <span></span>
+            <button class="btn btn-light" (click)="typeChanged('bl')">
+                <img src="assets/images/border-bottom-left-radius.svg" class="image-icon" alt="">
+            </button>
+            <span></span>
+            <button class="btn btn-light" (click)="typeChanged('br')">
+                <img src="assets/images/border-bottom-right-radius.svg" class="image-icon" alt="">
+            </button>
+
+        </div>
+
+
+        <div class="__items grid-1">
+            <br>
+            <label>
+                All Corners:
+            </label>
+            <input class="form-control w-100" [(ngModel)]="borderRadius" type="range" step="1" max="100" min="0"
+                (input)="omit()" />
+
+            <div class="d-flex justify-content-between" style="color: rgb(165, 165, 165); font-size: .7rem;">
+                <span>
+                    Sharper
+                </span>
+
+                <span>
+                    Softer
+                </span>
+            </div>
+
+        </div>
+
+        <br>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<!-- <div #box alt="" *ngIf="widget && widget.ItemType === SectionTypes.IMAGE && backgroundImg" [ngClass]="widget.ItemClass"
+  class="resizable-draggable image-holder" [class.active]="status === 1 || status === 2" (click)="itemClicked()"
+  [style.background-image]="backgroundImg">
+</div> -->
+
+
+<img *ngIf="widget && widget.ItemType === SectionTypes.IMAGE && backgroundImg" [src]="widget.ItemContent"
+  [ngClass]="widget.ItemClass" alt="">
+
+<p #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXT" class="resizable-draggable"
+  [innerHTML]="widget.ItemContent" (click)="itemClicked()" [ngClass]="widget.ItemClass"
+  [class.active]="status === 1 || status === 2">
+</p>
+
+<a #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.A" class="resizable-draggable"
+  [innerHTML]="widget.ItemContent" (click)="itemClicked()" [ngClass]="widget.ItemClass"
+  [class.active]="status === 1 || status === 2">
+</a>
+
+<h1 #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.HEADING" class="resizable-draggable"
+  [innerHTML]="widget.ItemContent" (click)="itemClicked()" [ngClass]="widget.ItemClass"
+  [class.active]="status === 1 || status === 2">
+</h1>
+
+
+<h2 #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.SUB_HEADING" class="resizable-draggable"
+  (click)="itemClicked()" [ngClass]="widget.ItemClass" [class.active]="status === 1 || status === 2">
+  <font *ngIf="widget.ItemFormat !== 'Currency'" [innerHTML]="widget.ItemContent"></font>
+  <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
+</h2>
+
+
+<button #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.BUTTON" (click)="itemClicked()"
+  [innerHTML]="widget.ItemContent" class="resizable-draggable" [ngClass]="widget.ItemClass"
+  [class.active]="status === 1 || status === 2">
+</button>
+
+<input #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXTBOX" [(ngModel)]="widget.ItemContent"
+  class="resizable-draggable" [ngClass]="widget.ItemClass" [class.active]="status === 1 || status === 2" />
+
+<textarea #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXTAREA" [(ngModel)]="widget.ItemContent"
+  class="resizable-draggable" [ngClass]="widget.ItemClass" [class.active]="status === 1 || status === 2"></textarea>

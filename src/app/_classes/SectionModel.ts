@@ -69,7 +69,6 @@ export class SectionModel extends MainClass {
     }
 
     MoveRowUp(row: RowModel, rowIndex: number) {
-        console.log('before: ', row.OrderNumber);
         const topRow = this.Rows[rowIndex - 1]
         if (!topRow)
             return;
@@ -82,8 +81,6 @@ export class SectionModel extends MainClass {
         topRow.OrderNumber = row.OrderNumber;
         row.OrderNumber = orderNumber;
         this.OrderNumber = orderNumber;
-        console.log('after: ', row.OrderNumber);
-        console.log(rowIndex);
         this.Sort();
     }
 

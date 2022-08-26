@@ -1,38 +1,5 @@
+@import "../../../../assets/styles/colors";
 ._container {
-    // border: 1px solid rgb(204, 204, 204);
-    position: relative;
-    .seletor {
-        // height: 2rem;
-        width: 5rem;
-        position: absolute;
-        content: "Container";
-        background: #000;
-        color: #fff;
-        text-align: center;
-        font-size: 0.65rem;
-        cursor: pointer;
-        border-radius: 4px 0 0 0;
-        opacity: 0.05;
-        z-index: 100;
-    }
-}
-
-._parent {
-    .seletor {
-        // transform: translate(-50%, 0);
-        top: 0;
-        right: 0;
-        border-radius: 0 0 0 4px;
-    }
-    &:hover {
-        border: 1px dotted rgb(142, 142, 142);
-        .parent-seletor {
-            opacity: 0.7;
-        }
-    }
-}
-
-._child {
     .seletor {
         left: 0;
         transform: translate(0, 0);
@@ -41,30 +8,40 @@
     }
 
     &:hover {
-        border: 1px dotted rgb(142, 142, 142);
+        border: 0.1px solid #3498db61;
         .seletor {
             opacity: 0.7;
         }
     }
 }
-._grand {
-    .seletor {
+
+._resizer {
+    position: absolute;
+    width: 100%;
+    height: 2.5px;
+    border-radius: 5px;
+    background: rgba(227, 209, 13, 0);
+    z-index: 10000;
+    bottom: -2px;
+    left: 0;
+    cursor: row-resize;
+    span {
+        position: absolute;
+        width: 7px;
+        height: 7.5px;
+        border-radius: 5px;
+        background: #3498db;
+        z-index: 10001;
+        bottom: -2px;
         left: 50%;
-        transform: translate(0, 0);
-        border-radius: 0;
-        top: 0;
         transform: translate(-50%, 0);
-    }
-
-    &:hover {
-        border: 1px dotted rgb(142, 142, 142);
-        .seletor {
-            opacity: 0.7;
-        }
+        cursor: row-resize;
     }
 }
 
-.________list__class {
-    flex-basis: 100%;
-    height: 100%;
+.active-node {
+    border: 2px solid #3498db;
+    &:hover {
+        border: 2px solid #3498db;
+    }
 }

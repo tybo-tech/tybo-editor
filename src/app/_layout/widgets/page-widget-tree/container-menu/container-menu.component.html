@@ -1,0 +1,21 @@
+<div class="container-menu" *ngIf="widget && website && page">
+    <div class="_items">
+        <div class="_item">
+            <b>{{widget.Name}} </b>
+        </div>
+        <div class="_item" *ngIf="website.DbTables && widget.ItemCategory === SectionTypes.DB_LIST" (click)="showChooseTable = !showChooseTable">
+            <span> <i class="fas fa-database"></i> {{widget.DbTable || 'Get data from...'}}</span>
+            <div *ngIf="showChooseTable" class="_select" (click)="menuClicked('db')">
+                <div *ngFor="let  option of website.DbTables" (click)="userTable(option)">
+                    {{option.Name}}
+                </div>
+            </div>
+        </div>
+        <div class="_item" (click)="menuClicked('delete')">
+            Delete
+        </div>
+        <div class="_item" (click)="menuClicked('move-up')">
+            Move up
+        </div>
+    </div>
+</div>

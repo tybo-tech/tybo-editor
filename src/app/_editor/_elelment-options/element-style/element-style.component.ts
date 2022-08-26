@@ -45,7 +45,6 @@ export class ElementStyleComponent implements OnInit, OnChanges {
 
     for (const [key, value] of Object.entries(anyObject)) {
       console.log(key, " : ", value);
-
     }
   }
   mapStyles(itemStyles: any) {
@@ -96,7 +95,10 @@ export class ElementStyleComponent implements OnInit, OnChanges {
   onInputEvent(e: IInput) {
     if (!e)
       return
-
+    if (e.Value === this.ItemStyle[e.Id]) {
+      delete this.ItemStyle[e.Id];
+      return;
+    }
     if (e.Id === 'background-type') {
       const parent = this.styles.find(x => x.Id === e.ParentId);
       if (!parent)

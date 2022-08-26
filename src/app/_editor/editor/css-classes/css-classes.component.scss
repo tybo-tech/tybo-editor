@@ -1,0 +1,31 @@
+@import "../../../../assets/styles/colors";
+.__body {
+    padding: 1rem;
+}
+
+.list-group {
+    padding-right: 2rem;
+    border-right: 1px solid $grey;
+    min-height: 30vh;
+    border-radius: 0;
+    margin-right: 1rem;
+
+    .list-group-item {
+        padding: 0;
+        input,.all-label {
+            font-size: 0.7rem;
+            cursor: pointer;
+        }  
+    }
+}
+// ._picker {
+//     width: 60%;
+// }
+
+._txt-area{
+    height: 21vh;
+    background: $bg;
+    color: $white;
+    font-size: .7rem;
+}
+

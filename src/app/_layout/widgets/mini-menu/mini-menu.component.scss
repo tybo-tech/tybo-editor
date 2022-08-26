@@ -10,8 +10,12 @@
     min-height: 4em;
     background: $white;
     box-shadow: $box-shadow;
-    z-index: 100001;
+    z-index: 90000003;
     padding-right: 2em;
+    font-size: .75rem;
+    top: 31%;
+    left: 42%;
+    text-align: left;
 
     .card{
         width: 100%;
@@ -19,7 +23,8 @@
 
     a{
         cursor: pointer;
-        font-size: .85rem;
+        font-size: .65rem;
+        padding: .25rem !important;
     }
 
     .fas {

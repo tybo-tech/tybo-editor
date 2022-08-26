@@ -1,6 +1,14 @@
-<div class="sections" *ngIf="page">
+<div class="sections" *ngIf="page && website">
+  
+  <div class="section holder" *ngIf="website.Header">
+    <app-page-widgtes-navigation-tree [page]="page" [widget]="website.Header" [website]="website"></app-page-widgtes-navigation-tree>
+  </div>
+  <div class="section holder" *ngFor="let widget of page.Widgets; let i = index" [id]="widget.WidgetId">
+    <app-page-widgtes-navigation-tree [page]="page" [widget]="widget" [website]="website"></app-page-widgtes-navigation-tree>
+  </div>
 
 
+<!-- 
   <div class="section" *ngIf="header">
     <h6 class="d-flex justify-content-between">
      <span>
@@ -26,7 +34,7 @@
       <i class="fas fa-eye-slash" *ngIf="!section.Diplayed"></i>
      </span>
     </h6>
-  </div>
+  </div> -->
 </div>
 
 

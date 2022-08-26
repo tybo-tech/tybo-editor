@@ -82,7 +82,7 @@ export class PublicColumnWidgetComponent implements OnInit {
     deleteEvent(e:any) {
         if (e) {
             this.column.DeleteWidget(this.index);
-            this.websiteService.delete(`widgets/${this.widget._id}`).subscribe(data => {
+            this.websiteService.delete(`widgets/${this.widget.Id}`).subscribe(data => {
                 console.log(data);
 
             })

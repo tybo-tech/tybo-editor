@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PageModel } from 'src/app/_classes/PageModel';
 import { SectionModel } from 'src/app/_classes/SectionModel';
+import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
+import { WidgetModel } from 'src/app/_classes/WidgetModel';
 import { WebsiteService } from 'src/app/_services/website.service';
 
 @Component({
@@ -10,7 +12,8 @@ import { WebsiteService } from 'src/app/_services/website.service';
 })
 export class LayersComponent implements OnInit {
   page: PageModel;
-  header: SectionModel | undefined;
+  header: WidgetModel | undefined;
+  website: WebsiteModel;
   constructor(private w: WebsiteService) { }
 
   ngOnInit() {
@@ -25,16 +28,11 @@ export class LayersComponent implements OnInit {
         })
       }
     })
+
     this.w.websiteObservable.subscribe(data => {
       if (data) {
-        let website = data;
-        this.header = website.Header;
-        if (this.header) {
-          this.header.Diplayed = true;
-          if (this.header.SelectedStyle && this.header.SelectedStyle['display'] === 'none') {
-            this.header.Diplayed = false;
-          }
-        }
+        this.website = data;
+        this.header = this.website.Header;
       }
     })
   }

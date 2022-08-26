@@ -1,3 +1,6 @@
-<div class="_item" *ngIf="input" (click)="onInputEvent()" [ngClass]="input.Classes || []">
+<div class="_item tt" *ngIf="input" (click)="onInputEvent()"
+data-bs-toggle="tooltip" data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+ [title]="input.Id + ' : ' + input.Option" [ngClass]="input.Classes || []">
   <img [src]="input.Label">
 </div>

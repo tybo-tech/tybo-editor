@@ -1,0 +1,7 @@
+<input type="file" multiple #filesInput style="display: none;" (change)="uploadFile(filesInput.files)">
+<span style="margin-left: 3rem;" *ngIf="!image">
+    <i *ngIf=" !files || !files.length" class="bi bi-cloud-plus _close pointer" (click)="filesInput.click()"></i>
+</span>
+<img [src]="image" *ngIf="image" [ngStyle]="{'width': width || '1.5rem'}" (mouseover)="view=true" (mouseleave)="view = false"  (click)="filesInput.click()">
+<img [src]="image" *ngIf="image && view" class="view">
+

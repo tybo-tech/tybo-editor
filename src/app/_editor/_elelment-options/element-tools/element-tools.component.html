@@ -1,15 +1,31 @@
 <div class="tools-holder">
     <div class="content">
+        <div *ngIf="!element" class="_name">
+            Element options
+        </div>
+        <div *ngIf="element" class="_name">
+            <i class="bi bi-chevron-left pointer" (click)="close()"></i>
+            <!-- {{element.Name}} -->
+            <input type="text" style="background:none; border:none; color:#fff; padding-left:1rem"
+                [(ngModel)]="element.Name" (change)="updateWidget(element)">
+        </div>
         <div class="tabs" *ngIf="tabs">
-            <div class="tab" *ngFor="let tab of tabs" [ngClass]="tab.Class" (click)="onTab(tab)">
-                <p [innerHTML]="tab.Name">
-
-                </p>
+            <div class="tab" *ngFor="let tab of tabs" [ngClass]="tab.Class" (click)="onTab(tab)" [innerHTML]="tab.Name">
             </div>
-
         </div>
 
-        <app-element-style *ngIf="tabId === 'styles' && element" [type]="element.ElementId" [ItemStyle]="element.SelectedStyle"></app-element-style>
-        <app-options *ngIf="tabId === 'options' && element" [type]="element.ElementId" [element]="element"></app-options>
+        <!-- <app-element-style *ngIf="tabId === 'styles' && element" [type]="element.ElementId" [ItemStyle]="element.SelectedStyle"></app-element-style> -->
+<!-- 
+        <app-element-class *ngIf="tabId === 'styles' && element" [type]="element.ElementId"
+            [ItemStyle]="element.SelectedStyle" [element]="element"></app-element-class> -->
+
+            <app-element-class-betta
+            *ngIf="tabId === 'styles' && element" [widget]="element" 
+            ></app-element-class-betta>
+
+        <app-options *ngIf="tabId === 'options' && element" [type]="element.ElementId" [element]="element">
+        </app-options>
+        <app-element-data *ngIf="tabId === 'data' && element" [type]="element.ElementId" [widget]="element" [website]="website" [page]="page">
+        </app-element-data>
     </div>
 </div>

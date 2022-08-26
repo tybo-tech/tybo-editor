@@ -1,3 +1,5 @@
+import { WidgetModel } from "../WidgetModel";
+
 export class HelperClass {
     public static getId(prefix: string = '') {
         if (prefix && prefix.length)
@@ -18,4 +20,15 @@ export class HelperClass {
     return col.trim();
   }
 
+  public static   getSubMenuItem(subMenuItems: WidgetModel[], id: string): WidgetModel | undefined {
+    if (subMenuItems) {
+        for (var i = 0; i < subMenuItems.length; i++) {
+            if (subMenuItems[i].WidgetId == id) {
+                return subMenuItems[i];
+            }
+            var found = this.getSubMenuItem(subMenuItems[i].Children, id);
+            if (found) return found;
+        }
+    }
+}
 }
