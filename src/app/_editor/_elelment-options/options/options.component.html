@@ -30,7 +30,8 @@
       </div>
 
 
-      <div class="_input grid-2" *ngIf="table && table.Columns && element.ItemEventName === EventTypes.GO_TO_PAGE && element.ItemEvent">
+      <div class="_input grid-2"
+        *ngIf="table && table.Columns && element.ItemEventName === EventTypes.GO_TO_PAGE && element.ItemEvent">
         <div class="_label">Pass Id</div>
         <div class="_units">
           <select name="" id="" [(ngModel)]="element.UrlId" (change)="eventChanged()" style="color: white;">
@@ -46,6 +47,29 @@
         <div class="_units">
           <input [(ngModel)]="element.ItemEvent" (change)="eventChanged()"
             style="text-transform: lowercase; color: white; text-align: right; font-size: .75rem;" />
+        </div>
+      </div>
+
+
+
+      <div class="_input grid-2">
+        <div class="_label">Category</div>
+        <div class="_units">
+          <select name="" id="" [(ngModel)]="element.ItemCategory" (change)="saveWidget()" style="color: white;">
+            <option value="">None</option>
+            <option [value]="option" *ngFor="let  option of [ItemCategories.MENU_BUTTON, ItemCategories.HIDE_MENU_BUTTON]">
+              {{option}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      
+      <div class="_input grid-2">
+        <div class="_label">Category</div>
+        <div class="_units">
+          <textarea name="" id="" [(ngModel)]="element.ItemContent" (change)="saveWidget()" style="color: white;">
+          </textarea>
         </div>
       </div>
     </div>

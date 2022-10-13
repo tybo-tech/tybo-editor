@@ -5,6 +5,7 @@ import { MainClass } from "./MainClass";
 import { PageModel } from "./PageModel";
 import { WebstyleModel } from "./WebstyleModel";
 import { WidgetModel } from "./WidgetModel";
+import { CssProperties } from "./_statics/CssProperties";
 import { DeviceTypes } from "./_statics/DeviceTypes";
 import { HelperClass } from "./_statics/HelperClass";
 import { SectionTypes } from "./_statics/SectionTypes";
@@ -34,7 +35,7 @@ export class WebsiteModel extends MainClass {
     ShowPages: boolean
     MaxWidth: string;
     WebsiteStyles: WebstyleModel[];
-    SelectedClass: WebstyleModel | undefined;
+    SelectedClass: WebstyleModel;
     Imports: ImportsModel[];
     Files: FileModel[];
     DbTables: DbTableModel[];
@@ -140,9 +141,9 @@ export class WebsiteModel extends MainClass {
         const logoContainer = new WidgetModel(HelperClass.getId('header'), columnId, pageId, 'Logo Container', SectionTypes.CONTAINER, ``);
         logoContainer.ParentId = boxContainer.WidgetId;
         logoContainer.GetClass(this, 'logo-container',
-            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '13%' }]),
-            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '30%' }]),
-            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '50%' }])
+            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '13%' }, { Key: 'height', Value: CssProperties.AUTO }]),
+            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '30%' }, { Key: 'height', Value: CssProperties.AUTO }]),
+            StyleHelper.getFlex([{ Key: 'flex-basis', Value: '50%' }, { Key: 'height', Value: CssProperties.AUTO }])
         );
 
         // logoContainer.AddImage(undefined, `assets/images/widgets/sample-logo-white.png`);
@@ -160,7 +161,7 @@ export class WebsiteModel extends MainClass {
         const menuContainer = new WidgetModel(HelperClass.getId('header'), columnId, pageId, 'Menu Container', SectionTypes.CONTAINER, ``);
         menuContainer.ParentId = boxContainer.WidgetId;
         menuContainer.GetClass(this, 'nav-items-container',
-            StyleHelper.getFlex([{ Key: 'justify-content', Value: 'flex-end' }, { Key: 'align-items', Value: 'center' }])
+            StyleHelper.getFlex([{ Key: 'justify-content', Value: 'flex-end' }, { Key: 'align-items', Value: 'center' }, { Key: 'height', Value: CssProperties.AUTO }])
         );
 
         // Mobile menu icon

@@ -77,33 +77,21 @@ export class PageModel extends MainClass {
         if (!container)
             return;
 
-        if (container.ContainerType === SectionTypes.HEADER) {
-            container.ItemStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT };
-            container.ItemStyle = { 'background-color': '#000000', 'padding': '20px' }
-        }
+     
 
 
-
-        if (container.ContainerType === SectionTypes.FOOTER) {
-            container.ItemStyle = { 'min-height': SectionTypes.FOOTER_HEIGHT, 'background-color': '#000000' }
-        }
         this.Containers.push(container);
     }
     AddSection(section: SectionModel) {
         if (!section)
             return;
 
-        if (section.SectionType === SectionTypes.HEADER) {
-            section.ItemStyle = { 'min-height': SectionTypes.HEADER_MIN_HEIGHT };
-            section.ItemStyle = { 'background-color': '#000000', 'padding': '20px' }
-        }
 
 
         if (section.SectionType === SectionTypes.HERO) {
             section.ItemClass = ['grid-2'];
 
             const row = new RowModel(HelperClass.getId('row'), section.SectionId, 'Section Row', [], 'Row');
-            row.ItemStyle = { 'grid-template-columns': '1fr 1fr', 'display': 'grid' }
             const col = new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-1', '', [], 'Grid-col');
             const col2 = new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-2', '', [], 'Grid-col');
             col.Widgets = [...hero_col_1];
@@ -113,7 +101,6 @@ export class PageModel extends MainClass {
 
             section.AddRow(row);
 
-            section.ItemStyle = { 'min-height': SectionTypes.BODY_MIN_HEIGHT, 'background-color': '#03204d', 'color': '#ffffff' }
             section.GridStyle = { 'gap': '0' }
             section.GridStyle['max-width'] = '90rem'
 
@@ -122,16 +109,13 @@ export class PageModel extends MainClass {
 
         if (section.SectionType === SectionTypes.CARD3) {
             section.ItemClass = ['grid-3'];
-            section.ItemStyle = { 'min-height': SectionTypes.BODY_MIN_HEIGHT, 'background-color': '#000000' }
         }
 
         if (section.SectionType === SectionTypes.EMPTY) {
-            section.ItemStyle = { 'min-height': SectionTypes.BODY_MIN_HEIGHT, 'background-color': '#ffffff' }
         }
 
 
         if (section.SectionType === SectionTypes.FOOTER) {
-            section.ItemStyle = { 'min-height': SectionTypes.FOOTER_HEIGHT, 'background-color': '#000000' }
         }
         this.Sections.push(section);
     }

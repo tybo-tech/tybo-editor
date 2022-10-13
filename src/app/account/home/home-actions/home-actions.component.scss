@@ -1,0 +1,16 @@
+.actions {
+    padding: 1rem;
+    padding-left: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    @media only screen and (max-width: 600px) {
+       flex-direction: column;
+       padding: .5rem;
+    }
+    .btn {
+        font-weight: 700;
+        padding: 1rem;
+    }
+}

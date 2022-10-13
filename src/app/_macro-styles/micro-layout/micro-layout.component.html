@@ -5,7 +5,7 @@
     <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: 1rem;">
         <div class="corner-image" (mouseleave)="showDirection = false">
             <label for="">Direction</label>
-            <img [src]="direction.Image" alt="" (click)="showDirection = true">
+            <img [src]="direction.Image" *ngIf="direction" alt="" (click)="showDirection = true">
             <div class="corner-options" *ngIf="showDirection">
                 <div class="item" *ngFor="let item of directions" (click)="selectDirection(item)">
                     <img [src]="item.Image" alt="">
@@ -33,6 +33,13 @@
 
 
     </div>
+</div>
+
+
+<div class="macro-style-container">
+    <label class="form-label">Flex basis</label>
+    <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+       type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="flexBasis" />
 </div>
 
 

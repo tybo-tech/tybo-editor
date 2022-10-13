@@ -7,6 +7,7 @@ import { UserModel } from 'src/app/_classes/UserModel';
 import { WidgetModel } from 'src/app/_classes/WidgetModel';
 import { DataKeys } from 'src/app/_classes/_statics/DataTypes';
 import { EventTypes } from 'src/app/_classes/_statics/EventTypes';
+import { ItemCategories } from 'src/app/_classes/_statics/ItemCategories';
 import { Emitters } from 'src/app/_emmiters/Emitters';
 import { SyncService } from 'src/app/_services/sync.service';
 import { WebsiteService } from 'src/app/_services/website.service';
@@ -25,6 +26,7 @@ export class OptionsComponent implements OnInit {
   user: UserModel;
   tables: DbTableModel[];
   table?: DbTableModel;
+  ItemCategories = ItemCategories;
   EventTypes = EventTypes;
   constructor(private websiteService: WebsiteService, private syncService: SyncService) {
 
@@ -66,6 +68,11 @@ export class OptionsComponent implements OnInit {
       this.syncService.updateWidgetState(this.element.ParentWidget, this.user?.UserId || this.element.CreateUserId)
       return
     }
+    this.syncService.empyWidgets();
+    this.syncService.updateWidgetState(this.element, this.user?.UserId || this.element.CreateUserId)
+  }
+
+  saveWidget(){
     this.syncService.empyWidgets();
     this.syncService.updateWidgetState(this.element, this.user?.UserId || this.element.CreateUserId)
   }

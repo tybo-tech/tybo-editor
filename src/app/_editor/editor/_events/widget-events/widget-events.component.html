@@ -12,7 +12,7 @@
         <div class="events">
             <ng-container *ngIf="widget && widget.Events && widget.Events.length">
                 <div class="event" *ngFor="let event of widget.Events">
-                    <span class="pointer" (click)="toggeEventOptions(event)">
+                    <span class="text-center  pointer" (click)="toggeEventOptions(event)">
                         {{event.Name}}
                     </span>
 
@@ -28,7 +28,8 @@
                             </div>
                         </li>
                         <li class="list-group-item pointer  grid-2" *ngFor="let input of event.Inputs">
-                            <label>{{input.Name}}</label>
+                            <!-- <label>{{input.Name}}</label> -->
+                            <label>Element</label>
                             <div>
                                 <input type="text" readonly class="form-control pointer" placeholder="Select source..."
                                     [(ngModel)]="input.Source" (click)="toggleViewOptions(input)">
@@ -63,8 +64,8 @@
 
 
             <div class="event">
-                <span class="pointer" (click)="addEvent = !addEvent">
-                    Add event
+                <span class="text-center pointer" (click)="addEvent = !addEvent">
+                   When clicked
                 </span>
 
                 <ul class="list-group" *ngIf="addEvent">

@@ -35,8 +35,6 @@
 
     <div *ngIf="!node.Children.length && node.ItemType === SectionTypes.CONTAINER" class="_container" can_drop_on_me
         [id]="node.WidgetId" [ngClass]="node.ItemClass">
-        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
-            {{node.Name}}</div> -->
 
         <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions">
             <span></span>
@@ -44,14 +42,11 @@
 
     </div>
 
-    <div *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER" class="_widget">
+    <ng-container *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER">
         <app-page-widget [widget]="node" [page]="page" [isPublic]="isPublic" [dataId]="dataId"></app-page-widget>
-
-    </div>
+    </ng-container>
 
     <div *ngIf="node.Children.length && node.ItemType === SectionTypes.MENU" class="_widget" [ngClass]="node.ItemClass">
-        <!-- <h1> You cant hit me yet, untill you have nasted widgets, which are not containers!</h1>
-        <app-page-widget [widget]="node" [page]="page"></app-page-widget> -->
         <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
         </ng-template>
 
@@ -59,14 +54,5 @@
 
 </ng-template>
 
-<!--
-	Initiate the recursive template rendering. Because our recursive template is going to
-	be using the ngFor directive to render recursively, the "context" in the recursive
-	instances is going to be the ngForContext. As such, we have to "mock" the initial
-	context to look like the context that the ngFor directive will expose internally.
- 
-	NOTE: If we used ngContainer or ngTemplate to invoke the recursion internally, we'd
-	have more control over which values were made available at each level.
--->
 <ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ $implicit: widget }">
 </ng-template>

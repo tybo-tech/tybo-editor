@@ -19,7 +19,6 @@ export const mobilemenu: WidgetModel = new WidgetModel(HelperClass.getId('mobile
 
 
 hero_headig.ItemContent = 'I am a heading, click me to edit'
-hero_headig.ItemStyle["margin-top"] = "80px";
 hero_headig.RowNumber = 1;
 hero_headig.ColNumber = 1
 hero_headig.ElementType = "h1"
@@ -35,7 +34,6 @@ hero_button.ColNumber = 1
 hero_button.ElementType = "button"
 
 hero_image.ItemContent = 'assets/images/mock/tech.gif';
-hero_image.ItemStyle["width"] = "500px";
 hero_image.RowNumber = 1;
 hero_image.ColNumber = 2;
 hero_image.ElementType = "image"
@@ -91,6 +89,7 @@ export const quickAdd: WidgetModel[] = [
     new WidgetModel('text', 'master-column', 'master-page', 'Paragraph', SectionTypes.TEXT, `assets/images/editor/text.svg`),
     new WidgetModel('text', 'master-column', 'master-page', 'Link', SectionTypes.LINK, `assets/images/editor/text.svg`),
     new WidgetModel('image', 'master-column', 'master-page', 'Image', SectionTypes.IMAGE, `assets/images/editor/image.svg`),
+    new WidgetModel('video', 'master-column', 'master-page', 'Video Bg', SectionTypes.VIDEO, `assets/images/editor/vid.svg`),
     button,
     new WidgetModel('card-1', 'master-column', 'master-page', 'Header', SectionTypes.HEADER, `assets/images/editor/1card.svg`),
     new WidgetModel('form-1', 'master-column', 'master-page', 'Form', SectionTypes.FORM, `assets/images/widgets/froms-widget.svg`),
@@ -100,7 +99,9 @@ export const quickAdd: WidgetModel[] = [
     new WidgetModel('dropdown', 'master-column', 'master-page', 'Dropdown', SectionTypes.DROPDOWN, `assets/images/widgets/froms-widget.svg`),
     // new WidgetModel('radio', 'master-column', 'master-page', 'Radio button', SectionTypes.RADIO, `assets/images/widgets/froms-widget.svg`),
     menu,
-    mobilemenu
+    mobilemenu,
+    new WidgetModel('data-list', 'master-column', 'master-page', 'Item List', SectionTypes.DB_LIST, `assets/images/editor/db-list.svg`),
+
     // new WidgetModel('section-empty', 'master-column', 'master-page', 'Empty Section', SectionTypes.EMPTY),
     // new WidgetModel('card-1', 'master-column', 'master-page', 'Card', SectionTypes.CARD1, `assets/images/editor/1card.svg`),
     // wid_cards[2], wid_cards[3],

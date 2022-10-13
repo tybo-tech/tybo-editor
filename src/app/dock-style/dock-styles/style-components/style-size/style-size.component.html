@@ -1,0 +1,45 @@
+
+<div class="grid-2 style-styles">
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">W</span>
+        <input type="number" class="form-control" (input)="emit()" [(ngModel)]="width"  aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+            <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+    </div>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">H</span>
+        <input type="number" class="form-control" (input)="emit()" [(ngModel)]="height"  aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+            <span class="input-group-text" id="inputGroup-sizing-sm">px</span>
+    </div>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Min W</span>
+        <input type="number" class="form-control" (input)="emit()" [(ngModel)]="min_width"  aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+            <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+    </div>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Min H</span>
+        <input type="number" class="form-control" (input)="emit()" [(ngModel)]="min_height"  aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+            <span class="input-group-text" id="inputGroup-sizing-sm">px</span>
+    </div>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Max W</span>
+        <input type="number" class="form-control" (input)="emit()" [(ngModel)]="max_width"  aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+            <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+    </div>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Max H</span>
+        <input type="number" class="form-control" (input)="emit()" [(ngModel)]="max_height"  aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+            <span class="input-group-text" id="inputGroup-sizing-sm">px</span>
+    </div>
+</div>
+

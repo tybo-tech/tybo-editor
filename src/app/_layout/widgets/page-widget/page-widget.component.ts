@@ -29,18 +29,7 @@ export class PageWidgetComponent implements OnInit {
         this.website = ww;
     })
   }
-  onStyleChange(event: any) {
-    if (!event)
-      return
-    if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
-      this.widget.ItemMobileStyle = event;
-    }
-
-
-    if (this.website && this.website.ViewDevice === DeviceTypes.PC) {
-      this.widget.ItemStyle = event;
-    }
-  }
+ 
 
   onImageChange(event: string, widget: WidgetModel) {
     widget.ItemContent = event;
@@ -71,15 +60,5 @@ export class PageWidgetComponent implements OnInit {
     }
   }
 
-  onCopyEvent(event: any) {
-    if (this.website && this.website.ViewDevice === DeviceTypes.PHONE) {
-      this.widget.ItemMobileStyle = this.stylesToPaste;
-    }
 
-    if (this.website && this.website.ViewDevice === DeviceTypes.PC) {
-      this.widget.ItemStyle = this.stylesToPaste;
-    }
-
-    this.widget.SelectedStyle = this.stylesToPaste;
-  }
 }

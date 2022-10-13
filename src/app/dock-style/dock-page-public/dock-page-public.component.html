@@ -1,0 +1,58 @@
+<ng-template #nodeTemplateRef let-node>
+
+    <div *ngIf="node.Children.length  && node.ItemType === SectionTypes.CONTAINER  && !node.IsTemplate"
+        [id]="node.WidgetId" class="_container" can_drop_on_me  [ngClass]="node.ItemClass"
+        >
+    
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+
+        </ng-template>
+
+    </div>
+
+
+    <ul *ngIf="node.Children.length  && node.ItemType === SectionTypes.UL  && !node.IsTemplate" [id]="node.WidgetId"
+        class="_container" can_drop_on_me  [ngClass]="node.ItemClass"
+        >
+  
+
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+
+        </ng-template>
+
+
+    </ul>
+
+
+
+
+    <li *ngIf="node.Children.length  && node.ItemType === SectionTypes.LI  && !node.IsTemplate" [id]="node.WidgetId"
+        class="_container" can_drop_on_me  [ngClass]="node.ItemClass"
+        >
+
+   
+
+
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+
+        </ng-template>
+        
+
+    </li>
+
+
+
+    <div *ngIf="!node.Children.length && node.ItemType === SectionTypes.CONTAINER && !node.IsTemplate"
+        [id]="node.WidgetId" class="_container" [id]="node.WidgetId"  can_drop_on_me
+           [ngClass]="node.ItemClass">
+
+    </div>
+
+    <ng-container *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER  && !node.IsTemplate">
+        <app-dock-tag-public [page]="page" [website]="website" [widget]="node"></app-dock-tag-public> 
+    </ng-container>
+
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ $implicit: widget }">
+</ng-template>

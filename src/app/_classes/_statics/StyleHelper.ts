@@ -1,3 +1,9 @@
+import { WebsiteModel } from "../WebsiteModel";
+import { WidgetModel } from "../WidgetModel";
+import { CssProperties } from "./CssProperties";
+import { DeviceTypes } from "./DeviceTypes";
+import { DisplayKeys } from "./DisplayKeys";
+import { WidgetHelper } from "./WidgetHelper";
 
 export class StyleHelper {
 
@@ -5,7 +11,9 @@ export class StyleHelper {
         let style: any = {
             'display': 'flex',
             'width': '100%',
-            'min-height': '30px',
+            'height': '400px',
+            'background': '#ffffff',
+            'position': 'relative'
         }
         styles.forEach(s => {
             style[s.Key] = s.Value;
@@ -15,7 +23,8 @@ export class StyleHelper {
     public static getFlexRow() {
         return {
             'display': 'flex',
-            'flex-direction': 'column',
+            'flex-direction': 'row',
+            'justify-content': 'center',
             // 'flex-basis': '100%',
             'gap': '1rem',
             // 'height': '600px',
@@ -24,7 +33,8 @@ export class StyleHelper {
             'position': 'relative',
             'padding-right': '10px',
             'padding-left': '10px',
-            'align-items': 'center'
+            'align-items': 'center',
+            'height': '400px',
         }
     }
     public static getFlexBox() {
@@ -33,7 +43,7 @@ export class StyleHelper {
             'flex-direction': 'row',
             // 'flex-basis': '100%',
             'gap': '1rem',
-            'min-height': '400px',
+            'height': '400px',
             'width': '100%',
             'padding-right': '10px',
             'padding-left': '10px',
@@ -50,7 +60,7 @@ export class StyleHelper {
             'flex-direction': 'column',
             // 'flex-basis': '100%',
             'gap': '1rem',
-            'min-height': '400px',
+            'height': '400px',
             'width': '100%',
             'padding-right': '10px',
             'padding-left': '10px',
@@ -67,7 +77,7 @@ export class StyleHelper {
             'flex-direction': 'column',
             // 'flex-basis': '100%',
             'gap': '1rem',
-            'min-height': '400px',
+            'height': '400px',
             'width': '100%',
             'padding-right': '10px',
             'padding-left': '10px',
@@ -80,7 +90,7 @@ export class StyleHelper {
     public static getFlexCol() {
         return {
             'display': 'flex',
-            'min-height': '100px'
+            'height': '100px'
         }
     }
     public static getFlexChild() {
@@ -89,9 +99,8 @@ export class StyleHelper {
             'position': 'relative',
             'flex-direction': 'column',
             'width': '100%',
-            // 'flex-basis': '100%',
-            'min-height': '50px',
-            'background': '#ffffff',
+            'height': '380px',
+            'background': '#e4e4e4',
             'padding-right': '10px',
             'padding-left': '10px',
             'padding-top': '10px',
@@ -99,12 +108,48 @@ export class StyleHelper {
         }
     }
 
+
+    public static getFoatingContainerStyles() {
+        return {
+            'display': 'flex',
+            'position': 'absolute',
+            'flex-direction': 'column',
+            'width': '40%',
+            // 'flex-basis': '100%',
+            'height': '200px',
+            'background': '#333333',
+            'padding-right': '10px',
+            'padding-left': '10px',
+            'padding-top': '10px',
+            'padding-bottom': '10px',
+            'left': '20%',
+            'top': '20%',
+            'z-index': '1',
+        }
+    }
+
+
+    public static getStackContainer() {
+        return {
+            'display': 'flex',
+            'position': 'absolute',
+            'flex-direction': 'column',
+            'width': '40%',
+            'height': '200px',
+            'background': 'none',
+            'left': '20%',
+            'top': '20%',
+            'padding': '10px',
+            'gap': '20px',
+            'z-index': '1',
+        }
+    }
+
     public static getGridStyles() {
         return {
             'display': 'grid',
-            'grid-template-columns': '100%',
+            'grid-template-columns': '33% 33% 33%',
             'position': 'relative',
-            'min-height': '12px',
             'background': '#dfe8f0',
             'grid-gap': '10px',
             'padding-right': '10px',
@@ -121,7 +166,7 @@ export class StyleHelper {
             'position': 'relative',
             'flex-direction': 'column',
             // 'flex-basis': '100%',
-            'min-height': '200px',
+            'height': '200px',
             'width': '100%',
             'padding-right': '10px',
             'padding-left': '10px',
@@ -136,7 +181,7 @@ export class StyleHelper {
             'position': 'relative',
             'flex-direction': 'column',
             // 'flex-basis': '100%',
-            'min-height': '200px',
+            'height': '200px',
             'width': '100%',
             'padding-right': '10px',
             'padding-left': '10px',
@@ -151,7 +196,7 @@ export class StyleHelper {
             'flex-direction': 'row',
             // 'flex-basis': '100%',
             'width': '100%',
-            'min-height': '4rem',
+            'height': CssProperties.NAV_HEIGHT,
             'align-items': 'center',
             'margin-left': 'auto',
             'margin-right': 'auto',
@@ -180,13 +225,12 @@ export class StyleHelper {
         return style;
     }
     public static getTextStyles(styles: KeyValueModel[] = []) {
-        return { 'color': '#838383', position: 'relative', 'z-index': 1, width: '100%' };
+        return { 'color': '#7f8c8d', background: 'none', position: 'relative', 'z-index': 1 };
     }
     public static getButtonStyles(styles: KeyValueModel[] = []) {
 
         let stringStyles = `
         border-radius: 6px;
-        width: 100%;
         border: none;
         position: relative;
         color: #fff;
@@ -207,6 +251,43 @@ export class StyleHelper {
         })
         return style;
     }
+
+    public static getImageStyles(styles: KeyValueModel[] = []) {
+
+        let stringStyles = `
+        width: 100%;
+        position: relative;
+        object-fit: cover;
+        object-position: top;
+        z-index:1;
+`
+        let style: any = this.proccessStringToCss(stringStyles);
+        styles.forEach(s => {
+            if (s.Key && s.Value && s.Key.length && s.Key != undefined) {
+                debugger
+                style[s.Key] = s.Value;
+            }
+        })
+        return style;
+    }
+    public static getCardStyles(styles: KeyValueModel[] = []) {
+
+        let stringStyles = `
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        min-height: 100px;
+        background: #ffffff;
+`
+        let style: any = this.proccessStringToCss(stringStyles);
+        styles.forEach(s => {
+            if (s.Key && s.Value && s.Key.length && s.Key != undefined) {
+                debugger
+                style[s.Key] = s.Value;
+            }
+        })
+        return style;
+    }
     public static getNavListItemStylePC(styles: KeyValueModel[] = []) {
 
         let stringStyles = `
@@ -217,6 +298,28 @@ export class StyleHelper {
         margin: 0;
         margin-left: 24px;
         padding: 0;
+`
+        let style: any = this.proccessStringToCss(stringStyles);
+        styles.forEach(s => {
+            if (s.Key && s.Value && s.Key.length && s.Key != undefined) {
+                debugger
+                style[s.Key] = s.Value;
+            }
+        })
+        return style;
+    }
+    public static getVidBg(styles: KeyValueModel[] = []) {
+
+        let stringStyles = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `
         let style: any = this.proccessStringToCss(stringStyles);
         styles.forEach(s => {
@@ -259,7 +362,7 @@ export class StyleHelper {
         width:70%;
         top:0;
         right:0;
-        transform: scale(1,0);
+        transform: scale(0,1);
         transform-origin: 100% 50%;
 `
         let style: any = this.proccessStringToCss(stringStyles);
@@ -273,8 +376,9 @@ export class StyleHelper {
     public static getLinkStyle(styles: KeyValueModel[] = []) {
 
         let stringStyles = `
-        color: #ffffff;
+        color: #333333;
         font-size: 18px;
+        cursor: pointer;
 `
         let style: any = this.proccessStringToCss(stringStyles);
         styles.forEach(s => {
@@ -316,6 +420,187 @@ export class StyleHelper {
             })
         }
         return style;
+    }
+
+
+    public static SelectStyles(website: WebsiteModel, widget: WidgetModel) {
+        if (website.ViewDevice === DeviceTypes.PC || !website.ViewDevice) {
+            return widget.SelectedClass?.PcStyles;
+        }
+
+        if (website.ViewDevice === DeviceTypes.TABLET) {
+            return widget.SelectedClass?.TabStyles;
+        }
+        if (website.ViewDevice === DeviceTypes.PHONE) {
+            return widget.SelectedClass?.PhoneStyles;
+        }
+    }
+
+
+    public static UpdatePosition(widget: WidgetModel) {
+        if (widget.SelectedClass?.PcStyles) {
+            widget.SelectedClass.PcStyles['position'] = 'relative';
+            widget.SelectedClass.PcStyles['left'] = '0';
+            widget.SelectedClass.PcStyles['width'] = '100%';
+        }
+        if (widget.SelectedClass?.TabStyles) {
+            widget.SelectedClass.TabStyles['position'] = 'relative';
+            widget.SelectedClass.PcStyles['left'] = '0';
+            widget.SelectedClass.PcStyles['width'] = '100%';
+        }
+        if (widget.SelectedClass?.PhoneStyles) {
+            widget.SelectedClass.PhoneStyles['position'] = 'relative';
+            widget.SelectedClass.PcStyles['left'] = '0';
+            widget.SelectedClass.PcStyles['width'] = '100%';
+        }
+        return widget;
+    }
+
+
+    public static MoveTag(website: WebsiteModel, widget: WidgetModel, x: string, y: string) {
+        if (widget && widget.SelectedClass) {
+
+            WidgetHelper.VilidateClassStyles(widget);
+
+            if (website.ViewDevice === DeviceTypes.PC || !website.ViewDevice) {
+                if (this.GetPosition(widget.SelectedClass.PcStyles) === CssProperties.ABSOLUTE) {
+                    widget.SelectedClass.PcStyles['top'] = y;
+                    widget.SelectedClass.PcStyles['left'] = x;
+                    delete widget.SelectedClass.PcStyles["margin-top"];
+                    delete widget.SelectedClass.PcStyles["margin-left"];
+                } else {
+                    widget.SelectedClass.PcStyles['margin-top'] = y;
+                    widget.SelectedClass.PcStyles['margin-left'] = x;
+                    delete widget.SelectedClass.PcStyles["top"];
+                    delete widget.SelectedClass.PcStyles["left"];
+                }
+            }
+
+            if (website.ViewDevice === DeviceTypes.TABLET) {
+                if (this.GetPosition(widget.SelectedClass.TabStyles) === 'absoulute') {
+                    widget.SelectedClass.TabStyles['top'] = y;
+                    widget.SelectedClass.TabStyles['left'] = x;
+                    delete widget.SelectedClass.TabStyles["margin-top"];
+                    delete widget.SelectedClass.TabStyles["margin-left"];
+                } else {
+                    widget.SelectedClass.TabStyles['margin-top'] = y;
+                    widget.SelectedClass.TabStyles['margin-left'] = x;
+                    delete widget.SelectedClass.TabStyles["top"];
+                    delete widget.SelectedClass.TabStyles["left"];
+                }
+            }
+            if (website.ViewDevice === DeviceTypes.PHONE) {
+                if (this.GetPosition(widget.SelectedClass.PhoneStyles) === 'absoulute') {
+                    widget.SelectedClass.PhoneStyles['top'] = y;
+                    widget.SelectedClass.PhoneStyles['left'] = x;
+                    delete widget.SelectedClass.PhoneStyles["margin-top"];
+                    delete widget.SelectedClass.PhoneStyles["margin-left"];
+                } else {
+                    widget.SelectedClass.PhoneStyles['margin-top'] = y;
+                    widget.SelectedClass.PhoneStyles['margin-left'] = x
+                    delete widget.SelectedClass.PhoneStyles["top"];
+                    delete widget.SelectedClass.PhoneStyles["left"];
+                }
+            }
+
+
+        }
+    }
+
+    private static GetPosition(style: any) {
+        if (!style) {
+            style = {};
+            style[CssProperties.POSITION] = CssProperties.RELATIVE;
+        }
+        return style[CssProperties.POSITION];
+    }
+
+    public static CheckPosition(website: WebsiteModel, widget: WidgetModel) {
+        widget = WidgetHelper.VilidateClassStyles(widget);
+        if (!widget.SelectedClass)
+            return;
+        if (website.ViewDevice === DeviceTypes.PC || !website.ViewDevice) {
+            return this.GetPosition(widget.SelectedClass.PcStyles)
+        }
+
+        if (website.ViewDevice === DeviceTypes.TABLET) {
+            return this.GetPosition(widget.SelectedClass.PcStyles)
+        }
+        if (website.ViewDevice === DeviceTypes.PHONE) {
+            return this.GetPosition(widget.SelectedClass.PcStyles)
+        }
+    }
+
+
+    public static AlignItems(style: any, alignId: string) {
+        if (style && alignId === DisplayKeys.ALIGN_CENTER_HORIZONTALY) {
+            style['left'] = '50%';
+            if (style['transform'] === 'translateY(-50%)' || style['transform'] === 'translate(-50%, -50%)') {
+                style['transform'] = 'translate(-50%, -50%)';
+                return style;
+            }
+            style['transform'] = 'translateX(-50%)';
+            return style;
+        }
+
+        if (style && alignId === DisplayKeys.ALIGN_CENTER_VERTICALY) {
+            style['top'] = '50%';
+            if (style['transform'] === 'translateX(-50%)' || style['transform'] === 'translate(-50%, -50%)') {
+                style['transform'] = 'translate(-50%, -50%)';
+                return style;
+            }
+            style['transform'] = 'translateY(-50%)';
+            return style;
+        }
+
+        if (style && alignId === DisplayKeys.ALIGN_LEFT) {
+            style['left'] = '0';
+            delete style['transform'];
+            delete style['right'];
+            return style;
+        }
+
+        if (style && alignId === DisplayKeys.ALIGN_LEFT) {
+            style['left'] = '0';
+            delete style['transform'];
+            delete style['right'];
+            return style;
+        }
+
+        if (style && alignId === DisplayKeys.ALIGN_RIGHT) {
+            style['right'] = '0';
+            delete style['transform'];
+            delete style['left'];
+            return style;
+        }
+
+        if (style && alignId === DisplayKeys.ALIGN_TOP) {
+            style['top'] = '0';
+            delete style['transform'];
+            delete style['bottom'];
+            return style;
+        }
+
+        if (style && alignId === DisplayKeys.ALIGN_BOTTOM) {
+            style['bottom'] = '0';
+            delete style['transform'];
+            delete style['top'];
+            return style;
+        }
+    }
+
+
+    public static ApplyStyle(style: any, alignId: string, styleKey: string) {
+        console.log(style, alignId, styleKey);
+        if(style){
+            style[styleKey] = alignId;
+            return style;
+        }
+    }
+
+    public static AlignFlexItems(style: any, alignId: string) {
+
+
     }
 }
 

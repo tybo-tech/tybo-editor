@@ -4,8 +4,6 @@
         [id]="node.WidgetId" class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
         (mousedown)="moveDown($event)" (mouseup)="moveUp()" (contextmenu)="toogleMiniMenu($event)"
         (click)="toggleOptions($event)">
-        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
-            {{node.Name}}</div> -->
         <span class="_container-menu">
             <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
                 [widget]="selecedWidget" (menuEvent)="menuEvent($event)"> </app-container-menu>
@@ -26,8 +24,6 @@
         class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
         (mousedown)="moveDown($event)" (mouseup)="moveUp()" (contextmenu)="toogleMiniMenu($event)"
         (click)="toggleOptions($event)">
-        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
-        {{node.Name}}</div> -->
         <span class="_container-menu">
             <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
                 [widget]="selecedWidget"> </app-container-menu>
@@ -50,8 +46,7 @@
         class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
         (mousedown)="moveDown($event)" (mouseup)="moveUp()" (contextmenu)="toogleMiniMenu($event)"
         (click)="toggleOptions($event)">
-        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
-        {{node.Name}}</div> -->
+
         <span class="_container-menu">
             <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
                 [widget]="selecedWidget"> </app-container-menu>
@@ -70,11 +65,9 @@
 
 
     <div *ngIf="!node.Children.length && node.ItemType === SectionTypes.CONTAINER && !node.IsTemplate"
-        [id]="node.WidgetId" class="_container" can_drop_on_me [id]="node.WidgetId"
-        (contextmenu)="toogleMiniMenu($event)" (click)="toggleOptions($event)" (onDrop)="onDrop($event,node)"
-        (mousedown)="moveDown($event)" (mouseup)="moveUp()" [ngClass]="node.ItemClass">
-        <!-- <div class="seletor parent-seletor" (contextmenu)="toogleMiniMenu($event,node)" (click)="toggleOptions(node)">
-            {{node.Name}}</div> -->
+        [id]="node.WidgetId" class="_container" [id]="node.WidgetId" (contextmenu)="toogleMiniMenu($event)"
+        (click)="toggleOptions($event)" can_drop_on_me (onDrop)="onDrop($event,node)" (mousedown)="moveDown($event)"
+        (mouseup)="moveUp()" [ngClass]="node.ItemClass">
 
         <span class="_container-menu">
             <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
@@ -92,26 +85,9 @@
     <div *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER  && !node.IsTemplate"
         [id]="node.WidgetId" class="_widget">
         <app-page-widget [widget]="node" [isPublic]="isPublic" [page]="page"></app-page-widget>
-        <!-- <div style="background: red;">
-        <h1>lol</h1>
-      </div> -->
     </div>
 
 </ng-template>
 
-<!--
-	Initiate the recursive template rendering. Because our recursive template is going to
-	be using the ngFor directive to render recursively, the "context" in the recursive
-	instances is going to be the ngForContext. As such, we have to "mock" the initial
-	context to look like the context that the ngFor directive will expose internally.
- 
-	NOTE: If we used ngContainer or ngTemplate to invoke the recursion internally, we'd
-	have more control over which values were made available at each level.
--->
 <ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ $implicit: widget }">
 </ng-template>
-
-
-<app-mini-menu [showMiniMenu]="showMiniMenu" [miniMenu]="miniMenu" [options]="type"
-    (miniMenuEvent)="selectMenu($event)">
-</app-mini-menu>

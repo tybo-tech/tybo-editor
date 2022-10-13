@@ -5,6 +5,7 @@ import { PageModel } from 'src/app/_classes/PageModel';
 import { UserModel } from 'src/app/_classes/UserModel';
 import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
 import { WidgetModel } from 'src/app/_classes/WidgetModel';
+import { ItemCategories } from 'src/app/_classes/_statics/ItemCategories';
 import { SectionTypes } from 'src/app/_classes/_statics/SectionTypes';
 import { WidgetHelper } from 'src/app/_classes/_statics/WidgetHelper';
 import { WebsiteService } from 'src/app/_services/website.service';
@@ -20,55 +21,51 @@ export class TagMenuComponent implements OnInit {
   @Input() page: PageModel;
   @Input() website: WebsiteModel;
   @Output() dbEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() setEditText: EventEmitter<any> = new EventEmitter<any>();
-  @Output() deleteEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() cloneEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() clickEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() copyStyleEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() pasteStyleEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() changeImageEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() menuEvent: EventEmitter<string> = new EventEmitter<string>();
   user: UserModel;
   SectionTypes = SectionTypes;
   showChooseTable = false;
   showFormat = false;
+  ItemCategories = ItemCategories;
   showChooseInputType = false;
+  showChooseField = false;
+  table: DbTableModel;
   constructor(private websiteService: WebsiteService) { }
 
   ngOnInit(): void {
     this.websiteService.userObservable.subscribe(data => { if (data) this.user = data });
+    if (this.widget.GrandParent?.DbTable && this.website) {
+      this.loadFieldList(this.widget.GrandParent?.DbTable);
+    }
 
   }
-
-  menuClicked(e: string) {
-    // alert(e)
-    if (e === 'edit')
-      this.setEditText.emit(this.widget)
-    if (e === 'delete')
-      this.deleteEvent.emit(this.widget)
-    if (e === 'clone')
-      this.cloneEvent.emit(this.widget)
-    if (e === 'click')
-      this.clickEvent.emit(this.widget)
-    if (e === 'copy-style')
-      this.copyStyleEvent.emit(this.widget)
-    if (e === 'paste-style')
-      this.pasteStyleEvent.emit(this.widget)
-    if (e === 'change-image')
-      this.changeImageEvent.emit(this.widget)
+  loadFieldList(tableName: string) {
+    const table = this.website.DbTables.find(x => x.Name.toLowerCase() === tableName.toLocaleLowerCase());
+    if (table) {
+      this.table = table;
+      console.log(table);
+      
+    }
   }
-  userTable(column?: DbColumnModel) {
+
+  triggerMenuEvent(e: string) {
+    if (e)
+      this.menuEvent.emit(e)
+  }
+
+  selectField(column?: DbColumnModel) {
     if (!column) {
-      this.widget.FeildName = '';
+      this.widget.ParentWidget.FeildName = '';
       this.dbEvent.emit(this.widget)
       this.widget.ModifyUserId = this.user.UserId || this.widget.ModifyUserId
-      const iwid = WidgetHelper.mapIwidgetUpdateFromWidget(this.widget);
+      const iwid = WidgetHelper.mapIwidgetUpdateFromWidget(this.widget.ParentWidget);
       this.websiteService.saveWidgetChanges(iwid)
       return;
     }
-    this.widget.FeildName = column.Name;
+    this.widget.ParentWidget.FeildName = column.Name;
     this.dbEvent.emit(this.widget)
     this.widget.ModifyUserId = this.user.UserId || this.widget.ModifyUserId
-    const iwid = WidgetHelper.mapIwidgetUpdateFromWidget(this.widget);
+    const iwid = WidgetHelper.mapIwidgetUpdateFromWidget(this.widget.ParentWidget);
     this.websiteService.saveWidgetChanges(iwid)
   }
   selectFormat(e: string) {

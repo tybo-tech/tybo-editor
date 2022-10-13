@@ -1,0 +1,20 @@
+@import "../../../../../assets/styles/colors";
+.style-styles {
+    display: block;
+}
+select {
+    margin: 0;
+    width: 3rem !important;
+    padding: 0;
+    border-radius: 0 !important;
+}
+input[type="color"] {
+    border-radius: 0 !important;
+    border: 0.1px solid $cloud !important;
+}
+
+::ng-deep {
+    .color-picker {
+        left: 1677.41px !important;
+    }
+}

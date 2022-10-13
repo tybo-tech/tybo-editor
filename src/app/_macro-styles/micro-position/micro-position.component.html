@@ -1,0 +1,56 @@
+<div class="hr"></div>
+<div class="macro-style-container" *ngIf="widget">
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Position</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="typeChanged()"
+            [(ngModel)]="position">
+            <option value="static">Default</option>
+            <option value="relative">Relative</option>
+            <option value="absolute">Absolute</option>
+            <option value="fixed">Fixed</option>
+            <option value="sticky">Sticky</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Z Index</label>
+        <input class="form-control form-select-sm" type="number" aria-label=".form-select-sm example" (input)="typeChanged()"
+            [(ngModel)]="zindex" />
+    </div>
+
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: .5rem;">
+        <div style="width:100%">
+            <label class="form-label">Left</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="left" />
+
+
+        </div>
+
+        <div style="width:100%">
+            <label class="form-label">Top</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="top" />
+        </div>
+
+
+    </div>
+
+    <div class="mb-3 _menuu  d-flex justify-content-start" style="gap: .5rem;">
+        <div style="width:100%">
+            <label class="form-label">Right</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="right" />
+
+
+        </div>
+
+        <div style="width:100%">
+            <label class="form-label">Bottom</label>
+            <input class="form-control form-control-sm" style="max-width: 80%;" aria-label=".form-select-sm example"
+               type="text" type="text" placeholder="Auto"  (input)="typeChanged()" [(ngModel)]="bottom" />
+        </div>
+
+
+    </div>
+</div>

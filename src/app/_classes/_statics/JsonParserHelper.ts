@@ -37,30 +37,10 @@ export class JsonParserHelper {
             site.ViewWidth,
         );
 
-        site.Widgets.map(x => x.ItemClass = JSON.parse(x.ItemClass));
+        site.Widgets.map(x => x.ItemClass = JSON.parse( this.cleanString(x.ItemClass)));
         web.Id = site.Id;
 
-        if (web && web.Footer && web.ViewDevice === DeviceTypes.PHONE) {
-            web.Footer.SelectedStyle = web.Footer.ItemMobileStyle;
-        }
 
-        if (web && web.Footer && web.ViewDevice === DeviceTypes.PC) {
-            web.Footer.SelectedStyle = web.Footer.ItemStyle;
-        }
-
-
-        if (web && web.Header && web.ViewDevice === DeviceTypes.PHONE) {
-            web.Header.SelectedStyle = web.Header.ItemMobileStyle;
-        }
-
-        if (web && web.Header && web.ViewDevice === DeviceTypes.PC) {
-            web.Header.SelectedStyle = web.Header.ItemStyle;
-        }
-
-
-
-        web.ItemStyle = site.ItemStyle;
-        web.ItemMobileStyle = site.ItemMobileStyle;
         web.Imports = site.Imports || [];
         web.Collections = site.Collections || [];
         web.TableIdListString = site.TableIdListString || [];
@@ -113,14 +93,12 @@ export class JsonParserHelper {
             p.Id = page.Id;
             p.WebsiteId = page.WebsiteId;
             p.IsSelected = page.IsSelected + '' == "true";
-            p.ItemStyle = page.ItemStyle;
             p.UrlId = page.UrlId;
             // p.PageData = page.PageData;
             p.Tables = page.Tables;
             p.TableName = page.TableName;
 
             p.TableDisplayColName = page.TableDisplayColName;
-            p.ItemMobileStyle = page.ItemMobileStyle;
             const pageWids = WidgetHelper.fixWidgetTree(widgets.filter(x => x.PageId === page.PageId), page.PageId);
             p.Widgets = this.parseWidgets(pageWids);
             pages.push(p)
@@ -156,8 +134,7 @@ export class JsonParserHelper {
                 wid.ColNumber
             );
             w.Id = wid.Id;
-            w.ItemStyle = wid.ItemStyle;
-            w.ItemMobileStyle = wid.ItemMobileStyle;
+
             w.EventStyles = wid.EventStyles;
             w.HeadingStyles = wid.HeadingStyles;
             w.ContentStyles = wid.ContentStyles;
@@ -282,12 +259,18 @@ export class JsonParserHelper {
                 input.Placeholder,
                 input.MobileLabelStyles
             );
-            w.ItemStyle = input.ItemStyle
-            w.ItemMobileStyle = input.ItemMobileStyle;
+
             w.OrderNumber = input.OrderNumber;
             inputs.push(w)
         })
         return inputs;
     }
-
+    static cleanString(str: string) {
+        if (str.charAt(0) === '"' && str.charAt(str.length - 1) === '"') {
+            console.log(str);
+            
+           return str.substring(1, str.length - 2);
+        }
+        return str;
+    }
 }

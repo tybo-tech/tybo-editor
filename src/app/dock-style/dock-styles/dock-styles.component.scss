@@ -1,0 +1,23 @@
+@import "../../../assets/styles/colors";
+.docker-styles-container {
+    position: fixed;
+    top: 3rem;
+    right: 0;
+    bottom: 0;
+    width: 20rem;
+    background: $mate-black;
+    height: 100vh;
+    padding-bottom: 4rem;
+    overflow-y: scroll;
+}
+
+.style-header {
+    background: #15181a;
+    padding: 2px 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 20px;
+}

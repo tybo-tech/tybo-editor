@@ -17,6 +17,7 @@ export class MicroDisplayComponent implements OnInit {
   @Output() styleChaged: EventEmitter<IKeyValueModel> = new EventEmitter<IKeyValueModel>();
 
   display: string;
+  overflow: string;
   alagnActions = [
     { Action: 'left', Classes: ['btn btn-dark'], Name: ['bi bi-text-left'] },
     { Action: 'center', Classes: ['btn btn-dark'], Name: ['bi bi-text-center'] },
@@ -29,6 +30,10 @@ export class MicroDisplayComponent implements OnInit {
     const display = WidgetHelper.getStyleValue('display', this.widget, this.website);
     if (display)
       this.display = display;
+
+    const overflow = WidgetHelper.getStyleValue('overflow', this.widget, this.website);
+    if (overflow)
+      this.overflow = overflow;
   }
 
 
@@ -36,6 +41,12 @@ export class MicroDisplayComponent implements OnInit {
     if (this.display) {
       const val: IKeyValueModel = {
         Key: 'display', Value: this.display
+      }
+      this.styleChaged.emit(val);
+    }
+    if (this.overflow) {
+      const val: IKeyValueModel = {
+        Key: 'overflow', Value: this.overflow
       }
       this.styleChaged.emit(val);
     }

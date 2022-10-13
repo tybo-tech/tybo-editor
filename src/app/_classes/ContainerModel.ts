@@ -45,9 +45,7 @@ export class ContainerModel extends MainClass {
         const element: WidgetModel = new WidgetModel(HelperClass.getId('image'), this.ContainerId, pageId, 'Text', SectionTypes.IMAGE, ``);
         element.ElementType = "image";
         element.ItemContent = image;
-        element.ItemStyle = { 'width': width, 'margin-left': '2rem', 'margin-top': '.5rem' };
-        element.ItemMobileStyle = { 'width': '5rem', 'margin-left': '2rem', 'margin-top': '.5rem', position: 'relative', top: '7px' };
-        element.SelectedStyle = isMobileMode ? element.ItemMobileStyle : element.ItemStyle;
+
         this.AddWidget(element);
     }
 
@@ -55,17 +53,12 @@ export class ContainerModel extends MainClass {
         const menuWidget: WidgetModel = new WidgetModel(
             HelperClass.getId('card-master'), this.ContainerId, pageId, 'Card-Master-1', SectionTypes.MENU, ``);
         menuWidget.ItemCategory = 'Menu';
-        menuWidget.ItemStyle = { 'margin-left': '2rem', 'margin-right': '2rem', 'display': 'flex', position: 'relative', top: '10px', 'justify-content': 'end' };
-        menuWidget.ItemMobileStyle = { 'display': 'none' };
-        menuWidget.SelectedStyle = isMobileMode ? menuWidget.ItemMobileStyle : menuWidget.ItemStyle;
 
         pages.forEach(page => {
             const menuItem: WidgetModel = new WidgetModel(HelperClass.getId('menu'), this.ContainerId, 'master', 'Item', SectionTypes.MENU_ITEM, ``);
             menuItem.ItemContent = page.Name;
             menuItem.ItemEvent = page.Url;
-            menuItem.ItemStyle = { 'margin-right': '2rem' };
-            menuItem.ItemMobileStyle = {};
-            menuItem.SelectedStyle = isMobileMode ? menuWidget.ItemMobileStyle : menuWidget.ItemStyle;
+
             menuWidget.Children.push(menuItem);
         })
 
@@ -79,18 +72,7 @@ export class ContainerModel extends MainClass {
             HelperClass.getId('card-master'), this.ContainerId, 'master', 'Card-Master-1', SectionTypes.BURGER_MENU, ``);
         menuWidget.ItemCategory = 'Menu';
         menuWidget.ItemEventName = '<i class="fas fa-bars"></i>';
-        menuWidget.ItemMobileStyle = {
-            'margin-left': '2rem',
-            'margin-right': '2rem',
-            'position': 'absolute',
-            'top': '10px',
-            'width': '2.5rem',
-            'border-radius': '4px',
-            'padding': ' 3px',
-            'right': '-10px'
-        };
-        menuWidget.ItemStyle = { 'display': 'none' };
-        menuWidget.SelectedStyle = isMobileMode ? menuWidget.ItemMobileStyle : menuWidget.ItemStyle;
+
 
 
         menuWidget.Children = [];
@@ -98,39 +80,12 @@ export class ContainerModel extends MainClass {
             const menuItem: WidgetModel = new WidgetModel(HelperClass.getId('menu'), this.ContainerId, 'master', 'Item', SectionTypes.MENU_ITEM, ``);
             menuItem.ItemContent = page.Name;
             menuItem.ItemEvent = page.Url;
-            menuItem.ItemStyle = {
-                "color": "#000000",
-                "font-weight": "700",
-                "text-align": "center",
-                "width": "100%",
-                "display": "block",
-                'margin-top': '2px',
-                'margin-bottom': '2px',
-            }
 
-            menuItem.ItemMobileStyle = menuItem.ItemStyle;
-            menuItem.SelectedStyle = menuItem.ItemStyle;
             menuWidget.Children.push(menuItem);
         });
 
         const menuItemWrapper: WidgetModel = new WidgetModel(HelperClass.getId('menu-wrapper'), this.ContainerId, 'master', 'Item', SectionTypes.MENU_WRAPPER, ``);
-        menuItemWrapper.ItemStyle = {
-            'position': 'absolute',
-            top: 0,
-            right: 0,
-            height: '100vh',
-            width: '90%',
-            'z-index': 1000,
-            'background': '#ffffff',
-            'padding-left': '4px',
-            'padding-right': '4px',
-            'color': '#000000',
-            'border': 'none',
-            'border-radius': '0',
-            'padding-top': "15px"
-        }
-        menuItemWrapper.ItemMobileStyle = menuItemWrapper.ItemStyle;
-        menuItemWrapper.SelectedStyle = menuItemWrapper.ItemStyle;
+
         menuWidget.Children.push(menuItemWrapper);
 
 

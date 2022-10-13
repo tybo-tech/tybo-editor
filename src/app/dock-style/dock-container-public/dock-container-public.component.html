@@ -1,0 +1,10 @@
+<div *ngIf="website && page" class="docker-container">
+    
+    <ng-container *ngIf="page.Widgets?.length">
+        <ng-container *ngFor="let widget of page.Widgets">
+            <app-dock-page-public [widget]="widget" [page]="page" [website]="website"></app-dock-page-public>
+        </ng-container>
+    </ng-container>
+
+</div>
+<div class="body-background-color"></div>

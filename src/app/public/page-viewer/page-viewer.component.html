@@ -1,5 +1,6 @@
 <div [ngClass]="mainClass">
-  <app-editor *ngIf="id == 'editor'" [id]="id" [id2]="id2" ></app-editor>
+  <!-- <app-editor *ngIf="id == 'editor'" [id]="id" [id2]="id2" ></app-editor> -->
+  <app-dock-container *ngIf="id == 'editor'"></app-dock-container>
   <app-templates *ngIf="id == 'templates'"></app-templates>
   <!-- <pre>
     {{ website | json }}
@@ -15,11 +16,13 @@
       <pre>
         {{website | json}}
       </pre> -->
-      <div class="body-holder">
+      <!-- <div class="body-holder">
         <app-page-public-tree  *ngFor="let widget of page.Widgets; let i = index" [dataId]="id2" [id]="widget.WidgetId" [page]="page" [dataId]="id2"
           [widget]="widget" [website]="website">
         </app-page-public-tree>
-      </div>
+      </div> -->
+      <app-dock-container-public></app-dock-container-public>
+
 
     </div>
 

@@ -4,11 +4,23 @@
         <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
     </p>
     <span class="resizer" *ngIf="widget.ShowOptions"></span>
-    <span class="_container-menu">
-        <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
-            *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
-        </app-tag-menu>
-    </span>
+    <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
+        *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-tag-menu>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.HEADING" (click)="toggleOptions()">
+    <h1 [ngClass]="widget.ItemClass" *ngIf="!widget.EditText">
+        <font *ngIf="widget.ItemFormat !== 'Currency'" [innerHTML]="widget.ItemContent"></font>
+        <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
+    </h1>
+
+    <h1  *ngIf="widget.EditText" [(ngModel)]="widget.ItemContent" contenteditable [ngClass]="widget.ItemClass">
+    </h1>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()" (menuEvent)="menuEvent($event)"
+        *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-tag-menu>
 </span>
 
 
@@ -19,11 +31,9 @@
         <font *ngIf="widget.ItemFormat === 'Currency'"> {{widget.ItemContent | currency: 'R'}}</font>
     </a>
     <span class="resizer" *ngIf="widget.ShowOptions"></span>
-    <span class="_container-menu">
-        <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
-            *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
-        </app-tag-menu>
-    </span>
+    <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
+        *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-tag-menu>
 </span>
 
 
@@ -35,9 +45,10 @@
     </button>
     <span class="resizer" *ngIf="widget.ShowOptions"></span>
     <app-tag-menu (setEditText)="setEditText()" (deleteEvent)="delete()" (cloneEvent)="clone()"
-    (clickEvent)="onClickEvent()"  (copyStyleEvent)="copyStyles()"   (pasteStyleEvent)="pasteStyles()"   *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
-    [website]="website" [widget]="widget">
-</app-tag-menu>
+        (openMenuEvent)="openMenuEvent()" (menuEvent)="menuEvent($event)" (clickEvent)="onClickEvent()"
+        (copyStyleEvent)="copyStyles()" (pasteStyleEvent)="pasteStyles()"
+        *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-tag-menu>
 </span>
 
 <span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXTBOX" (click)="toggleOptions()">
@@ -52,15 +63,22 @@
 
 <span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.IMAGE && backgroundImg"
     (click)="toggleOptions()">
-    <!-- <div [ngClass]="widget.ItemClass"
-    [style.background-image]="backgroundImg"></div> -->
     <img [src]="widget.ItemContent" [ngClass]="widget.ItemClass" alt="">
     <span class="resizer" *ngIf="widget.ShowOptions"></span>
-    <span class="_container-menu">
-        <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()"
-            *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
-        </app-tag-menu>
-    </span>
+    <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()" (deleteEvent)="delete()"
+        *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-tag-menu>
+</span>
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.VIDEO" (click)="toggleOptions()">
+    <video [ngClass]="widget.ItemClass" muted loop autoplay>
+        <source [src]="widget.ItemContent" type="video/mp4" />
+    </video>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu (dbEvent)="dbEvent()" (changeImageEvent)="changeImageEvent()" (deleteEvent)="delete()"
+        *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-tag-menu>
 </span>
 
 

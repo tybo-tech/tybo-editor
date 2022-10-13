@@ -25,7 +25,7 @@ header {
     }
 
     @media (min-width: 40em) {
-        padding: 7em 0;
+        padding: 4em 0;
     }
 }
 
@@ -36,12 +36,19 @@ header {
         margin-inline: auto;
         color: $wt;
         text-align: left;
+        @media only screen and (max-width: 600px) {
+            max-width: 100%;
+            margin-top: 4rem;
+        }
     }
 
     p {
         color: $wt;
         text-align: left;
         padding-left: 2rem;
+        @media only screen and (max-width: 600px) {
+            padding: 0;
+        }
     }
 }
 .body,
@@ -94,14 +101,45 @@ h2 {
 //     margin-top: 3rem;
 // }
 
-.actions {
+#myVideo {
+    display: block;
+    max-width: 60%;
+    margin: 1rem auto;
+    margin-top: 3rem;
+}
+
+.action-holder-center {
     padding: 1rem;
-    padding-left: 2rem;
     display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-    .btn {
-        font-weight: 700;
-        padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+
+    @media only screen and (max-width: 600px) {
+        flex-direction: column;
+        padding: 0.5rem;
+        align-items: stretch;
+    }
+}
+
+.tv {
+    padding: 0;
+    background: $wt;
+    border-radius: 0.8rem;
+    border: 10px solid #17242a;
+    margin: 0 auto;
+    margin-top: 3rem;
+    max-width: 1300px;
+
+    video {
+        display: block;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.w-75 {
+    @media only screen and (max-width: 600px) {
+        width: 100% !important;
     }
 }

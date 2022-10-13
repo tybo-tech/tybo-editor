@@ -112,79 +112,6 @@ export class WebsiteService {
       });
     }
   }
-  selectWebsiteStyles(isMobileMode: boolean, website: WebsiteModel): WebsiteModel | undefined {
-    if (website) {
-      website.SelectedStyle = isMobileMode ? website.ItemMobileStyle : website.ItemStyle;
-      // website.IsMobileView = isMobileMode;
-      if (website.Footer)
-        this.selectWidgetStyles(website.Footer, isMobileMode)
-
-      if (website.Header)
-        this.selectWidgetStyles(website.Header, isMobileMode)
-
-
-      return website;
-    }
-    return undefined;
-  }
-  selectContainerStyles(container: ContainerModel, isMobileMode = false): ContainerModel {
-    if (container) {
-      if (!container.ItemStyle)
-        container.ItemStyle = container.SelectedStyle || {}
-
-      if (!container.ItemMobileStyle)
-        container.ItemMobileStyle = container.SelectedStyle || {}
-      container.SelectedStyle = isMobileMode ? container.ItemMobileStyle : container.ItemStyle;
-      if (container.Widgets) {
-        container.Widgets.forEach(c => {
-          this.selectWidgetStyles(c, isMobileMode);
-        })
-      }
-
-      if (container.Containers) {
-        container.Containers.forEach(c => {
-          this.selectContainerStyles(c, isMobileMode);
-        })
-      }
-    }
-    return container;
-  }
-
-  selectWidgetStyles(widget: WidgetModel, isMobileMode = false): WidgetModel {
-    if (widget) {
-      // debugger
-      if (!widget.ItemStyle)
-        widget.ItemStyle = {}
-
-      if (!widget.ItemMobileStyle)
-        widget.ItemMobileStyle = {}
-      widget.SelectedStyle = isMobileMode ? widget.ItemMobileStyle : widget.ItemStyle;
-      if (widget.Children) {
-        widget.Children.forEach(c => {
-          this.selectWidgetStyles(c, isMobileMode);
-        })
-      }
-    }
-    return widget;
-  }
-  selectTyles(isMobileMode: boolean, page: PageModel): PageModel | undefined {
-    if (page) {
-      page.SelectedStyle = page.ItemStyle;
-      if (page.Containers)
-        page.Containers.forEach(c => {
-          this.selectContainerStyles(c, isMobileMode);
-        });
-
-
-      if (page.Widgets)
-        page.Widgets.forEach(c => {
-          this.selectWidgetStyles(c, isMobileMode);
-        });
-
-      return page;
-    }
-    return;
-  }
 
 
 
@@ -349,5 +276,15 @@ export class WebsiteService {
         this.create(`webstyles/save-webstyles.php`, [selectedClass]).subscribe(data => { });
     }
     // debugger
+  }
+
+  saveStylesForWidget(widget: WidgetModel, website: WebsiteModel) {
+    if (!widget.ItemClass.length)
+      return;
+    const styles = website.WebsiteStyles?.find(x => x.SelectorName === widget.ItemClass[0]);
+    if (!styles)
+      return;
+    this.create(`webstyles/save-webstyles.php`, [styles]).subscribe(data => { });
+
   }
 }

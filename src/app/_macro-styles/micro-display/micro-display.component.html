@@ -1,3 +1,4 @@
+<div class="hr"></div>
 <div class="macro-style-container" *ngIf="widget">
     <div class="mb-3">
         <label for="basic-url" class="form-label">Display</label>
@@ -9,5 +10,15 @@
             <option value="grid">Grid</option>
         </select>
     </div>
+
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Overflow</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="typeChanged()" [(ngModel)]="overflow">
+            <option value="none">None</option>
+            <option value="hidden">hidden</option>
+            <option value=" inline-block">scroll</option>
+        </select>
+    </div>
+
 
 </div>

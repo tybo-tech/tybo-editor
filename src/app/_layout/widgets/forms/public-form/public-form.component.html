@@ -1,6 +1,0 @@
-<div class="forms" *ngIf="widget && widget.Form" [ngStyle]="widget.SelectedStyle">
-  <div *ngFor="let input of widget.Form.Inputs; let i= index">
-    <app-public-input [input]="input" [form]="widget.Form" [website]="website" [index]="i"></app-public-input>
-  </div>
-
-</div>

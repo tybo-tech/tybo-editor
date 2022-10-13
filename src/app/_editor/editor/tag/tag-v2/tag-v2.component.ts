@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { EVENT_NAMES } from 'src/app/_classes/IEvent';
 import { ImageModel } from 'src/app/_classes/ImageModel';
 import { PageModel } from 'src/app/_classes/PageModel';
 import { UserModel } from 'src/app/_classes/UserModel';
 import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
 import { WidgetModel } from 'src/app/_classes/WidgetModel';
+import { EventHelper } from 'src/app/_classes/_statics/EventHelper';
 import { SectionTypes } from 'src/app/_classes/_statics/SectionTypes';
 import { WidgetHelper } from 'src/app/_classes/_statics/WidgetHelper';
 import { CopyService } from 'src/app/_services/copy.service';
@@ -25,7 +27,7 @@ export class TagV2Component implements OnInit {
 
   SectionTypes = SectionTypes;
   backgroundImg: any;
-  editText: any;
+  // editText: any;
   showImage: boolean;
   user: UserModel;
   showEvents: boolean;
@@ -45,9 +47,8 @@ export class TagV2Component implements OnInit {
     });
     if (this.widget && this.widget.ItemType === SectionTypes.IMAGE) {
       this.backgroundImg = this.sanitizer.bypassSecurityTrustStyle('url(' + this.widget.ItemContent + ')');
-
     }
-    
+
   }
   toggleOptions() {
     // debugger
@@ -55,13 +56,13 @@ export class TagV2Component implements OnInit {
       return;
 
     WidgetHelper.removeClass(this.page.Widgets, 'active-node')
-    if (this.website.Header){
+    if (this.website.Header) {
       WidgetHelper.removeClass([this.website.Header], 'active-node')
       WidgetHelper.removeShowOptions([this.website.Header])
     }
     WidgetHelper.removeShowOptions(this.page.Widgets)
     this.widget.ItemClass.push('active-node');
-    this.editText != !this.editText;
+    this.widget.EditText != !this.widget.EditText;
     WidgetHelper.toggleOptions(this.page.Widgets)
     this.eventService.updateOptionsState(undefined);
     setTimeout(() => {
@@ -82,7 +83,7 @@ export class TagV2Component implements OnInit {
     }
   }
 
-  changeImageEvent(){
+  changeImageEvent() {
     this.showImage = true;
   }
 
@@ -160,9 +161,52 @@ export class TagV2Component implements OnInit {
   }
 
   setEditText() {
-    this.editText = true;
-    // setTimeout(() => {
-    //   this.box.nativeElement.focus();
-    // }, 1);
+    this.widget.EditText = true;
+    setTimeout(() => {
+    }, 1);
+  }
+  menuEvent(eventName: string) {
+    if (eventName === 'close-menu') {
+      let eventResults = EventHelper.CloseMenu(this.widget, this.page, this.website);
+      if (eventResults) {
+        this.websiteService.updateWebsieState(this.website);
+        this.saveWebStyles(eventResults);
+      }
+      return
+    }
+
+    if (eventName === 'edit') {
+      this.setEditText();
+    }
+  }
+
+
+  openMenuEvent() {
+    if (this.widget.Events && this.widget.Events.length) {
+      const currentEvent = this.widget.Events[0];
+      if (currentEvent.Name === EVENT_NAMES.SHOW.Name && currentEvent.Inputs?.length) {
+        let elementToShow: WidgetModel = WidgetHelper.getWidget(this.page.Widgets, currentEvent.Inputs[0].SourceId || '');
+        if (!elementToShow && this.website.Header)
+          elementToShow = WidgetHelper.getWidget([this.website.Header], currentEvent.Inputs[0].SourceId || '');;
+        if (!elementToShow)
+          return;
+        EventHelper.ShowElelent(elementToShow, this.website);
+        this.websiteService.updateWebsieState(this.website)
+        return
+      }
+    } else {
+      alert("No Event linked with this element")
+    }
+  }
+
+
+  saveWidget(widget: WidgetModel) {
+    this.syncService.empyWidgets();
+    this.syncService.updateWidgetState(widget, this.user?.UserId || widget.CreateUserId)
+  }
+
+  saveWebStyles(widget: WidgetModel) {
+    this.websiteService.saveStylesForWidget(widget, this.website)
+
   }
 }

@@ -16,6 +16,7 @@ export class MicroLayoutComponent implements OnInit {
   direction: any
   justify: any
   align: any
+  flexBasis: any
   showDirection: boolean;
   showJustify: boolean;
   showAlign: boolean;
@@ -81,14 +82,23 @@ export class MicroLayoutComponent implements OnInit {
 
     const justify = WidgetHelper.getStyleValue('justify-content', this.widget, this.website);
     if (justify) {
-
       this.justify = this.justifyItemsList.find((x: any) => x.Id === justify);
+    }
+    const flexBasis = WidgetHelper.getStyleValue('flex-basis', this.widget, this.website);
+    if (flexBasis) {
+      this.flexBasis = flexBasis;
     }
 
   }
 
 
   typeChanged() {
+    if (this.flexBasis) {
+      const val: IKeyValueModel = {
+        Key: 'flex-basis', Value: this.flexBasis + ''
+      }
+      this.styleChaged.emit(val);
+    }
 
   }
   selectDirection(item: any) {

@@ -47,15 +47,7 @@ export class CopyService {
     this.vwBehaviorSubject.next(vw);
   }
 
-  getColumnToPaste(column: ColumnModel): ColumnModel | undefined {
-    if (!column.ColumnId || !column.ColumnType)
-      return ;
 
-    const col = new ColumnModel(HelperClass.getId('col'), column.RowId, 'Col-1', '', [], 'Grid-col');
-    col.Widgets = column.Widgets;
-    col.ItemStyle = column.ItemStyle;
-    return col;
-  }
 
   getWidgetToPaste(widget: WidgetModel): WidgetModel | undefined{
     if (!widget.WidgetId && !widget.ItemContent && !widget.ItemHeading && !widget.ImageUrl && !widget.ItemEventName)

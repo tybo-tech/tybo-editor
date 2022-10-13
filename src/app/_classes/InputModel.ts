@@ -44,15 +44,7 @@ export class InputModel extends MainClass {
 
     AddStyles() {
         if (this.InputType === 'text' || this.InputType === 'email' || this.InputType === 'tel' || this.InputType === 'number' || this.InputType === 'password' || this.InputType === 'textarea') {
-            this.ItemStyle = {
-                'display': 'block',
-                'padding': ' 0.5rem 1rem',
-                'width': '71%',
-                'background-color': 'rgb(31, 39, 48)',
-                'border': 'none',
-                'border-radius': '7px',
-                'margin-bottom': '18px'
-            }
+       
 
             this.LabelStyles = {
                 'margin-bottom': '5px',
@@ -60,15 +52,6 @@ export class InputModel extends MainClass {
             }
         }
 
-        if (this.InputType === 'button') {
-            this.ItemStyle = { 'background-color': '#4c3ee8', 'padding': '20px', 'color': '#ffffff', 'border': 'none', 'border-radius': '5px' }
-        }
-
-
-        this.ItemMobileStyle = this.ItemStyle;
-        this.MobileLabelStyles = this.LabelStyles;
-        if (this.ItemMobileStyle && this.ItemMobileStyle['width'])
-            this.ItemMobileStyle['width'] = '100%'
     }
 }
 

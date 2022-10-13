@@ -1,0 +1,68 @@
+@import "../../../../../../assets/styles/colors";
+$w: 100%;
+$h: 12rem;
+
+.style-styles {
+    display: block;
+    padding: 1rem;
+}
+.outer-container {
+    background: #2a2d35;
+    width: $w;
+    height: $h;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .inner-container {
+        background: #323741;
+        width: 70%;
+        height: 60%;
+        border-radius: 0.5rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .most-inner {
+            position: relative;
+            width: 70%;
+            height: 30%;
+            border-radius: 0.5rem;
+            background: #2a2d35;
+        }
+    }
+}
+
+.top,
+.left,
+.right,
+.bottom {
+    position: absolute;
+    z-index: 100;
+    display: block;
+}
+.left {
+    left: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.right {
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.top {
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bottom {
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+}

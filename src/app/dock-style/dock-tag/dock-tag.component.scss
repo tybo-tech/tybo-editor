@@ -1,0 +1,14 @@
+
+@import '../../../assets/styles/colors';
+.active-node {
+    border: 2px solid $info;
+    z-index: 1000;
+    // cursor: move !important;
+
+    .resize-action {
+        transform: translate3d(-50%, -50%, 0) rotateZ(45deg);
+        border-style: solid;
+        border-width: 8px;
+        border-color: transparent transparent transparent $info;
+    }
+}

@@ -1,0 +1,29 @@
+@import "../../../../../assets/styles/colors";
+.align-icons {
+    padding: 0;
+    padding-bottom: 1rem;
+    padding-top: 0.4rem;
+    img {
+        width: 1.4vw;
+        cursor: pointer;
+        background: #2b3035;
+        padding: 0.4rem;
+        border-radius: 0.25rem;
+        &:hover {
+            background: #000;
+        }
+    }
+}
+
+p {
+    margin: 5px 0 !important;
+    padding: 3px 5px !important;
+    background: #15181a;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+label {
+    display: block;
+    padding: 3px 5px;
+    font-size: 0.75rem;
+}

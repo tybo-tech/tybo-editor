@@ -45,80 +45,94 @@
                         and drop.
                     </p>
 
-                    <div class="actions">
-                        <a routerLink="/account/create-a-new-website" class="btn btn-primary">
-                            Create a website
-                        </a>
-                        <a class="btn btn-dark">
-                            Hire a developer
-                        </a>
-                    </div>
+                    <app-home-actions></app-home-actions>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <img class="main-bg" src="../../../assets/images/editor/main-bg.png" alt="">
+                    <!-- <img class="main-bg" src="../../../assets/images/editor/main-bg.png" alt=""> -->
+                    <div class="tv">
+                        <video autoplay muted loop [muted]="'true'">
+                            <source src="assets/images/buildsite.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="">
+    <section class="" style="background:rgb(19, 5, 24); color: white;">
+        <h4 class="center mb-3">
+            Responsive design
+
+            <span style="max-width: 30rem;margin: .5rem auto; font-size: 1rem; display: block; text-align: center;"
+                class="text-center p-1">
+                Build for Pc, Tablets and mobile phones. The goal of responsive design is to build web pages that detect
+                the visitor’s screen size and
+                orientation and change the layout accordingly.
+            </span>
+        </h4>
+        <div class="tv">
+            <video autoplay muted loop id="myVideo-1" [muted]="'true'">
+                <source src="assets/images/Responsive.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+        <div class="action-holder-center">
+            <app-home-actions></app-home-actions>
+        </div>
+    </section>
+
+    <section class="" style="background:rgb(32, 32, 32); color: white;">
         <div class="con">
-            <h2 class="center">
-               Your website is Few Clicks away.
-            </h2>
+            <h4 class="center mb-3">
+                Content Management System (CMS)
 
-            <div class="split">
-                <div>
-                    <p>Forget about spending hours learning how to code or trying to find a good developer to create
-                        your website. Tybo In Just Few Clicks enables you to create stunning and unique websites,
-                        already integrated with google analytics, maps, seo, payfast and more.
+                <span style="max-width: 30rem;margin: .5rem auto; font-size: 1rem; display: block; text-align: center;"
+                    class="text-center p-1">
+                    A content management system helps you create, manage, and publish content on the web. It also helps
+                    keep
+                    content organized and accessible so it can be used and repurposed effectively.
+                </span>
+            </h4>
 
-                        </p>
-                </div>
-                <div>
-                    <p>Good thing is you can do all this by your self in this platform or our team can handle all this
-                        admin work for you, we are a software company after all.</p>
+
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="main-bg" style="margin: .5rem auto;" src="assets/images/database1.png" alt="">
                 </div>
             </div>
         </div>
     </section>
+    <section class="" style="background:rgb(32, 32, 32); color: white;">
+        <div class="con">
+            <h4 class="center mb-3">
+                Easy to configure events, like clicks and mouse over
 
-    <section class="bg-primary">
-        <div class="con">
-            <div class="split">
-                <div>
-                    <h2>Ecommerce</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt accusamus vel expedita
-                        debitis, eveniet ea
-                        obcaecati reiciendis, iste earum, commodi accusantium impedit? Dolorum perferendis harum dicta
-                        corporis nam!
-                    </p>
-                </div>
-                <div>
-                    <img src="../../../assets/images/mock/t2.png" alt="">
+                <span style="max-width: 30rem;margin: .5rem auto; font-size: 1rem; display: block; text-align: center;"
+                    class="text-center p-1">
+                    An easy example is when the user clicks the "Send button" on a contact form, I want the system to
+                    send an email to the website owner.
+                </span>
+            </h4>
+
+
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="main-bg" style="margin: .5rem auto;" src="assets/images/events.png" alt="">
                 </div>
             </div>
         </div>
-    </section>
-    <section class="bg-dark">
-        <div class="con">
-            <div class="split">
-                <div>
-                    <img src="../../../assets/images/mock/t1.png" alt="">
-                </div>
-                <div>
-                    <h2>Service booking</h2>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum totam, veritatis a non quidem
-                        soluta fugit
-                        error voluptate sapiente quas?</p>
-                </div>
-            </div>
+
+        <div class="action-holder-center">
+            <app-home-actions></app-home-actions>
         </div>
     </section>
+
 </div>
 
 <!-- 

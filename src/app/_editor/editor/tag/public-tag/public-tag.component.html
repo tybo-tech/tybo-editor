@@ -7,6 +7,13 @@
 <img *ngIf="widget && widget.ItemType === SectionTypes.IMAGE && backgroundImg" [src]="widget.ItemContent"
   [ngClass]="widget.ItemClass" alt="">
 
+<video muted loop autoplay *ngIf="widget && widget.ItemType === SectionTypes.VIDEO" 
+  [ngClass]="widget.ItemClass">
+  <source [src]="widget.ItemContent" type="video/mp4" />
+</video>
+  <!-- <div  *ngIf="widget && widget.ItemType === SectionTypes.VIDEO" class="___overlay"></div> -->
+
+
 <p #box *ngIf="!editText && widget && widget.ItemType === SectionTypes.TEXT" class="resizable-draggable"
   [innerHTML]="widget.ItemContent" (click)="itemClicked()" [ngClass]="widget.ItemClass"
   [class.active]="status === 1 || status === 2">

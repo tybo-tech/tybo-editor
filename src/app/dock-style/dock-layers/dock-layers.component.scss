@@ -1,0 +1,10 @@
+@import '../../../assets/styles/colors';
+
+.docker-layers-container{
+    position: fixed;
+    top: 3rem;
+    left: 0;
+    bottom: 0;
+    width: 15rem;
+    background: $mate-black; 
+}

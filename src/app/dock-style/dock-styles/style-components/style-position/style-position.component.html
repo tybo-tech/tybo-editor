@@ -1,0 +1,50 @@
+<div class="grid-2 style-styles">
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">LEFT</span>
+        <input type="number" class="form-control"  (input)="emit()" [(ngModel)]="left" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+    </div>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">RIGH</span>
+        <input type="number" class="form-control"  (input)="emit()" [(ngModel)]="right" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+    </div>
+
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">TOP</span>
+        <input type="number" class="form-control"  (input)="emit()" [(ngModel)]="top" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+    </div>
+
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">BOT</span>
+        <input type="number" class="form-control"  (input)="emit()" [(ngModel)]="bottom" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Position</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="emit()"
+            [(ngModel)]="position">
+            <option value="static">Default</option>
+            <option value="relative">Relative</option>
+            <option value="absolute">Absolute</option>
+            <option value="fixed">Fixed</option>
+            <option value="sticky">Sticky</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="basic-url" class="form-label">Z Index</label>
+        <input class="form-control form-select-sm" type="number" aria-label=".form-select-sm example" (input)="emit()"
+            [(ngModel)]="zindex" />
+    </div>
+</div>
+

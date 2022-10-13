@@ -1,0 +1,33 @@
+<br>
+<br>
+<br>
+<p>
+    Container Items
+</p>
+<label for="">Items direction</label>
+<div class="align-icons style-styles">
+    <img *ngFor="let display of options" [src]="display.Url" alt="" (click)="displayClick(display)">
+</div>
+
+
+<!-- <label for="">Justify</label>
+<div class="align-icons style-styles">
+    <img *ngFor="let display of options" [src]="display.Url" alt="" (click)="displayClick(display)">
+</div> -->
+
+
+<label for="">Alignment</label>
+<div class="align-icons style-styles">
+    <img *ngFor="let display of alignsVertical" [src]="display.Url" alt="" (click)="displayClick(display)">
+</div>
+
+
+
+<div class="style-styles">
+<div class="input-group input-group-sm">
+    <span class="input-group-text" id="inputGroup-sizing-sm">GAB IN BETWEEN</span>
+    <input type="number" class="form-control" (input)="emit()" [(ngModel)]="gab" placeholder="Auto"  aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-sm">
+      
+</div>
+</div>

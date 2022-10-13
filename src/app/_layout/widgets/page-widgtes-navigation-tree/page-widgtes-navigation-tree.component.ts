@@ -56,8 +56,6 @@ export class PageWidgtesNavigationTreeComponent implements OnInit {
       // Container
       if (sectionType === SectionTypes.CONTAINER && containerWidget) {
         const subContainer: WidgetModel = new WidgetModel(HelperClass.getId('text'),containerWidget.WidgetId, this.page.PageId, 'Text', SectionTypes.CONTAINER, ``);
-        subContainer.ItemStyle = StyleHelper.getFlexChild();
-        subContainer.ItemMobileStyle = StyleHelper.getFlexChild();
         subContainer.SelectedStyle = StyleHelper.getFlexChild();
         containerWidget.AddChild(subContainer)
       }

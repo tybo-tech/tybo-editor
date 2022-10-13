@@ -4,14 +4,53 @@
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-display>
 <app-macro-background *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-macro-background>
-    <app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
+<app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
 <app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-margin>
-    <app-micro-border *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
+<app-micro-border *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-border>
-    <app-micro-layout *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
+<app-micro-layout *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-layout>
+    <app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.CONTAINER" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
+
+
+
+<app-micro-size *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget" [website]="website"
+    (styleChaged)="styleChaged($event)"></app-micro-size>
+<app-micro-display *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-display>
+<app-macro-background *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-macro-background>
+<app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
+<app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-margin>
+<app-micro-border *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-border>
+<app-micro-layout *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-layout>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.UL" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
+
+
+<app-micro-size *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget" [website]="website"
+    (styleChaged)="styleChaged($event)"></app-micro-size>
+<app-micro-display *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-display>
+<app-macro-background *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-macro-background>
+<app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
+<app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-margin>
+<app-micro-border *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-border>
+<app-micro-layout *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-layout>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.LI" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
 
 
 
@@ -28,8 +67,10 @@
 
 <app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.IMAGE" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
-    <app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.IMAGE" [widget]="widget"
+<app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.IMAGE" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-margin>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.IMAGE" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
 
 
 
@@ -42,29 +83,40 @@
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
 <app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.TEXT" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-margin>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.TEXT" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
 
 <!-- 
-    <app-micro-size *ngIf="widget  && website && widget.ItemType === SectionTypes.A" [widget]="widget"
-[website]="website" (styleChaged)="styleChaged($event)"></app-micro-size> -->
+        <app-micro-size *ngIf="widget  && website && widget.ItemType === SectionTypes.A" [widget]="widget"
+        [website]="website" (styleChaged)="styleChaged($event)"></app-micro-size> -->
 <app-macro-tipography *ngIf="widget  && website && widget.ItemType === SectionTypes.A" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-macro-tipography>
 <app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.A" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
 <app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.A" [widget]="widget" [website]="website"
     (styleChaged)="styleChaged($event)"></app-micro-margin>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.A" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
 
 
 <app-micro-size *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-size>
+    <app-micro-display *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-display>
 <app-macro-tipography *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-macro-tipography>
 <app-micro-corners *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-corners>
+    <app-micro-border *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-border>
 
 <app-micro-margin *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-margin>
 <app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.BUTTON" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
+
 
 
 
@@ -74,11 +126,16 @@
     [website]="website" (styleChaged)="styleChaged($event)"></app-macro-tipography>
 <app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.HEADING" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
+    <app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.HEADING" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
 
 <app-macro-tipography *ngIf="widget  && website && widget.ItemType === SectionTypes.SUB_HEADING" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-macro-tipography>
 <app-micro-padding *ngIf="widget  && website && widget.ItemType === SectionTypes.SUB_HEADING" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-padding>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.SUB_HEADING" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
+    
 
 
 <app-macro-background *ngIf="widget  && website && widget.ItemType === SectionTypes.PAGE" [widget]="widget"
@@ -98,6 +155,8 @@
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-border>
 <app-micro-corners *ngIf="widget  && website && widget.ItemType === SectionTypes.TEXTBOX" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-corners>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.TEXTBOX" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>
 
 
 
@@ -113,3 +172,5 @@
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-border>
 <app-micro-corners *ngIf="widget  && website && widget.ItemType === SectionTypes.TEXTAREA" [widget]="widget"
     [website]="website" (styleChaged)="styleChaged($event)"></app-micro-corners>
+<app-micro-position *ngIf="widget  && website && widget.ItemType === SectionTypes.TEXTAREA" [widget]="widget"
+    [website]="website" (styleChaged)="styleChaged($event)"></app-micro-position>

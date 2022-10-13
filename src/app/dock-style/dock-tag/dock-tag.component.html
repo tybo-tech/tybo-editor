@@ -1,0 +1,94 @@
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXT">
+    <app-dock-tag-resizer *ngIf="widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-dock-tag-resizer>
+    <p [ngClass]="widget.ItemClass" [(ngModel)]="widget.ItemContent" contenteditable (ngModelChange)="textChanged()"
+         [id]="widget.WidgetId" class="__tag" class="__tag">
+    </p>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website"
+        (menuEvent)="menuEvent($event)" [widget]="widget">
+    </app-tag-menu>
+
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.HEADING">
+    <h1 [ngClass]="widget.ItemClass" *ngIf="!widget.EditText"  [id]="widget.WidgetId" class="__tag" [(ngModel)]="widget.ItemContent"
+        contenteditable (ngModelChange)="textChanged()">
+    </h1>
+    <!-- 
+    <h1 *ngIf="widget.EditText" [(ngModel)]="widget.ItemContent" contenteditable [ngClass]="widget.ItemClass">
+    </h1> -->
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu (menuEvent)="menuEvent($event)" *ngIf="page && website && widget && widget.ShowOptions" [page]="page"
+        [website]="website" [widget]="widget">
+    </app-tag-menu>
+    <app-dock-tag-resizer *ngIf="widget.ShowOptions" [website]="website" [page]="page" [widget]="widget">
+    </app-dock-tag-resizer>
+
+</span>
+
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.A">
+    <a [ngClass]="widget.ItemClass"  [id]="widget.WidgetId" class="__tag" [(ngModel)]="widget.ItemContent" contenteditable>
+    </a>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website"
+        [widget]="widget">
+    </app-tag-menu>
+</span>
+
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.BUTTON">
+    <app-dock-tag-resizer *ngIf="widget.ShowOptions" [website]="website" [page]="page" [widget]="widget">
+    </app-dock-tag-resizer>
+    <div [ngClass]="widget.ItemClass" [(ngModel)]="widget.ItemContent" contenteditable  [id]="widget.WidgetId" class="__tag"
+        (ngModelChange)="textChanged()">
+    </div>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website"
+        (menuEvent)="menuEvent($event)" [widget]="widget">
+    </app-tag-menu>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXTBOX">
+    <input [(ngModel)]="widget.ItemContent" [ngClass]="widget.ItemClass"  [id]="widget.WidgetId" class="__tag" />
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website"
+        (menuEvent)="menuEvent($event)" [widget]="widget">
+    </app-tag-menu>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXTAREA">
+    <textarea [(ngModel)]="widget.ItemContent" [ngClass]="widget.ItemClass"  [id]="widget.WidgetId" class="__tag"></textarea>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.IMAGE ">
+    <img [src]="widget.ItemContent" [ngClass]="widget.ItemClass"  [id]="widget.WidgetId" class="__tag" alt="" draggable="false">
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website"
+        (menuEvent)="menuEvent($event)" [widget]="widget">
+    </app-tag-menu>
+    <app-dock-tag-resizer *ngIf="widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-dock-tag-resizer>
+</span>
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.VIDEO">
+    <video [ngClass]="widget.ItemClass" muted loop autoplay  [id]="widget.WidgetId" class="__tag">
+        <source [src]="widget.ItemContent" type="video/mp4" />
+    </video>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-tag-menu *ngIf="page && website && widget && widget.ShowOptions" [page]="page" [website]="website"
+        [widget]="widget">
+    </app-tag-menu>
+</span>
+
+
+<app-image-picker *ngIf="showImage" (onClose)="showImage= false" (onImageSelect)="onImageSelect($event)">
+</app-image-picker>
+
+<app-widget-events [widget]="widget" *ngIf="widget && showEvents && page && website && user" [user]="user"
+    [website]="website" [page]="page" (onClose)="showEvents= false"></app-widget-events>

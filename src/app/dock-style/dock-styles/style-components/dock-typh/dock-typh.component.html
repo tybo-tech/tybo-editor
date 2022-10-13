@@ -1,0 +1,27 @@
+<div class="grid-1 style-styles">
+    <label for="">Customize Text</label>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">COLOR</span>
+        <input type="color" class="form-control" aria-label="Sizing example input" [(ngModel)]="color"
+            (input)="emit()" aria-describedby="inputGroup-sizing-sm">
+            <span class="input-group-text" id="inputGroup-sizing-sm">SIZE</span>
+            <input type="number" class="form-control" aria-label="Sizing example input" [(ngModel)]="font_size"
+            (input)="emit()" aria-describedby="inputGroup-sizing-sm">
+    </div>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">ALIGN</span>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="align"   (change)="emit()">
+            <option value="left">LEFT</option>
+            <option value="center">CENTER</option>
+            <option value="right">RIGHT</option>
+        </select>
+        <span class="input-group-text" id="inputGroup-sizing-sm">THICK</span>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="font_weight"   (change)="emit()">
+            <option [value]="item" *ngFor="let item of [100,200,300,400,500,600,700,800,900]">
+                {{item}}
+            </option>
+        </select>
+    
+    </div>
+</div>

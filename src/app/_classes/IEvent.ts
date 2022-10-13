@@ -32,10 +32,22 @@ export interface IEmailEvent {
 }
 
 
+export const EVENT_NAMES = {
+  SEND_EMAIL: { Name: 'Send Email' },
+  SHOW_TOAST_MESSAGE: { Name: 'Show toast message' },
+  NAVIGATE: { Name: 'Navigate' },
+  PAGE: { Name: 'Page on this website' },
+  LINK: { Name: 'External link' },
+  SHOW_HIDE: { Name: 'Show/Hide element' },
+  SHOW: { Name: 'Show element' },
+  HIDE: { Name: 'Hide element' },
+  TOGGLE: { Name: 'Toggle element' },
+}
+
 
 export const EVENTS = [
   {
-    Name: 'Send Email', Events: [], Inputs: [
+    Name: EVENT_NAMES.SEND_EMAIL.Name, Events: [], Inputs: [
       {
         Name: 'FromEmail', Type: 'string', IsRequred: 'yes', Mode: 'Dynamic', InputValue: '', ViewOptions: false, Source: '', SourceId: ''
       },
@@ -51,26 +63,26 @@ export const EVENTS = [
     ]
   },
   {
-    Name: 'Show toast message', Events: [], Inputs: [
+    Name: EVENT_NAMES.SHOW_TOAST_MESSAGE.Name, Events: [], Inputs: [
       {
         Name: 'Toast message', Type: 'string', IsRequred: 'yes', Mode: 'Dynamic', InputValue: '', ViewOptions: false, Source: '', SourceId: ''
       }
     ]
   },
   {
-    Name: 'Navigate', Events: [
-      { Name: 'Website page', Events: [], Inputs: [] },
-      { Name: 'External link', Events: [], Inputs: [] },
+    Name: EVENT_NAMES.NAVIGATE.Name, Events: [
+      { Name: EVENT_NAMES.PAGE.Name, Events: [], Inputs: [] },
+      { Name: EVENT_NAMES.LINK.Name, Events: [], Inputs: [] },
     ], Inputs: []
   },
 
   // Show Hide
   {
-    Name: 'Show/Hide element',
+    Name: EVENT_NAMES.SHOW_HIDE.Name,
     Inputs: [],
     Events: [
       {
-        Name: 'Show element',
+        Name: EVENT_NAMES.SHOW.Name,
         Events: [],
         Inputs: [
           {
@@ -79,7 +91,7 @@ export const EVENTS = [
         ]
       },
       {
-        Name: 'Hide element',
+        Name: EVENT_NAMES.HIDE.Name,
         Events: [],
         Inputs: [
           {
@@ -88,7 +100,7 @@ export const EVENTS = [
         ]
       },
       {
-        Name: 'Toggle element',
+        Name: EVENT_NAMES.TOGGLE.Name,
         Events: [],
         Inputs: [
           {

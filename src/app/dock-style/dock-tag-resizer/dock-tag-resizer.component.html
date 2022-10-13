@@ -1,0 +1,6 @@
+<div class="dock-tag-resizer" [ngStyle]="style">
+    <div class="dock-resizer top-left"></div>
+    <div class="dock-resizer top-right"></div>
+    <div class="dock-resizer bottom-left"></div>
+    <div class="dock-resizer bottom-right"  *ngIf="widget" [id]="'tag-bottom-right__'+widget.WidgetId"></div>
+</div>

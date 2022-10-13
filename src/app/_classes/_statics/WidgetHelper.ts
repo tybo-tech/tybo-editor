@@ -11,6 +11,11 @@ import { HelperClass } from "./HelperClass";
 import { SectionTypes } from "./SectionTypes";
 
 export class WidgetHelper {
+  static GetSelectedWidgets(widgets: WidgetModel[]) {
+    const wids = this.IsolateWidget([], widgets);
+    const actives = wids.filter(x => x.ShowOptions);
+    return actives;
+  }
 
 
   public static removeDynamicWidgets(arr: WidgetModel[]): WidgetModel[] {
@@ -23,6 +28,10 @@ export class WidgetHelper {
       });
   }
 
+  public static createWidget(name: string, type: string, parentId: string, idPrefix: string) {
+    const widget: WidgetModel = new WidgetModel(HelperClass.getId(idPrefix), '', parentId, name, type, '', [], parentId);
+    return widget;
+  }
 
   public static getWidget(arr: WidgetModel[], id: string) {
     if (arr && arr.length) {
@@ -72,6 +81,8 @@ export class WidgetHelper {
 
   public static proccessWidget(widget: WidgetModel, website: WebsiteModel, page: PageModel) {
     if (widget && widget.Children) {
+      // debugger
+      console.log(widget.Name, widget.ItemCategory);
 
       if (widget.ItemCategory === SectionTypes.DB_LIST && widget.DbTable) {
         const tableData: any[] = this.GetPageData(website, widget.DbTable);
@@ -88,6 +99,7 @@ export class WidgetHelper {
               this.proccessWidget(child, website, page);
           })
         }
+        console.log(widget);
       } else {
         if (widget.Children.length)
           widget.Children.forEach(child => {
@@ -149,12 +161,13 @@ export class WidgetHelper {
   }
 
   public static GetFeildValue(widgetId: string, page: PageModel) {
-    debugger
     const widget: WidgetModel = this.getWidget(page.Widgets, widgetId);
     if (widget) {
       return widget.ItemContent;
     }
   }
+
+
 
   public static getByType(output: WidgetModel[], widgets: WidgetModel[], type: string) {
     widgets.forEach((wid: WidgetModel) => {
@@ -220,6 +233,7 @@ export class WidgetHelper {
   }
 
   static removeClass(widgets: WidgetModel[], className: string) {
+    // debugger
     widgets.forEach(wid => {
       if (wid.ItemClass && wid.ItemClass.length && wid.ItemClass.find((x: string) => x === className)) {
         wid.ShowOptions = false;
@@ -237,11 +251,19 @@ export class WidgetHelper {
   static removeShowOptions(widgets: WidgetModel[]) {
     widgets.forEach(wid => {
       wid.ShowOptions = false;
-      if (wid.Children)
-        this.removeShowOptions(wid.Children)
     })
     return widgets;
   }
+
+  static removeIsMouseDown(widgets: WidgetModel[]) {
+    widgets.forEach(wid => {
+      wid.IsMouseDown = false;
+      if (wid.Children)
+        this.removeIsMouseDown(wid.Children)
+    })
+    return widgets;
+  }
+
 
 
   static getStyleValue(key: string, widget: WidgetModel, website: WebsiteModel) {
@@ -311,6 +333,74 @@ export class WidgetHelper {
     }
     if (website.ViewDevice === DeviceTypes.PHONE) {
       widget.SelectedClass.PhoneStyles[key] = value + units;
+    }
+    return widget;
+  }
+
+
+
+
+  static MakeBackground(website: WebsiteModel, widget: WidgetModel) {
+    if (!widget || !website || !widget.ItemClass || !widget.ItemClass.length)
+      return widget;
+
+    if (!website.WebsiteStyles)
+      website.WebsiteStyles = [];
+    widget.SelectedClass = website.WebsiteStyles.find(x => x.SelectorName === widget.ItemClass[0]);
+    if (!widget.SelectedClass) {
+      const newClass: WebstyleModel = new WebstyleModel(HelperClass.getId('class'), website.WebsiteId, `class-${new Date().getTime()}`, {});
+      newClass.PcStyles = {};
+      newClass.TabStyles = {};
+      newClass.PhoneStyles = {};
+
+      website.WebsiteStyles.push(newClass);
+      widget.ItemClass = [newClass.SelectorName];
+      widget.SelectedClass = newClass;
+    }
+
+
+    if (!widget.SelectedClass.PcStyles)
+      widget.SelectedClass.PcStyles = {};
+
+    if (!widget.SelectedClass.PhoneStyles)
+      widget.SelectedClass.PhoneStyles = {};
+
+    if (!widget.SelectedClass.TabStyles)
+      widget.SelectedClass.TabStyles = {};
+
+    if (website.ViewDevice === DeviceTypes.PC || !website.ViewDevice) {
+      widget.SelectedClass.PcStyles['top'] = 0;
+      widget.SelectedClass.PcStyles['right'] = 0;
+      widget.SelectedClass.PcStyles['bottom'] = 0;
+      widget.SelectedClass.PcStyles['left'] = 0;
+      widget.SelectedClass.PcStyles['width'] = '100%';
+      widget.SelectedClass.PcStyles['height'] = '100%';
+      widget.SelectedClass.PcStyles['z-index'] = '-1 !important';
+      widget.SelectedClass.PcStyles['position'] = 'absolute';
+      widget.SelectedClass.PcStyles['object-fit'] = 'cover';
+    }
+
+    if (website.ViewDevice === DeviceTypes.TABLET) {
+      widget.SelectedClass.PcStyles['top'] = 0;
+      widget.SelectedClass.PcStyles['right'] = 0;
+      widget.SelectedClass.PcStyles['bottom'] = 0;
+      widget.SelectedClass.PcStyles['left'] = 0;
+      widget.SelectedClass.PcStyles['width'] = '100%';
+      widget.SelectedClass.PcStyles['height'] = '100%';
+      widget.SelectedClass.PcStyles['z-index'] = '-1 !important';
+      widget.SelectedClass.PcStyles['position'] = 'absolute';
+      widget.SelectedClass.PcStyles['object-fit'] = 'cover';
+    }
+    if (website.ViewDevice === DeviceTypes.PHONE) {
+      widget.SelectedClass.PcStyles['top'] = 0;
+      widget.SelectedClass.PcStyles['right'] = 0;
+      widget.SelectedClass.PcStyles['bottom'] = 0;
+      widget.SelectedClass.PcStyles['left'] = 0;
+      widget.SelectedClass.PcStyles['width'] = '100%';
+      widget.SelectedClass.PcStyles['height'] = '100%';
+      widget.SelectedClass.PcStyles['z-index'] = '-1 !important';
+      widget.SelectedClass.PcStyles['position'] = 'absolute';
+      widget.SelectedClass.PcStyles['object-fit'] = 'cover';
     }
     return widget;
   }
@@ -398,14 +488,19 @@ export class WidgetHelper {
     copy.ItemEventName = old.ItemEventName
     copy.ItemContent = old.ItemContent;
     copy.ItemFormat = old.ItemFormat;
+    // copy.ItemCategory = old.ItemCategory;
+    copy.ItemCategory = "Db-Item";
     copy.UrlId = old.UrlId;
     copy.Name = dataItem["Name"] || old.Name
     if (copy.UrlId) {
       copy.UrlValue = dataItem[copy.UrlId]
     }
-    if (old.Settings[DataKeys.DATA_SOURCE] && copy.FeildName) {
-      copy.ItemContent = dataItem[copy.FeildName] || old.ItemContent;
+    // if (old.Settings[DataKeys.DATA_SOURCE] && copy.FeildName) {
+    //   copy.ItemContent = dataItem[copy.FeildName] || old.ItemContent;
+    // }
 
+    if (copy.FeildName) {
+      copy.ItemContent = dataItem[copy.FeildName] || old.ItemContent;
     }
     copy.ItemType = old.ItemType;
     copy.ElementType = old.ElementType;
@@ -474,5 +569,44 @@ export class WidgetHelper {
         this.proccessWidgetDataChanaged(wid.Children)
     });
     return widgets;
+  }
+
+
+  public static getPageWidgetsPlusOfHeader(page: PageModel, website: WebsiteModel): WidgetModel[] {
+    const inputWidgets: WidgetModel[] = [];
+    if (website.Header) {
+      const fromHeader = WidgetHelper.IsolateWidget([], [website.Header]) || [];
+      if (fromHeader.length)
+        fromHeader.forEach(i => {
+          inputWidgets.push(i)
+        })
+    }
+    (WidgetHelper.IsolateWidget([], page.Widgets) || []).forEach(x => {
+      inputWidgets.push(x)
+    });
+    return inputWidgets;
+  }
+
+  public static deleteWidget(page: PageModel, website: WebsiteModel, widget: WidgetModel) {
+    const childrenToDelete = WidgetHelper.getChildrenToDelete([], widget);
+    childrenToDelete.forEach(c => {
+      website.WidgetsToDelete.push(c);
+    });
+    page.RecursiveWidget(page.Widgets, widget.WidgetId);
+  }
+
+  public static VilidateClassStyles(widget: WidgetModel) {
+    if (widget.SelectedClass) {
+      if (!widget.SelectedClass.PcStyles)
+        widget.SelectedClass.PcStyles = {};
+
+      if (!widget.SelectedClass.PhoneStyles)
+        widget.SelectedClass.PhoneStyles = {};
+
+      if (!widget.SelectedClass.TabStyles)
+        widget.SelectedClass.TabStyles = {};
+      return widget;
+    }
+    return widget;
   }
 }

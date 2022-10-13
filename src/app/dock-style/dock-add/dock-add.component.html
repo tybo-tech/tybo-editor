@@ -1,0 +1,43 @@
+<div class="dock-add">
+    <button class="btn btn-dark" *ngIf="!showAdd" (click)="add(true)"><i class="fa fa-add"></i></button>
+    <button class="btn btn-dark" *ngIf="showAdd" (click)="add(false)"><i class="fa fa-times"></i></button>
+    <a class="btn btn-dark ml-1" (click)="showDatabase = true"><i class="fas fa-database"></i> </a>
+    <a href="/pages" target="_blank" class="btn btn-dark ml-1"><i class="fa fa-play"></i></a>
+    <button class="btn btn-dark ml-1" (click)="showCss = true"><i class="fa fa-code"></i></button>
+    <div class="btn-group ml-2" role="group" aria-label="Basic example">
+        <button type="button" (click)="pcView()" class="btn btn-dark"><i class="fas fa-desktop"></i> </button>
+        <button type="button" (click)="tabView()" class="btn btn-dark"><i class="fas fa-tablet-alt"></i></button>
+        <button type="button" (click)="phoneVew()" class="btn btn-dark"><i class="fas fa-mobile-alt"></i></button>
+    </div>
+
+<!--     
+    <div class="input-group input-group-sm" *ngIf="page">
+        <select class="form-select" aria-label="Default select example" [(ngModel)]="page.PageId" (change)="pageChanged()">
+          <option [value]="pageItem.PageId" *ngFor="let pageItem of website.Pages">
+            Page: {{pageItem.Name}}
+          </option>
+        </select>
+        <span class="input-group-text" (click)="toggleClose()" id="inputGroup-sizing-sm"><i
+            class="fas fa-cog pointer"></i></span>
+      </div> -->
+</div>
+
+<div class="docker-add-items-container" *ngIf="elements && showAdd">
+    <div class="draggables menu-item d-flex justify-content-start" *ngFor="let item of elements" draggable="true"
+        [id]="item.ItemType" candragme (click)="addHeaderOrFooter(item)">
+        <div class="icon">
+            <img [src]="item.ImageUrl" alt="">
+        </div>
+
+        <div class="name">
+            {{item.Name}}
+        </div>
+    </div>
+</div>
+
+
+<app-database *ngIf="showDatabase" (onClose)="showDatabase= false">
+</app-database>
+
+<app-css-classes *ngIf="showCss" (onClose)="showCss= false">
+</app-css-classes>

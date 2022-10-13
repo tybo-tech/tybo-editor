@@ -1,0 +1,47 @@
+<div class="grid-1 style-styles">
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">FILL</span>
+
+        <input  class="form-control" [value]="background" [(ngModel)]="background"
+            [style.background]="background" 
+            [(colorPicker)]="background" [cpEyeDropper]="true"       
+            [cpPositionOffset]="'20%'"
+            [cpPosition]="'bottom-left'"
+            [cpSaveClickOutside]="true" 
+            [cpOKButtonClass]= "'btn btn-primary btn-xs'"
+            (colorPickerChange)="background=$event; emit()"
+            />
+    </div>
+
+    <!-- 
+    
+    <label for="">Background</label>
+    <div class="input-group input-group-sm mb-3">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>FILL</option>
+                <option value="1">GRADEINT</option>
+            </select>
+            <input type="color" class="form-control" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>100%</option>
+                <option value="1">Dotted</option>
+            </select>
+      
+    </div> -->
+
+
+    <label for="">Border</label>
+    <div class="input-group input-group-sm">
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option selected>1PX</option>
+            <option value="1">2PX</option>
+        </select>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option selected>Solid</option>
+            <option value="1">Dotted</option>
+        </select>
+        <input type="color" class="form-control" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm">
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<ng-template #nodeTemplateRef let-node>
+
+    <div *ngIf="node.Children.length  && node.ItemType === SectionTypes.CONTAINER  && !node.IsTemplate"
+        [id]="node.WidgetId" class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
+        (click)="toggleOptions($event)">
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" [page]="page" [website]="website"
+                [widget]="selecedWidget" (menuEvent)="menuEvent($event)"> </app-container-menu>
+            <app-dock-stack *ngIf="page && website" [page]="page" [website]="website"></app-dock-stack>
+        </span>
+
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+
+        </ng-template>
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
+        <app-dock-resizer [widget]="selecedWidget" [page]="page" [website]="website" *ngIf="node && node.ShowOptions">
+        </app-dock-resizer>
+    </div>
+
+
+    <ul *ngIf="node.Children.length  && node.ItemType === SectionTypes.UL  && !node.IsTemplate" [id]="node.WidgetId"
+        class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
+        (click)="toggleOptions($event)">
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" (menuEvent)="menuEvent($event)"
+                [page]="page" [website]="website" [widget]="selecedWidget"> </app-container-menu>
+        </span>
+
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+
+        </ng-template>
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
+
+    </ul>
+
+
+
+
+    <li *ngIf="node.Children.length  && node.ItemType === SectionTypes.LI  && !node.IsTemplate" [id]="node.WidgetId"
+        class="_container" can_drop_on_me (onDrop)="onDrop($event,node)" [ngClass]="node.ItemClass"
+        (click)="toggleOptions($event)">
+
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" (menuEvent)="menuEvent($event)"
+                [page]="page" [website]="website" [widget]="selecedWidget"> </app-container-menu>
+        </span>
+
+
+        <ng-template ngFor [ngForOf]="node.Children" [ngForTemplate]="nodeTemplateRef">
+
+        </ng-template>
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
+
+    </li>
+
+
+
+    <div *ngIf="!node.Children.length && node.ItemType === SectionTypes.CONTAINER && !node.IsTemplate"
+        [id]="node.WidgetId" class="_container" [id]="node.WidgetId" (click)="toggleOptions($event)" can_drop_on_me
+        (onDrop)="onDrop($event,node)" (mousedown)="moveDown($event)" (mouseup)="moveUp()" [ngClass]="node.ItemClass">
+
+        <span class="_container-menu">
+            <app-container-menu *ngIf="page && website && node && node.ShowOptions" (menuEvent)="menuEvent($event)"
+                [page]="page" [website]="website" [widget]="selecedWidget"> </app-container-menu>
+        </span>
+
+
+        <span class="_resizer" [id]="node.WidgetId" *ngIf="node.ShowOptions" (mousedown)="resizeDown($event, node)"
+            (mouseup)="resizeUp()">
+            <span></span>
+        </span>
+
+    </div>
+
+    <ng-container *ngIf="!node.Children.length && node.ItemType !== SectionTypes.CONTAINER  && !node.IsTemplate">
+        <app-dock-tag [page]="page" [website]="website" [widget]="node"></app-dock-tag>
+    </ng-container>
+
+
+
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ $implicit: widget }">
+</ng-template>

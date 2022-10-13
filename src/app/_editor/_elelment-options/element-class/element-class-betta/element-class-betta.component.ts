@@ -17,7 +17,7 @@ export class ElementClassBettaComponent implements OnInit {
   website: WebsiteModel;
   SectionTypes = SectionTypes
   savingStyles: any;
-  constructor(private websiteService: WebsiteService, private stylesService: SyncService) { }
+  constructor(private websiteService: WebsiteService, private syncService: SyncService) { }
 
   ngOnInit(): void {
     this.websiteService.websiteObservable.subscribe(data => {
@@ -28,11 +28,11 @@ export class ElementClassBettaComponent implements OnInit {
 
     let timeer = setInterval(() => {
       // auto update styles
-      const styles = this.stylesService.getStylsToSave;
+      const styles = this.syncService.getStylsToSave;
       if (styles && styles.length) {
         const temp = styles;
         this.savingStyles = true;
-        this.stylesService.empyStyles();
+        this.syncService.empyStyles();
         this.websiteService.create(`webstyles/save-webstyles.php`, styles).subscribe(data => {
           this.savingStyles = false;
 
@@ -40,11 +40,11 @@ export class ElementClassBettaComponent implements OnInit {
       }
 
       // auto update widget
-      const widgets = this.stylesService.getWidgetsToSave;
+      const widgets = this.syncService.getWidgetsToSave;
       if (widgets && widgets.length) {
         const temp = widgets;
         this.savingStyles = true;
-        this.stylesService.empyWidgets();
+        this.syncService.empyWidgets();
       this.websiteService.saveWidgetChanges(widgets[0])
       }
     }, 2000);
@@ -68,7 +68,7 @@ export class ElementClassBettaComponent implements OnInit {
     const styles = WidgetHelper.updateCassClass(this.website, this.widget, style.Key, style.Value, '');
     if (styles && this.widget.SelectedClass) {
       this.websiteService.updateWebsieState(this.website);
-      this.stylesService.updateStyleState(this.widget.SelectedClass)
+      this.syncService.updateStyleState(this.widget.SelectedClass)
     }
 
   }

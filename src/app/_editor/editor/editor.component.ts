@@ -123,6 +123,20 @@ export class EditorComponent implements OnInit {
     this.websiteService.updateWebsieState(this.website);
 
   }
+  tabView() {
+    const editor = <HTMLDivElement>document.querySelector(".editor");
+    if (!editor)
+      return;
+    this.website.ViewDevice = DeviceTypes.TABLET;
+    this.website.WebsiteMode = 'dev';
+    this.website.ViewWidth = DeviceTypes.TABLET_WIDTH;
+    editor.style.width = DeviceTypes.TABLET_WIDTH;
+    this.viewModeService.changeMode(this.website);
+    // this.mainClass = "phone-class"
+    this.mainClass = "tablet"
+    this.websiteService.updateWebsieState(this.website);
+
+  }
   pcView() {
     const editor = <HTMLDivElement>document.querySelector(".editor");
     if (!editor)
@@ -320,21 +334,6 @@ export class EditorComponent implements OnInit {
   }
 
 
-  onClose(e: boolean, section: SectionModel) {
-    section.ShowOptions = false;
-    section.ShowMiniMenu = false
-    // this.selectedSection = null;
-    section.ItemStyle['border'] = this.tempBorder;
-  }
-
-  viewOptions(section: SectionModel) {
-    section.ShowMiniMenu = true
-    // this.selectedSection = null;
-    section.ShowOptions = true;
-    this.tempBorder = section.ItemStyle['border'];
-    section.ItemStyle['border'] = '1px solid #3498db';
-    this.selectedSection = section;
-  }
 
   closePreview() {
     this.preview = false;
@@ -394,46 +393,6 @@ export class EditorComponent implements OnInit {
     this.page.AddContainerWidget(parentContainer);
     this.websiteService.updateWebsieState(this.website);
     this.websiteService.saveWidget([parentContainer], this.website, this.page)
-  }
-  addContainer(numberOfColumns: number) {
-    const container = new ContainerModel(HelperClass.getId('container'), this.page.PageId, 'Parent', '', [], SectionTypes.CONTAINER);
-    // container.ItemStyle = StyleHelper.getFlexRow();
-    // container.ItemMobileStyle = StyleHelper.getFlexRow();
-    // container.SelectedStyle = StyleHelper.getFlexRow();
-
-    const subContainer = new ContainerModel(HelperClass.getId('container'), this.page.PageId, 'Sub', '', [], SectionTypes.CONTAINER);
-    subContainer.ItemStyle = StyleHelper.getFlexRow();
-    subContainer.ItemMobileStyle = StyleHelper.getFlexRow();
-    subContainer.SelectedStyle = StyleHelper.getFlexRow();
-
-
-    for (let i = 0; i < numberOfColumns; i++) {
-      const childContainer = new ContainerModel(HelperClass.getId('container'), this.page.PageId, 'Col', '', [], SectionTypes.CONTAINER);
-      childContainer.ParentId = container.ContainerId;
-      childContainer.ItemStyle = StyleHelper.getFlexChild();
-      childContainer.ItemMobileStyle = StyleHelper.getFlexChild();
-      childContainer.SelectedStyle = StyleHelper.getFlexChild();
-      subContainer.AddContainer(childContainer);
-
-    }
-    container.AddContainer(subContainer);
-    this.page.AddContainer(container);
-
-
-
-
-
-    // const section = new SectionModel(HelperClass.getId('section'), this.page.PageId, 'Body Section', '', [], [], SectionTypes.EMPTY, 'max-width', '80rem');
-    // const row = new RowModel(HelperClass.getId('row'), section.SectionId, 'Section Row', [], 'Row');
-
-    // let col = HelperClass.getGridClassFromNumberOfColumns(numberOfColumns)
-    // row.ItemStyle = { 'grid-template-columns': col, 'display': 'grid', 'min-height': SectionTypes.BODY_MIN_HEIGHT, }
-
-    // for (let i = 0; i < numberOfColumns; i++) {
-    //   row.AddColumn(new ColumnModel(HelperClass.getId('col'), row.RowId, 'Col-1', '', [], 'Grid-col'));
-    // }
-    // section.AddRow(row);
-    // this.page.AddSection(section);
   }
 
   menuEvent(menu: WidgetModel) {

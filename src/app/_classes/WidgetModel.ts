@@ -30,7 +30,7 @@ export class WidgetModel extends MainClass {
     RowNumber: number;
     ColNumber: number;
     Form: FormModel | undefined;
-    SelectedClass: WebstyleModel | undefined;
+    SelectedClass?: WebstyleModel;
     FeildName?: string;
     ParentWidget: WidgetModel;
     IsParentWidget: boolean;
@@ -44,6 +44,8 @@ export class WidgetModel extends MainClass {
     UrlValue: string;
     ItemFormat: any;
     Events: IEvent[];
+    EditText: boolean;
+    IsMouseDown: boolean;
     constructor(
         WidgetId: string,
         ColumnId: string,
@@ -88,6 +90,7 @@ export class WidgetModel extends MainClass {
         this.RowNumber = RowNumber;
         this.ColNumber = ColNumber;
         this.Form = Form;
+        this.EditText = false;
         // this.AddStyles();
         this.OrderNumber = Children.length + 1;
         // this.ItemClass = [this.WidgetId]
@@ -113,33 +116,14 @@ export class WidgetModel extends MainClass {
         text.ItemContent = ItemContent;
         debugger
         text.ParentId = this.WidgetId;
-        text.ItemStyle = { 'color': '#000000' };
-        text.ItemMobileStyle = { 'color': '#000000' };
-        text.SelectedStyle = isMobileMode ? text.ItemMobileStyle : text.ItemStyle;
         this.AddChild(text);
     }
 
-    AddStyles() {
-        if (this.ItemType === SectionTypes.BUTTON) {
-            this.ItemStyle = { 'background-color': '#2980b9', 'padding': '4px 15px', 'color': '#ffffff', 'border': 'none', 'border-radius': '4px', 'width': ' fit-content', 'text-align': 'center' }
-            this.ItemMobileStyle = this.ItemStyle;
-            this.SelectedStyle = this.ItemStyle;
-        }
-        if (this.ItemType === SectionTypes.BURGER_MENU) {
-            this.ItemStyle = { 'width': '2.5rem', 'position': 'absolute', 'top': '8px', 'right': '7px', 'background-color': '#ffffff', 'padding': '4px', 'color': '#000000', 'border': 'none', 'border-radius': '2px' };
-            this.ItemMobileStyle = this.ItemStyle;
-            this.SelectedStyle = this.ItemStyle;
-        }
-        if (this.ItemType === SectionTypes.MENU) {
-            this.ItemStyle = { 'list-style-type': 'none', 'display': 'flex', 'gap': '1rem', 'align-items': 'center', 'justify-content': 'end', 'top': '2px' }
-            this.ItemMobileStyle = this.ItemStyle;
-            this.SelectedStyle = this.ItemStyle;
-        }
-    }
+
 
 
     AddMenu(website: WebsiteModel, pageId = 'master', pages: PageModel[]) {
-        const ul: WidgetModel = new WidgetModel(HelperClass.getId('card-master'), this.ColumnId, pageId, 'Nav Ul', SectionTypes.UL, ``);
+        const ul: WidgetModel = new WidgetModel(HelperClass.getId('card-master'), this.ColumnId, pageId, 'Nav Ul-All devices', SectionTypes.UL, ``);
         ul.GetClass(website, 'menu--items', { padding: '0', 'margin': '0' }, StyleHelper.getUlStylePhone(), StyleHelper.getUlStylePhone());
         ul.ParentId = this.WidgetId;
 
@@ -168,71 +152,6 @@ export class WidgetModel extends MainClass {
 
         this.AddChild(ul);
 
-
-    }
-
-    AddBurger(pageId = 'master', pages: PageModel[], isMobileMode = true) {
-        const menuWidget: WidgetModel = new WidgetModel(
-            HelperClass.getId('card-master'), this.ColumnId, 'master', 'Card-Master-1', SectionTypes.BURGER_MENU, ``);
-        menuWidget.ItemCategory = 'Menu';
-        menuWidget.ItemEventName = '<i class="fas fa-bars"></i>';
-        menuWidget.ItemMobileStyle = {
-            'margin-left': '2rem',
-            'margin-right': '2rem',
-            'position': 'absolute',
-            'top': '10px',
-            'width': '2.5rem',
-            'border-radius': '4px',
-            'padding': ' 3px',
-            'right': '-10px'
-        };
-        menuWidget.ItemStyle = { 'display': 'none' };
-        menuWidget.SelectedStyle = isMobileMode ? menuWidget.ItemMobileStyle : menuWidget.ItemStyle;
-
-
-        menuWidget.Children = [];
-        pages.forEach(page => {
-            const menuItem: WidgetModel = new WidgetModel(HelperClass.getId('menu'), this.ColumnId, 'master', 'Item', SectionTypes.MENU_ITEM, ``);
-            menuItem.ItemContent = page.Name;
-            menuItem.ItemEvent = page.Url;
-            menuItem.ItemStyle = {
-                "color": "#000000",
-                "font-weight": "700",
-                "text-align": "center",
-                "width": "100%",
-                "display": "block",
-                'margin-top': '2px',
-                'margin-bottom': '2px',
-            }
-
-            menuItem.ItemMobileStyle = menuItem.ItemStyle;
-            menuItem.SelectedStyle = menuItem.ItemStyle;
-            menuWidget.Children.push(menuItem);
-        });
-
-        const menuItemWrapper: WidgetModel = new WidgetModel(HelperClass.getId('menu-wrapper'), this.ColumnId, 'master', 'Item', SectionTypes.MENU_WRAPPER, ``);
-        menuItemWrapper.ItemStyle = {
-            'position': 'absolute',
-            top: 0,
-            right: 0,
-            height: '100vh',
-            width: '90%',
-            'z-index': 1000,
-            'background': '#ffffff',
-            'padding-left': '4px',
-            'padding-right': '4px',
-            'color': '#000000',
-            'border': 'none',
-            'border-radius': '0',
-            'padding-top': "15px"
-        }
-        menuItemWrapper.ItemMobileStyle = menuItemWrapper.ItemStyle;
-        menuItemWrapper.SelectedStyle = menuItemWrapper.ItemStyle;
-        menuWidget.Children.push(menuItemWrapper);
-
-
-
-        this.AddChild(menuWidget);
 
     }
 

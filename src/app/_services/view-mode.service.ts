@@ -26,18 +26,5 @@ export class ViewModeService {
   changeMode(itemInMoemory: any) {
     this.deviceModeBehaviorSubject.next(itemInMoemory);
   }
-  selectStyles(data: WidgetModel, website: WebsiteModel) {
-    // debugger
-    if (data) {
-      if (website && website.ViewDevice === DeviceTypes.PHONE) {
-        data.SelectedStyle = data.ItemMobileStyle;
-      }
 
-
-      if (website && website.ViewDevice === DeviceTypes.PC) {
-        data.SelectedStyle = data.ItemStyle;
-      }
-      return data;
-    }
-  }
 }

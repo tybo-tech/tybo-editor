@@ -1,0 +1,70 @@
+@import "../../../assets/styles/colors";
+$size: 0.3rem;
+$size2: 0.1rem;
+$offset: 0.29rem;
+.dock-resizer {
+    position: absolute;
+    background: $info;
+    width: $size;
+    height: $size;
+    z-index: 100;
+}
+.top-left {
+    top: -$offset;
+    left: -$offset;
+    cursor: nw-resize;
+}
+.top-right {
+    top: -$offset;
+    right: -$offset;
+    cursor: ne-resize;
+}
+
+.bottom-right {
+    bottom: -$offset;
+    right: -$offset;
+    cursor: nw-resize;
+}
+.bottom-left {
+    bottom: -$offset;
+    left: -$offset;
+    cursor: ne-resize;
+}
+
+.border-resizer {
+    position: absolute;
+    background: $info;
+    z-index: 100;
+}
+
+.border-top {
+    left: 0;
+    top: 0;
+    right: 0;
+    height: $size2;
+    cursor: n-resize;
+}
+
+.border-right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: $size2;
+    cursor: e-resize;
+}
+
+.border-bottom {
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: $size2;
+    cursor: n-resize;
+}
+
+.border-left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $size2;
+    cursor: e-resize;
+}

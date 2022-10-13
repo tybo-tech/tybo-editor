@@ -59,7 +59,7 @@ export class WebsiteBasicDetailsComponent implements OnInit {
     this.website.CreateUserId = this.user.UserId;
     this.website.ModifyUserId = this.user.UserId;
     this.website.ItemClass = ['website-body'];
-    const newClass: WebstyleModel = new WebstyleModel(HelperClass.getId('class'), this.website.WebsiteId, 'website-body', { background: '#ffffff', height: '100vh' });
+    const newClass: WebstyleModel = new WebstyleModel(HelperClass.getId('class'), this.website.WebsiteId, 'website-body', { height: '100vh' });
     this.website.WebsiteStyles = [newClass];
 
   }

@@ -39,6 +39,7 @@
     border: 2px solid $border;
     margin-bottom: .25rem;
     select,
+    textarea,
     input {
         width: 100%;
         background: #1f2937;
@@ -70,6 +71,6 @@
 }
 
 .grid-2 {
-    grid-template-columns: 25% auto;
+    grid-template-columns: 40% auto;
     gap: 0;
 }

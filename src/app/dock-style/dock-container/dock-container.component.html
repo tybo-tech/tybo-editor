@@ -1,0 +1,31 @@
+<div *ngIf="website && page" class="docker-container">
+
+  <ng-container *ngIf="!page.Widgets?.length">
+    <app-dock-page [page]="page" [website]="website"></app-dock-page>
+  </ng-container>
+
+  <ng-container *ngIf="website.Header">
+    <app-dock-page [widget]="website.Header" [page]="page" [website]="website"></app-dock-page>
+  </ng-container>
+
+
+  <ng-container *ngIf="page.Widgets?.length">
+    <ng-container *ngFor="let widget of page.Widgets">
+      <app-dock-page [widget]="widget" [page]="page" [website]="website"></app-dock-page>
+    </ng-container>
+  </ng-container>
+
+  <div class="create-section">
+    <h3 class="text-white">
+      Create a section
+    </h3>
+
+    <div class="d-flex justify-content-center">
+      <div class="item" *ngFor="let colItem of COL_IMAGES" (click)="addContainerWidget(colItem.Id)">
+        <img [src]="colItem.ImageUrl" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="body-background-color"></div>
+<app-dock-menu *ngIf="website && page" [page]="page" [website]="website"></app-dock-menu>

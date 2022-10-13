@@ -1,0 +1,41 @@
+<div class="align-icons style-styles">
+    <p>
+        Spacing
+    </p>
+    <div class="outer-container">
+        <span class="left">
+            <app-dock-input (changed)="changed($event, 'margin-left')" [currentValue]="margin_left || '-'">
+            </app-dock-input>
+        </span>
+        <span class="top">
+            <app-dock-input (changed)="changed($event,'margin-top')" [currentValue]="margin_top || '-'">
+            </app-dock-input>
+        </span>
+        <span class="right">
+            <app-dock-input (changed)="changed($event,'margin-right')" [currentValue]="margin_right || '-'">
+            </app-dock-input>
+        </span>
+        <span class="bottom">
+            <app-dock-input (changed)="changed($event,'margin-bottom')" [currentValue]="margin_bottom || '-'"></app-dock-input>
+        </span>
+        <div class="inner-container">
+            <span class="left">
+                <app-dock-input (changed)="changed($event, 'padding-left')" [currentValue]="padding_left || '-'">
+                </app-dock-input>
+            </span>
+            <span class="top">
+                <app-dock-input (changed)="changed($event, 'padding-top')" [currentValue]="padding_top || '-'">
+                </app-dock-input>
+            </span>
+            <span class="right">
+                <app-dock-input (changed)="changed($event, 'padding-right')" [currentValue]="padding_right || '-'">
+                </app-dock-input>
+            </span>
+            <span class="bottom">
+                <app-dock-input (changed)="changed($event, 'padding-bottom')" [currentValue]="padding_bottom || '-'">
+                </app-dock-input>
+            </span>
+            <div class="most-inner"></div>
+        </div>
+    </div>
+</div>

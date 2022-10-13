@@ -1,0 +1,40 @@
+@import "../../../assets/styles/colors";
+
+$size: 0.3rem;
+$size2: 0.1rem;
+$offset: 0.29rem;
+
+.dock-tag-resizer {
+    position: absolute;
+    z-index: 100;
+    background: none;
+}
+
+.dock-resizer {
+    position: absolute;
+    background: $info;
+    width: $size;
+    height: $size;
+    z-index: 1000;
+}
+.top-left {
+    top: -$offset;
+    left: -$offset;
+    cursor: nw-resize;
+}
+.top-right {
+    top: -$offset;
+    right: -$offset;
+    cursor: ne-resize;
+}
+
+.bottom-right {
+    bottom: -$offset;
+    right: -$offset;
+    cursor: nw-resize;
+}
+.bottom-left {
+    bottom: -$offset;
+    left: -$offset;
+    cursor: ne-resize;
+}

@@ -9,8 +9,6 @@ export class MainClass {
     StatusName: string;
     StatusId: number;
     StyleString: string;
-    ItemStyle: any;
-    ItemMobileStyle: any;
     SelectedStyle: any;
     ItemClass: any;
     ItemCategory: string;
@@ -31,8 +29,6 @@ export class MainClass {
         StatusName: string = 'Active',
         StatusId: number = 1,
         StyleString: string = '',
-        ItemStyle = {},
-        ItemMobileStyle = {},
         SelectedStyle = {},
         ItemClass = [],
         ItemCategory = '',
@@ -52,8 +48,6 @@ export class MainClass {
         this.StatusName = StatusName;
         this.StatusId = StatusId;
         this.StyleString = StyleString;
-        this.ItemStyle = ItemStyle;
-        this.ItemMobileStyle = ItemMobileStyle;
         this.SelectedStyle = SelectedStyle;
         this.ShowOptions = ShowOptions;
         this.ItemClass = ItemClass;

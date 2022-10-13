@@ -116,7 +116,7 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Text
       if (sectionType === SectionTypes.TEXT && containerWidget) {
-        const text: WidgetModel = new WidgetModel(HelperClass.getId('text'), containerWidget.WidgetId, this.page.PageId, 'Text', SectionTypes.TEXT, ``);
+        const text: WidgetModel = new WidgetModel(HelperClass.getId('text'), containerWidget.WidgetId, containerWidget.PageId, 'Text', SectionTypes.TEXT, ``);
         text.ElementType = "p";
         text.ItemContent = `
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum harum illum perspiciatis atque consequatur delectus amet
@@ -134,7 +134,7 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Heading
       if (sectionType === SectionTypes.HEADING && containerWidget) {
-        const text: WidgetModel = new WidgetModel(HelperClass.getId('heading'), containerWidget.WidgetId, this.page.PageId, 'Heading', SectionTypes.HEADING, ``);
+        const text: WidgetModel = new WidgetModel(HelperClass.getId('heading'), containerWidget.WidgetId, containerWidget.PageId, 'Heading', SectionTypes.HEADING, ``);
         text.ElementType = "h1";
         text.ItemContent = `Heading`;
         text.Settings = JsonParserHelper.loadSettings(text);
@@ -148,7 +148,7 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Sub Heading
       if (sectionType === SectionTypes.SUB_HEADING && containerWidget) {
-        const text: WidgetModel = new WidgetModel(HelperClass.getId('heading'), containerWidget.WidgetId, this.page.PageId, 'Sub Heading', SectionTypes.SUB_HEADING, ``);
+        const text: WidgetModel = new WidgetModel(HelperClass.getId('heading'), containerWidget.WidgetId, containerWidget.PageId, 'Sub Heading', SectionTypes.SUB_HEADING, ``);
         text.ElementType = "h2";
         text.ItemContent = `Sub  Heading`;
         text.Settings = JsonParserHelper.loadSettings(text);
@@ -164,7 +164,7 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Image
       if (sectionType === SectionTypes.IMAGE && containerWidget) {
-        const element: WidgetModel = new WidgetModel(HelperClass.getId('image'), '', this.page.PageId, 'Image', SectionTypes.IMAGE, ``);
+        const element: WidgetModel = new WidgetModel(HelperClass.getId('image'), '', containerWidget.PageId, 'Image', SectionTypes.IMAGE, ``);
         element.ElementType = "image";
         element.ParentId = containerWidget.WidgetId;
         element.ItemContent = 'assets/images/widgets/image-palceholder-landscape.svg';
@@ -176,10 +176,24 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
       }
 
 
+      // Video
+      if (sectionType === SectionTypes.VIDEO && containerWidget) {
+        const element: WidgetModel = new WidgetModel(HelperClass.getId('vid'), '', containerWidget.PageId, 'Image', SectionTypes.VIDEO, ``);
+        element.ElementType = "Video";
+        element.ParentId = containerWidget.WidgetId;
+        element.ItemContent = 'http://editor.tybo.co.za/api/api/upload/uploads/1661769931.mp4';
+        element.GetClass(this.website, 'vid', StyleHelper.getVidBg());
+        element.Settings = JsonParserHelper.loadSettings(element);
+        containerWidget.AddChild(element);
+        this.websiteService.updateWebsieState(this.website);
+        this.websiteService.saveAddedWidget(element, this.website);
+      }
+
+
 
       // Container
       if (sectionType === SectionTypes.CONTAINER && containerWidget) {
-        const subContainer: WidgetModel = new WidgetModel(HelperClass.getId('container'), containerWidget.WidgetId, this.page.PageId, 'Container', SectionTypes.CONTAINER, ``);
+        const subContainer: WidgetModel = new WidgetModel(HelperClass.getId('container'), containerWidget.WidgetId, containerWidget.PageId, 'Container', SectionTypes.CONTAINER, ``);
         subContainer.ParentId = containerWidget.WidgetId;
         subContainer.Settings = JsonParserHelper.loadSettings(subContainer, 200, 50);
 
@@ -191,8 +205,8 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Grid
       if (sectionType === SectionTypes.DB_LIST && containerWidget) {
-        const grid: WidgetModel = new WidgetModel(HelperClass.getId('tybo-grid'), containerWidget.WidgetId, this.page.PageId, 'Data List', SectionTypes.CONTAINER, ``);
-        const gridTemplate: WidgetModel = new WidgetModel(HelperClass.getId('grid-temp'), containerWidget.WidgetId, this.page.PageId, 'Data Item', SectionTypes.CONTAINER, ``);
+        const grid: WidgetModel = new WidgetModel(HelperClass.getId('tybo-grid'), containerWidget.WidgetId, containerWidget.PageId, 'Data List', SectionTypes.CONTAINER, ``);
+        const gridTemplate: WidgetModel = new WidgetModel(HelperClass.getId('grid-temp'), containerWidget.WidgetId, containerWidget.PageId, 'Data Item', SectionTypes.CONTAINER, ``);
         grid.ParentId = containerWidget.WidgetId;
         grid.ItemCategory = SectionTypes.DB_LIST;
         gridTemplate.ItemCategory = SectionTypes.DB_ITEM;
@@ -211,7 +225,7 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Button
       if (sectionType === SectionTypes.BUTTON && containerWidget) {
-        const button: WidgetModel = new WidgetModel(HelperClass.getId('button'), containerWidget.WidgetId, this.page.PageId, 'Button', SectionTypes.BUTTON, ``);
+        const button: WidgetModel = new WidgetModel(HelperClass.getId('button'), containerWidget.WidgetId, containerWidget.PageId, 'Button', SectionTypes.BUTTON, ``);
         button.Settings = {};
         button.ElementType = "button";
         button.ParentId = containerWidget.WidgetId;
@@ -230,7 +244,7 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Text box
       if (sectionType === SectionTypes.TEXTBOX && containerWidget) {
-        const textBox: WidgetModel = new WidgetModel(HelperClass.getId('text-box'), containerWidget.WidgetId, this.page.PageId, 'Input Text', SectionTypes.TEXTBOX, ``);
+        const textBox: WidgetModel = new WidgetModel(HelperClass.getId('text-box'), containerWidget.WidgetId, containerWidget.PageId, 'Input Text', SectionTypes.TEXTBOX, ``);
         textBox.ElementType = "input-text";
         textBox.ItemContent = ``;
         textBox.Settings = JsonParserHelper.loadSettings(textBox, 300, 20);
@@ -246,7 +260,7 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Text area
       if (sectionType === SectionTypes.TEXTAREA && containerWidget) {
-        const textBox: WidgetModel = new WidgetModel(HelperClass.getId('text-area'), containerWidget.WidgetId, this.page.PageId, 'Text Area', SectionTypes.TEXTAREA, ``);
+        const textBox: WidgetModel = new WidgetModel(HelperClass.getId('text-area'), containerWidget.WidgetId, containerWidget.PageId, 'Text Area', SectionTypes.TEXTAREA, ``);
         textBox.ElementType = "text-area";
         textBox.ItemContent = ``;
         textBox.Settings = JsonParserHelper.loadSettings(textBox, 300, 20);
@@ -264,19 +278,12 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
       // Form
       if (sectionType === SectionTypes.FORM && containerWidget) {
         // debugger
-        const form: WidgetModel = new WidgetModel(HelperClass.getId('form'), containerWidget.WidgetId, this.page.PageId, 'Form', SectionTypes.CONTAINER, ``);
-        const input: WidgetModel = new WidgetModel(HelperClass.getId('input'), containerWidget.WidgetId, this.page.PageId, 'Text input', SectionTypes.TEXTBOX, ``);
-        const input2: WidgetModel = new WidgetModel(HelperClass.getId('input'), containerWidget.WidgetId, this.page.PageId, 'Text input', SectionTypes.TEXTBOX, ``);
-        const button: WidgetModel = new WidgetModel(HelperClass.getId('button'), containerWidget.WidgetId, this.page.PageId, 'Button', SectionTypes.BUTTON, ``);
+        const form: WidgetModel = new WidgetModel(HelperClass.getId('form'), containerWidget.WidgetId, containerWidget.PageId, 'Form', SectionTypes.CONTAINER, ``);
+        const input: WidgetModel = new WidgetModel(HelperClass.getId('input'), containerWidget.WidgetId, containerWidget.PageId, 'Text input', SectionTypes.TEXTBOX, ``);
+        const input2: WidgetModel = new WidgetModel(HelperClass.getId('input'), containerWidget.WidgetId, containerWidget.PageId, 'Text input', SectionTypes.TEXTBOX, ``);
+        const button: WidgetModel = new WidgetModel(HelperClass.getId('button'), containerWidget.WidgetId, containerWidget.PageId, 'Button', SectionTypes.BUTTON, ``);
         input.ElementType = SectionTypes.TEXTBOX;
         input2.ElementType = SectionTypes.TEXTBOX;
-        input.ItemStyle = StyleHelper.getInputStyles();
-        input.ItemMobileStyle = StyleHelper.getInputStyles();
-        input2.ItemStyle = StyleHelper.getInputStyles();
-        input2.ItemMobileStyle = StyleHelper.getInputStyles();
-        input.SelectedStyle = this.website.IsMobileMode() ? input.ItemMobileStyle : input.ItemStyle;
-        input2.SelectedStyle = this.website.IsMobileMode() ? input2.ItemMobileStyle : input2.ItemStyle;
-
         button.ElementType = "button";
         button.ItemContent = 'Action Name';
         form.ElementType = "form";
@@ -284,9 +291,9 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
         input.ParentId = form.WidgetId;
         input2.ParentId = form.WidgetId;
         button.ParentId = form.WidgetId;
-        form.AddText(this.page.PageId, 'Label here', undefined);
+        form.AddText(containerWidget.PageId, 'Label here', undefined);
         form.AddChild(input);
-        form.AddText(this.page.PageId, 'Label here', undefined);
+        form.AddText(containerWidget.PageId, 'Label here', undefined);
         form.AddChild(input2);
         form.AddChild(button);
         containerWidget.AddChild(form);
@@ -295,13 +302,10 @@ export class PageWidgetTreeComponent implements OnInit, AfterViewInit {
 
       // Textaraa
       if (sectionType === SectionTypes.TEXTAREA && containerWidget) {
-        const textarea: WidgetModel = new WidgetModel(HelperClass.getId('button'), containerWidget.WidgetId, this.page.PageId, 'Textarea', SectionTypes.TEXTAREA, ``);
+        const textarea: WidgetModel = new WidgetModel(HelperClass.getId('button'), containerWidget.WidgetId, containerWidget.PageId, 'Textarea', SectionTypes.TEXTAREA, ``);
         textarea.ElementType = SectionTypes.TEXTAREA;
         textarea.ParentId = containerWidget.WidgetId;
-        textarea.ItemStyle = StyleHelper.getInputStyles();
-        textarea.ItemMobileStyle = StyleHelper.getInputStyles();
-        textarea.SelectedStyle = this.website.IsMobileMode() ? textarea.ItemMobileStyle : textarea.ItemStyle;
-        containerWidget.AddText(this.page.PageId, 'Label here', undefined);
+        containerWidget.AddText(containerWidget.PageId, 'Label here', undefined);
 
         containerWidget.AddChild(textarea);
       }

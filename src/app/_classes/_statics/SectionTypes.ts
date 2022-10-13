@@ -46,6 +46,7 @@ export class SectionTypes {
     public static HEADING = 'Heading';
     public static SUB_HEADING = 'Sub heading';
     public static IMAGE = 'Image';
+    public static VIDEO = 'Video';
 
     
     public static DB_LIST = 'Db-List';

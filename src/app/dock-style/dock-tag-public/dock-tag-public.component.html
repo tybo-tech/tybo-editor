@@ -1,0 +1,56 @@
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXT">
+    <p [ngClass]="widget.ItemClass" [innerHTML]="widget.ItemContent" [id]="widget.WidgetId">
+    </p>
+
+
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.HEADING">
+    <h1 [ngClass]="widget.ItemClass" *ngIf="!widget.EditText" [id]="widget.WidgetId" [innerHTML]="widget.ItemContent">
+    </h1>
+
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+
+    <app-dock-tag-resizer *ngIf="widget.ShowOptions" [website]="website" [page]="page" [widget]="widget">
+    </app-dock-tag-resizer>
+
+</span>
+
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.A">
+    <a [ngClass]="widget.ItemClass" [id]="widget.WidgetId" []="widget.ItemContent" contenteditable>
+    </a>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+</span>
+
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.BUTTON">
+<button [ngClass]="widget.ItemClass" [id]="widget.WidgetId" [innerHTML]="widget.ItemContent"></button>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXTBOX">
+    <input []="widget.ItemContent" [ngClass]="widget.ItemClass" [id]="widget.WidgetId" />
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.TEXTAREA">
+    <textarea []="widget.ItemContent" [ngClass]="widget.ItemClass" [id]="widget.WidgetId"></textarea>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+</span>
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.IMAGE ">
+    <img [src]="widget.ItemContent" [ngClass]="widget.ItemClass" [id]="widget.WidgetId" alt="" draggable="false">
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+    <app-dock-tag-resizer *ngIf="widget.ShowOptions" [page]="page" [website]="website" [widget]="widget">
+    </app-dock-tag-resizer>
+</span>
+
+
+<span class="tybo-tag" *ngIf="widget && widget.ItemType === SectionTypes.VIDEO">
+    <video [ngClass]="widget.ItemClass" muted loop autoplay [id]="widget.WidgetId">
+        <source [src]="widget.ItemContent" type="video/mp4" />
+    </video>
+    <span class="resizer" *ngIf="widget.ShowOptions"></span>
+</span>

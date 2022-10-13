@@ -1,12 +1,13 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { EVENTS, IEmailEvent } from 'src/app/_classes/IEvent';
+import { EVENTS, EVENT_NAMES, IEmailEvent } from 'src/app/_classes/IEvent';
 import { ImageModel } from 'src/app/_classes/ImageModel';
 import { PageModel } from 'src/app/_classes/PageModel';
 import { WebsiteModel } from 'src/app/_classes/WebsiteModel';
 import { WidgetModel } from 'src/app/_classes/WidgetModel';
 import { DeviceTypes } from 'src/app/_classes/_statics/DeviceTypes';
+import { EventHelper } from 'src/app/_classes/_statics/EventHelper';
 import { EventTypes } from 'src/app/_classes/_statics/EventTypes';
 import { SectionTypes } from 'src/app/_classes/_statics/SectionTypes';
 import { WidgetHelper } from 'src/app/_classes/_statics/WidgetHelper';
@@ -77,8 +78,8 @@ export class PublicTagComponent implements OnInit {
   itemClicked() {
     if (this.widget.Events && this.widget.Events.length) {
       const currentEvent = this.widget.Events[0];
-      if (currentEvent.Name === EVENTS[0].Name) { // Email
-        console.log(currentEvent);
+      console.log(currentEvent);
+      if (currentEvent.Name === EVENT_NAMES.SEND_EMAIL.Name) { // Email
         const email: IEmailEvent = {
           FromEmail: WidgetHelper.GetFeildValue(currentEvent.Inputs.find(x => x.Name === 'FromEmail')?.SourceId || '', this.page) || '',
           ToEmail: currentEvent.Inputs.find(x => x.Name === 'ToEmail')?.Source || '',
@@ -90,6 +91,48 @@ export class PublicTagComponent implements OnInit {
           console.log(data);
 
         })
+      }
+
+      if (currentEvent.Name === EVENT_NAMES.TOGGLE.Name && currentEvent.Inputs?.length) {
+        // alert(currentEvent.Name);
+        let elementToShow: WidgetModel = WidgetHelper.getWidget(this.page.Widgets, currentEvent.Inputs[0].SourceId || '');
+        if (!elementToShow && this.website.Header)
+          elementToShow = WidgetHelper.getWidget([this.website.Header], currentEvent.Inputs[0].SourceId || '');;
+
+        if (!elementToShow)
+          return;
+        EventHelper.ToggleElelent(elementToShow, this.website);
+        this.websiteService.updateWebsieState(this.website)
+        return
+      }
+      if (currentEvent.Name === EVENT_NAMES.SHOW.Name && currentEvent.Inputs?.length) {
+        let elementToShow: WidgetModel = WidgetHelper.getWidget(this.page.Widgets, currentEvent.Inputs[0].SourceId || '');
+        if (!elementToShow && this.website.Header)
+          elementToShow = WidgetHelper.getWidget([this.website.Header], currentEvent.Inputs[0].SourceId || '');;
+
+        if (!elementToShow)
+          return;
+          EventHelper.ShowElelent(elementToShow, this.website);
+          this.websiteService.updateWebsieState(this.website)
+        return
+      }
+
+
+      if (currentEvent.Name === EVENT_NAMES.HIDE.Name && currentEvent.Inputs?.length) {
+        let elementToShow: WidgetModel = WidgetHelper.getWidget(this.page.Widgets, currentEvent.Inputs[0].SourceId || '');
+        if (!elementToShow && this.website.Header)
+          elementToShow = WidgetHelper.getWidget([this.website.Header], currentEvent.Inputs[0].SourceId || '');;
+
+        if (!elementToShow)
+          return;
+          EventHelper.HideElelent(elementToShow, this.website);
+          this.websiteService.updateWebsieState(this.website)
+        return
+      }
+
+      if (currentEvent.Name === EVENT_NAMES.HIDE.Name) {
+        alert(currentEvent.Name);
+        return
       }
 
       return;
@@ -107,7 +150,6 @@ export class PublicTagComponent implements OnInit {
     }
   }
   dbEvent() {
-    debugger
     if (this.dataId && this.page && this.page.PageData && this.page.TableName && this.page.UrlId && this.widget.FeildName && this.page.PageData[this.widget.FeildName]) {
       this.widget.ItemContent = this.page.PageData[this.widget.FeildName]
     } else {

@@ -56,7 +56,7 @@ export class PageViewerComponent implements OnInit, AfterViewInit {
     }
     this.websiteService.websiteObservable.subscribe(data => {
       if (data) {
-        this.website = this.websiteService.selectWebsiteStyles(this.isMobileMode, data);
+        this.website = data;
         if (this.id && this.website) {
           // debugger
           this.nextPage(this.website, this.id);

@@ -1,0 +1,19 @@
+<div class="docker-styles-container"  *ngIf="widget">
+  <div class="style-header">
+    <span>{{widget.ItemType}} styles</span>
+    <i class="fa fa-times" (click)="close()"></i>
+  </div>
+  <app-style-align  *ngIf="website && widget && widget.ItemType !== SectionTypes.CONTAINER" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)"></app-style-align>
+  <app-style-size *ngIf="website && widget" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)"></app-style-size>
+  <app-style-position  *ngIf="website && widget && widget.ItemType !== SectionTypes.CONTAINER" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)"></app-style-position>
+  <app-style-rotate-and-corners  *ngIf="website && widget && widget.ItemType !== SectionTypes.CONTAINER"></app-style-rotate-and-corners>
+  <app-style-fill *ngIf="website && widget" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)">
+  </app-style-fill>
+  <!-- <app-style-dock  *ngIf="website && widget && widget.ItemType !== SectionTypes.CONTAINER"></app-style-dock> -->
+  <app-dock-spacing  [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)" *ngIf="website && widget"></app-dock-spacing>
+  <app-dock-typh  *ngIf="website && widget && widget.ItemType === SectionTypes.TEXT" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)"></app-dock-typh>
+  <app-dock-typh  *ngIf="website && widget && widget.ItemType === SectionTypes.HEADING" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)"></app-dock-typh>
+  <app-dock-typh  *ngIf="website && widget && widget.ItemType === SectionTypes.A" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)"></app-dock-typh>
+  <app-dock-typh  *ngIf="website && widget && widget.ItemType === SectionTypes.BUTTON" [website]="website" [widget]="widget" (styleChaged)="styleChaged($event)"></app-dock-typh>
+  <app-dock-layout  *ngIf="website && widget && widget.ItemType === SectionTypes.CONTAINER" [website]="website" [widget]="widget" ></app-dock-layout>
+</div>
